@@ -2,13 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/Addons.js'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useThreeModel } from '@/context/ThreeModelContext'
+import {  EffectComposer, OrbitControls, RenderPass, RGBELoader } from 'three-stdlib'
+import { DebugEnvironment } from 'three/examples/jsm/Addons.js'
 
 export default function ThreeScene() {
     const mountRef = useRef<HTMLDivElement>(null)
@@ -19,7 +17,7 @@ export default function ThreeScene() {
 
         const scene = new THREE.Scene()
         // Use a white background for the scene (opaque)
-        scene.background = new THREE.Color(0xffffff)
+        scene.background = new THREE.Color(0x000000)
         const camera = new THREE.PerspectiveCamera(
             75,
             mountRef.current.clientWidth / mountRef.current.clientHeight,
@@ -41,12 +39,50 @@ export default function ThreeScene() {
         controls.dampingFactor = 0.05
         controls.enableZoom = false
 
-        camera.position.set(0, 0, 5);
+        camera.position.set(0, 0, 1.5);
 
         controls.target.copy(model.position);
 
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        pmremGenerator.compileCubemapShader();
+
+        const envScene = new DebugEnvironment();
+
+        const generatedCubeRenderTarget = pmremGenerator.fromScene(envScene);
+        scene.background = new THREE.Color(0xfffefa);
+        scene.background = null;
+        // scene.background = generatedCubeRenderTarget.texture;
+
         // Add model from context
         if (model) {
+            model.traverse((child) => {
+                if (child instanceof THREE.Mesh) {
+                    // if (child.isMesh && child.material instanceof THREE.MeshPhysicalMaterial) {
+                    if (child.isMesh) {
+                        const mat = child.material;
+
+                        mat.envMap = generatedCubeRenderTarget.texture;
+
+                        // Add physical reflection polish
+                        // mat.clearcoat = 0.6;
+                        // mat.clearcoatRoughness = 0.1;
+
+                        // Let texture drive roughness but slightly reduce it
+                        // mat.roughness = 0.2; // Use mid value instead of 1.0
+                        // mat.metalness = 0.9; // Confirm fully metallic
+
+                        // Enhance visible lighting interaction
+                        // mat.normalScale.set(0.1, -0.1); // more pronounced
+
+                        // Stronger reflection handling
+                        // mat.envMapIntensity = 0.5;
+
+                        // Ensure material updates
+                        mat.needsUpdate = true;
+
+                    }
+                }
+            });
             scene.add(model);
             // Setup animation
             // if (animationActions && animationActions['Base Stack']) {
@@ -58,6 +94,9 @@ export default function ThreeScene() {
             // }
 
         }
+
+        model.position.set(0, 0, 0); // push geometry down inside the pivot
+
 
         // Store initial states
         const initialCameraPos = camera.position.clone();
@@ -102,19 +141,34 @@ export default function ThreeScene() {
         // controls.addEventListener("change", onUserInteraction);
         // controls.addEventListener("end", onUserInteraction);
 
-        const sunLight = new THREE.DirectionalLight(0xffffff, 5);
-        sunLight.position.set(4, 4, 4);
-        sunLight.lookAt(model.position);
-        scene.add(sunLight);
+
+
+        // const hrdi = new RGBELoader()
+        //     .load('studio.hdr', (texture) => {
+        //         texture.mapping = THREE.EquirectangularReflectionMapping;
+        //         scene.environment = texture;
+        //         scene.background = null; // set to texture if you want HDR as background
+        //     });
+
+        const sunLight = new THREE.DirectionalLight(0xffffff, 4);
+        sunLight.position.set(5, 5, 5);
+        sunLight.lookAt(model.getWorldPosition(new THREE.Vector3()));
+        // scene.add(sunLight);
+
+        const lightHelper = new THREE.DirectionalLightHelper(sunLight, 1);
+        // scene.add(lightHelper);
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-        scene.add(ambientLight);
+        // scene.add(ambientLight);
 
 
-        // renderer.toneMappingExposure = 3.0;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+        camera.lookAt(model.position);
+
+
+        renderer.toneMapping = THREE.AgXToneMapping;
+        renderer.toneMappingExposure = 3; // Not more than 1.2
         renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMappingExposure = 1.5;
 
         // Post-processing: EffectComposer + UnrealBloomPass to make the model look shiny/metallic
         const composer = new EffectComposer(renderer)
@@ -122,17 +176,19 @@ export default function ThreeScene() {
         composer.addPass(renderPass)
 
         // Bloom parameters: tune strength/radius/threshold for a metallic sheen
-        const bloomStrength = 0.3
-        const bloomRadius = 0.1
-        const bloomThreshold = 0.4
-        const bloomPass = new UnrealBloomPass(new THREE.Vector2(mountRef.current.clientWidth, mountRef.current.clientHeight), bloomStrength, bloomRadius, bloomThreshold)
-        composer.addPass(bloomPass)
+        // const bloomStrength = 0.2
+        // const bloomRadius = 0.1
+        // const bloomThreshold = 0.1
+        // const bloomPass = new UnrealBloomPass(new THREE.Vector2(mountRef.current.clientWidth, mountRef.current.clientHeight), bloomStrength, bloomRadius, bloomThreshold)
+        // composer.addPass(bloomPass)
+        // composer.addPass(new ClearPass(0xffffff, 1));
 
+        scene.background = new THREE.Color(0xfffefa)
 
         const clock = new THREE.Clock();
 
         // Auto-rotate settings (radians per second)
-        const rotateSpeed = 0.1
+        const rotateSpeed = 0.4
 
 
         // Animation loop
@@ -144,12 +200,18 @@ export default function ThreeScene() {
                 mixer.update(delta);
             }
 
+            // sunLight.position.copy(camera.position);
+            sunLight.lookAt(model.getWorldPosition(new THREE.Vector3()));
+
+
+
+
             // Auto-rotate the model around its Y axis to give it a slow metallic spin
             if (model) {
                 model.rotation.y += delta * rotateSpeed
             }
 
-            controls.update(delta)
+            controls.update()
             // Render via composer so bloom is applied
             composer.render()
             animationFrameId = requestAnimationFrame(animate)

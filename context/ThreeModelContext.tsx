@@ -31,7 +31,7 @@ export function ThreeModelProvider({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         const scene = new THREE.Scene(); // Temporary scene for loading
 
-        loadGLTFModel(scene, '/models/earth.glb', { draco: true })
+        loadGLTFModel(scene, '/models/Logo_Silver1.glb', { draco: false })
             .then(({ model, animationActions, mixer }) => {
                 // Configure model
                 // model.position.set(-0.2, -0.3, 0);
