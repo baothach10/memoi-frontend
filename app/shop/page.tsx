@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function ShopPage() {
   const exampleWithLinks = {
     media: {
-      type: "video" as const,
-      src: "/videos/video.mp4",
+      type: "image" as const,
+      src: "/images/shop-menu.webp",
     },
     firstParameter:
       "Welcome to our amazing platform. Discover the future of innovation.",

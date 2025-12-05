@@ -5,7 +5,6 @@ import Image from "next/image";
 import { VideoControls } from "@/components/ui/atoms/VideoControl";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
 
-// Types for the component props
 type LinkObject = {
   url: string;
   title: string;
@@ -29,8 +28,6 @@ type HeroSectionProps = {
   secondParameter?: SecondParameter;
 };
 
-// Video Play/Pause Button Component
-
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
   ({ media, firstParameter, secondParameter }, ref) => {
     const [isPlaying, setIsPlaying] = useState(true);
@@ -52,7 +49,6 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
         ref={ref}
         className="h-screen w-full snap-start relative overflow-hidden"
       >
-        {/* Media Background - Image or Video */}
         {media.type === "image" ? (
           <Image
             src={media.src}
@@ -76,10 +72,6 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
           </>
         )}
 
-        {/* Overlay for better text readability */}
-        {/* <div className="absolute inset-0 bg-black bg-opacity-30" /> */}
-
-        {/* Content at bottom center */}
         {firstParameter && secondParameter && (
           <div className="absolute bottom-10 left-0 right-0 z-10 px-8">
             <div className="max-w-7xl mx-auto text-center space-y-4">
@@ -88,7 +80,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                 {Array.isArray(firstParameter) ? (
                   <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                     {firstParameter.map((link, index) => (
-                      <LinkItem key={index} url={link.url} title={link.title} />
+                      <LinkItem key={index} url={link.url} title={link.title} style="uppercase" />
                     ))}
                   </div>
                 ) : (
@@ -101,6 +93,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                 <LinkItem
                   url={secondParameter.url}
                   title={secondParameter.title}
+                  style="capitalize"
                 />
               </div>
             </div>

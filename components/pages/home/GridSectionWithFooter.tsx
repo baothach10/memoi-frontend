@@ -1,39 +1,85 @@
 import Footer from "@/components/ui/organisms/Footer";
+import Link from "next/link";
 import React, { forwardRef } from "react";
+import Carousel from '@/components/ui/molecules/Carousel'
+import GridHyperImageItem from './GridHyperImageItem'
+import BenefitItem from "./BenefitItem";
 
 const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
+
   return (
     <section
       ref={ref}
-      className="h-screen w-full snap-start relative overflow-hidden flex flex-col"
+      className="h-screen w-full snap-start relative overflow-hidden flex flex-col bg-white"
     >
-      <div className="flex-1 bg-linear-to-br from-orange-500 to-pink-600 flex items-center justify-center p-8">
-        <div className="max-w-7xl w-full">
-          <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-8">
-            Our Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((item) => (
-              <div
-                key={item}
-                className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border-2 border-white/30 hover:bg-white/30 transition-all transform hover:scale-105"
-              >
-                <div className="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-2xl text-white">{item}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  Service {item}
-                </h3>
-                <p className="text-white/90 text-base leading-relaxed">
-                  Discover amazing features that will transform the way you work
-                  and achieve your goals.
-                </p>
-              </div>
-            ))}
+      <div className="relative h-full w-full flex flex-col justify-around">
+
+        <div className="flex flex-col items-center text-center text-black text-[16px] gap-3 pt-20 pb-5">
+          <span className="uppercase">Follow us on Instagram</span>
+          <span>
+            <Link
+              href={"https://www.instagram.com/memoi.official/"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @memoi.official
+            </Link>
+          </span>
+        </div>
+        <div className="w-full">
+          <Carousel
+            items={[
+              <GridHyperImageItem key={1} src="/images/instagram-post-1.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={2} src="/images/instagram-post-2.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={3} src="/images/instagram-post-3.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={4} src="/images/instagram-post-4.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={5} src="/images/instagram-post-1.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={6} src="/images/instagram-post-2.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={7} src="/images/instagram-post-3.webp" href="https://www.instagram.com/memoi.official/" />,
+              <GridHyperImageItem key={8} src="/images/instagram-post-4.webp" href="https://www.instagram.com/memoi.official/" />
+            ]}
+            slidesPerView={4}
+            spaceBetween={16}
+            autoplay={{ delay: 1000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            speed={1800}
+            className="py-6"
+          />
+        </div>
+        <div className="px-16 py-8">
+          <div className="flex items-center">
+            <div className="flex-1">
+              <BenefitItem
+                image="/icons/shipping-icon.svg"
+                imageAlt="Shipping Icon"
+                title="Free Delivery & Exchanges"
+                description="Complimentary standard shipping and returns & exchanges within 30 days"
+              />
+            </div>
+
+            <div className="w-px bg-gray-200 self-stretch" />
+
+            <div className="flex-1">
+              <BenefitItem
+                image="/icons/payment-icon.svg"
+                imageAlt="Shipping Icon"
+                title="Free Delivery & Exchanges"
+                description="Complimentary standard shipping and returns & exchanges within 30 days"
+              />
+            </div>
+
+            <div className="w-px bg-gray-200 self-stretch" />
+
+            <div className="flex-1">
+              <BenefitItem
+                image="/icons/check-icon.svg"
+                imageAlt="Shipping Icon"
+                title="Free Delivery & Exchanges"
+                description="Complimentary standard shipping and returns & exchanges within 30 days"
+              />
+            </div>
           </div>
         </div>
       </div>
-      <Footer />
     </section>
   );
 });

@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export const LinkItem = ({ url, title }: { url: string; title: string }) => (
+export const LinkItem = ({ url, title, style }: { url: string; title: string; style?: string }) => (
   <Link
     href={url}
-    className="text-white underline hover:text-gray-200 transition-colors"
+    className={`text-white underline hover:text-gray-200 transition-colors ${style}`}
     target="_blank"
     rel="noopener noreferrer"
   >

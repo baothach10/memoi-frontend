@@ -6,8 +6,8 @@ import { Header } from "@/components/ui/organisms/Header";
 export default function CollectionPage() {
   const exampleWithLinks = {
     media: {
-      type: "video" as const,
-      src: "/videos/video.mp4",
+      type: "image" as const,
+      src: "/images/collection-menu.webp",
     },
     firstParameter:
       "Welcome to our amazing platform. Discover the future of innovation.",
