@@ -21,11 +21,11 @@ export default function RootLayout({
         <ThreeModelProvider>
 
           {/* <Header /> */}
-          <main className="relative">
-            {/* <Suspense fallback={<LoadingPage />}> */}
-            {children}
-            {/* </Suspense> */}
-          </main>
+          {/* <main className="relative"> */}
+          {/* <Suspense fallback={<LoadingPage />}> */}
+          {children}
+          {/* </Suspense> */}
+          {/* </main> */}
           {/* <Footer /> */}
 
         </ThreeModelProvider>
