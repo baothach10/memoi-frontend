@@ -3,9 +3,8 @@
 import { Header } from "@/components/ui/organisms/Header";
 import GridSectionWithFooter from "../components/pages/home/GridSectionWithFooter";
 import HeroSection from "../components/pages/home/HeroSection";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import Footer from "@/components/ui/organisms/Footer";
 
 export default function HomePage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -14,11 +13,13 @@ export default function HomePage() {
   const heroSection1Ref = useRef<HTMLElement>(null);
   const heroSection2Ref = useRef<HTMLElement>(null);
   const heroSection3Ref = useRef<HTMLElement>(null);
+  const heroSection4Ref = useRef<HTMLElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
-  const footerSectionRef = useRef<HTMLElement>(null);
 
   const currentIndexRef = useRef(0);
   const isAnimatingRef = useRef(false);
+
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
@@ -36,8 +37,9 @@ export default function HomePage() {
       heroSection1Ref.current,
       heroSection2Ref.current,
       heroSection3Ref.current,
+      heroSection4Ref.current,
       gridSectionRef.current,
-      footerSectionRef.current,
+      // footerSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
 
     if (index < 0 || index >= sections.length) return;
@@ -47,11 +49,19 @@ export default function HomePage() {
 
     isAnimatingRef.current = true;
 
+    const lastIndex = sections.length - 1;
+
+    // Normal snap behavior for non-last sections: translate the content container
     gsap.to(content, {
       y: -targetTop,
       duration: 1,
       ease: "power3.inOut",
       onComplete: () => {
+        if (currentIndexRef.current === lastIndex) {
+          setIsAtBottom(true);
+        } else {
+          setIsAtBottom(false);
+        }
         isAnimatingRef.current = false;
       },
     });
@@ -71,8 +81,8 @@ export default function HomePage() {
       heroSection1Ref.current,
       heroSection2Ref.current,
       heroSection3Ref.current,
+      heroSection4Ref.current,
       gridSectionRef.current,
-      footerSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
 
     let newIndex = currentIndexRef.current;
@@ -85,6 +95,7 @@ export default function HomePage() {
 
     if (newIndex !== currentIndexRef.current) {
       currentIndexRef.current = newIndex;
+
       scrollToSection(newIndex);
     }
   }, []);
@@ -94,17 +105,42 @@ export default function HomePage() {
    * -------------------------------------------------------- */
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
+      const gridEl = gridSectionRef.current;
+
+      // still allow native scrolling inside grid
+      if (gridEl && gridEl.contains(e.target as Node)) {
+        const canScroll = gridEl.scrollHeight > gridEl.clientHeight;
+        const down = e.deltaY > 0;
+        const atBottom = gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1;
+        const atTop = gridEl.scrollTop <= 1;
+
+        if (canScroll && ((down && !atBottom) || (!down && !atTop))) {
+          return;
+        }
+      }
+
+      // Prevent snap if native scroll still active
+      if (isAtBottom) {
+        // allow wheel event to bubble so wrapper scroll listener can detect "back up"
+        if (e.deltaY < 0 && gridSectionRef.current && gridSectionRef.current.getBoundingClientRect().top >= 0 && Math.abs(e.deltaY) > 30) {
+          e.preventDefault();
+          setIsAtBottom(false);
+          handleScrollGesture(e.deltaY > 0 ? "down" : "up");
+        }
+        return;
+      }
+
       e.preventDefault();
-      if (e.deltaY > 0) handleScrollGesture("down");
-      else handleScrollGesture("up");
+      handleScrollGesture(e.deltaY > 0 ? "down" : "up");
     };
+
 
     window.addEventListener("wheel", wheelHandler, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", wheelHandler);
     };
-  }, [handleScrollGesture]);
+  }, [handleScrollGesture, isAtBottom]);
 
   /** --------------------------------------------------------
    *  Touch Events (Mobile)
@@ -117,12 +153,36 @@ export default function HomePage() {
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      // If we've reached the last section, allow native touch scrolling freely
+      if (isAtBottom) return
+      const currentY = e.touches[0].clientY
+      const deltaY = startY - currentY;
+      if (Math.abs(deltaY) < 0) return;
+
+      // If touch starts inside the grid section and it can scroll, allow native scrolling unless at boundary
+      const gridEl = gridSectionRef.current
+      const target = e.target as HTMLElement | null
+      if (gridEl && target && gridEl.contains(target)) {
+        const canScrollVertically = gridEl.scrollHeight > gridEl.clientHeight
+        if (canScrollVertically) {
+          const scrollingDown = deltaY > 0
+          const atBottom = gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1
+          const atTop = gridEl.scrollTop <= 1
+
+          if ((scrollingDown && !atBottom) || (!scrollingDown && !atTop)) {
+            // let browser handle native scroll inside the grid
+            startY = currentY
+            return
+          }
+          // else, fall through to handle section snap when at boundary
+        }
+      }
+
+      // Intercept and snap when not handled by native scroll
       e.preventDefault();
-      const deltaY = startY - e.touches[0].clientY;
-      if (Math.abs(deltaY) < 30) return;
       if (deltaY > 0) handleScrollGesture("down");
       else handleScrollGesture("up");
-      startY = e.touches[0].clientY;
+      startY = currentY;
     };
 
     window.addEventListener("touchstart", onTouchStart, { passive: false });
@@ -132,11 +192,78 @@ export default function HomePage() {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
     };
-  }, [handleScrollGesture]);
+  }, [handleScrollGesture, isAtBottom]);
+
+  /** --------------------------------------------------------
+   *  When the page is in native-scroll mode for the last section
+   *  (isAtBottom === true) we need to detect when the user scrolls
+   *  back up out of that section. When the wrapper's scrollTop passes
+   *  above the last section's offset we switch back to the per-section
+   *  snapping behavior and animate the content container to the
+   *  previous section.
+   * -------------------------------------------------------- */
+  useEffect(() => {
+    if (!isAtBottom) return;
+
+    const wrapper = smoothWrapperRef.current;
+    const content = smoothContentRef.current;
+    if (!wrapper || !content) return;
+
+    const sections = [
+      heroSection1Ref.current,
+      heroSection2Ref.current,
+      heroSection3Ref.current,
+      gridSectionRef.current,
+    ].filter(Boolean) as HTMLElement[];
+
+    const lastIndex = sections.length - 1;
+    const gridTop = sections[lastIndex]?.offsetTop ?? 0;
+
+    const onWrapperScroll = () => {
+      // If wrapper.scrollTop has moved above the grid's top, user intends to
+      // go back to the previous section — restore snap behavior.
+      if (wrapper.scrollTop <= gridTop - 1) {
+        // detach listener to avoid reentrancy
+        wrapper.removeEventListener('scroll', onWrapperScroll);
+
+        // Reset wrapper scroll to avoid a visual jump while we animate
+        // the content transform back into snap mode.
+        try {
+          wrapper.scrollTop = 0;
+        } catch (err) {
+          void err;
+        }
+
+        setIsAtBottom(false);
+
+        const prevIndex = Math.max(0, lastIndex - 1);
+        currentIndexRef.current = prevIndex;
+
+        // Animate the content container to the previous section position
+        const targetTop = sections[prevIndex].offsetTop;
+        isAnimatingRef.current = true;
+        gsap.to(content, {
+          y: -targetTop,
+          duration: 1,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            isAnimatingRef.current = false;
+          },
+        });
+      }
+    };
+
+    wrapper.addEventListener('scroll', onWrapperScroll, { passive: true });
+
+    return () => {
+      wrapper.removeEventListener('scroll', onWrapperScroll);
+    };
+  }, [isAtBottom]);
 
   // Example content
   const exampleWithLinks = {
     media: [
+      { type: "image" as const, src: "/images/desktop-hero.webp" },
       { type: "image" as const, src: "/images/desktop-first-collection.webp" },
       { type: "image" as const, src: "/images/desktop-second-collection.webp" },
       { type: "image" as const, src: "/images/desktop-third-collection.webp" },
@@ -165,10 +292,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative bg-[#fffefa]`">
       <Header />
 
-      <div ref={smoothWrapperRef} className="h-screen overflow-hidden">
+      <div ref={smoothWrapperRef} className={`h-screen ${isAtBottom ? "" : "overflow-hidden"}`}>
         <div ref={smoothContentRef}>
           <section ref={heroSection1Ref} className="h-screen">
             <HeroSection
@@ -196,13 +323,17 @@ export default function HomePage() {
               secondParameter={exampleWithLinks.secondParameter[2]}
             />
           </section>
-
-          <section ref={gridSectionRef} className="h-screen">
-            <GridSectionWithFooter ref={gridSectionRef} />
+          <section ref={heroSection4Ref} className="h-screen">
+            <HeroSection
+              ref={heroSection4Ref}
+              media={exampleWithLinks.media[3]}
+              firstParameter={exampleWithLinks.firstParameter[3]}
+              secondParameter={exampleWithLinks.secondParameter[3]}
+            />
           </section>
 
-          <section ref={footerSectionRef} className="h-screen">
-            <Footer />
+          <section ref={gridSectionRef} className="min-h-screen">
+            <GridSectionWithFooter ref={gridSectionRef} />
           </section>
         </div>
       </div>

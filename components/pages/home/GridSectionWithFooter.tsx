@@ -10,17 +10,18 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
   return (
     <section
       ref={ref}
-      className="h-screen w-full snap-start relative overflow-hidden flex flex-col bg-white"
+      className="min-h-screen w-full snap-start relative flex flex-col bg-[#fffefa] overflow-y-auto"
     >
       <div className="relative h-full w-full flex flex-col justify-around">
 
-        <div className="flex flex-col items-center text-center text-black text-[16px] gap-3 pt-20 pb-5">
-          <span className="uppercase">Follow us on Instagram</span>
+        <div className="flex flex-col items-center text-center text-black gap-3 pt-20 pb-8">
+          <span className="uppercase text-2xl leading-none font-regular">Follow us on Instagram</span>
           <span>
             <Link
               href={"https://www.instagram.com/memoi.official/"}
               target="_blank"
               rel="noopener noreferrer"
+              className="leading-[1.2]"
             >
               @memoi.official
             </Link>
@@ -42,10 +43,9 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
             spaceBetween={16}
             autoplay={{ delay: 1000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             speed={1800}
-            className="py-6"
           />
         </div>
-        <div className="px-16 py-8">
+        <div className="px-25 py-16">
           <div className="flex items-center">
             <div className="flex-1">
               <BenefitItem
@@ -62,8 +62,8 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               <BenefitItem
                 image="/icons/payment-icon.svg"
                 imageAlt="Shipping Icon"
-                title="Free Delivery & Exchanges"
-                description="Complimentary standard shipping and returns & exchanges within 30 days"
+                title="Secure Payment & Information"
+                description="Your payment and information details are encrypted and securely processed"
               />
             </div>
 
@@ -73,12 +73,13 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               <BenefitItem
                 image="/icons/check-icon.svg"
                 imageAlt="Shipping Icon"
-                title="Free Delivery & Exchanges"
-                description="Complimentary standard shipping and returns & exchanges within 30 days"
+                title="The MEMOI Membership Experience"
+                description="Your Memoí membership elevates your experience with tiered loyalty rewards"
               />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </section>
   );

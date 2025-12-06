@@ -74,11 +74,11 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
 
         {firstParameter && secondParameter && (
           <div className="absolute bottom-10 left-0 right-0 z-10 px-8">
-            <div className="max-w-7xl mx-auto text-center space-y-4">
+            <div className="mx-auto text-center space-y-3">
               {/* First Parameter - Links or Text */}
-              <div className="text-white text-lg md:text-xl">
+              <div className="text-white text-[1rem] leading-[1.2] ">
                 {Array.isArray(firstParameter) ? (
-                  <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                  <div className="flex flex-wrap justify-center gap-4 leading-[1.2]">
                     {firstParameter.map((link, index) => (
                       <LinkItem key={index} url={link.url} title={link.title} style="uppercase" />
                     ))}
@@ -89,7 +89,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               </div>
 
               {/* Second Parameter - Link */}
-              <div className="text-white text-lg md:text-xl">
+              <div className="text-white text-[1rem] leading-[1.2] ">
                 <LinkItem
                   url={secondParameter.url}
                   title={secondParameter.title}

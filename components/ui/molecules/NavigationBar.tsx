@@ -3,7 +3,7 @@ import React from "react";
 
 function NavigationBar() {
   return (
-    <nav className="flex items-center gap-16 ">
+    <nav className="flex items-center gap-16 text-sm">
       <Link
         href="/collection"
         className="text-white hover:text-gray-300 transition"

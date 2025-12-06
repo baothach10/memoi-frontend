@@ -3,8 +3,8 @@ import Link from "next/link";
 
 function Logo() {
   return (
-    <Link href="/" className="transform -translate-y-1/2">
-      <Image width={109} height={24} src={"/logo.svg"} alt="logo icon" />
+    <Link href="/" className="transform">
+      <Image width={100} height={22} src={"/logo.svg"} alt="logo icon" />
     </Link>
   );
 }
