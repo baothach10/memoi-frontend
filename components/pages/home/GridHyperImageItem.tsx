@@ -42,11 +42,11 @@ export default function GridHyperImageItem({
                     src={src}
                     alt={alt}
                     fill
-                    className="object-cover rounded-md"
+                    className="object-cover"
                 />
 
                 <div
-                    className="absolute w-full h-full flex items-center bg-black/0 hover:bg-black/40 justify-center transition-all rounded-md"
+                    className="absolute w-full h-full flex items-center bg-black/0 hover:bg-black/40 justify-center transition-all"
                 >
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
