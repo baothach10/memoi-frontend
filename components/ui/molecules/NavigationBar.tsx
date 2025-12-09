@@ -1,9 +1,8 @@
 import Link from "next/link";
-import React from "react";
 
-function NavigationBar() {
+function NavigationBar({ className = "" }: { className?: string }) {
   return (
-    <nav className="flex items-center gap-16 text-sm">
+    <nav className={`flex items-center gap-16 text-sm ${className}`}>
       <Link
         href="/collection"
         className="text-white hover:text-gray-300 transition"

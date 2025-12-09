@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThreeModelProvider } from "@/context/ThreeModelContext";
+import { Header } from "@/components/ui/organisms/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,8 @@ export default function RootLayout({
       >
         <ThreeModelProvider>
 
-          {/* <Header /> */}
+          <Header />
+
           {/* <main className="relative"> */}
           {/* <Suspense fallback={<LoadingPage />}> */}
           {children}

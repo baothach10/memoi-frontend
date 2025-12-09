@@ -1,6 +1,5 @@
-import CollectionLink from "@/components/pages/collection/CollectionLink";
-import HeroSection from "@/components/pages/home/HeroSection";
-import { Header } from "@/components/ui/organisms/Header";
+import CollectionLink from "@/components/ui/pages/collection/CollectionLink";
+import HeroSection from "@/components/ui/pages/home/HeroSection";
 
 // Main Home Component
 export default function CollectionPage() {
@@ -9,11 +8,13 @@ export default function CollectionPage() {
       type: "image" as const,
       src: "/images/collection-menu.webp",
     },
-    firstParameter:
-      "Welcome to our amazing platform. Discover the future of innovation.",
-    secondParameter: {
-      url: "https://example.com/signup",
-      title: "Sign Up Now",
+    tabletMedia: {
+      type: "image" as const,
+      src: "/images/collection-menu.webp",
+    },
+    mobileMedia: {
+      type: "image" as const,
+      src: "/images/collection-menu.webp",
     },
   };
 
@@ -25,10 +26,9 @@ export default function CollectionPage() {
 
   return (
     <div className="relative">
-      <Header />
       <div id="smooth-wrapper" className="h-screen overflow-hidden">
         <div id="smooth-content">
-          <HeroSection ref={null} media={exampleWithLinks.media} />
+          <HeroSection ref={null} media={exampleWithLinks.media} tabletMedia={exampleWithLinks.tabletMedia} mobileMedia={exampleWithLinks.mobileMedia} />
         </div>
         <div className="text-white gap-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
           <div className="gap-3 flex flex-col items-center justify-center">

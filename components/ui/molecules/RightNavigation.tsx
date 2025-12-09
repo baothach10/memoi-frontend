@@ -1,17 +1,21 @@
 import Link from "next/link";
-import Image from "next/image";
+import SearchIcon from "../atoms/SearchIcon";
+import CartIcon from "../atoms/CartIcon";
+import UserIcon from "../atoms/UserIcon";
 
-function RightNavigation() {
+function RightNavigation({ color = "white", onClose }: { color?: string; onClose?: () => void }) {
+
   return (
-    <div className="flex items-center gap-6">
-      <Link href="#" className="text-white hover:text-gray-300 transition">
-        <Image width={14} height={14} src={"/search.svg"} alt="search icon" />
+    <div className="flex items-center gap-6 max-mobile:gap-4">
+
+      <Link href="#" onClick={() => onClose?.()} className="text-white hover:text-gray-300 transition">
+        <SearchIcon width={14} height={14} color={color} />
       </Link>
-      <Link href="#" className="text-white hover:text-gray-300 transition">
-        <Image width={14} height={14} src={"/cart.svg"} alt="cart icon" />
+      <Link href="#" onClick={() => onClose?.()} className="text-white hover:text-gray-300 transition" >
+        <CartIcon width={14} height={14} color={color} />
       </Link>
-      <Link href="#" className="text-white hover:text-gray-300 transition">
-        <Image width={14} height={14} src={"/profile.svg"} alt="profile icon" />
+      <Link href="#" onClick={() => onClose?.()} className="text-white hover:text-gray-300 transition max-mobile:hidden">
+        <UserIcon width={14} height={14} color={color} />
       </Link>
     </div>
   );

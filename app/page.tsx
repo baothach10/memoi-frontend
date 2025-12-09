@@ -1,10 +1,10 @@
 "use client";
 
-import { Header } from "@/components/ui/organisms/Header";
-import GridSectionWithFooter from "../components/pages/home/GridSectionWithFooter";
-import HeroSection from "../components/pages/home/HeroSection";
+import GridSectionWithFooter from "../components/ui/pages/home/GridSectionWithFooter";
+import HeroSection from "../components/ui/pages/home/HeroSection";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import useIsMobile from "@/hooks/useIsMobile";
 
 export default function HomePage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -105,6 +105,11 @@ export default function HomePage() {
    * -------------------------------------------------------- */
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
+      // If the mobile menu is open, ignore wheel events for page snapping
+      if (typeof document !== "undefined" && document.body.classList.contains("menu-open")) {
+        e.preventDefault();
+        return;
+      }
       const gridEl = gridSectionRef.current;
 
       // still allow native scrolling inside grid
@@ -153,6 +158,12 @@ export default function HomePage() {
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      // If mobile menu is open, ignore touch move for page snapping
+      if (typeof document !== "undefined" && document.body.classList.contains("menu-open")) {
+        e.preventDefault()
+        return
+      }
+
       // If we've reached the last section, allow native touch scrolling freely
       if (isAtBottom) return
       const currentY = e.touches[0].clientY
@@ -264,9 +275,17 @@ export default function HomePage() {
   const exampleWithLinks = {
     media: [
       { type: "image" as const, src: "/images/desktop-hero.webp" },
+      { type: "image" as const, src: "/images/tablet-hero.webp" },
+      { type: "image" as const, src: "/images/mobile-hero.webp" },
       { type: "image" as const, src: "/images/desktop-first-collection.webp" },
+      { type: "image" as const, src: "/images/tablet-first-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-first-collection.webp" },
       { type: "image" as const, src: "/images/desktop-second-collection.webp" },
+      { type: "image" as const, src: "/images/tablet-second-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-second-collection.webp" },
       { type: "image" as const, src: "/images/desktop-third-collection.webp" },
+      { type: "image" as const, src: "/images/tablet-third-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-third-collection.webp" },
     ],
     firstParameter: [
       "MEMOÍ - for the woman becoming herself",
@@ -292,15 +311,15 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative bg-[#fffefa]`">
-      <Header />
-
+    <div className="relative w-full h-full bg-[#fffefa]`">
       <div ref={smoothWrapperRef} className={`h-screen ${isAtBottom ? "" : "overflow-hidden"}`}>
         <div ref={smoothContentRef}>
           <section ref={heroSection1Ref} className="h-screen">
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
+              tabletMedia={exampleWithLinks.media[1]}
+              mobileMedia={exampleWithLinks.media[2]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
             />
@@ -309,7 +328,9 @@ export default function HomePage() {
           <section ref={heroSection2Ref} className="h-screen">
             <HeroSection
               ref={heroSection2Ref}
-              media={exampleWithLinks.media[1]}
+              media={exampleWithLinks.media[3]}
+              tabletMedia={exampleWithLinks.media[4]}
+              mobileMedia={exampleWithLinks.media[5]}
               firstParameter={exampleWithLinks.firstParameter[1]}
               secondParameter={exampleWithLinks.secondParameter[1]}
             />
@@ -318,7 +339,9 @@ export default function HomePage() {
           <section ref={heroSection3Ref} className="h-screen">
             <HeroSection
               ref={heroSection3Ref}
-              media={exampleWithLinks.media[2]}
+              media={exampleWithLinks.media[6]}
+              tabletMedia={exampleWithLinks.media[7]}
+              mobileMedia={exampleWithLinks.media[8]}
               firstParameter={exampleWithLinks.firstParameter[2]}
               secondParameter={exampleWithLinks.secondParameter[2]}
             />
@@ -326,7 +349,9 @@ export default function HomePage() {
           <section ref={heroSection4Ref} className="h-screen">
             <HeroSection
               ref={heroSection4Ref}
-              media={exampleWithLinks.media[3]}
+              media={exampleWithLinks.media[9]}
+              tabletMedia={exampleWithLinks.media[10]}
+              mobileMedia={exampleWithLinks.media[11]}
               firstParameter={exampleWithLinks.firstParameter[3]}
               secondParameter={exampleWithLinks.secondParameter[3]}
             />

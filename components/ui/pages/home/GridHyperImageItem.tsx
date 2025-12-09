@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import InstagramIcon from '../../atoms/InstagramIcon'
+import useIsMobile from '@/hooks/useIsMobile'
 
 type Props = {
     src: string
@@ -15,11 +18,18 @@ export default function GridHyperImageItem({
     className = ''
 }: Props) {
     const [ratios, setRatios] = useState<string>('5/6');
+    const isMobile = useIsMobile(1024);
 
     useEffect(() => {
         const updateRatio = () => {
-            const height = typeof window !== 'undefined' ? window.innerHeight : 0;
-            setRatios(height >= 1440 ? '9/16' : '5/6');
+            const width = document.documentElement.clientWidth;
+            if (width >= 1440) {
+                setRatios('9/16');
+            } else if (width > 767) {
+                setRatios('5/6');
+            } else {
+                setRatios('5/7');
+            }
         };
         updateRatio();
         window.addEventListener('resize', updateRatio);
@@ -27,7 +37,7 @@ export default function GridHyperImageItem({
     }, []);
 
     return (
-        <a
+        <Link
             href={href}
             target="_blank"
             rel="noopener noreferrer"
@@ -44,19 +54,17 @@ export default function GridHyperImageItem({
                     fill
                     className="object-cover"
                 />
+                {!isMobile && (
 
-                <div
-                    className="absolute w-full h-full flex items-center bg-black/0 hover:bg-black/40 justify-center transition-all"
-                >
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" strokeWidth="1.5" fill="none" />
-                            <path d="M7 12a5 5 0 1 0 10 0 5 5 0 0 0-10 0z" stroke="white" strokeWidth="1.5" fill="none" />
-                            <circle cx="17.5" cy="6.5" r="0.8" fill="white" />
-                        </svg>
+                    <div
+                        className="absolute w-full h-full flex items-center bg-black/0 hover:bg-black/40 justify-center transition-all"
+                    >
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                            <InstagramIcon color='white' width={48} height={48} />
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
-        </a>
+        </Link>
     )
 }

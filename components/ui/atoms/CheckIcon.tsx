@@ -1,0 +1,11 @@
+import { IconProps } from "@/types"
+
+function CheckIcon({ color = 'black', width = 48, height = 48 }: IconProps) {
+    return (
+        <svg width={width} height={height} viewBox={`0 0 48 48`} fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44 22.1714V24.0114C43.9975 28.3243 42.601 32.5208 40.0187 35.9751C37.4363 39.4294 33.8066 41.9564 29.6707 43.1792C25.5349 44.4021 21.1145 44.2552 17.0689 42.7606C13.0234 41.266 9.56931 38.5036 7.22192 34.8856C4.87453 31.2675 3.75958 26.9876 4.04335 22.6841C4.32712 18.3806 5.99441 14.2841 8.79656 11.0056C11.5987 7.72709 15.3856 5.44221 19.5924 4.49174C23.7992 3.54127 28.2005 3.97612 32.14 5.73145M44 8L24 28.02L18 22.02" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    )
+}
+
+export default CheckIcon

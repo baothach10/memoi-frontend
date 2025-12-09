@@ -1,4 +1,22 @@
 @import "tailwindcss";
+/* @import "tailwindcss/preflight"; */
+/* @tailwind utilities; */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  /* Optional: Reset default breakpoints if you want to define them all from scratch */
+  --breakpoint-*: initial;
+
+  /* Define your custom breakpoints */
+  --breakpoint-mobile: 767px;
+  --breakpoint-smaller-tablet: 768px;
+  --breakpoint-tablet: 1023px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1729px;
+}
 
 :root {
   --background: #ffffff;
