@@ -68,8 +68,12 @@ export default function MobileMenu({ className = "", open: openProp, onToggle }:
                     {open ? <ExitIcon width={18} height={18} color="black" /> : <HamburgerMenuIcon width={18} height={18} color="white" />}
                 </button>
 
-                <div className={`relative w-[${iconSize}px] h-[${iconSize}px]`} />
-                <div className={`relative w-[${iconSize}px] h-[${iconSize}px] mobile:max-tablet:block hidden`} />
+                <div className={`relative w-[${iconSize}px] h-[${iconSize}px]`}>
+                    <ExitIcon width={18} height={18} color="transparent" />
+                </div>
+                <div className={`relative w-[${iconSize}px] h-[${iconSize}px] max-tablet:block hidden`}>
+                    <ExitIcon width={18} height={18} color="transparent" />
+                </div>
 
             </div>
 

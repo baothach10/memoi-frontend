@@ -1,6 +1,6 @@
 import { IconProps } from "@/types"
 
-function InstagramIcon({ color = 'black', width = 16, height = 16 }: IconProps) {
+function InstagramIcon({ color = '#4d4c4b', width = 16, height = 16 }: IconProps) {
     return (
         <svg width={width} height={height} viewBox={`0 0 16 16`} fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_744_16282)">

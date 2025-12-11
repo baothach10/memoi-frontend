@@ -4,7 +4,6 @@ import GridSectionWithFooter from "../components/ui/pages/home/GridSectionWithFo
 import HeroSection from "../components/ui/pages/home/HeroSection";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import useIsMobile from "@/hooks/useIsMobile";
 
 export default function HomePage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);

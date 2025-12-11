@@ -23,9 +23,12 @@ export default function GridHyperImageItem({
     useEffect(() => {
         const updateRatio = () => {
             const width = document.documentElement.clientWidth;
-            if (width >= 1440) {
-                setRatios('9/16');
-            } else if (width > 767) {
+            if (width >= 1440) { // laptop and desktop
+                setRatios('3/4');
+            } else if (width >= 1000 && width < 1200) { // ipad pro
+                setRatios('5/7');
+            }
+            else if (width > 767) {
                 setRatios('5/6');
             } else {
                 setRatios('5/7');

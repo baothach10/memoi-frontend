@@ -1,4 +1,3 @@
-import Image from "next/image";
 import MemoiGraphicLogo from "../atoms/MemoiGraphicLogo";
 import FacebookIcon from "../atoms/FacebookIcon";
 import InstagramIcon from "../atoms/InstagramIcon";
@@ -20,7 +19,7 @@ export function Footer() {
             MEMOÍ exists for the woman becoming herself. We believe true luxury lies in conscious living and timeless quality. Our pieces are an act of service: accessible elegance designed to honor your choices and support your growth.
           </div>
         </div>
-        <div className="grid grid-cols-1 laptop:max-desktop:grid-cols-4 gap-16 w-2/3 mx-auto text-center max-tablet:hidden">
+        <div className="grid max-tablet:grid-cols-1 grid-cols-4 gap-16 w-2/3 mx-auto text-center max-tablet:hidden">
           <div className="gap-8 flex flex-col items-center justify-center">
             <h4 className="font-regular mb-2 text-[16px] uppercase">Shop</h4>
             <ul className="space-y-2 text-black/60 text-sm">
@@ -125,7 +124,7 @@ export function Footer() {
           </div>
         </div>
         <div className="grid grid-cols-1 w-full mx-auto text-center laptop:hidden">
-          <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
+          <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4 max-mobile:mx-5" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
             <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
               <li>
                 <a href="#" className="hover:text-black transition">
@@ -150,7 +149,9 @@ export function Footer() {
             </ul>
           </ExpandableSection>
 
-          <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Explore</h4>}>
+          {/* <div className="laptop:max-desktop:w-px max-tablet:h-px border-b-black/10 self-stretch max-mobile:mx-5" /> */}
+
+          <ExpandableSection defaultOpen={false} className="relative  mx-10  py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4 max-mobile:mx-5" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Explore</h4>}>
             <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
               <li>
                 <a href="#" className="hover:text-black transition">
@@ -175,7 +176,7 @@ export function Footer() {
             </ul>
           </ExpandableSection>
 
-          <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
+          <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4 max-mobile:mx-5" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
             <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
               <li>
                 <a href="#" className="hover:text-black transition">
@@ -200,7 +201,7 @@ export function Footer() {
             </ul>
           </ExpandableSection>
 
-          <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
+          <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 max-mobile:px-4 max-mobile:py-4 max-mobile:mx-5" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
             <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
               <li>
                 <a href="#" className="hover:text-black transition">
@@ -226,7 +227,7 @@ export function Footer() {
           </ExpandableSection>
         </div>
         <div className="border-t border-black/10 pt-3 text-black text-sm pb-5 max-tablet:pb-8 max-tablet:pt-5">
-          <div className="flex justify-between px-25 smaller-tablet:max-tablet:px-10 max-mobile:flex-col max-mobile:gap-4 max-mobile:px-4 max-mobile:items-center max-mobile:text-center">
+          <div className="flex justify-between px-25 smaller-tablet:max-tablet:px-10 max-mobile:flex-col max-mobile:gap-4 max-mobile:px-4 max-mobile:items-center max-mobile:text-center max-mobile:text-xs max-mobile:leading-normal">
             <p>&copy; 2025 MEMOI ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
             <div className="flex gap-5 max-mobile:gap-[18px]">
               <FacebookIcon

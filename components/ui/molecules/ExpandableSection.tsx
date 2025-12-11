@@ -60,7 +60,7 @@ export default function ExpandableSection({ title, children, className = "", def
     }, [open])
 
     return (
-        <div className={`w-full ${className}`}>
+        <div className={` ${className}`}>
             <div className="flex items-center justify-between cursor-pointer" role="heading" aria-level={3}>
                 <button
                     type="button"
