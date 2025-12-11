@@ -70,7 +70,7 @@ export default function ExpandableSection({ title, children, className = "", def
                 >
                     <span className="flex-1">{title}</span>
                     <span className="shrink-0">
-                        {open ? <ChevronDownIcon width={chevronSize} height={chevronSize} /> : <ChevronUpIcon width={chevronSize} height={chevronSize} />}
+                        {open ? <ChevronUpIcon width={chevronSize} height={chevronSize} /> : <ChevronDownIcon width={chevronSize} height={chevronSize} />}
                     </span>
                 </button>
             </div>
