@@ -176,9 +176,9 @@ export default function ThreeScene() {
         composer.addPass(renderPass)
 
         // Bloom parameters: tune strength/radius/threshold for a metallic sheen
-        const bloomStrength = 0.15
-        const bloomRadius = 0.1
-        const bloomThreshold = 0.1
+        const bloomStrength = 0.05
+        const bloomRadius = 0.05
+        const bloomThreshold = 0.05
         const bloomPass = new UnrealBloomPass(new THREE.Vector2(mountRef.current.clientWidth, mountRef.current.clientHeight), bloomStrength, bloomRadius, bloomThreshold)
         composer.addPass(bloomPass)
         // composer.addPass(new ClearPass(0xffffff, 1));
