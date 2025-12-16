@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useThreeModel } from '@/context/ThreeModelContext'
-import {  EffectComposer, OrbitControls, RenderPass, RGBELoader } from 'three-stdlib'
+import {  EffectComposer, OrbitControls, RenderPass, RGBELoader, UnrealBloomPass } from 'three-stdlib'
 import { DebugEnvironment } from 'three/examples/jsm/Addons.js'
 
 export default function ThreeScene() {
@@ -39,7 +39,7 @@ export default function ThreeScene() {
         controls.dampingFactor = 0.05
         controls.enableZoom = false
 
-        camera.position.set(0, 0, 1.5);
+        camera.position.set(0, 0, 1.05);
 
         controls.target.copy(model.position);
 
@@ -64,18 +64,18 @@ export default function ThreeScene() {
                         mat.envMap = generatedCubeRenderTarget.texture;
 
                         // Add physical reflection polish
-                        // mat.clearcoat = 0.6;
-                        // mat.clearcoatRoughness = 0.1;
+                        // mat.clearcoat = 0.1;
+                        // mat.clearcoatRoughness = 0.2;
 
                         // Let texture drive roughness but slightly reduce it
-                        // mat.roughness = 0.2; // Use mid value instead of 1.0
-                        // mat.metalness = 0.9; // Confirm fully metallic
+                        // mat.roughness = 0.5; // Use mid value instead of 1.0
+                        // mat.metalness = 0.6; // Confirm fully metallic
 
                         // Enhance visible lighting interaction
-                        // mat.normalScale.set(0.1, -0.1); // more pronounced
+                        // mat.normalScale.set(5, 5); // more pronounced
 
                         // Stronger reflection handling
-                        // mat.envMapIntensity = 0.5;
+                        mat.envMapIntensity = 2.5;
 
                         // Ensure material updates
                         mat.needsUpdate = true;
@@ -150,7 +150,7 @@ export default function ThreeScene() {
         //         scene.background = null; // set to texture if you want HDR as background
         //     });
 
-        const sunLight = new THREE.DirectionalLight(0xffffff, 4);
+        const sunLight = new THREE.DirectionalLight(0xffffff, 10);
         sunLight.position.set(5, 5, 5);
         sunLight.lookAt(model.getWorldPosition(new THREE.Vector3()));
         // scene.add(sunLight);
@@ -166,8 +166,8 @@ export default function ThreeScene() {
         camera.lookAt(model.position);
 
 
-        renderer.toneMapping = THREE.AgXToneMapping;
-        renderer.toneMappingExposure = 3; // Not more than 1.2
+        renderer.toneMapping = THREE.NeutralToneMapping;
+        renderer.toneMappingExposure = 1.2; // Not more than 1.2
         renderer.outputColorSpace = THREE.SRGBColorSpace;
 
         // Post-processing: EffectComposer + UnrealBloomPass to make the model look shiny/metallic
@@ -176,11 +176,11 @@ export default function ThreeScene() {
         composer.addPass(renderPass)
 
         // Bloom parameters: tune strength/radius/threshold for a metallic sheen
-        // const bloomStrength = 0.2
-        // const bloomRadius = 0.1
-        // const bloomThreshold = 0.1
-        // const bloomPass = new UnrealBloomPass(new THREE.Vector2(mountRef.current.clientWidth, mountRef.current.clientHeight), bloomStrength, bloomRadius, bloomThreshold)
-        // composer.addPass(bloomPass)
+        const bloomStrength = 0.15
+        const bloomRadius = 0.1
+        const bloomThreshold = 0.1
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(mountRef.current.clientWidth, mountRef.current.clientHeight), bloomStrength, bloomRadius, bloomThreshold)
+        composer.addPass(bloomPass)
         // composer.addPass(new ClearPass(0xffffff, 1));
 
         scene.background = new THREE.Color(0xfffefa)

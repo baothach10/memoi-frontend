@@ -1,0 +1,15 @@
+import { IconProps } from "@/types"
+
+
+function CartIcon({ color = 'black', width = 14, height = 14 }: IconProps) {
+    return (
+        <svg width={width} height={height} viewBox={`0 0 14 14`} fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.5 1.16699L1.75 3.50033V11.667C1.75 11.9764 1.87292 12.2732 2.09171 12.492C2.3105 12.7107 2.60725 12.8337 2.91667 12.8337H11.0833C11.3928 12.8337 11.6895 12.7107 11.9083 12.492C12.1271 12.2732 12.25 11.9764 12.25 11.667V3.50033L10.5 1.16699H3.5Z" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M1.75 3.5H12.25" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9.33317 5.83301C9.33317 6.45185 9.08734 7.04534 8.64975 7.48292C8.21217 7.92051 7.61868 8.16634 6.99984 8.16634C6.381 8.16634 5.78751 7.92051 5.34992 7.48292C4.91234 7.04534 4.6665 6.45185 4.6665 5.83301" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
+    )
+}
+
+export default CartIcon
