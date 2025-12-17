@@ -1,6 +1,6 @@
 import Footer from "@/components/ui/organisms/Footer";
 import Link from "next/link";
-import { forwardRef, use } from "react";
+import { forwardRef } from "react";
 import Carousel from '@/components/ui/molecules/Carousel'
 import GridHyperImageItem from './GridHyperImageItem'
 import BenefitItem from "./BenefitItem";

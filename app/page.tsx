@@ -105,7 +105,10 @@ export default function HomePage() {
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
       // If the mobile menu is open, ignore wheel events for page snapping
-      if (typeof document !== "undefined" && document.body.classList.contains("menu-open")) {
+      if (
+        typeof document !== "undefined" &&
+        document.body.classList.contains("menu-open")
+      ) {
         e.preventDefault();
         return;
       }
@@ -115,7 +118,8 @@ export default function HomePage() {
       if (gridEl && gridEl.contains(e.target as Node)) {
         const canScroll = gridEl.scrollHeight > gridEl.clientHeight;
         const down = e.deltaY > 0;
-        const atBottom = gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1;
+        const atBottom =
+          gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1;
         const atTop = gridEl.scrollTop <= 1;
 
         if (canScroll && ((down && !atBottom) || (!down && !atTop))) {
@@ -126,7 +130,12 @@ export default function HomePage() {
       // Prevent snap if native scroll still active
       if (isAtBottom) {
         // allow wheel event to bubble so wrapper scroll listener can detect "back up"
-        if (e.deltaY < 0 && gridSectionRef.current && gridSectionRef.current.getBoundingClientRect().top >= 0 && Math.abs(e.deltaY) > 30) {
+        if (
+          e.deltaY < 0 &&
+          gridSectionRef.current &&
+          gridSectionRef.current.getBoundingClientRect().top >= 0 &&
+          Math.abs(e.deltaY) > 30
+        ) {
           e.preventDefault();
           setIsAtBottom(false);
           handleScrollGesture(e.deltaY > 0 ? "down" : "up");
@@ -137,7 +146,6 @@ export default function HomePage() {
       e.preventDefault();
       handleScrollGesture(e.deltaY > 0 ? "down" : "up");
     };
-
 
     window.addEventListener("wheel", wheelHandler, { passive: false });
 
@@ -158,31 +166,35 @@ export default function HomePage() {
 
     const onTouchMove = (e: TouchEvent) => {
       // If mobile menu is open, ignore touch move for page snapping
-      if (typeof document !== "undefined" && document.body.classList.contains("menu-open")) {
-        e.preventDefault()
-        return
+      if (
+        typeof document !== "undefined" &&
+        document.body.classList.contains("menu-open")
+      ) {
+        e.preventDefault();
+        return;
       }
 
       // If we've reached the last section, allow native touch scrolling freely
-      if (isAtBottom) return
-      const currentY = e.touches[0].clientY
+      if (isAtBottom) return;
+      const currentY = e.touches[0].clientY;
       const deltaY = startY - currentY;
       if (Math.abs(deltaY) < 0) return;
 
       // If touch starts inside the grid section and it can scroll, allow native scrolling unless at boundary
-      const gridEl = gridSectionRef.current
-      const target = e.target as HTMLElement | null
+      const gridEl = gridSectionRef.current;
+      const target = e.target as HTMLElement | null;
       if (gridEl && target && gridEl.contains(target)) {
-        const canScrollVertically = gridEl.scrollHeight > gridEl.clientHeight
+        const canScrollVertically = gridEl.scrollHeight > gridEl.clientHeight;
         if (canScrollVertically) {
-          const scrollingDown = deltaY > 0
-          const atBottom = gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1
-          const atTop = gridEl.scrollTop <= 1
+          const scrollingDown = deltaY > 0;
+          const atBottom =
+            gridEl.scrollTop + gridEl.clientHeight >= gridEl.scrollHeight - 1;
+          const atTop = gridEl.scrollTop <= 1;
 
           if ((scrollingDown && !atBottom) || (!scrollingDown && !atTop)) {
             // let browser handle native scroll inside the grid
-            startY = currentY
-            return
+            startY = currentY;
+            return;
           }
           // else, fall through to handle section snap when at boundary
         }
@@ -234,7 +246,7 @@ export default function HomePage() {
       // go back to the previous section — restore snap behavior.
       if (wrapper.scrollTop <= gridTop - 1) {
         // detach listener to avoid reentrancy
-        wrapper.removeEventListener('scroll', onWrapperScroll);
+        wrapper.removeEventListener("scroll", onWrapperScroll);
 
         // Reset wrapper scroll to avoid a visual jump while we animate
         // the content transform back into snap mode.
@@ -255,7 +267,7 @@ export default function HomePage() {
         gsap.to(content, {
           y: -targetTop,
           duration: 1,
-          ease: 'power3.inOut',
+          ease: "power3.inOut",
           onComplete: () => {
             isAnimatingRef.current = false;
           },
@@ -263,10 +275,10 @@ export default function HomePage() {
       }
     };
 
-    wrapper.addEventListener('scroll', onWrapperScroll, { passive: true });
+    wrapper.addEventListener("scroll", onWrapperScroll, { passive: true });
 
     return () => {
-      wrapper.removeEventListener('scroll', onWrapperScroll);
+      wrapper.removeEventListener("scroll", onWrapperScroll);
     };
   }, [isAtBottom]);
 
@@ -311,9 +323,12 @@ export default function HomePage() {
 
   return (
     <div className="relative w-full h-full bg-[#fffefa]`">
-      <div ref={smoothWrapperRef} className={`h-screen ${isAtBottom ? "" : "overflow-hidden"}`}>
+      <div
+        ref={smoothWrapperRef}
+        className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}
+      >
         <div ref={smoothContentRef}>
-          <section ref={heroSection1Ref} className="h-screen">
+          <section ref={heroSection1Ref} className="h-screen relative">
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -324,7 +339,7 @@ export default function HomePage() {
             />
           </section>
 
-          <section ref={heroSection2Ref} className="h-screen">
+          <section ref={heroSection2Ref} className="h-screen relative">
             <HeroSection
               ref={heroSection2Ref}
               media={exampleWithLinks.media[3]}
@@ -335,7 +350,7 @@ export default function HomePage() {
             />
           </section>
 
-          <section ref={heroSection3Ref} className="h-screen">
+          <section ref={heroSection3Ref} className="h-screen relative">
             <HeroSection
               ref={heroSection3Ref}
               media={exampleWithLinks.media[6]}
@@ -345,7 +360,7 @@ export default function HomePage() {
               secondParameter={exampleWithLinks.secondParameter[2]}
             />
           </section>
-          <section ref={heroSection4Ref} className="h-screen">
+          <section ref={heroSection4Ref} className="h-screen relative">
             <HeroSection
               ref={heroSection4Ref}
               media={exampleWithLinks.media[9]}
@@ -356,9 +371,7 @@ export default function HomePage() {
             />
           </section>
 
-          <section ref={gridSectionRef} className="min-h-screen">
-            <GridSectionWithFooter ref={gridSectionRef} />
-          </section>
+          <GridSectionWithFooter ref={gridSectionRef} />
         </div>
       </div>
     </div>

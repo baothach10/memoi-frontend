@@ -37,7 +37,7 @@ export default function CollectionPage() {
                 <CollectionLink
                   id={collection.id}
                   name={collection.name}
-                  href="/collection"
+                  href={`/collection/${collection.id}`}
                 />
               </div>
             ))}
