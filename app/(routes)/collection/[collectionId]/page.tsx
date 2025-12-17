@@ -415,7 +415,7 @@ function CollectionDetailPage() {
         className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}
       >
         <div ref={smoothContentRef} className="bg-[#fffefa]">
-          <section ref={heroSection1Ref} className="h-screen">
+          <section ref={heroSection1Ref} className="h-screen" data-header-theme="dark">
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -435,6 +435,7 @@ function CollectionDetailPage() {
           <section
             ref={gridSectionRef}
             className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+            data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">
               <div className="relative flex flex-col items-center text-center gap-6 max-w-[480px] smaller-tablet:max-tablet:max-w-[590px] max-mobile:max-w-7/8 max-mobile:gap-4">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThreeModelProvider } from "@/context/ThreeModelContext";
 import { Header } from "@/components/ui/organisms/Header";
+import { HeaderWrapper } from "@/components/ui/molecules/HeaderWrapper";
 
 export const metadata: Metadata = {
   title: "MEMOI Website",
@@ -21,7 +22,9 @@ export default function RootLayout({
       >
         <ThreeModelProvider>
 
-          <Header />
+          <HeaderWrapper>
+            <Header />
+          </HeaderWrapper>
 
           {/* <main className="relative"> */}
           {/* <Suspense fallback={<LoadingPage />}> */}

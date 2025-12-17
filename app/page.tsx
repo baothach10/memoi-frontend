@@ -360,7 +360,7 @@ export default function HomePage() {
               secondParameter={exampleWithLinks.secondParameter[2]}
             />
           </section>
-          <section ref={heroSection4Ref} className="h-screen relative">
+          <section ref={heroSection4Ref} className="h-screen relative" data-header-theme="dark">
             <HeroSection
               ref={heroSection4Ref}
               media={exampleWithLinks.media[9]}

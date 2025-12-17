@@ -6,6 +6,7 @@ import ExitIcon from "@/components/ui/atoms/ExitIcon"
 import ExpandableSection from "@/components/ui/molecules/ExpandableSection"
 import Link from "next/link"
 import useIsMobile from "@/hooks/useIsMobile"
+import { useHeaderTheme } from "@/hooks/useHeaderTheme"
 
 type Props = {
     className?: string
@@ -16,9 +17,11 @@ type Props = {
 export default function MobileMenu({ className = "", open: openProp, onToggle }: Props) {
     const [internalOpen, setInternalOpen] = useState(false)
     const isControlled = typeof openProp === "boolean"
+    const theme = useHeaderTheme();
     const open = isControlled ? (openProp as boolean) : internalOpen
     const isMobile = useIsMobile(768);
     const iconSize = isMobile ? 14 : 18;
+    const textColor = internalOpen || theme === "light" ? "black" : "white";
 
     const toggle = () => {
         if (isControlled) {
@@ -55,17 +58,17 @@ export default function MobileMenu({ className = "", open: openProp, onToggle }:
                     aria-label={open ? "Close menu" : "Open menu"}
                     aria-expanded={open}
                     onClick={toggle}
-                    className="z-10 relative items-center justify-center max-mobile:flex hidden"
+                    className="z-10 relative items-center justify-center max-mobile:flex hidden transition-all ease-in"
                 >
-                    {open ? <ExitIcon width={14} height={14} color="black" /> : <HamburgerMenuIcon width={14} height={14} color="white" />}
+                    {open ? <ExitIcon width={14} height={14} color={textColor} /> : <HamburgerMenuIcon width={14} height={14} color={textColor} />}
                 </button>
                 <button
                     aria-label={open ? "Close menu" : "Open menu"}
                     aria-expanded={open}
                     onClick={toggle}
-                    className="z-10 relative flex items-center justify-center max-mobile:hidden"
+                    className="z-10 relative flex items-center justify-center max-mobile:hidden transition-all ease-in"
                 >
-                    {open ? <ExitIcon width={18} height={18} color="black" /> : <HamburgerMenuIcon width={18} height={18} color="white" />}
+                    {open ? <ExitIcon width={18} height={18} color={textColor} /> : <HamburgerMenuIcon width={18} height={18} color={textColor} />}
                 </button>
 
                 <div className={`relative w-[${iconSize}px] h-[${iconSize}px]`}>

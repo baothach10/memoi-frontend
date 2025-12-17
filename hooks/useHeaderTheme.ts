@@ -1,0 +1,37 @@
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
+export function useHeaderTheme() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-header-theme]");
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = entry.target.getAttribute("data-header-theme");
+            if (theme === "light" || theme === "dark") {
+              setTheme(theme);
+              console.log(theme)
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "-20px 0px -99% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+
+    return () => observer.disconnect();
+  }, [pathname]); // 🔥 re-run on navigation
+
+  return theme;
+}
