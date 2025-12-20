@@ -1,16 +1,16 @@
 "use client";
 
-import PaginationComponent from "@/components/ui/molecules/Pagination";
-import Footer from "@/components/ui/organisms/Footer";
 import HeroSection from "@/components/ui/pages/home/HeroSection";
-import ShopInteractiveItem from "@/components/ui/pages/shop/ShopInteractiveItem";
 import useIsMobile from "@/hooks/useIsMobile";
+import { useRef, useState, useCallback, useEffect } from "react";
+import Footer from "../../organisms/Footer";
+import ShopInteractiveItem from "./ShopInteractiveItem";
 import { gsap } from "gsap";
 import Link from "next/link";
-import { useRef, useState, useCallback, useEffect } from "react";
+import PaginationComponent from "../../molecules/Pagination";
 
 // Main Home Component
-export default function ShopPage() {
+export default function ShopByCategory() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
@@ -23,10 +23,10 @@ export default function ShopPage() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const isMobile = useIsMobile(1024);
   const isLargeTablet = useIsMobile(1200);
-  const [currentPage, setCurrentPage] = useState(1)
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
+  const [currentPage, setCurrentPage] = useState(1)
 
   /** --------------------------------------------------------
    *  Smooth GSAP transition to section index
@@ -297,7 +297,7 @@ export default function ShopPage() {
       },
     ],
     heroDetail: {
-      title: "All products",
+      title: "Dresses",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
@@ -392,6 +392,7 @@ export default function ShopPage() {
 
   const itemsList = ["Dresses", "Tops", "Skirts", "Pants"];
 
+
   return (
     <div className="relative w-full h-full bg-[#fffefa]`">
       <div
@@ -452,6 +453,7 @@ export default function ShopPage() {
                 />
               ))}
             </div>
+
             <PaginationComponent
               totalPage={10}
               page={currentPage}

@@ -44,13 +44,6 @@ export default function GridImageItem({
       style={{ aspectRatio: ratios }}
     >
       <Image src={src} alt={alt} fill sizes="100%" className="object-cover" />
-      {!isMobile && (
-        <div className="absolute w-full h-full flex items-center bg-black/0 hover:bg-black/40 justify-center transition-all">
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-            <InstagramIcon color="white" width={48} height={48} />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

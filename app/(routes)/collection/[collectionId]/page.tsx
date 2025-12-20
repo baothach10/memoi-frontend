@@ -377,7 +377,7 @@ function CollectionDetailPage() {
       title: "Becoming",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
-      url: "/shop",
+      url: "/shop/collection",
     },
     slider: [
       {
@@ -438,7 +438,7 @@ function CollectionDetailPage() {
             data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">
-              <div className="relative flex flex-col items-center text-center gap-6 max-w-[480px] smaller-tablet:max-tablet:max-w-[590px] max-mobile:max-w-7/8 max-mobile:gap-4">
+              <div className="relative flex flex-col items-center text-center gap-6 max-w-[480px] smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:gap-4">
                 <div className="font-regular p-2.5 text-2xl max-tablet:text-lg max-mobile:p-0">
                   SS26 BECOMING
                 </div>
@@ -494,7 +494,7 @@ function CollectionDetailPage() {
                 </div>
               ))}
             </div>
-            <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0  max-mobile:max-w-7/8 max-mobile:text-xs ">
+            <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0  max-mobile:w-full max-mobile:px-5 max-mobile:text-xs ">
               When she loves herself — embracing even the cracks in the mirror —
               she touches the beginning of something New. More than a feeling,
               that understanding becomes her compass.
@@ -524,7 +524,7 @@ function CollectionDetailPage() {
                 </div>
               ))}
             </div>
-            <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:max-w-[590px]  max-mobile:max-w-7/8 max-mobile:text-xs">
+            <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:text-xs">
               The collection speaks to individuals with a modern lifestyle -
               those who seek versatile, real-life-ready designs that balance
               practicality with subtle sophistication. Each piece is refined yet
@@ -591,7 +591,7 @@ function CollectionDetailPage() {
               <LinkItem
                 url={exampleWithLinks.heroDetail.url}
                 title={exampleWithLinks.heroDetail.urlTitle}
-                style="underline underline-offset-4 text-black decoration-black/40"
+                style=" text-black underline underline-offset-4 decoration-black/40"
               />
             </div>
           </section>

@@ -1,16 +1,16 @@
 "use client";
 
-import PaginationComponent from "@/components/ui/molecules/Pagination";
-import Footer from "@/components/ui/organisms/Footer";
 import HeroSection from "@/components/ui/pages/home/HeroSection";
-import ShopInteractiveItem from "@/components/ui/pages/shop/ShopInteractiveItem";
 import useIsMobile from "@/hooks/useIsMobile";
-import { gsap } from "gsap";
-import Link from "next/link";
 import { useRef, useState, useCallback, useEffect } from "react";
+import Footer from "../../organisms/Footer";
+import ShopCollectionHeroDetail from "./ShopHeroDetail";
+import ShopInteractiveItem from "./ShopInteractiveItem";
+import { gsap } from "gsap";
+import PaginationComponent from "../../molecules/Pagination";
 
 // Main Home Component
-export default function ShopPage() {
+export default function ShopByCollection() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
@@ -23,10 +23,15 @@ export default function ShopPage() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const isMobile = useIsMobile(1024);
   const isLargeTablet = useIsMobile(1200);
-  const [currentPage, setCurrentPage] = useState(1)
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
+
+  const [currentPage, setCurrentPage] = useState(1)
+
+  // useEffect(() => {
+  //   set
+  // }, currentPage)
 
   /** --------------------------------------------------------
    *  Smooth GSAP transition to section index
@@ -285,19 +290,20 @@ export default function ShopPage() {
     media: [
       {
         type: "image" as const,
-        src: "/images/shop-menu.webp",
+        src: "/images/desktop-first-collection.webp",
       },
       {
         type: "image" as const,
-        src: "/images/shop-menu.webp",
+        src: "/images/tablet-first-collection.webp",
       },
       {
         type: "image" as const,
-        src: "/images/shop-menu.webp",
+        src: "/images/mobile-first-collection.webp",
       },
     ],
     heroDetail: {
-      title: "All products",
+      id: "SS26",
+      title: "Becoming",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
@@ -390,8 +396,6 @@ export default function ShopPage() {
     ],
   };
 
-  const itemsList = ["Dresses", "Tops", "Skirts", "Pants"];
-
   return (
     <div className="relative w-full h-full bg-[#fffefa]`">
       <div
@@ -400,24 +404,18 @@ export default function ShopPage() {
       >
         <div ref={smoothContentRef} className="bg-[#fffefa]">
           <section ref={heroSection1Ref} className="h-screen" data-header-theme="dark">
-            <div className="relative h-full w-full">
-              <HeroSection
-                ref={heroSection1Ref}
-                media={exampleWithLinks.media[0]}
-                tabletMedia={exampleWithLinks.media[1]}
-                mobileMedia={exampleWithLinks.media[2]}
+            <HeroSection
+              ref={heroSection1Ref}
+              media={exampleWithLinks.media[0]}
+              tabletMedia={exampleWithLinks.media[1]}
+              mobileMedia={exampleWithLinks.media[2]}
+            >
+              <ShopCollectionHeroDetail
+                id={exampleWithLinks.heroDetail.id}
+                title={exampleWithLinks.heroDetail.title}
+                numberOfItems={exampleWithLinks.heroDetail.numberOfItems}
               />
-              <div className="text-white gap-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-1">
-                <div className="gap-3 flex flex-col items-center justify-center">
-                  {itemsList.map((item) => (
-                    <Link href={"/shop"} key={item}>
-                      <div className="text-[16px] capitalize">{item}</div>
-                    </Link>
-                  ))}
-                </div>
-                <div className="text-[16px]">All products</div>
-              </div>
-            </div>
+            </HeroSection>
           </section>
 
           <section
@@ -428,6 +426,11 @@ export default function ShopPage() {
             <div className="mx-auto text-center space-y-2">
               <div className="text-black leading-[1.2] text-2xl max-mobile:text-sm">
                 <div className="flex flex-wrap justify-center gap-4 font-regular">
+                  <div
+                    className={`uppercase transition-colors decoration-white/40`}
+                  >
+                    {exampleWithLinks.heroDetail.id}
+                  </div>
                   <div
                     className={`uppercase transition-colors decoration-white/40`}
                   >
@@ -452,6 +455,7 @@ export default function ShopPage() {
                 />
               ))}
             </div>
+
             <PaginationComponent
               totalPage={10}
               page={currentPage}

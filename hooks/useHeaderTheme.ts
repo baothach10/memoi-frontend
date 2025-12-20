@@ -17,7 +17,6 @@ export function useHeaderTheme() {
             const theme = entry.target.getAttribute("data-header-theme");
             if (theme === "light" || theme === "dark") {
               setTheme(theme);
-              console.log(theme)
             }
           }
         });

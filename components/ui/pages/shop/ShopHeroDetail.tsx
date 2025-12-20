@@ -1,20 +1,20 @@
 import { LinkItem } from "../../atoms/LinkItem";
 
-type CollectionHeroDetailProps = {
+type ShopCollectionHeroDetailProps = {
   id: string;
   title: string;
   numberOfItems: number;
-  urlTitle: string;
-  url: string;
+  urlTitle?: string;
+  url?: string;
 };
 
-function CollectionHeroDetail({
+function ShopCollectionHeroDetail({
   id,
   title,
   numberOfItems,
   urlTitle,
   url,
-}: CollectionHeroDetailProps) {
+}: ShopCollectionHeroDetailProps) {
   return (
     <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-5">
       <div className="mx-auto text-center space-y-2">
@@ -33,14 +33,16 @@ function CollectionHeroDetail({
           </div>
         </div>
         <div className="text-white/60">{numberOfItems} products</div>
-        <LinkItem
-          url={url}
-          title={urlTitle}
-          style="text-white underline underline-offset-4 decoration-white/40"
-        />
+        {urlTitle && url && (
+          <LinkItem
+            url={url}
+            title={urlTitle}
+            style="underline underline-offset-4 decoration-white/40"
+          />
+        )}
       </div>
     </div>
   );
 }
 
-export default CollectionHeroDetail;
+export default ShopCollectionHeroDetail;
