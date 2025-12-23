@@ -22,26 +22,44 @@ export default function ShopInteractiveItem({
 
   return (
     <div className="flex flex-col items-center bg-linear-to-b from-white via-black/2 to-white smaller-tablet:pb-8 max-mobile:pb-4">
-      <div
-        className="relative w-full aspect-3/4 overflow-hidden cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"
-            }`}
-        />
-        <Image
-          src={hoveredImage}
-          alt={`${name} - hovered`}
-          fill
-          className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
-            }`}
-        />
-      </div>
+      {[
+        {
+          breakpoint: "laptop:grid hidden",
+          sizes: "(min-width: 1025px) 50vw, 0px",
+        },
+        {
+          breakpoint: "smaller-tablet:max-tablet:grid hidden",
+          sizes: "(min-width: 768px) and (max-width: 1024px) 50vw, 0px",
+        },
+        {
+          breakpoint: "max-mobile:grid hidden",
+          sizes: "(max-width: 767px) 50vw, 0px",
+        },
+      ].map(({ breakpoint, sizes }, gridIndex) => (
+        <div
+          key={gridIndex}
+          className={`relative w-full aspect-3/4 overflow-hidden cursor-pointer ${breakpoint}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Image
+            src={image}
+            alt={name}
+            fill
+            sizes={sizes}
+            className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"
+              }`}
+          />
+          <Image
+            src={hoveredImage}
+            alt={`${name} - hovered`}
+            fill
+            sizes={sizes}
+            className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
+              }`}
+          />
+        </div>
+      ))}
 
       <div className="flex flex-col items-center mt-4 w-full gap-2">
         <h3 className="text-center font-regular text-[14px]">{name}</h3>
@@ -50,6 +68,6 @@ export default function ShopInteractiveItem({
           <span>{price.toFixed(2)}</span>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import PaginationComponent from "@/components/ui/molecules/Pagination";
 import Footer from "@/components/ui/organisms/Footer";
 import HeroSection from "@/components/ui/pages/home/HeroSection";
-import ShopInteractiveItem from "@/components/ui/pages/shop/ShopInteractiveItem";
+import ShopAllProductsGrid from "@/components/ui/pages/shop/ShopAllProductsGrid";
 import useIsMobile from "@/hooks/useIsMobile";
 import { gsap } from "gsap";
 import Link from "next/link";
@@ -23,10 +22,12 @@ export default function ShopPage() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const isMobile = useIsMobile(1024);
   const isLargeTablet = useIsMobile(1200);
-  const [currentPage, setCurrentPage] = useState(1)
+
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
+
+
 
   /** --------------------------------------------------------
    *  Smooth GSAP transition to section index
@@ -301,96 +302,11 @@ export default function ShopPage() {
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
-    },
-    gridItems: [
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-    ],
+    }
   };
 
   const itemsList = ["Dresses", "Tops", "Skirts", "Pants"];
+
 
   return (
     <div className="relative w-full h-full bg-[#fffefa]`">
@@ -439,24 +355,9 @@ export default function ShopPage() {
                 {exampleWithLinks.heroDetail.numberOfItems} products
               </div>
             </div>
+            <ShopAllProductsGrid />
 
-            <div className="grid grid-cols-4 gap-2.5 max-tablet:grid-cols-2 max-mobile:grid-cols-2 w-full px-2.5 smaller-tablet:max-tablet:px-10 max-mobile:px-5">
-              {exampleWithLinks.gridItems.map((item, index) => (
-                <ShopInteractiveItem
-                  key={index}
-                  image={item.image}
-                  hoveredImage={item.hoveredImage}
-                  name={item.name}
-                  currency={item.currency}
-                  price={item.price}
-                />
-              ))}
-            </div>
-            <PaginationComponent
-              totalPage={10}
-              page={currentPage}
-              onChange={(page) => { setCurrentPage(page) }}
-            />
+
           </section>
 
           <Footer />

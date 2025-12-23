@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThreeModelProvider } from "@/context/ThreeModelContext";
 import { Header } from "@/components/ui/organisms/Header";
 import { HeaderWrapper } from "@/components/ui/molecules/HeaderWrapper";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "MEMOI Website",
@@ -20,21 +21,22 @@ export default function RootLayout({
         className="relative"
         cz-shortcut-listen="true"
       >
-        <ThreeModelProvider>
+        <ReactQueryProvider>
+          <ThreeModelProvider>
 
-          <HeaderWrapper>
-            <Header />
-          </HeaderWrapper>
+            <HeaderWrapper>
+              <Header />
+            </HeaderWrapper>
 
-          {/* <main className="relative"> */}
-          {/* <Suspense fallback={<LoadingPage />}> */}
-          {children}
-          {/* </Suspense> */}
-          {/* </main> */}
-          {/* <Footer /> */}
+            {/* <main className="relative"> */}
+            {/* <Suspense fallback={<LoadingPage />}> */}
+            {children}
+            {/* </Suspense> */}
+            {/* </main> */}
+            {/* <Footer /> */}
 
-        </ThreeModelProvider>
-
+          </ThreeModelProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
