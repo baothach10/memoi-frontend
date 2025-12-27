@@ -524,7 +524,7 @@ function CollectionDetailPage() {
                 </div>
               ))}
             </div>
-            <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:text-xs">
+            <div className="text-center max-w-[500px] px-2.5 pb-2.5 pt-16 mx-auto text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:text-xs">
               The collection speaks to individuals with a modern lifestyle -
               those who seek versatile, real-life-ready designs that balance
               practicality with subtle sophistication. Each piece is refined yet

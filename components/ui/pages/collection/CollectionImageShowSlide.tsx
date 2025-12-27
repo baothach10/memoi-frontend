@@ -34,13 +34,13 @@ function CollectionImageShowSlide({
   return (
     <div className="relative w-full h-full flex flex-col gap-8 max-mobile:gap-4">
       {/* Image Container */}
-      <div className="relative flex-1 w-full">
+      <div className="relative flex-1 w-full aspect-4/5 h-full">
         <Image
           src={images[currentIndex]}
           alt={`Image ${currentIndex + 1} of ${images.length}`}
           fill
           sizes={sizes ?? "100vw"}
-          className="object-cover object-center"
+          className="object-cover object-center "
           priority={currentIndex === 0}
         />
       </div>
@@ -51,9 +51,8 @@ function CollectionImageShowSlide({
         <button
           onClick={goToPrevious}
           disabled={isFirst}
-          className={`p-2 transition-opacity ${
-            isFirst ? "opacity-20 cursor-not-allowed" : "opacity-100"
-          }`}
+          className={`p-2 transition-opacity ${isFirst ? "opacity-20 cursor-not-allowed" : "opacity-100"
+            }`}
           aria-label="Previous image"
         >
           <ChevronLeftIcon />
@@ -61,16 +60,15 @@ function CollectionImageShowSlide({
 
         {/* Pagination Info */}
         <div className="font-regular">
-          {currentIndex + 1} of {images.length}
+          {currentIndex + 1}/{images.length}
         </div>
 
         {/* Right Chevron */}
         <button
           onClick={goToNext}
           disabled={isLast}
-          className={`p-2 transition-opacity ${
-            isLast ? "opacity-20 cursor-not-allowed" : "opacity-100"
-          }`}
+          className={`p-2 transition-opacity ${isLast ? "opacity-20 cursor-not-allowed" : "opacity-100"
+            }`}
           aria-label="Next image"
         >
           <ChevronRightIcon />

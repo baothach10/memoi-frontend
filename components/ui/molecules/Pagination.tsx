@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 type PaginationComponentType = {
     totalPage: number;
@@ -19,7 +19,7 @@ export default function PaginationComponent({
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            className=" w-full px-2.5 smaller-tablet:max-tablet:px-10 max-mobile:px-5"
+            className=" w-full px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-5"
         >
             {/* ⬅️ PREVIOUS */}
             <IconButton
@@ -29,12 +29,12 @@ export default function PaginationComponent({
                     color: "black",
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 1,
+                    borderRadius: 0,
                     width: 40,
                     height: 40,
                 }}
             >
-                <ArrowBack />
+                <ChevronLeft />
             </IconButton>
 
             {/* 🔢 NUMBERS (GROUPED) */}
@@ -44,7 +44,21 @@ export default function PaginationComponent({
                 onChange={(_, p) => onChange?.(p)}
                 hidePrevButton
                 hideNextButton
-                shape="rounded"
+                sx={{
+                    '& .MuiPaginationItem-root': {
+                        borderRadius: 0,
+                    },
+
+                    '& .MuiPaginationItem-root.Mui-selected': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // 20%
+                        color: '#000',
+
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)', // 10%
+                        },
+                    },
+                }}
+
             />
 
             {/* ➡️ NEXT */}
@@ -55,12 +69,12 @@ export default function PaginationComponent({
                     color: "black",
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 1,
+                    borderRadius: 0,
                     width: 40,
                     height: 40,
                 }}
             >
-                <ArrowForward />
+                <ChevronRight />
             </IconButton>
         </Stack>
     );

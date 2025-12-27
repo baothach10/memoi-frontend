@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "memoi-product.s3-website-us-west-2.amazonaws.com",
+        hostname: "memoi-product-sg.s3-website-ap-southeast-1.amazonaws.com",
         pathname: "/**",
       },
     ],

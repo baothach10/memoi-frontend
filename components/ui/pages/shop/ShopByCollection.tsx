@@ -8,6 +8,7 @@ import ShopCollectionHeroDetail from "./ShopHeroDetail";
 import ShopInteractiveItem from "./ShopInteractiveItem";
 import { gsap } from "gsap";
 import PaginationComponent from "../../molecules/Pagination";
+import ShopAllProductsGrid from "./ShopAllProductsGrid";
 
 // Main Home Component
 export default function ShopByCollection() {
@@ -429,11 +430,6 @@ export default function ShopByCollection() {
                   <div
                     className={`uppercase transition-colors decoration-white/40`}
                   >
-                    {exampleWithLinks.heroDetail.id}
-                  </div>
-                  <div
-                    className={`uppercase transition-colors decoration-white/40`}
-                  >
                     {exampleWithLinks.heroDetail.title}
                   </div>
                 </div>
@@ -442,25 +438,9 @@ export default function ShopByCollection() {
                 {exampleWithLinks.heroDetail.numberOfItems} products
               </div>
             </div>
+            <ShopAllProductsGrid />
 
-            <div className="grid grid-cols-4 gap-2.5 max-tablet:grid-cols-2 max-mobile:grid-cols-2 w-full px-2.5 smaller-tablet:max-tablet:px-10 max-mobile:px-5">
-              {exampleWithLinks.gridItems.map((item, index) => (
-                <ShopInteractiveItem
-                  key={index}
-                  image={item.image}
-                  hoveredImage={item.hoveredImage}
-                  name={item.name}
-                  currency={item.currency}
-                  price={item.price}
-                />
-              ))}
-            </div>
 
-            <PaginationComponent
-              totalPage={10}
-              page={currentPage}
-              onChange={(page) => { setCurrentPage(page) }}
-            />
           </section>
 
           <Footer />
