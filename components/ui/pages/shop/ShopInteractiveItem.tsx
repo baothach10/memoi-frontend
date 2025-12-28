@@ -21,7 +21,7 @@ export default function ShopInteractiveItem({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="flex flex-col items-center bg-linear-to-b from-white via-black/2 to-white smaller-tablet:pb-8 max-mobile:pb-4">
+    <div className="flex flex-col items-center bg-linear-to-b from-[#fffefa] via-black/2 to-[#fffefa] smaller-tablet:pb-8 max-mobile:pb-4">
       {[
         {
           breakpoint: "laptop:grid hidden",
@@ -46,6 +46,7 @@ export default function ShopInteractiveItem({
             src={image}
             alt={name}
             fill
+            loading="eager"
             sizes={sizes}
             className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"
               }`}
@@ -54,6 +55,7 @@ export default function ShopInteractiveItem({
             src={hoveredImage}
             alt={`${name} - hovered`}
             fill
+            loading="eager"
             sizes={sizes}
             className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
               }`}

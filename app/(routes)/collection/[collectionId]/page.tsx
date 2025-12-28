@@ -1,36 +1,22 @@
 "use client";
 
-import GridSectionWithFooter from "@/components/ui/pages/home/GridSectionWithFooter";
 import HeroSection from "@/components/ui/pages/home/HeroSection";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import CollectionHeroDetail from "@/components/ui/pages/collection/CollectionHeroDetail";
 import Footer from "@/components/ui/organisms/Footer";
 import Image from "next/image";
-import GridHyperImageItem from "@/components/ui/pages/home/GridHyperImageItem";
 import Carousel from "@/components/ui/molecules/Carousel";
 import useIsMobile from "@/hooks/useIsMobile";
 import GridImageItem from "@/components/ui/pages/collection/GridImageItem";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
 import CollectionImageShowSlide from "@/components/ui/pages/collection/CollectionImageShowSlide";
 
-function TestComponent() {
-  return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-75 p-6 rounded-md shadow-md">
-      <h2 className="text-xl font-bold mb-2">Test Component</h2>
-      <p className="text-gray-700">This is a testing component.</p>
-    </div>
-  );
-}
-
 function CollectionDetailPage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
   const heroSection1Ref = useRef<HTMLElement>(null);
-  const heroSection2Ref = useRef<HTMLElement>(null);
-  const heroSection3Ref = useRef<HTMLElement>(null);
-  const heroSection4Ref = useRef<HTMLElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -589,7 +575,7 @@ function CollectionDetailPage() {
                 />
               </div>
               <LinkItem
-                url={exampleWithLinks.heroDetail.url}
+                url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
                 title={exampleWithLinks.heroDetail.urlTitle}
                 style=" text-black underline underline-offset-4 decoration-black/40"
               />

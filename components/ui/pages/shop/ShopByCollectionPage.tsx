@@ -5,13 +5,16 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useRef, useState, useCallback, useEffect } from "react";
 import Footer from "../../organisms/Footer";
 import ShopCollectionHeroDetail from "./ShopHeroDetail";
-import ShopInteractiveItem from "./ShopInteractiveItem";
 import { gsap } from "gsap";
-import PaginationComponent from "../../molecules/Pagination";
-import ShopAllProductsGrid from "./ShopAllProductsGrid";
+import ShopByCollectionGrid from "./ShopByCollectionGrid";
+
+type ShopByCollectionPageType = {
+  collection: string
+}
 
 // Main Home Component
-export default function ShopByCollection() {
+export default function ShopByCollectionPage({ collection }: ShopByCollectionPageType) {
+
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
@@ -27,12 +30,6 @@ export default function ShopByCollection() {
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
-
-  const [currentPage, setCurrentPage] = useState(1)
-
-  // useEffect(() => {
-  //   set
-  // }, currentPage)
 
   /** --------------------------------------------------------
    *  Smooth GSAP transition to section index
@@ -308,93 +305,7 @@ export default function ShopByCollection() {
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
-    },
-    gridItems: [
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-      {
-        image: "/images/collection-becoming-gallery-look-5.webp",
-        hoveredImage: "/images/collection-becoming-gallery-look-7.webp",
-        name: "Floral Print Dress",
-        currency: "SGD",
-        price: 120.0,
-      },
-    ],
+    }
   };
 
   return (
@@ -438,7 +349,7 @@ export default function ShopByCollection() {
                 {exampleWithLinks.heroDetail.numberOfItems} products
               </div>
             </div>
-            <ShopAllProductsGrid />
+            <ShopByCollectionGrid collectionName={collection} />
 
 
           </section>

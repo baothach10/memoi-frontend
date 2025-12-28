@@ -81,8 +81,8 @@ export default function MobileMenu({ className = "", open: openProp, onToggle }:
             </div>
 
             {open && (
-                <div className="fixed top-[100px] max-mobile:top-12 max-mobile:pt-10 left-0 w-full h-full bg-white text-black">
-                    <nav className="relative h-full w-full overflow-auto">
+                <div className="fixed top-17 max-mobile:top-12 left-0 w-full h-full bg-[#fffefa] text-black">
+                    <nav className="absolute top-[76px] max-mobile:top-10 h-full w-full overflow-auto">
                         <div className="flex flex-col mx-auto">
                             <ExpandableSection defaultOpen className="py-6 px-10 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<span className="font-regular text-[16px] uppercase max-mobile:text-sm">Collection</span>}>
                                 <ul className="space-y-2">

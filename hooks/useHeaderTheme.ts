@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+
 export function useHeaderTheme() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const pathname = usePathname();
@@ -9,7 +10,6 @@ export function useHeaderTheme() {
     const sections = document.querySelectorAll("[data-header-theme]");
 
     if (!sections.length) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

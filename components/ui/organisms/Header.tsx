@@ -16,7 +16,7 @@ export function Header() {
   const setMenuOpen = ctx ? ctx.setOpen : setLocalOpen
   const textColor = menuOpen || theme === "light" ? "black" : "white";
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 ${menuOpen ? 'bg-white' : 'bg-transparent'} py-10 max-mobile:py-4 max-mobile:px-5`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 ${menuOpen ? 'bg-[#fffefa]' : 'bg-transparent'} pt-10 max-mobile:py-4 max-mobile:px-5`}>
 
       <div className="px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-0 flex items-center justify-between transition-all ease-in">
         <MobileMenu open={menuOpen} onToggle={setMenuOpen} className="max-tablet:block hidden" />

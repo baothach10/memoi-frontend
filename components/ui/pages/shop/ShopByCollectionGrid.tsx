@@ -1,13 +1,17 @@
-import { useProductsPaginatedQuery } from '@/queries/useProductPaginatedQuery';
 import { useEffect, useRef, useState } from 'react'
 import PaginationComponent from '../../molecules/Pagination';
 import ShopInteractiveItem from './ShopInteractiveItem';
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useProductPaginatedByCollectionQuery } from '@/queries/useProductPaginatedByCollectionQuery';
 
 gsap.registerPlugin(ScrollToPlugin);
 
-function ShopAllProductsGrid() {
+type ShopByCollectionGridType = {
+    collectionName: string
+}
+
+function ShopByCollectionGrid({ collectionName }: ShopByCollectionGridType) {
     const PAGE_SIZE = 12;
     const [currentPage, setCurrentPage] = useState(1)
     const {
@@ -15,7 +19,8 @@ function ShopAllProductsGrid() {
         isFetching,
         isLoading,
         isError,
-    } = useProductsPaginatedQuery({
+    } = useProductPaginatedByCollectionQuery({
+        collection_name: collectionName,
         page_number: currentPage,
         page_limit: PAGE_SIZE,
     });
@@ -60,13 +65,17 @@ function ShopAllProductsGrid() {
                     />
                 ))}
             </div>
-            <PaginationComponent
-                totalPage={data?.total_pages ?? 1}
-                page={currentPage}
-                onChange={(page) => { setCurrentPage(page) }}
-            />
+
+            {
+                data && data?.total_pages > 1 &&
+                <PaginationComponent
+                    totalPage={data?.total_pages ?? 1}
+                    page={currentPage}
+                    onChange={(page) => { setCurrentPage(page) }}
+                />
+            }
         </>
     )
 }
 
-export default ShopAllProductsGrid
+export default ShopByCollectionGrid
