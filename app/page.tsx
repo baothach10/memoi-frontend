@@ -322,7 +322,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
         className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}

@@ -347,7 +347,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
 
   if (isError) return (
 
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
       <section className="h-screen" data-header-theme="dark">
         <div>Failed to load products...</div>
       </section>

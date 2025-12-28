@@ -303,6 +303,39 @@ function CollectionDetailPage() {
         type: "image" as const,
         src: "/images/mobile-collection-becoming-hero.webp",
       },
+      {
+        type: "image" as const,
+        src: "/images/desktop-collection-becoming-campaign-1.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/desktop-collection-becoming-campaign-2.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/tablet-collection-becoming-campaign-1.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/tablet-collection-becoming-campaign-2.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/mobile-collection-becoming-campaign-1.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/mobile-collection-becoming-campaign-2.webp",
+      },
+      {
+        type: "image" as const,
+        src: "/images/collection-becoming-gallery-look-1.webp",
+      },
+      { type: "image" as const, src: "/images/tablet-second-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-second-collection.webp" },
+      { type: "image" as const, src: "/images/desktop-third-collection.webp" },
+      { type: "image" as const, src: "/images/tablet-third-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-third-collection.webp" },
     ],
     firstParameter: [
       "MEMOÍ - for the woman becoming herself",
@@ -362,7 +395,7 @@ function CollectionDetailPage() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
         className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}

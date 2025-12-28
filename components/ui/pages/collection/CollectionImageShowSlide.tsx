@@ -40,7 +40,7 @@ function CollectionImageShowSlide({
           alt={`Image ${currentIndex + 1} of ${images.length}`}
           fill
           sizes={sizes ?? "100vw"}
-          className="object-cover object-center "
+          className="object-contain object-center"
           priority={currentIndex === 0}
         />
       </div>

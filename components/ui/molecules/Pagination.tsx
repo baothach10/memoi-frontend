@@ -50,7 +50,7 @@ export default function PaginationComponent({
                     },
 
                     '& .MuiPaginationItem-root.Mui-selected': {
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // 20%
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)', // 20%
                         color: '#000',
 
                         '&:hover': {

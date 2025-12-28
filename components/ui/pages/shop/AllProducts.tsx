@@ -43,11 +43,11 @@ export default function AllProducts() {
 
 
   if (isLoading || isFetching) return (
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
 
       <section
         data-header-theme="light"
-        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
       >
         <div>Loading products...</div>
       </section>
@@ -56,11 +56,11 @@ export default function AllProducts() {
 
   if (isError) return (
 
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
 
       <section
         data-header-theme="light"
-        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
       >
         <div>Failed to load products...</div>
       </section>
@@ -70,11 +70,11 @@ export default function AllProducts() {
 
 
   return (
-    <div className="relative w-full h-full bg-[#fffefa]`">
+    <div className="relative w-full h-full bg-[#fffefa]">
 
       <section
         data-header-theme="light"
-        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
       >
         <div className="mx-auto text-center space-y-2">
           <div className="text-black leading-[1.2] text-2xl max-mobile:text-sm">
