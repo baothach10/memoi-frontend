@@ -303,39 +303,6 @@ function CollectionDetailPage() {
         type: "image" as const,
         src: "/images/mobile-collection-becoming-hero.webp",
       },
-      {
-        type: "image" as const,
-        src: "/images/desktop-collection-becoming-campaign-1.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/desktop-collection-becoming-campaign-2.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/tablet-collection-becoming-campaign-1.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/tablet-collection-becoming-campaign-2.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/mobile-collection-becoming-campaign-1.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/mobile-collection-becoming-campaign-2.webp",
-      },
-      {
-        type: "image" as const,
-        src: "/images/collection-becoming-gallery-look-1.webp",
-      },
-      { type: "image" as const, src: "/images/tablet-second-collection.webp" },
-      { type: "image" as const, src: "/images/mobile-second-collection.webp" },
-      { type: "image" as const, src: "/images/desktop-third-collection.webp" },
-      { type: "image" as const, src: "/images/tablet-third-collection.webp" },
-      { type: "image" as const, src: "/images/mobile-third-collection.webp" },
     ],
     firstParameter: [
       "MEMOÍ - for the woman becoming herself",
@@ -413,7 +380,7 @@ function CollectionDetailPage() {
                 title={exampleWithLinks.heroDetail.title}
                 numberOfItems={exampleWithLinks.heroDetail.numberOfItems}
                 urlTitle={exampleWithLinks.heroDetail.urlTitle}
-                url={exampleWithLinks.heroDetail.url}
+                url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
               />
             </HeroSection>
           </section>
@@ -471,6 +438,7 @@ function CollectionDetailPage() {
                         <Image
                           src={media.src}
                           fill
+                          loading="eager"
                           sizes={sizes}
                           alt={`Collection image ${slice[0] + index}`}
                           className="object-cover object-center"

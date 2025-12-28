@@ -68,6 +68,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
             src={media.src}
             alt="Hero background"
             fill
+            loading="eager"
             sizes="(min-width: 1025px) 100vw, 0px"
             className="object-cover object-center laptop:block hidden"
             priority
@@ -94,6 +95,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               src={tabletMedia.src}
               alt="Hero background"
               fill
+              loading="eager"
               sizes="(min-width: 768px) and (max-width: 1024px) 100vw, 0px"
               className="object-cover object-center smaller-tablet:max-tablet:block hidden"
               priority
@@ -120,6 +122,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               src={mobileMedia.src}
               alt="Hero background"
               fill
+              loading="eager"
               sizes="(max-width: 767px) 100vw, 0px"
               className="object-cover object-center max-mobile:block hidden"
               priority
