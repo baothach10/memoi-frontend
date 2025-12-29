@@ -575,11 +575,13 @@ function CollectionDetailPage() {
                   speed={1800}
                 />
               </div>
-              <LinkItem
-                url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
-                title={exampleWithLinks.heroDetail.urlTitle}
-                style="text-black underline underline-offset-4 leading-[1.2] decoration-black/40"
-              />
+              <div>
+                <LinkItem
+                  url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
+                  title={exampleWithLinks.heroDetail.urlTitle}
+                  style="text-black relative inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40"
+                />
+              </div>
             </div>
           </section>
           <Footer />
