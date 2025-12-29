@@ -26,7 +26,7 @@ export default function ExplorePage() {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative" data-header-theme="dark">
       <div id="smooth-wrapper" className="h-screen overflow-hidden">
         <div id="smooth-content">
           <HeroSection ref={null} media={exampleWithLinks.media} tabletMedia={exampleWithLinks.tabletMedia} mobileMedia={exampleWithLinks.mobileMedia} />

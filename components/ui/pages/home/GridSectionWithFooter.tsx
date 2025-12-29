@@ -1,6 +1,6 @@
 import Footer from "@/components/ui/organisms/Footer";
 import Link from "next/link";
-import { forwardRef, use } from "react";
+import { forwardRef } from "react";
 import Carousel from '@/components/ui/molecules/Carousel'
 import GridHyperImageItem from './GridHyperImageItem'
 import BenefitItem from "./BenefitItem";
@@ -13,7 +13,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
     <section
       ref={ref}
       className="min-h-screen w-full snap-start relative flex flex-col bg-[#fffefa] overflow-y-auto"
-
+      data-header-theme="light"
     >
       <div className="relative h-full w-full flex flex-col justify-around">
 

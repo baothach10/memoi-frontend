@@ -6,10 +6,10 @@ function Logo({ color, onClose }: IconProps & { onClose?: () => void }) {
   return (
     <>
 
-      <Link href="/" onClick={() => onClose?.()} className="transform smaller-tablet:block hidden">
+      <Link href="/" onClick={() => onClose?.()} className="transform smaller-tablet:block hidden transition-all ease-in">
         <MemoiTextLogo color={color} />
       </Link>
-      <Link href="/" onClick={() => onClose?.()} className="transform max-smaller-tablet:block hidden">
+      <Link href="/" onClick={() => onClose?.()} className="transform max-smaller-tablet:block hidden transition-all ease-in">
         <MemoiTextLogo color={color} width={82} height={18} />
       </Link>
 
