@@ -328,7 +328,7 @@ export default function HomePage() {
         className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}
       >
         <div ref={smoothContentRef}>
-          <section ref={heroSection1Ref} className="h-screen relative">
+          <section ref={heroSection1Ref} className="h-screen relative" data-header-theme="dark">
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -336,10 +336,11 @@ export default function HomePage() {
               mobileMedia={exampleWithLinks.media[2]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
+
             />
           </section>
 
-          <section ref={heroSection2Ref} className="h-screen relative">
+          <section ref={heroSection2Ref} className="h-screen relative" data-header-theme="dark">
             <HeroSection
               ref={heroSection2Ref}
               media={exampleWithLinks.media[3]}
@@ -350,7 +351,7 @@ export default function HomePage() {
             />
           </section>
 
-          <section ref={heroSection3Ref} className="h-screen relative">
+          <section ref={heroSection3Ref} className="h-screen relative" data-header-theme="dark">
             <HeroSection
               ref={heroSection3Ref}
               media={exampleWithLinks.media[6]}

@@ -31,6 +31,10 @@ export default function GeneralShopPage() {
         ]
     };
 
+    const underlineLink =
+        "relative leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/40 after:transition-transform after:duration-200 hover:after:scale-x-100";
+
+
     if (isLoading || isFetching) return (
         <div className="relative w-full h-full bg-[#fffefa]">
             <section className="h-screen" data-header-theme="dark">
@@ -63,13 +67,15 @@ export default function GeneralShopPage() {
                             <div className="gap-3 flex flex-col items-center justify-center">
 
                                 {itemsList && itemsList.map((category) => (
-                                    <Link href={`/shop/category/${category.name}`} key={category.id}>
-                                        <div className="text-[16px] capitalize">{category.name}</div>
+                                    <Link className="flex" href={`/shop/category/${category.name}`} key={category.id}>
+                                        <span className={`text-[16px] capitalize ${underlineLink}`}>{category.name}</span>
                                     </Link>
                                 ))}
                             </div>
-                            <Link href={`/shop/all-products`}>
-                                <div className="text-[16px]">All products</div>
+                            <Link href={`/shop/all-products`} className="flex">
+                                <span className={`text-[16px] ${underlineLink}`}>
+                                    All products
+                                </span>
                             </Link>
                         </div>
                     </div>
