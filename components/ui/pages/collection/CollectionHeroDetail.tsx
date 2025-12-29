@@ -33,11 +33,13 @@ function CollectionHeroDetail({
           </div>
         </div>
         <div className="text-white/60">{numberOfItems} products</div>
+
         <LinkItem
           url={url}
           title={urlTitle}
-          style="text-white underline underline-offset-4 decoration-white/40"
+          style="relative inline-flex leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
         />
+
       </div>
     </div>
   );

@@ -578,7 +578,7 @@ function CollectionDetailPage() {
               <LinkItem
                 url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
                 title={exampleWithLinks.heroDetail.urlTitle}
-                style=" text-black underline underline-offset-4 decoration-black/40"
+                style="text-black underline underline-offset-4 leading-[1.2] decoration-black/40"
               />
             </div>
           </section>
