@@ -16,7 +16,7 @@ function CollectionDetailPage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
-  const heroSection1Ref = useRef<HTMLElement>(null);
+  const heroSection1Ref = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -401,7 +401,11 @@ function CollectionDetailPage() {
         className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}
       >
         <div ref={smoothContentRef} className="bg-[#fffefa]">
-          <section ref={heroSection1Ref} className="h-screen" data-header-theme="dark">
+          <div
+            ref={heroSection1Ref}
+            className="h-screen"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -416,11 +420,11 @@ function CollectionDetailPage() {
                 url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
               />
             </HeroSection>
-          </section>
+          </div>
 
           <section
             ref={gridSectionRef}
-            className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+            className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
             data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">

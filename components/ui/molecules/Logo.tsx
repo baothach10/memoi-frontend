@@ -5,7 +5,6 @@ import { IconProps } from "@/types";
 function Logo({ color, onClose }: IconProps & { onClose?: () => void }) {
   return (
     <>
-
       <Link href="/" onClick={() => onClose?.()} className="transform smaller-tablet:block hidden transition-all ease-in">
         <MemoiTextLogo color={color} />
       </Link>

@@ -23,7 +23,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
-  const heroSection1Ref = useRef<HTMLElement>(null);
+  const heroSection1Ref = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -361,7 +361,11 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
         className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}
       >
         <div ref={smoothContentRef} className="bg-[#fffefa]">
-          <section ref={heroSection1Ref} className="h-screen" data-header-theme="dark">
+          <div
+            ref={heroSection1Ref}
+            className="h-screen"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -374,7 +378,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                 numberOfItems={data?.total_products ? data.total_products : 0}
               />
             </HeroSection>
-          </section>
+          </div>
 
           <section
             ref={gridSectionRef}
@@ -400,7 +404,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                   </div>
                 </div>
 
-                <div ref={topRef} className='absolute top-0 left-0' />
+                <div ref={topRef} className="absolute top-0 left-0" />
                 <div className="grid grid-cols-4 gap-2.5 max-tablet:grid-cols-2 max-mobile:grid-cols-2 w-full px-2.5 smaller-tablet:max-tablet:px-10 max-mobile:px-5">
                   {data?.products.map((item) => (
                     <ShopInteractiveItem
@@ -414,14 +418,15 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                   ))}
                 </div>
 
-                {
-                  data && data?.total_pages > 1 &&
+                {data && data?.total_pages > 1 && (
                   <PaginationComponent
                     totalPage={data?.total_pages ?? 1}
                     page={currentPage}
-                    onChange={(page) => { setCurrentPage(page) }}
+                    onChange={(page) => {
+                      setCurrentPage(page);
+                    }}
                   />
-                }
+                )}
               </>
             )}
           </section>

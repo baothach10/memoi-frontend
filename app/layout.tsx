@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThreeModelProvider } from "@/context/ThreeModelContext";
-import { Header } from "@/components/ui/organisms/Header";
-import { HeaderWrapper } from "@/components/ui/molecules/HeaderWrapper";
+import ConditionalHeader from "@/components/ui/organisms/ConditionalHeader";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
@@ -17,24 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative w-full h-full">
-      <body
-        className="relative"
-        cz-shortcut-listen="true"
-      >
+      <body className="relative" cz-shortcut-listen="true">
         <ReactQueryProvider>
           <ThreeModelProvider>
-
-            <HeaderWrapper>
-              <Header />
-            </HeaderWrapper>
-
-            {/* <main className="relative"> */}
-            {/* <Suspense fallback={<LoadingPage />}> */}
+            <ConditionalHeader />
             {children}
-            {/* </Suspense> */}
-            {/* </main> */}
-            {/* <Footer /> */}
-
           </ThreeModelProvider>
         </ReactQueryProvider>
       </body>

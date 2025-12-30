@@ -8,17 +8,21 @@ type Props = {
   href?: string;
   alt?: string;
   className?: string;
+  fillHeight?: boolean; // Add prop to control whether to fill height or use aspect ratio
 };
 
 export default function GridImageItem({
   src,
   alt = "Instagram image",
   className = "",
+  fillHeight = false,
 }: Props) {
   const [ratios, setRatios] = useState<string>("5/6");
   const isMobile = useIsMobile(1024);
 
   useEffect(() => {
+    if (fillHeight) return; // Skip aspect ratio calculation if fillHeight is true
+
     const updateRatio = () => {
       const width = document.documentElement.clientWidth;
       if (width >= 1440) {
@@ -36,12 +40,14 @@ export default function GridImageItem({
     updateRatio();
     window.addEventListener("resize", updateRatio);
     return () => window.removeEventListener("resize", updateRatio);
-  }, []);
+  }, [fillHeight]);
 
   return (
     <div
-      className={`relative w-full group ${className}`}
-      style={{ aspectRatio: ratios }}
+      className={`relative w-full group ${
+        fillHeight ? "h-full" : ""
+      } ${className}`}
+      style={!fillHeight ? { aspectRatio: ratios } : undefined}
     >
       <Image src={src} alt={alt} fill sizes="100%" className="object-cover" />
     </div>

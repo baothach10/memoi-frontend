@@ -9,10 +9,10 @@ export default function HomePage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
-  const heroSection1Ref = useRef<HTMLElement>(null);
-  const heroSection2Ref = useRef<HTMLElement>(null);
-  const heroSection3Ref = useRef<HTMLElement>(null);
-  const heroSection4Ref = useRef<HTMLElement>(null);
+  const heroSection1Ref = useRef<HTMLDivElement>(null);
+  const heroSection2Ref = useRef<HTMLDivElement>(null);
+  const heroSection3Ref = useRef<HTMLDivElement>(null);
+  const heroSection4Ref = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -328,7 +328,11 @@ export default function HomePage() {
         className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}
       >
         <div ref={smoothContentRef}>
-          <section ref={heroSection1Ref} className="h-screen relative" data-header-theme="dark">
+          <div
+            ref={heroSection1Ref}
+            className="h-screen relative"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
@@ -336,11 +340,14 @@ export default function HomePage() {
               mobileMedia={exampleWithLinks.media[2]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
-
             />
-          </section>
+          </div>
 
-          <section ref={heroSection2Ref} className="h-screen relative" data-header-theme="dark">
+          <div
+            ref={heroSection2Ref}
+            className="h-screen relative"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection2Ref}
               media={exampleWithLinks.media[3]}
@@ -349,9 +356,13 @@ export default function HomePage() {
               firstParameter={exampleWithLinks.firstParameter[1]}
               secondParameter={exampleWithLinks.secondParameter[1]}
             />
-          </section>
+          </div>
 
-          <section ref={heroSection3Ref} className="h-screen relative" data-header-theme="dark">
+          <div
+            ref={heroSection3Ref}
+            className="h-screen relative"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection3Ref}
               media={exampleWithLinks.media[6]}
@@ -360,8 +371,12 @@ export default function HomePage() {
               firstParameter={exampleWithLinks.firstParameter[2]}
               secondParameter={exampleWithLinks.secondParameter[2]}
             />
-          </section>
-          <section ref={heroSection4Ref} className="h-screen relative" data-header-theme="dark">
+          </div>
+          <div
+            ref={heroSection4Ref}
+            className="h-screen relative"
+            data-header-theme="dark"
+          >
             <HeroSection
               ref={heroSection4Ref}
               media={exampleWithLinks.media[9]}
@@ -370,7 +385,7 @@ export default function HomePage() {
               firstParameter={exampleWithLinks.firstParameter[3]}
               secondParameter={exampleWithLinks.secondParameter[3]}
             />
-          </section>
+          </div>
 
           <GridSectionWithFooter ref={gridSectionRef} />
         </div>
