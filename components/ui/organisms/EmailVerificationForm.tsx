@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import ErrorModal from "../molecules/ErrorModal";
 import Link from "next/link";
+import { sendOTP, verifyOTP } from "@/app/api/auth/action";
 
 type FormValues = {
   code: string[];
@@ -20,11 +21,49 @@ export default function EmailVerificationForm({ email }: Props) {
     },
   });
 
+  async function handleVerifyOtp(formData: FormData) {
+    const res = await verifyOTP(formData)
+    if (res?.error) setErrorOpen(true);
+  }
+
+  async function handleSendOtp(formData: FormData) {
+    const res = await sendOTP(formData)
+    if (res?.error) setErrorOpen(true);
+  }
+
+
   const inputsRef = useRef<HTMLInputElement[]>([]);
   const code = watch("code");
   const [seconds, setSeconds] = useState(0);
   const [canResend, setCanResend] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const pastedData = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "") // keep digits only
+      .slice(0, 6);       // max 6 digits
+
+    if (!pastedData) return;
+
+    const digits = pastedData.split("");
+
+    digits.forEach((digit, index) => {
+      setValue(`code.${index}`, digit);
+    });
+
+    // Clear remaining inputs if pasted less than 6 digits
+    for (let i = digits.length; i < 6; i++) {
+      setValue(`code.${i}`, "");
+    }
+
+    // Focus next input or last one
+    const focusIndex = Math.min(digits.length, 5);
+    inputsRef.current[focusIndex]?.focus();
+  };
+
 
   /* Countdown */
   useEffect(() => {
@@ -46,9 +85,12 @@ export default function EmailVerificationForm({ email }: Props) {
   );
 
   const onSubmit = (data: FormValues) => {
+    const formData = new FormData();
+    formData.append("email", email);
     const otp = data.code.join("");
+    formData.append("token", otp);
     console.log("OTP:", otp);
-    setErrorOpen(true);
+    handleVerifyOtp(formData)
   };
 
   const handleChange = (value: string, index: number) => {
@@ -69,9 +111,12 @@ export default function EmailVerificationForm({ email }: Props) {
 
   const handleResendCode = () => {
     if (!canResend) return;
+    const formData = new FormData();
+    formData.append("email", email);
     console.log("Resending code to:", email);
     // Reset timer and disable resend again
     setSeconds(60);
+    handleSendOtp(formData)
     setCanResend(false);
   };
 
@@ -129,6 +174,7 @@ export default function EmailVerificationForm({ email }: Props) {
                 value={code[i] || ""}
                 onChange={(e) => handleChange(e.target.value, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
+                onPaste={handlePaste}
                 onClick={handleInputClick}
                 className="w-10 border-b border-black/20 bg-transparent text-center text-lg outline-none focus:border-black/60"
               />

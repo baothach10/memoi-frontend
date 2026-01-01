@@ -109,7 +109,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="space-y-2">
+                <ul className="text-sm space-y-2 max-mobile:text-xs">
                   <li>
                     <Link
                       href="/collection"
@@ -131,7 +131,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="space-y-2">
+                <ul className="text-sm space-y-2 max-mobile:text-xs">
                   {itemsList &&
                     itemsList.map((category) => (
                       <li key={category.id}>
@@ -155,12 +155,11 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="space-y-2">
+                <ul className="text-sm space-y-2 max-mobile:text-xs">
                   <li>
                     <Link
                       href="/explore/about-us"
                       onClick={closeMenu}
-                      className=" text-[14px] max-mobile:text-xs"
                     >
                       About us
                     </Link>
@@ -169,7 +168,6 @@ export default function MobileMenu({
                     <Link
                       href="/explore"
                       onClick={closeMenu}
-                      className=" text-[14px] max-mobile:text-xs"
                     >
                       The MEMOÍ House
                     </Link>
@@ -178,7 +176,6 @@ export default function MobileMenu({
                     <Link
                       href="/explore/commitments"
                       onClick={closeMenu}
-                      className=" text-[14px] max-mobile:text-xs"
                     >
                       Our Commitments
                     </Link>
@@ -187,7 +184,6 @@ export default function MobileMenu({
                     <Link
                       href="/explore/contact-us"
                       onClick={closeMenu}
-                      className=" text-[14px] max-mobile:text-xs"
                     >
                       Contact us
                     </Link>

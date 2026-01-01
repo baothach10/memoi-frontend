@@ -86,6 +86,7 @@ export default function RegisterForm() {
         <Field label="EMAIL *" error={errors.email}>
           <input
             type="email"
+            placeholder="Enter your email"
             className={inputClass()}
             {...register("email", { required: true })}
           />
@@ -128,7 +129,7 @@ export default function RegisterForm() {
           <div className="flex gap-4">
             {/* Zone selector */}
             <select
-              className={`flex-1 ${inputClass()}`}
+              className={`flex-1 max-mobile:flex-2 ${inputClass()}`}
               {...register("phoneZone", { required: true })}
             >
               <option value="">+Code</option>
@@ -143,7 +144,7 @@ export default function RegisterForm() {
             <input
               type="tel"
               placeholder="Phone number"
-              className={`flex-9 ${inputClass()}`}
+              className={`flex-9 max-mobile:flex-8 ${inputClass()}`}
               {...register("phone", { required: true })}
             />
           </div>
@@ -169,12 +170,12 @@ export default function RegisterForm() {
         {/* Terms */}
         <p className="text-xs text-black/70 leading-relaxed">
           By clicking Create account, I confirm that I have read and accept the{" "}
-          <Link href={"/"} className="underline">
+          <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
             Terms & Condition
           </Link>{" "}
           and understand the information regarding the use of my personal
           details as explained in the{" "}
-          <Link href={"/"} className="underline">
+          <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
             Privacy Policy
           </Link>
           .
@@ -199,7 +200,7 @@ export default function RegisterForm() {
         {/* Footer */}
         <p className="text-center text-xs">
           Already have an account?{" "}
-          <Link href={"/sign-in"} className="underline cursor-pointer">
+          <Link href={"/sign-in"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 cursor-pointer max-mobile:text-xs">
             Login
           </Link>
         </p>

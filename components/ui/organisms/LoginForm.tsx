@@ -6,6 +6,7 @@ import { AlertCircle } from "lucide-react";
 import GoogleIcon from "../atoms/GoogleIcon";
 import EmailVerificationForm from "./EmailVerificationForm";
 import Link from "next/link";
+import { loginWithGoogle, sendOTP } from "@/app/api/auth/action";
 
 type FormValues = {
   email: string;
@@ -22,10 +23,17 @@ export default function LoginForm() {
   } = useForm<FormValues>();
 
   const onSubmit = (data: FormValues) => {
+    const formData = new FormData();
+    formData.append("email", data.email);
     console.log(data);
     setSubmittedEmail(data.email);
     setShowVerification(true);
+    handleSendOtp(formData)
   };
+
+  async function handleSendOtp(formData: FormData) {
+    await sendOTP(formData)
+  }
 
   // Show verification form if email was submitted
   if (showVerification && submittedEmail) {
@@ -92,6 +100,8 @@ export default function LoginForm() {
             <button
               type="button"
               className="w-full border py-4 text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition max-mobile:text-xs"
+              onTouchEnd={loginWithGoogle}
+              onClick={loginWithGoogle}
             >
               <GoogleIcon />
               Continue with Google
@@ -101,19 +111,22 @@ export default function LoginForm() {
             <p className=" text-sm text-black/80 leading-[150%] max-mobile:text-xs">
               By logging in with my social login, I agree to link my account in
               accordance with the{" "}
-              <Link href={"/"} className="underline cursor-pointer">
+              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
                 Privacy Policy
               </Link>
             </p>
           </div>
         </div>
-        <Link
-          href={"/"}
-          className="text-sm underline cursor-pointer max-mobile:text-xs"
-        >
-          Need help?
-        </Link>
+        <div>
+
+          <Link
+            href={"/"}
+            className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 cursor-pointer max-mobile:text-xs"
+          >
+            Need help?
+          </Link>
+        </div>
       </form>
-    </div>
+    </div >
   );
 }
