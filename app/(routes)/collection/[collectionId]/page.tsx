@@ -506,7 +506,7 @@ function CollectionDetailPage() {
                 },
               ].map(({ breakpoint, sizes }, gridIndex) => (
                 <div key={gridIndex} className={`${breakpoint}`}>
-                  <div className="relative w-1/3 mx-auto aspect-8/9 max-tablet:aspect-auto smaller-tablet:max-tablet:w-3/5 max-mobile:w-2/3">
+                  <div className="relative w-1/3 mx-auto aspect-auto smaller-tablet:max-tablet:w-3/5 max-mobile:w-2/3">
                     <CollectionImageShowSlide
                       sizes={sizes}
                       images={exampleWithLinks.slideShow}
