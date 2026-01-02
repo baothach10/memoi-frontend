@@ -106,7 +106,6 @@ export default function SignInCarousel({
         allowTouchMove={true}
         grabCursor={true}
         slidesPerView={slidesPerView}
-        spaceBetween={spaceBetween}
         className="h-full"
         breakpoints={slidesPerView ? undefined : defaultBreakpoints}
       >

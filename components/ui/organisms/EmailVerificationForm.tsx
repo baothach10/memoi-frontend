@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import ErrorModal from "../molecules/ErrorModal";
 import Link from "next/link";
-import { sendOTP, verifyOTP } from "@/app/api/auth/action";
+import { sendOTP, verifyOTP } from "@/app/(routes)/auth/action";
 
 type FormValues = {
   code: string[];

@@ -6,7 +6,7 @@ import { AlertCircle } from "lucide-react";
 import GoogleIcon from "../atoms/GoogleIcon";
 import EmailVerificationForm from "./EmailVerificationForm";
 import Link from "next/link";
-import { loginWithGoogle, sendOTP } from "@/app/api/auth/action";
+import { loginWithGoogle, sendOTP } from "@/app/(routes)/auth/action";
 
 type FormValues = {
   email: string;

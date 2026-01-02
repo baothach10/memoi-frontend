@@ -22,7 +22,7 @@ function CommitmentsPage() {
                   alt="Commitment 1"
                 />
               </div>
-              <div className="flex flex-col max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
+              <div className="flex flex-col gap-5 max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
                 <div className="uppercase font-regular text-[16px] leading-[150%]">
                   Timeless & Refined Design
                 </div>
@@ -42,7 +42,7 @@ function CommitmentsPage() {
                   alt="Commitment 2"
                 />
               </div>
-              <div className="flex flex-col max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
+              <div className="flex flex-col gap-5 max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
                 <div className="uppercase font-regular text-[16px] leading-[150%]">
                   Ethical & Sustainable Production
                 </div>
@@ -62,7 +62,7 @@ function CommitmentsPage() {
                   alt="Commitment 3"
                 />
               </div>
-              <div className="flex flex-col max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
+              <div className="flex flex-col gap-5 max-mobile:gap-2.5 smaller-tablet:max-tablet:gap-5">
                 <div className="uppercase font-regular text-[16px] leading-[150%]">
                   Empowerment & Conscious Elegance
                 </div>
