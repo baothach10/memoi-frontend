@@ -1,11 +1,13 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { createServerSupabaseClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 // --- Google Login ---
 export async function loginWithGoogle() {
-  const supabase = await createClient();
+  const supabase = await createServerSupabaseClient();
+
+  console.log('authen gg')
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -14,14 +16,17 @@ export async function loginWithGoogle() {
     },
   });
 
+  console.log('gg',data)
+
   if (data.url) {
+    
     redirect(data.url);
   }
 }
 
 // --- Email OTP: Step 1 (Send Code) ---
 export async function sendOTP(formData: FormData) {
-  const supabase = await createClient();
+  const supabase = await createServerSupabaseClient();
   const email = formData.get("email") as string;
 
   const { error } = await supabase.auth.signInWithOtp({
@@ -35,7 +40,7 @@ export async function sendOTP(formData: FormData) {
 
 // --- Email OTP: Step 2 (Verify Code) ---
 export async function verifyOTP(formData: FormData) {
-  const supabase = await createClient();
+  const supabase = await createServerSupabaseClient();
   const email = formData.get("email") as string;
   const token = formData.get("token") as string;
 
@@ -52,7 +57,7 @@ export async function verifyOTP(formData: FormData) {
 
 // --- Sign Out ---
 export async function signOut() {
-  const supabase = await createClient();
+  const supabase = await createServerSupabaseClient();
   await supabase.auth.signOut();
   redirect("/");
 }
