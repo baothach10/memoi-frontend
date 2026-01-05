@@ -3,6 +3,13 @@ import type { NextRequest } from "next/server";
 import { createServerSupabaseClient } from "./utils/supabase/server";
 
 export async function proxy(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  // Allow auth callback for Google redirect URI
+  if (pathname === "/auth/callback") {
+    return NextResponse.next();
+  }
+
   const res = NextResponse.next();
 
   const supabase = await createServerSupabaseClient();
@@ -18,8 +25,6 @@ export async function proxy(req: NextRequest) {
   } = await supabase.auth.getUser();
 
   console.log("user: ", user);
-
-  const pathname = req.nextUrl.pathname;
 
   const publicRoutes = ["/register", "/sign-in"];
 
