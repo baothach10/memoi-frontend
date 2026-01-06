@@ -15,25 +15,19 @@ export async function proxy(req: NextRequest) {
   const supabase = await createServerSupabaseClient();
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  console.log("session:", session);
-
-  const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user: ", user);
+  const isAccountRoute = pathname.startsWith("/account");
+  const isAuthPage = pathname === "/sign-in" || pathname === "/register";
 
-  const publicRoutes = ["/register", "/sign-in"];
-
-  if (!user && !publicRoutes.includes(pathname)) {
+  // 🚫 Block /account for unauthenticated users
+  if (!user && isAccountRoute) {
     return NextResponse.redirect(new URL("/register", req.url));
   }
 
   // 🚫 Block auth pages when logged in
-  if (user && pathname === "/sign-in") {
+  if (user && isAuthPage) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
