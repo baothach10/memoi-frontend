@@ -5,6 +5,7 @@ import SearchIcon from "../atoms/SearchIcon";
 import { searchProducts, SearchProduct } from "@/app/api/searchProducts";
 import SearchInteractiveItem from "../pages/overlay/SearchInteractiveItem";
 import { ArrowRight } from "lucide-react";
+import SearchProductSuggestions from "./SearchProductSuggestions";
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -76,17 +77,15 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:hidden ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:hidden ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         onClick={onClose}
       />
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[668px] bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-screen w-[668px] bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -139,11 +138,13 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             {isLoading ? (
               <p className="text-sm text-black font-regular">Searching...</p>
             ) : !hasSearched ? (
-              <div className="mt-auto w-full h-1/3 flex flex-col gap-5">
+              <div className="mt-auto w-full h-fit flex flex-col gap-5">
                 <p className="text-sm text-black font-regular">
                   You may also like
                 </p>
-                <div className="relative w-full h-full bg-gray-400"></div>
+                <div className="relative w-full h-full">
+                  <SearchProductSuggestions numberOfSuggestions={3} />
+                </div>
               </div>
             ) : products.length === 0 ? (
               <>
@@ -151,11 +152,13 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   There are no results for your search &quot;{searchQuery}
                   &quot;. Please try again.
                 </p>
-                <div className="mt-auto w-full h-1/3 flex flex-col gap-5">
+                <div className="mt-auto w-full h-fit flex flex-col gap-5">
                   <p className="text-sm text-black font-regular">
                     You may also like
                   </p>
-                  <div className="relative w-full h-full bg-gray-400"></div>
+                  <div className="relative w-full h-full">
+                    <SearchProductSuggestions numberOfSuggestions={3} />
+                  </div>
                 </div>
               </>
             ) : (

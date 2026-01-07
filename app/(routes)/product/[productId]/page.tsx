@@ -5,6 +5,7 @@ import ImageColumn from "@/components/ui/pages/product/ImageColumn";
 import ProductInfo from "@/components/ui/pages/product/ProductInfo";
 import { useProductDetailsQuery } from "@/queries/useProductDetailsQuery";
 import Footer from "@/components/ui/organisms/Footer";
+import ProductDetailsSuggestions from "@/components/ui/organisms/ProductDetailsSuggestions";
 
 export default function ProductPage() {
   const params = useParams();
@@ -49,7 +50,7 @@ export default function ProductPage() {
 
   return (
     <div
-      className="relative w-full h-full bg-[#fffefa]"
+      className="relative w-full h-full bg-[#fffefa] flex flex-col gap-20"
       data-header-theme="light"
     >
       <section className="relative grid grid-cols-10">
@@ -59,6 +60,10 @@ export default function ProductPage() {
         <div className="col-span-3 ">
           <ProductInfo product={product} />
         </div>
+      </section>
+      <section className="relative flex flex-col gap-8 items-center justify-center">
+        <div className="uppercase text-[16px] leading-[120%] text-black">You may also like</div>
+        <ProductDetailsSuggestions numberOfSuggestions={4} />
       </section>
       <Footer />
     </div>

@@ -136,7 +136,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <div
             ref={overlayRef}
             className="
-              absolute left-0 mb-2 z-10
+              absolute left-0 z-10
               w-full min-h-[200px]
               bg-white border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
