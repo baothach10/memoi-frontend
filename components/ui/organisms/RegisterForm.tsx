@@ -3,6 +3,11 @@
 import { useForm } from "react-hook-form";
 import Field from "../molecules/Field";
 import Link from "next/link";
+import { getCountries, getCountryCallingCode } from "libphonenumber-js";
+import countries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
+
+countries.registerLocale(en);
 
 type FormValues = {
   email: string;
@@ -33,14 +38,28 @@ export default function RegisterForm() {
     },
   });
 
-  const PHONE_ZONES = [
-    { code: "+1", label: "US / Canada" },
-    { code: "+84", label: "Vietnam" },
-    { code: "+61", label: "Australia" },
-    { code: "+44", label: "United Kingdom" },
-    { code: "+81", label: "Japan" },
-    { code: "+82", label: "Korea" },
-  ];
+  const PHONE_ZONES = Array.from(
+    new Map(
+      getCountries().map((country) => {
+        const code = `+${getCountryCallingCode(country)}`;
+
+        return [
+          code,
+          {
+            iso: country,
+            label: countries.getName(country, "en") ?? country,
+            code,
+          },
+        ];
+      })
+    ).values()
+  ).sort((a, b) => a.label.localeCompare(b.label));
+
+  const COUNTRIES = getCountries().map((country) => ({
+    label: countries.getName(country, "en") ? countries.getName(country, "en") : country,
+    iso: country,
+  })).sort((a, b) => a.label && b.label ? a.label.localeCompare(b.label) : 0);
+
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
@@ -86,7 +105,6 @@ export default function RegisterForm() {
         <Field label="EMAIL *" error={errors.email}>
           <input
             type="email"
-            placeholder="Enter your email"
             className={inputClass()}
             {...register("email", { required: true })}
           />
@@ -119,8 +137,11 @@ export default function RegisterForm() {
             {...register("country", { required: true })}
           >
             <option value="">Choose your country</option>
-            <option value="VN">Vietnam</option>
-            <option value="US">United States</option>
+            {COUNTRIES.map((z) => (
+              <option key={z.iso + z.label} value={z.iso}>
+                {z.label}
+              </option>
+            ))}
           </select>
         </Field>
 
@@ -134,7 +155,7 @@ export default function RegisterForm() {
             >
               <option value="">+Code</option>
               {PHONE_ZONES.map((z) => (
-                <option key={z.code} value={z.code}>
+                <option key={z.code + z.label} value={z.code}>
                   {z.code}
                 </option>
               ))}
