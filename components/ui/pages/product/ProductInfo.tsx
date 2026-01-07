@@ -12,10 +12,11 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   /* ---------------------------------------------
    * COLORS
    --------------------------------------------- */
-  const colors = useMemo(
-    () => Array.from(new Set(product.variants.map((v) => v.color))),
-    [product.variants]
-  );
+  // const colors = useMemo(
+  //   () => Array.from(new Set(product.variants.map((v) => v.color))),
+  //   [product.variants]
+  // );
+  const colors = ["#000000", "#ffffff", "#ff0000"]; // Placeholder until variants are set up
 
   const [selectedColor, setSelectedColor] = useState(() => colors[0] || "");
   const [showSizeOverlay, setShowSizeOverlay] = useState(false);
@@ -27,13 +28,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
    --------------------------------------------- */
   const sizes = useMemo(() => {
     return product.variants
-      .filter((v) => v.color === selectedColor)
       .map((v) => ({
         size: v.size,
         stock: v.stock,
         price: v.price,
       }));
-  }, [product.variants, selectedColor]);
+  }, [product.variants]);
 
   const displayPrice =
     product.variants.find((s) => s.color === selectedColor)?.price ??
@@ -90,7 +90,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         />
       )}
 
-      <div className="px-16 flex flex-col items-center w-full max-w-sm">
+      <div className="px-16 flex flex-col items-center justify-center w-full max-w-sm">
         {/* CATEGORY */}
         <p className="text-xs tracking-widest mb-2">
           {product.category.name.toUpperCase()}
@@ -102,10 +102,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </h1>
 
         {/* PRICE */}
-        <p className="text-sm mb-8">SGD {displayPrice.toFixed(2)}</p>
+        <p className="text-sm mb-8 text-center">SGD {displayPrice.toFixed(2)}</p>
 
         {/* COLOR SELECTOR */}
-        <div className="mb-10">
+        <div className="mb-10 flex flex-col items-center justify-center text-center">
           <p className="text-xs mb-2">COLOR: {selectedColor.toUpperCase()}</p>
 
           <div className="flex gap-2">
@@ -113,16 +113,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               <button
                 key={color}
                 onClick={() => setSelectedColor(color)}
-                className={`
-                  w-3 h-3 rounded-full ring-1
-                  ${selectedColor === color ? "ring-black" : "ring-neutral-300"}
-                  ${
-                    color.toLowerCase() === "black"
-                      ? "bg-black"
-                      : "bg-neutral-300"
-                  }
-                `}
-              />
+                className="relative w-4 h-4 flex items-center justify-center rounded-full"
+              >
+                {/* Outer selected ring */}
+                {selectedColor === color && (
+                  <span className="absolute inset-0 rounded-full ring-1 ring-black/20 ring-offset-2 ring-offset-white" />
+                )}
+
+                {/* Inner base ring + color */}
+                <span
+                  style={{ backgroundColor: color }}
+                  className="relative z-10 w-3 h-3 rounded-full ring-1 ring-black/20"
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -151,10 +154,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                   onClick={() => !disabled && handleSizeSelect(size, price)}
                   className={`
                     transition
-                    ${
-                      disabled
-                        ? "opacity-40 line-through cursor-not-allowed"
-                        : "hover:underline"
+                    ${disabled
+                      ? "opacity-40 line-through cursor-not-allowed"
+                      : "hover:underline"
                     }
                   `}
                 >
@@ -163,7 +165,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               );
             })}
 
-            <button onClick={() => {}} className="text-xs underline mt-2">
+            <button onClick={() => { }} className="text-xs underline mt-2">
               Size Suggestion
             </button>
           </div>

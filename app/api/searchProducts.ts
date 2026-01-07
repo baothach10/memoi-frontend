@@ -4,7 +4,7 @@ export type ProductImage = {
 };
 
 export type SearchProduct = {
-  product_id: number;
+  product_id: string;
   name: string;
   price: number;
   currency: string;

@@ -167,6 +167,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     hoveredImage={
                       product.images[1]?.url || product.images[0]?.url || ""
                     }
+                    id={product.product_id}
                     name={product.name}
                     currency={product.currency}
                     price={product.price}
