@@ -54,10 +54,10 @@ export default function ProductPage() {
       data-header-theme="light"
     >
       <section className="relative grid grid-cols-10">
-        <div className="col-span-7 pt-30 min-h-[calc(100vh-120px)]">
+        <div className="col-span-6 pt-30 min-h-[calc(100vh-120px)]">
           <ImageColumn images={imageUrls} />
         </div>
-        <div className="col-span-3 ">
+        <div className="col-span-4 ">
           <ProductInfo product={product} />
         </div>
       </section>

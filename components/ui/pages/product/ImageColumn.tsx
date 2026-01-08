@@ -10,7 +10,7 @@ export default function ImageColumn({ images }: ImageColumnProps) {
       {images.map((src, index) => (
         <div
           key={index}
-          className="relative w-full h-[calc(100vh-120px)] bg-black/2"
+          className="relative w-full h-[calc(100vh-120px)] bg-linear-to-b from-[#fffefa] via-black/2 to-[#fffefa"
         >
           <Image
             src={src}

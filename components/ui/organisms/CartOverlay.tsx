@@ -75,17 +75,15 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:hidden ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:hidden ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         onClick={onClose}
       />
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[500px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa]  shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}

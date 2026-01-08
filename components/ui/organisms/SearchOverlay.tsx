@@ -84,7 +84,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[668px] bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
         <div className="flex flex-col h-full">
