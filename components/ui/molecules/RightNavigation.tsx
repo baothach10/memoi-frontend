@@ -55,13 +55,24 @@ function RightNavigation({
 
   const handleSearchClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    console.log('asd')
     setActiveOverlay(activeOverlay === "search" ? null : "search");
   };
 
+  const handleSearchTouch = (e: React.TouchEvent) => {
+    e.preventDefault();
+    console.log('asdasdasd')
+    setActiveOverlay(activeOverlay === "search" ? null : "search");
+  }
   const handleCartClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setActiveOverlay(activeOverlay === "cart" ? null : "cart");
   };
+
+  const handleCartTouch = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setActiveOverlay(activeOverlay === "cart" ? null : "cart");
+  }
 
   const closeOverlay = () => {
     setActiveOverlay(null);
@@ -72,6 +83,7 @@ function RightNavigation({
       <div className="relative flex items-center gap-6 max-mobile:gap-4">
         <button
           onClick={handleSearchClick}
+          onTouchEnd={handleSearchTouch}
           className="relative group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
         >
           <SearchIcon width={14} height={14} color={color} />
@@ -79,19 +91,17 @@ function RightNavigation({
             Search products
           </span>
         </button>
-        <Link
-          href="#"
-          onClick={() => onClose?.()}
-          className="relative group text-white hover:text-gray-300 transition-all ease-in tablet:hidden"
+        <button
+          onClick={handleSearchClick}
+          onTouchEnd={handleSearchTouch}
+          className="relative group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
           <SearchIcon width={14} height={14} color={color} />
-          <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-            Search products
-          </span>
-        </Link>
+        </button>
 
         <button
           onClick={handleCartClick}
+          onTouchEnd={handleCartTouch}
           className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
         >
           <CartIcon width={14} height={14} color={color} />
@@ -107,10 +117,10 @@ function RightNavigation({
             Cart
           </span>
         </button>
-        <Link
-          href="#"
-          onClick={() => onClose?.()}
-          className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in tablet:hidden"
+        <button
+          onClick={handleSearchClick}
+          onTouchEnd={handleSearchTouch}
+          className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
           <CartIcon width={14} height={14} color={color} />
           {cartCount > 0 && (
@@ -121,10 +131,7 @@ function RightNavigation({
               ({cartCount})
             </span>
           )}
-          <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-            Cart
-          </span>
-        </Link>
+        </button>
 
         <Link
           href="/account"

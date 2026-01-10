@@ -6,6 +6,7 @@ import { searchProducts, SearchProduct } from "@/app/api/searchProducts";
 import SearchInteractiveItem from "../pages/overlay/SearchInteractiveItem";
 import { ArrowRight } from "lucide-react";
 import SearchProductSuggestions from "./SearchProductSuggestions";
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [products, setProducts] = useState<SearchProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const isMobile = useIsMobile(768);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -77,14 +79,14 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:hidden ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:w-full ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         onClick={onClose}
       />
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:w-full ${isOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -143,7 +145,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   You may also like
                 </p>
                 <div className="relative w-full h-full">
-                  <SearchProductSuggestions numberOfSuggestions={3} />
+                    <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
                 </div>
               </div>
             ) : products.length === 0 ? (
@@ -157,26 +159,36 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     You may also like
                   </p>
                   <div className="relative w-full h-full">
-                    <SearchProductSuggestions numberOfSuggestions={3} />
+                        <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
                   </div>
                 </div>
               </>
             ) : (
-              <div className="grid grid-cols-3 gap-2.5">
-                {products.map((product) => (
-                  <SearchInteractiveItem
-                    key={product.product_id}
-                    image={product.images[0]?.url || ""}
-                    hoveredImage={
-                      product.images[1]?.url || product.images[0]?.url || ""
-                    }
-                    id={product.product_id}
-                    name={product.name}
-                    currency={product.currency}
-                    price={product.price}
-                  />
-                ))}
-              </div>
+              <>
+
+                <div className="grid grid-cols-3 gap-2.5">
+                  {products.map((product) => (
+                    <SearchInteractiveItem
+                      key={product.product_id}
+                      image={product.images[0]?.url || ""}
+                      hoveredImage={
+                        product.images[1]?.url || product.images[0]?.url || ""
+                      }
+                      id={product.product_id}
+                      name={product.name}
+                      currency={product.currency}
+                      price={product.price}
+                    />
+                  ))}
+                </div>
+                <div className="p-2.5 text-center cursor-pointer"
+                  onClick={handleSearchRedirect}
+                  onTouchEnd={handleSearchRedirect}>
+                  <div className="relative text-black text-[16px] inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40">
+                    Show more
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
