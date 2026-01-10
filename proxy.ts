@@ -23,7 +23,7 @@ export async function proxy(req: NextRequest) {
 
   // 🚫 Block /account for unauthenticated users
   if (!user && isAccountRoute) {
-    return NextResponse.redirect(new URL("/register", req.url));
+    return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
   // 🚫 Block auth pages when logged in

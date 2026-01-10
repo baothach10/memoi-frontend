@@ -165,8 +165,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               </>
             ) : (
               <>
-
-                <div className="grid grid-cols-3 gap-2.5">
+                <div className={`grid grid-cols-${isMobile ? 2 : 3} gap-2.5`}>
                   {products.map((product) => (
                     <SearchInteractiveItem
                       key={product.product_id}
