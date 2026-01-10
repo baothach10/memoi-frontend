@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ProductDetailsResponse } from "@/app/api/getProductDetails";
+import Link from "next/link";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
@@ -18,7 +19,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   // );
   const colors = ["#000000", "#ffffff", "#ff0000"]; // Placeholder until variants are set up
 
-  const [selectedColor, setSelectedColor] = useState(() => colors[0] || "");
+  const [selectedColor, setSelectedColor] = useState(() => product.color || "");
   const [showSizeOverlay, setShowSizeOverlay] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -35,9 +36,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       }));
   }, [product.variants]);
 
-  const displayPrice =
-    product.variants.find((s) => s.color === selectedColor)?.price ??
-    product.variants[0].price;
+  const displayPrice = product.variants[0].price;
 
   /* ---------------------------------------------
    * GSAP overlay animation
@@ -66,7 +65,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
     cartItems.push({
       productId: product.product_id,
-      color: selectedColor,
+      color: product.color,
       size,
       price,
     });
@@ -102,30 +101,37 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </h1>
 
         {/* PRICE */}
-        <p className="text-sm mb-8 text-center">SGD {displayPrice.toFixed(2)}</p>
+        <p className="text-sm mb-8 text-center">{product.currency} {displayPrice.toFixed(2)}</p>
 
         {/* COLOR SELECTOR */}
         <div className="mb-10 flex flex-col items-center justify-center text-center">
-          <p className="text-xs mb-2">COLOR: {selectedColor.toUpperCase()}</p>
+          <p className="text-xs mb-2">COLOR: {product.color.toUpperCase()}</p>
 
           <div className="flex gap-2">
-            {colors.map((color) => (
-              <button
-                key={color}
-                onClick={() => setSelectedColor(color)}
+            <div className="relative w-4 h-4 flex items-center justify-center">
+              {/* Outer ring (with offset) */}
+              <span className="absolute inset-0 rounded-full ring-1 ring-black/20 ring-offset-2 ring-offset-white" />
+
+              {/* Inner ring + color */}
+              <span
+                style={{ backgroundColor: product.color }}
+                className="relative z-10 w-3 h-3 rounded-full ring-1 ring-black/20"
+              />
+            </div>
+
+            {product.colors.map((colorData, id) => (
+              <Link
+                key={id}
+                // onClick={() => setSelectedColor(colorData.color)}
+                href={`/product/${colorData.product_id}`}
                 className="relative w-4 h-4 flex items-center justify-center rounded-full"
               >
-                {/* Outer selected ring */}
-                {selectedColor === color && (
-                  <span className="absolute inset-0 rounded-full ring-1 ring-black/20 ring-offset-2 ring-offset-white" />
-                )}
-
                 {/* Inner base ring + color */}
                 <span
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: colorData.color }}
                   className="relative z-10 w-3 h-3 rounded-full ring-1 ring-black/20"
                 />
-              </button>
+              </Link>
             ))}
           </div>
         </div>

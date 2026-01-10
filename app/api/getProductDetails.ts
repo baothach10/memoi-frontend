@@ -15,11 +15,19 @@ export type ProductCategory = {
   name: string;
 };
 
+export type ProductColor = {
+  color: string;
+  product_id: string;
+};
+
 export type ProductDetailsResponse = {
   product_id: number;
   sku: string;
   name: string;
+  currency: string;
   description: string;
+  color: string;
+  colors: ProductColor[];
   seo_meta_description: string;
   status: string;
   collection: string;

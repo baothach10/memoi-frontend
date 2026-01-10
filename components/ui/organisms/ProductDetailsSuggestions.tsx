@@ -29,7 +29,7 @@ function ProductDetailsSuggestions({ numberOfSuggestions }: { numberOfSuggestion
                             }
                             id={product.id}
                             name={product.name}
-                            currency={"SGD"}
+                            currency={'SGD'}
                             price={product.price}
                         />
                     )) : <div>No suggestions available.</div>}
