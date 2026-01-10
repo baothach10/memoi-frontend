@@ -6,6 +6,8 @@ import Link from "next/link";
 import { getCountries, getCountryCallingCode } from "libphonenumber-js";
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
+import { useCreateUser } from "@/queries/useCreateUser";
+import { useRouter } from "next/navigation";
 
 countries.registerLocale(en);
 
@@ -37,6 +39,8 @@ export default function RegisterForm() {
       phoneZone: "+1",
     },
   });
+  const { mutate, isPending, error } = useCreateUser();
+  const router = useRouter();
 
   const PHONE_ZONES = Array.from(
     new Map(
@@ -63,6 +67,23 @@ export default function RegisterForm() {
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
+    mutate(
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        country: data.country,
+        phone: data.phone,
+        phoneZone: data.phoneZone,
+        dob: data.dob,
+        marketing: data.marketing,
+      },
+      {
+        onSuccess: () => {
+          // ✅ Redirect to home after successful auth / registration
+          router.replace("/");
+        },
+      }
+    );
     reset(
       {
         email: "",
@@ -215,8 +236,13 @@ export default function RegisterForm() {
 
         {/* Submit */}
         <button className="mt-6 bg-black text-white py-4 text-sm">
-          Create account
+          {isPending ? "Creating..." : "Create account"}
         </button>
+        {error && (
+          <p className="text-red-500 text-xs">
+            {(error as Error).message}
+          </p>
+        )}
 
         {/* Footer */}
         <p className="text-center text-xs">
