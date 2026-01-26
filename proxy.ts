@@ -28,17 +28,21 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
-  // 🚫 Block auth pages when logged in
-  if (user && isAuthPage) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-  if (user && isAccountRoute) {
+  // 🚫 For authenticated users, check profile completion
+  if (user && !isRegisterPage) {
     const userData = await getUserProfile();
+    // Redirect to register if profile is not completed (mandatory step)
     if (!userData.authenticated || !userData.profile_completed)
       return NextResponse.redirect(new URL("/register", req.url));
   }
 
-  if (user && (isAuthPage || isRegisterPage)) {
+  // 🚫 Block auth pages when logged in with completed profile
+  if (user && isAuthPage) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // Allow completed users to access all other pages
+  if (user && isRegisterPage) {
     const userData = await getUserProfile();
     if (userData.authenticated && userData.profile_completed)
       return NextResponse.redirect(new URL("/", req.url));

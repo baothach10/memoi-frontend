@@ -8,6 +8,8 @@ import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 import { useCreateUser } from "@/queries/useCreateUser";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
 countries.registerLocale(en);
 
@@ -33,6 +35,7 @@ export default function RegisterForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -41,6 +44,22 @@ export default function RegisterForm() {
   });
   const { mutate, isPending, error } = useCreateUser();
   const router = useRouter();
+
+  // Fetch user email from Supabase on mount
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      const supabase = createBrowserSupabaseClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user?.email) {
+        setValue("email", user.email);
+      }
+    };
+
+    fetchUserEmail();
+  }, [setValue]);
 
   const PHONE_ZONES = Array.from(
     new Map(
@@ -111,131 +130,139 @@ export default function RegisterForm() {
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-[620px] flex flex-col gap-9 max-mobile:px-5"
+        className="w-full max-w-[620px] flex flex-col gap-12 max-mobile:px-5"
       >
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-2xl font-regular max-mobile:text-lg">CREATE AN ACCOUNT</h1>
-          <p className="text-sm text-black/70 mt-2">
-            Please fill in the fields below to create your account and get
-            access to exclusive services immediately
-          </p>
+        <div className="flex flex-col gap-9">
+          <div className="flex flex-col gap-12">
+            {/* Header */}
+            <div className="text-center">
+              <h1 className="text-2xl font-regular max-mobile:text-lg">CREATE AN ACCOUNT</h1>
+              <p className="text-sm text-black/70 mt-2">
+                Please fill in the fields below to create your account and get
+                access to exclusive services immediately
+              </p>
+            </div>
+
+            {/* EMAIL */}
+            <Field label="EMAIL *" error={errors.email}>
+              <input
+                type="email"
+                className={inputClass()}
+                disabled
+                {...register("email", { required: true })}
+              />
+            </Field>
+
+            {/* FIRST NAME */}
+            <Field label="FIRST NAME *" error={errors.firstName}>
+              <input
+                type="text"
+                placeholder="Enter your first name"
+                className={inputClass()}
+                {...register("firstName", { required: true })}
+              />
+            </Field>
+
+            {/* LAST NAME */}
+            <Field label="LAST NAME *" error={errors.lastName}>
+              <input
+                type="text"
+                placeholder="Enter your last name"
+                className={inputClass()}
+                {...register("lastName", { required: true })}
+              />
+            </Field>
+
+            {/* COUNTRY */}
+            <Field label="COUNTRY *" error={errors.country}>
+              <select
+                className={inputClass()}
+                {...register("country", { required: true })}
+              >
+                <option value="">Choose your country</option>
+                {COUNTRIES.map((z) => (
+                  <option key={z.iso + z.label} value={z.iso}>
+                    {z.label}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            {/* PHONE */}
+            <Field label="PHONE NUMBER *" error={errors.phone || errors.phoneZone}>
+              <div className="flex gap-4">
+                {/* Zone selector */}
+                <select
+                  className={`flex-1 max-mobile:flex-2 ${inputClass()}`}
+                  {...register("phoneZone", { required: true })}
+                >
+                  <option value="">+Code</option>
+                  {PHONE_ZONES.map((z) => (
+                    <option key={z.code + z.label} value={z.code}>
+                      {z.code}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Phone number */}
+                <input
+                  type="tel"
+                  placeholder="Phone number"
+                  className={`flex-9 max-mobile:flex-8 ${inputClass()}`}
+                  {...register("phone", { required: true })}
+                />
+              </div>
+            </Field>
+
+            {/* DOB */}
+            <Field label="DATE OF BIRTH *" error={errors.dob}>
+              <input
+                type="text"
+                placeholder="dd / mm / yyyy"
+                className={inputClass()}
+                {...register("dob", {
+                  required: "Date of birth is required",
+                  pattern: {
+                    value:
+                      /^(0[1-9]|[12][0-9]|3[01])\s*\/\s*(0[1-9]|1[0-2])\s*\/\s*(19|20)\d{2}$/,
+                    message: "Please enter a valid date in dd/mm/yyyy format",
+                  },
+                })}
+              />
+            </Field>
+          </div>
+
+          <div className="flex flex-col gap-3">
+
+            {/* Terms */}
+            <p className="text-sm text-black/70 leading-relaxed text-left">
+              By clicking Create account, I confirm that I have read and accept the{" "}
+              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
+                Terms & Condition
+              </Link>{" "}
+              and understand the information regarding the use of my personal
+              details as explained in the{" "}
+              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
+                Privacy Policy
+              </Link>
+              .
+            </p>
+
+            {/* Marketing */}
+            <label className="flex items-center gap-3 text-sm text-black/70">
+              <input
+                type="checkbox"
+                className="accent-black"
+                {...register("marketing")}
+              />
+              I would like to receive information about the latest updates from
+              MEMOI by email.
+            </label>
+          </div>
         </div>
 
-        {/* EMAIL */}
-        <Field label="EMAIL *" error={errors.email}>
-          <input
-            type="email"
-            className={inputClass()}
-            {...register("email", { required: true })}
-          />
-        </Field>
-
-        {/* FIRST NAME */}
-        <Field label="FIRST NAME *" error={errors.firstName}>
-          <input
-            type="text"
-            placeholder="Enter your first name"
-            className={inputClass()}
-            {...register("firstName", { required: true })}
-          />
-        </Field>
-
-        {/* LAST NAME */}
-        <Field label="LAST NAME *" error={errors.lastName}>
-          <input
-            type="text"
-            placeholder="Enter your last name"
-            className={inputClass()}
-            {...register("lastName", { required: true })}
-          />
-        </Field>
-
-        {/* COUNTRY */}
-        <Field label="COUNTRY *" error={errors.country}>
-          <select
-            className={inputClass()}
-            {...register("country", { required: true })}
-          >
-            <option value="">Choose your country</option>
-            {COUNTRIES.map((z) => (
-              <option key={z.iso + z.label} value={z.iso}>
-                {z.label}
-              </option>
-            ))}
-          </select>
-        </Field>
-
-        {/* PHONE */}
-        <Field label="PHONE NUMBER *" error={errors.phone || errors.phoneZone}>
-          <div className="flex gap-4">
-            {/* Zone selector */}
-            <select
-              className={`flex-1 max-mobile:flex-2 ${inputClass()}`}
-              {...register("phoneZone", { required: true })}
-            >
-              <option value="">+Code</option>
-              {PHONE_ZONES.map((z) => (
-                <option key={z.code + z.label} value={z.code}>
-                  {z.code}
-                </option>
-              ))}
-            </select>
-
-            {/* Phone number */}
-            <input
-              type="tel"
-              placeholder="Phone number"
-              className={`flex-9 max-mobile:flex-8 ${inputClass()}`}
-              {...register("phone", { required: true })}
-            />
-          </div>
-        </Field>
-
-        {/* DOB */}
-        <Field label="DATE OF BIRTH *" error={errors.dob}>
-          <input
-            type="text"
-            placeholder="dd / mm / yyyy"
-            className={inputClass()}
-            {...register("dob", {
-              required: "Date of birth is required",
-              pattern: {
-                value:
-                  /^(0[1-9]|[12][0-9]|3[01])\s*\/\s*(0[1-9]|1[0-2])\s*\/\s*(19|20)\d{2}$/,
-                message: "Please enter a valid date in dd/mm/yyyy format",
-              },
-            })}
-          />
-        </Field>
-
-        {/* Terms */}
-        <p className="text-xs text-black/70 leading-relaxed">
-          By clicking Create account, I confirm that I have read and accept the{" "}
-          <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
-            Terms & Condition
-          </Link>{" "}
-          and understand the information regarding the use of my personal
-          details as explained in the{" "}
-          <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
-            Privacy Policy
-          </Link>
-          .
-        </p>
-
-        {/* Marketing */}
-        <label className="flex items-center gap-3 text-xs text-black/70">
-          <input
-            type="checkbox"
-            className="accent-black"
-            {...register("marketing")}
-          />
-          I would like to receive information about the latest updates from
-          MEMOI by email.
-        </label>
-
         {/* Submit */}
-        <button className="mt-6 bg-black text-white py-4 text-sm">
+        <button className="bg-black text-white py-4 text-sm">
           {isPending ? "Creating..." : "Create account"}
         </button>
         {error && (

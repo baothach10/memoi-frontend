@@ -18,14 +18,14 @@ function Field({
       {children}
 
       {/* Reserved space for error */}
-      <div className="pt-3">
-        {error && (
+      {error && (
+        <div className="pt-3">
           <div className="flex items-center gap-1 text-red-600 text-xs">
             <AlertCircle size={12} />
             <span>{error.message || "This field is required"}</span>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
