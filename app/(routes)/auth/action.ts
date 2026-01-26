@@ -49,7 +49,7 @@ export async function verifyOTP(formData: FormData) {
 
   if (error) return { error: error.message };
 
-  redirect("/");
+  redirect("/register");
 }
 
 // --- Sign Out ---

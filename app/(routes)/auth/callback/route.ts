@@ -27,7 +27,7 @@ export async function GET(request: Request) {
 
       // save to session or local storage
 
-      return NextResponse.redirect(`${origin}`);
+      return NextResponse.redirect(`${origin}/register`);
     }
   }
 

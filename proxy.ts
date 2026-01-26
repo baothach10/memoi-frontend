@@ -23,29 +23,22 @@ export async function proxy(req: NextRequest) {
   const isAuthPage = pathname === "/sign-in";
   const isRegisterPage = pathname === "/register";
 
-  // 🚫 Block /account for unauthenticated users
-  if (!user && isAccountRoute) {
+  if (!user && (isAccountRoute || isRegisterPage)) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
-  // 🚫 For authenticated users, check profile completion
-  if (user && !isRegisterPage) {
-    const userData = await getUserProfile();
-    // Redirect to register if profile is not completed (mandatory step)
-    if (!userData.authenticated || !userData.profile_completed)
-      return NextResponse.redirect(new URL("/register", req.url));
-  }
-
   // 🚫 Block auth pages when logged in with completed profile
-  if (user && isAuthPage) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
 
   // Allow completed users to access all other pages
-  if (user && isRegisterPage) {
+  if (user && (isAuthPage || isRegisterPage)) {
     const userData = await getUserProfile();
     if (userData.authenticated && userData.profile_completed)
       return NextResponse.redirect(new URL("/", req.url));
+    else if (
+      (!userData.authenticated || !userData.profile_completed) &&
+      isAuthPage
+    )
+      return NextResponse.redirect(new URL("/register", req.url));
   }
 
   return res;
