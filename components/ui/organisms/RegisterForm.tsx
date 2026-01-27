@@ -26,7 +26,7 @@ type FormValues = {
 
 function inputClass() {
   return `
-    w-full border-b bg-transparent py-1 text-sm outline-none border-black/40 focus:border-black/60
+    w-full border-b bg-transparent pt-4 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs ,ax-mobile:pt-2
   `;
 }
 
@@ -130,14 +130,14 @@ export default function RegisterForm() {
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-[620px] flex flex-col gap-12 max-mobile:px-5"
+        className="w-full max-w-[620px] flex flex-col gap-12 max-mobile:px-5 max-mobile:gap-9"
       >
         <div className="flex flex-col gap-9">
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 max-mobile:gap-9">
             {/* Header */}
             <div className="text-center">
               <h1 className="text-2xl font-regular max-mobile:text-lg">CREATE AN ACCOUNT</h1>
-              <p className="text-sm text-black/70 mt-2">
+              <p className="text-sm text-black/70 mt-2 max-mobile:text-xs max-mobile:text-left">
                 Please fill in the fields below to create your account and get
                 access to exclusive services immediately
               </p>
@@ -235,7 +235,7 @@ export default function RegisterForm() {
           <div className="flex flex-col gap-3">
 
             {/* Terms */}
-            <p className="text-sm text-black/70 leading-relaxed text-left">
+            <p className="text-sm text-black/70 leading-relaxed text-left max-mobile:text-xs">
               By clicking Create account, I confirm that I have read and accept the{" "}
               <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
                 Terms & Condition
@@ -249,10 +249,10 @@ export default function RegisterForm() {
             </p>
 
             {/* Marketing */}
-            <label className="flex items-center gap-3 text-sm text-black/70">
+            <label className="flex items-start text-left gap-3 text-sm text-black/70 max-mobile:text-xs">
               <input
                 type="checkbox"
-                className="accent-black"
+                className="accent-black mt-0.5 max-mobile:mt-px"
                 {...register("marketing")}
               />
               I would like to receive information about the latest updates from
@@ -261,23 +261,25 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Submit */}
-        <button className="bg-black text-white py-4 text-sm">
-          {isPending ? "Creating..." : "Create account"}
-        </button>
-        {error && (
-          <p className="text-red-500 text-xs">
-            {(error as Error).message}
-          </p>
-        )}
+        <div className="flex flex-col gap-6 max-mobile:gap-4">
+          {/* Submit */}
+          <button className="bg-black text-white py-4 text-sm">
+            {isPending ? "Creating..." : "Create account"}
+          </button>
+          {error && (
+            <p className="text-red-500 text-xs">
+              {(error as Error).message}
+            </p>
+          )}
 
-        {/* Footer */}
-        <p className="text-center text-xs">
-          Already have an account?{" "}
-          <Link href={"/sign-in"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 cursor-pointer max-mobile:text-xs">
-            Login
-          </Link>
-        </p>
+          {/* Footer */}
+          <p className="text-center text-sm max-mobile:text-xs">
+            Already have an account?{" "}
+            <Link href={"/sign-in"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 cursor-pointer max-mobile:text-xs">
+              Login
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
