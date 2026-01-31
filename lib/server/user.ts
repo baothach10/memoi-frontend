@@ -26,8 +26,8 @@ export async function createUser(body: CreateUserPayload) {
         apiKey: process.env.NEXT_PUBLIC_API_KEY!,
       },
       body: JSON.stringify({
-        first_name: body.firstName,
-        last_name: body.lastName,
+        firstName: body.firstName,
+        lastName: body.lastName,
         country: body.country,
         phone: body.phone,
         phoneZone: body.phoneZone,

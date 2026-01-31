@@ -10,6 +10,10 @@ import { useCreateUser } from "@/queries/useCreateUser";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { createBrowserSupabaseClient } from "@/utils/supabase/client";
+import ChevronDownIcon from "../atoms/ChevronDownIcon";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 countries.registerLocale(en);
 
@@ -26,7 +30,7 @@ type FormValues = {
 
 function inputClass() {
   return `
-    w-full border-b bg-transparent pt-4 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs ,ax-mobile:pt-2
+    w-full border-b bg-transparent pt-4 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2
   `;
 }
 
@@ -60,6 +64,25 @@ export default function RegisterForm() {
 
     fetchUserEmail();
   }, [setValue]);
+
+  // Format date input with auto-slash insertion
+  const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-digits
+    let formattedValue = "";
+
+    if (value.length > 0) {
+      formattedValue = value.slice(0, 2); // dd
+      if (value.length >= 3) {
+        formattedValue += "/" + value.slice(2, 4); // dd/mm
+        if (value.length >= 5) {
+          formattedValue += "/" + value.slice(4, 8); // dd/mm/yyyy
+        }
+      }
+    }
+
+    e.target.value = formattedValue;
+    setValue("dob", formattedValue);
+  };
 
   const PHONE_ZONES = Array.from(
     new Map(
@@ -98,8 +121,13 @@ export default function RegisterForm() {
       },
       {
         onSuccess: () => {
-          // ✅ Redirect to home after successful auth / registration
+          // ✅ Show toast then redirect to home after successful auth / registration
+          toast.success("Profile updated successfully");
           router.replace("/");
+        },
+        onError: (err: any) => {
+          const message = err?.message.error || "Unable to create account";
+          toast.error(message);
         },
       }
     );
@@ -175,17 +203,22 @@ export default function RegisterForm() {
 
             {/* COUNTRY */}
             <Field label="COUNTRY *" error={errors.country}>
-              <select
-                className={inputClass()}
-                {...register("country", { required: true })}
-              >
-                <option value="">Choose your country</option>
-                {COUNTRIES.map((z) => (
-                  <option key={z.iso + z.label} value={z.iso}>
-                    {z.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative flex">
+                <select
+                  className={`pb-1 appearance-none w-full ${inputClass()}`}
+                  {...register("country", { required: true })}
+                >
+                  <option value="">Choose your country</option>
+                  {COUNTRIES.map((z) => (
+                    <option key={z.iso + z.label} value={z.iso}>
+                      {z.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
+                  <ChevronDownIcon width={16} height={16} />
+                </div>
+              </div>
             </Field>
 
             {/* PHONE */}
@@ -228,6 +261,7 @@ export default function RegisterForm() {
                     message: "Please enter a valid date in dd/mm/yyyy format",
                   },
                 })}
+                onChange={handleDateInput}
               />
             </Field>
           </div>
@@ -266,12 +300,7 @@ export default function RegisterForm() {
           <button className="bg-black text-white py-4 text-sm">
             {isPending ? "Creating..." : "Create account"}
           </button>
-          {error && (
-            <p className="text-red-500 text-xs">
-              {(error as Error).message}
-            </p>
-          )}
-
+          
           {/* Footer */}
           <p className="text-center text-sm max-mobile:text-xs">
             Already have an account?{" "}
@@ -281,6 +310,7 @@ export default function RegisterForm() {
           </p>
         </div>
       </form>
+      <ToastContainer position="top-right" />
     </div>
   );
 }
