@@ -205,7 +205,7 @@ export default function RegisterForm() {
             <Field label="COUNTRY *" error={errors.country}>
               <div className="relative flex">
                 <select
-                  className={`pb-1 appearance-none w-full ${inputClass()}`}
+                  className={`pb-0.5 appearance-none w-full ${inputClass()}`}
                   {...register("country", { required: true })}
                 >
                   <option value="">Choose your country</option>
@@ -225,17 +225,22 @@ export default function RegisterForm() {
             <Field label="PHONE NUMBER *" error={errors.phone || errors.phoneZone}>
               <div className="flex gap-4">
                 {/* Zone selector */}
-                <select
-                  className={`flex-1 max-mobile:flex-2 ${inputClass()}`}
-                  {...register("phoneZone", { required: true })}
-                >
-                  <option value="">+Code</option>
-                  {PHONE_ZONES.map((z) => (
-                    <option key={z.code + z.label} value={z.code}>
-                      {z.code}
-                    </option>
-                  ))}
-                </select>
+                <div className="relative flex flex-1 max-mobile:flex-2">
+                  <select
+                    className={` appearance-none ${inputClass()}`}
+                    {...register("phoneZone", { required: true })}
+                  >
+                    <option value="">+Code</option>
+                    {PHONE_ZONES.map((z) => (
+                      <option key={z.code + z.label} value={z.code}>
+                        {z.code}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
+                    <ChevronDownIcon width={16} height={16} />
+                  </div>
+                </div>
 
                 {/* Phone number */}
                 <input
@@ -300,7 +305,7 @@ export default function RegisterForm() {
           <button className="bg-black text-white py-4 text-sm">
             {isPending ? "Creating..." : "Create account"}
           </button>
-          
+
           {/* Footer */}
           <p className="text-center text-sm max-mobile:text-xs">
             Already have an account?{" "}
