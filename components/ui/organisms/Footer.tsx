@@ -56,7 +56,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/help?tab=house" className="hover:text-black transition">
+                <a href="/the-memoi-house" className="hover:text-black transition">
                   The MEMOÍ House
                 </a>
               </li>
