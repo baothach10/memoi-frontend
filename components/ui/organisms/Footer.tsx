@@ -56,7 +56,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-black transition">
+                <a href="/help?tab=house" className="hover:text-black transition">
                   The MEMOÍ House
                 </a>
               </li>
@@ -76,22 +76,22 @@ export function Footer() {
             <h4 className="font-regular mb-2 text-[16px] uppercase">Help</h4>
             <ul className="space-y-2 text-black/60 text-sm">
               <li>
-                <a href="#" className="hover:text-black transition">
+                <a href="/help?tab=shipping" className="hover:text-black transition">
                   Shipping & Exchanges
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-black transition">
+                <a href="/help?tab=orders" className="hover:text-black transition">
                   Orders & Payment
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-black transition">
+                <a href="/help?tab=care" className="hover:text-black transition">
                   MEMOÍ care
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-black transition">
+                <a href="/help?tab=shipping" className="hover:text-black transition">
                   Exchange Request
                 </a>
               </li>
