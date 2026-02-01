@@ -91,7 +91,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/help?tab=shipping" className="hover:text-black transition">
+                <a href="/exchange-request" className="hover:text-black transition">
                   Exchange Request
                 </a>
               </li>

@@ -165,7 +165,7 @@ export default function RegisterForm() {
             {/* Header */}
             <div className="text-center">
               <h1 className="text-2xl font-regular max-mobile:text-lg">CREATE AN ACCOUNT</h1>
-              <p className="text-sm text-black/70 mt-2 max-mobile:text-xs max-mobile:text-left">
+              <p className="text-sm text-black/70 mt-8 max-mobile:text-xs max-mobile:text-left max-mobile:mt-4">
                 Please fill in the fields below to create your account and get
                 access to exclusive services immediately
               </p>
