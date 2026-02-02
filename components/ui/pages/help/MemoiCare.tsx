@@ -13,9 +13,9 @@ export default function MemoiCare() {
                     </p>
                 </div>
             </div>
-            <div className="space-y-8">
+            <div>
                 <ExpandableSection title={"GENERAL CARE"} titleClassName="text-[16px] py-8 border-t border-t-black/10" defaultOpen={true}>
-                    <div className="leading-normal space-y-2 text-sm">
+                    <div className="leading-normal space-y-2 text-sm pb-8">
                         <p>
                             Our garments are made from delicate, premium fabrics such as silk, satin, taffeta, chiffon, and cotton blends. These materials require gentle handling to maintain their natural texture and fluidity.
                         </p>
@@ -25,7 +25,7 @@ export default function MemoiCare() {
                     </div>
                 </ExpandableSection>
                 <ExpandableSection title={"WASHING & DRYING"} titleClassName="text-[16px] py-8 border-t border-t-black/10" defaultOpen={true}>
-                    <div className="leading-normal space-y-2 text-sm">
+                    <div className="leading-normal space-y-2 text-sm pb-8">
                         <div className="space-y-2">
                             <p>To ensure lasting softness and color integrity:</p>
                             <ul className="list-['-_'] list-inside text-sm space-y-2">
@@ -38,7 +38,7 @@ export default function MemoiCare() {
                     </div>
                 </ExpandableSection>
                 <ExpandableSection title={"IRONING & STEAMING"} titleClassName="text-[16px] py-8 border-t border-t-black/10" defaultOpen={true}>
-                    <div className="leading-normal space-y-2 text-sm">
+                    <div className="leading-normal space-y-2 text-sm pb-8">
 
                         <ul className="list-['-_'] list-inside text-sm space-y-2">
                             <li>Use a steamer for a natural, crease-free finish.</li>
@@ -50,7 +50,7 @@ export default function MemoiCare() {
                     </div>
                 </ExpandableSection>
                 <ExpandableSection title={"STORAGE & HANDLING"} titleClassName="text-[16px] py-8 border-t border-t-black/10" defaultOpen={true}>
-                    <div className="leading-normal space-y-2 text-sm">
+                    <div className="leading-normal space-y-2 text-sm pb-8">
 
                         <ul className="list-['-_'] list-inside text-sm space-y-2">
                             <li>Store garments in a cool, dry place away from sunlight.</li>
