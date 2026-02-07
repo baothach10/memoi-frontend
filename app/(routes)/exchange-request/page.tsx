@@ -9,6 +9,8 @@ import ChevronDownIcon from "@/components/ui/atoms/ChevronDownIcon";
 import { useState } from "react";
 import Footer from "@/components/ui/organisms/Footer";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 countries.registerLocale(en);
 
@@ -60,7 +62,22 @@ export default function ExchangeRequestPage() {
     const onSubmit = async (data: FormValues) => {
         setIsPending(true);
         try {
-            console.log("Exchange request submitted:", data);
+            const response = await fetch("/api/exchange-requests/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ACCESS_TOKEN}`,
+                },
+                body: JSON.stringify(data),
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok || responseData.error) {
+                const errorMessage = responseData.error || "Failed to submit exchange request";
+                toast.error(errorMessage);
+                return;
+            }
             reset({
                 email: "",
                 phoneZone: "+1",
@@ -69,7 +86,9 @@ export default function ExchangeRequestPage() {
             });
             router.push("/exchange-success");
         } catch (error: any) {
-            console.error(error?.message || "Failed to submit exchange request");
+            const errorMessage = error?.message || "Failed to submit exchange request";
+            console.error(errorMessage);
+            toast.error(errorMessage);
         } finally {
             setIsPending(false);
         }
@@ -171,6 +190,7 @@ export default function ExchangeRequestPage() {
                 </form>
             </section>
             <Footer />
+            <ToastContainer position="top-right" />
         </div>
     );
 }
