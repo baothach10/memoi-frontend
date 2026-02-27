@@ -13,9 +13,11 @@ type OverlayType = "search" | "cart" | null;
 function RightNavigation({
   color = "white",
   onClose,
+  className,
 }: {
   color?: string;
   onClose?: () => void;
+  className?: string;
 }) {
   const [cartCount, setCartCount] = useState(0);
   const [activeOverlay, setActiveOverlay] = useState<OverlayType>(null);
@@ -80,7 +82,7 @@ function RightNavigation({
 
   return (
     <>
-      <div className="relative flex items-center gap-6 max-mobile:gap-4">
+      <div className={`relative flex items-center gap-6 max-mobile:gap-4 ${className}`}>
         <button
           onClick={handleSearchClick}
           onTouchEnd={handleSearchTouch}
