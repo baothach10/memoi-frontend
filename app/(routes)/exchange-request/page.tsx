@@ -9,8 +9,6 @@ import ChevronDownIcon from "@/components/ui/atoms/ChevronDownIcon";
 import { useState } from "react";
 import Footer from "@/components/ui/organisms/Footer";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 countries.registerLocale(en);
 
@@ -32,6 +30,7 @@ export default function ExchangeRequestPage() {
         register,
         handleSubmit,
         reset,
+        setError,
         formState: { errors },
     } = useForm<FormValues>({
         defaultValues: {
@@ -75,7 +74,7 @@ export default function ExchangeRequestPage() {
 
             if (!response.ok || responseData.error) {
                 const errorMessage = responseData.error || "Failed to submit exchange request";
-                toast.error(errorMessage);
+                setError("orderNumber", { type: "manual", message: errorMessage });
                 return;
             }
             reset({
@@ -88,7 +87,7 @@ export default function ExchangeRequestPage() {
         } catch (error: any) {
             const errorMessage = error?.message || "Failed to submit exchange request";
             console.error(errorMessage);
-            toast.error(errorMessage);
+            setError("orderNumber", { type: "manual", message: errorMessage });
         } finally {
             setIsPending(false);
         }
@@ -190,7 +189,6 @@ export default function ExchangeRequestPage() {
                 </form>
             </section>
             <Footer />
-            <ToastContainer position="top-right" />
         </div>
     );
 }
