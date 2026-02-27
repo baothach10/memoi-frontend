@@ -109,10 +109,10 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs">
+                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
                   <li>
                     <Link
-                      href="/collection"
+                      href="/collection/SS26"
                       onClick={closeMenu}
                       className=" text-[14px] uppercase max-mobile:text-xs"
                     >
@@ -131,7 +131,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs">
+                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
                   {itemsList &&
                     itemsList.map((category) => (
                       <li key={category.id}>
@@ -155,7 +155,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs">
+                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
                   <li>
                     <Link
                       href="/explore/about-us"
@@ -166,7 +166,7 @@ export default function MobileMenu({
                   </li>
                   <li>
                     <Link
-                      href="/explore"
+                      href="/the-memoi-house"
                       onClick={closeMenu}
                     >
                       The MEMOÍ House
