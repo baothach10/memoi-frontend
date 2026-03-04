@@ -1,3 +1,5 @@
+"use client";
+
 import MemoiGraphicLogo from "../atoms/MemoiGraphicLogo";
 import FacebookIcon from "../atoms/FacebookIcon";
 import InstagramIcon from "../atoms/InstagramIcon";
