@@ -68,29 +68,34 @@ export default function BenefitTable() {
 
     return (
         <div className="w-full overflow-x-auto">
-            <div className="grid grid-cols-[1fr_120px_120px_120px] gap-x-20">
+            <div className="grid grid-cols-[1fr_120px_120px_120px] gap-x-20 max-mobile:grid-cols-[1fr_1fr_1fr_1fr] max-mobile:gap-x-0">
                 {/* Header */}
                 <div />
                 {TIERS.map((t) => (
-                    <div key={t} className="text-center pb-4">
+                    <div key={t} className="text-center pb-4 flex flex-col items-center max-mobile:text-sm justify-between">
                         <div className="text-[16px] font-regular">{t}</div>
-                        <div className="text-[16px] text-black/60 mt-2">{TIERS_PRICE[t]}</div>
+                        <div className="text-[16px] text-black/60 mt-2 max-mobile:gap-2">{TIERS_PRICE[t]}</div>
                     </div>
                 ))}
 
                 {/* Rows */}
                 {BENEFITS.map((b, idx) => (
-                    <div key={idx} className="contents space-y-8">
-                        <div >
+                    <div key={idx} className="contents max-mobile:text-xs">
+                        <div className={idx === BENEFITS.length - 1 ? "mb-0" : "mb-8"}>
                             <div className="text-sm font-regular">{b.title}</div>
-                            {b.subtitle && <div className="text-sm text-black/60 mt-2">{b.subtitle}</div>}
+                            {b.subtitle && <div className="text-sm text-black/60 mt-2 max-mobile:mt-1">{b.subtitle}</div>}
                         </div>
 
                         {TIERS.map((t) => (
-                            <div key={`${t}-${idx}`} className="text-center flex items-center justify-center">
+                            <div key={`${t}-${idx}`} className={`text-center flex items-center justify-center ${idx === BENEFITS.length - 1 ? "mb-0" : "mb-8"}`}>
                                 {b.included[t] ? (
                                     <div className="flex items-center justify-center">
-                                        <TickIcon width={24} height={24} />
+                                        <div className="max-mobile:hidden block">
+                                            <TickIcon width={24} height={24} />
+                                        </div>
+                                        <div className="hidden max-mobile:block">
+                                            <TickIcon width={20} height={20} />
+                                        </div>
                                     </div>
                                 ) : (
                                     <div className="h-4" />

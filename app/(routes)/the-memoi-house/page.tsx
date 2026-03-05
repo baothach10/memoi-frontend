@@ -299,17 +299,18 @@ function TheMemoiHousePage() {
                             media={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
                             tabletMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
                             mobileMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
+                            desktopImageClassName={"object-[0_80%]"}
                         >
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto max-w-[720px] text-center flex flex-col gap-12 justify-center items-center">
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto max-w-[720px] text-center flex flex-col gap-12 justify-center items-center max-mobile:w-full max-mobile:px-5">
                                 <div className="flex flex-col gap-8 justify-center items-center text-white">
                                     <div>
-                                        <div className="text-2xl font-regular leading-[140%]">
+                                        <div className="text-2xl font-regular leading-[140%] max-mobile:text-lg">
                                             <h2>WELCOME HOME TO THE</h2>
                                             <h2>HOUSE OF MEMOÍ</h2>
                                         </div>
                                         <div className="text-xs text-white/80 mt-1">Where every woman finds her reflection</div>
                                     </div>
-                                    <div className="text-sm leading-normal space-y-2">
+                                    <div className="text-sm leading-normal space-y-2 max-mobile:text-xs">
                                         <div>
                                             Welcome to The MEMOÍ House, our exclusive client collective where sophisticated belonging meets conscious elegance. More than a membership, the House is where we recognize and reward your commitment, granting you access to special discounts, personalized services, and priority access to new collections and events.
                                         </div>
@@ -332,6 +333,7 @@ function TheMemoiHousePage() {
                                         hover:bg-white
                                         hover:text-black
                                         hover:border-white
+                                        max-mobile:text-xs
                                     "
                                 >
                                     Join The MEMOÍ House
@@ -342,28 +344,28 @@ function TheMemoiHousePage() {
 
                     <section
                         ref={gridSectionRef}
-                        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
+                        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-10"
                         data-header-theme="light"
                     >
-                        <div className="relative h-full max-w-[904px] px-10 space-y-16">
-                            <div className="space-y-20">
+                        <div className="relative h-full max-w-[904px] px-10 space-y-16 max-mobile:px-5 max-mobile:space-y-8">
+                            <div className="space-y-20 max-mobile:space-y-8">
                                 <div className="text-center space-y-2">
-                                    <h2 className="font-regular uppercase text-2xl">Benefits for House Members</h2>
-                                    <p className="text-[16px] leading-[140%]">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
+                                    <h2 className="font-regular uppercase text-2xl max-mobile:text-lg">Benefits for House Members</h2>
+                                    <p className="text-[16px] leading-[140%] max-mobile:text-sm">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
                                 </div>
                                 <div>
                                     <BenefitTable />
                                 </div>
                             </div>
-                            <div className="space-y-12 border-t pt-8 border-t-black/10">
+                            <div className="space-y-12 border-t pt-8 border-t-black/10 max-mobile:space-y-6 max-mobile:pt-6">
 
                                 <div className="space-y-4">
-                                    <h3 className="uppercase text-[16px]">
+                                    <h3 className="uppercase text-[16px] max-mobile:text-sm">
                                         How to Qualify
                                     </h3>
-                                    <div className="space-y-2 text-sm">
+                                    <div className="space-y-2 text-sm max-mobile:text-xs">
                                         <p className="">Exclusive membership tiers are achieved when your cumulative spending reaches the required threshold:</p>
-                                        <ul className="list-['-_'] list-inside text-sm space-y-2">
+                                        <ul className="list-['-_'] list-inside space-y-2">
                                             <li><span className="font-regular">MEMOÍ +:</span> Achieve S$3,000 in accumulated spending.</li>
                                             <li><span className="font-regular">MEMOÍ ELITE:</span> Achieve S$8,000 in accumulated spending.</li>
                                         </ul>
@@ -371,12 +373,12 @@ function TheMemoiHousePage() {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h3 className="uppercase text-[16px]">
+                                    <h3 className="uppercase text-[16px] max-mobile:text-sm">
                                         Status Maintenance and Validity
                                     </h3>
-                                    <div className="space-y-2 text-sm">
+                                    <div className="space-y-2 text-sm max-mobile:text-xs">
                                         <p className="">To ensure the best experience and extend membership benefits, your status is tied to a rolling 6-month period from the date of your last purchase.</p>
-                                        <ul className="list-['-_'] list-inside text-sm space-y-2">
+                                        <ul className="list-['-_'] list-inside space-y-2">
                                             <li><span className="font-regular">Validity Period:</span> Your privileges are active for 6 months after your last transaction.</li>
                                             <li><span className="font-regular">Maintenance & Upgrade:</span> To maintain your current status or upgrade to the next level, you must generate sufficient new spending within this 6-month period.</li>
                                             <li><span className="font-regular">Extension:</span> Every new purchase you make automatically extends your 6-month validity period.</li>
