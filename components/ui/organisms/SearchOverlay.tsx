@@ -79,15 +79,13 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 max-tablet:w-full ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+        className={`fixed inset-0 bg-black/50 z-100 transition-opacity duration-300 max-tablet:w-full ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={onClose}
       />
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out max-tablet:w-full ${isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-100 transform transition-transform duration-300 ease-in-out max-tablet:w-full ${isOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"}`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -145,7 +143,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   You may also like
                 </p>
                 <div className="relative w-full h-full">
-                    <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
+                  <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
                 </div>
               </div>
             ) : products.length === 0 ? (
@@ -159,7 +157,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     You may also like
                   </p>
                   <div className="relative w-full h-full">
-                        <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
+                    <SearchProductSuggestions numberOfSuggestions={isMobile ? 2 : 3} />
                   </div>
                 </div>
               </>
