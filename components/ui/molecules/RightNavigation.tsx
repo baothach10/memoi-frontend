@@ -68,11 +68,13 @@ function RightNavigation({
   }
   const handleCartClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    console.log('click')
     setActiveOverlay(activeOverlay === "cart" ? null : "cart");
   };
 
   const handleCartTouch = (e: React.TouchEvent) => {
     e.preventDefault();
+    console.log('touch')
     setActiveOverlay(activeOverlay === "cart" ? null : "cart");
   }
 
@@ -120,8 +122,8 @@ function RightNavigation({
           </span>
         </button>
         <button
-          onClick={handleSearchClick}
-          onTouchEnd={handleSearchTouch}
+          onClick={handleCartClick}
+          onTouchEnd={handleCartTouch}
           className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
           <CartIcon width={14} height={14} color={color} />

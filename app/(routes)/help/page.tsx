@@ -21,28 +21,33 @@ export default function HelpPage() {
     const currentSection = validSections.includes(activeSection) ? activeSection : "shipping";
 
     const handleSetActive = (section: string) => {
-        router.push(`/help?tab=${section}`);
+        router.push(`/help?tab=${section}`, { scroll: false });
     };
 
     return (
-        <div className=" px-[100px] relative w-full bg-[#fffefa]" data-header-theme="light">
+        <div className="px-[100px] max-tablet:px-[5%] relative w-full bg-[#fffefa]" data-header-theme="light">
             {/* FAQ CONTENT WRAPPER (sticky boundary) */}
-            <section className=" mx-auto grid grid-cols-10 gap-32 pt-36 pb-27" id="help-section">
+            <section className="mx-auto grid grid-cols-10 max-tablet:grid-cols-1 gap-32 max-tablet:gap-10 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16" id="help-section">
 
-                {/* LEFT – STICKY side section */}
-                <aside className="col-span-3 self-start h-full">
+                {/* LEFT – STICKY side section (hidden on tablet/mobile) */}
+                <aside className="col-span-3 self-start h-full max-tablet:hidden">
                     <LeftHelpNavigation active={currentSection} setActive={handleSetActive} />
                 </aside>
 
                 {/* RIGHT – FAQ CONTENT */}
-                <div id="help-main" className="col-span-7 flex flex-col gap-9">
+                <div id="help-main" className="col-span-7 max-tablet:col-span-1 flex flex-col gap-9 max-tablet:gap-0">
                     <div className="flex flex-col gap-4">
-                        <h1 className="text-2xl font-regular uppercase">
+                        <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">
                             FREQUENTLY ASKED QUESTIONS
                         </h1>
-                        <p className="text-sm text-black/60">
+                        <p className="text-sm text-black/60 max-mobile:text-xs">
                             Latest Updates: 12/12/2025
                         </p>
+                    </div>
+
+                    {/* Navigation – shown below header on tablet/mobile only */}
+                    <div className="hidden max-tablet:block max-tablet:mt-9 max-tablet:mb-16 max-mobile:mt-6 max-mobile:mb-9">
+                        <LeftHelpNavigation active={currentSection} setActive={handleSetActive} />
                     </div>
 
                     <div>

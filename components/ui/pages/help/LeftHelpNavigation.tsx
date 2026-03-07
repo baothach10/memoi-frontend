@@ -7,7 +7,7 @@ export default function LeftHelpNavigation({ active, setActive }: { active: stri
     ];
 
     return (
-        <div className="sticky top-24 space-y-2 text-sm">
+        <div className="sticky top-24 max-tablet:static space-y-2 text-sm">
             {items.map((it) => (
                 <div
                     key={it.id}
@@ -24,7 +24,7 @@ export default function LeftHelpNavigation({ active, setActive }: { active: stri
                         if (container) container.scrollIntoView({ behavior: "smooth", block: "start" });
                     }}
                     className={`block py-3 transition cursor-pointer ${active === it.id ? "border-b border-black font-medium" : "border-b border-b-black/10 text-black/70"}`}
-                    
+
                 >
                     {it.label}
                 </div>
