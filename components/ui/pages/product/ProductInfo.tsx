@@ -65,7 +65,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
     cartItems.push({
       productId: product.product_id,
+      productName: product.name,
+      productImage: product.images[0].url,
       color: product.color,
+      quantity: 1,
       size,
       price,
     });
