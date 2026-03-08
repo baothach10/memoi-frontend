@@ -1,9 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/ui/organisms/Footer";
 
 export default function CheckoutSuccessPage() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const [isValid, setIsValid] = useState(false);
+
+    useEffect(() => {
+        const paymentIntent = searchParams.get("payment_intent");
+        const status = searchParams.get("redirect_status");
+
+        if (!paymentIntent || status !== "succeeded") {
+            router.replace("/");
+            return;
+        }
+
+        localStorage.removeItem("itemList");
+        window.dispatchEvent(new Event("cartUpdated"));
+        setIsValid(true);
+    }, [searchParams, router]);
+
+    if (!isValid) {
+        return null;
+    }
     return (
         <div className="" data-header-theme="light">
             <section className="flex w-full justify-center py-50 max-mobile:py-38 smaller-tablet:max-tablet:py-73">

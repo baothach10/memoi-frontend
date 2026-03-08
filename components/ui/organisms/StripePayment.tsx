@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, forwardRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useCreatePaymentIntent } from "@/queries/useCreatePaymentIntent";
-import PaymentForm from "@/components/ui/molecules/PaymentForm";
+import PaymentForm, { PaymentFormRef } from "@/components/ui/molecules/PaymentForm";
 
 const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -51,7 +51,7 @@ const appearance = {
     },
 };
 
-export default function StripePayment() {
+const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, ref) {
     const { mutate, data: clientSecret, error, isPending } = useCreatePaymentIntent();
 
     useEffect(() => {
@@ -85,7 +85,9 @@ export default function StripePayment() {
                 ],
             }}
         >
-            <PaymentForm />
+            <PaymentForm ref={ref} />
         </Elements>
     );
-}
+});
+
+export default StripePayment;

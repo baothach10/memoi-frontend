@@ -31,9 +31,9 @@ export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
                 >
                     View cart
                 </button>
-                <button className="flex-[1.5] py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200">
+                <Link href="/checkout" className=" block text-center flex-[1.5] py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200">
                     Checkout
-                </button>
+                </Link>
             </div>
 
             {/* Footer Links */}

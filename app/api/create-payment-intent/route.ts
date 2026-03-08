@@ -11,8 +11,6 @@ export async function POST(request: Request) {
       quantity: item.quantity,
     }));
 
-
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL!}/api/stripe/payments/create-intent`,
       {
