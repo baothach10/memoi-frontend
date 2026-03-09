@@ -19,7 +19,7 @@ type CheckoutFormValues = {
     firstName: string;
     lastName: string;
     country: string;
-    state: string;
+    // state: string;
     city: string;
     zipCode: string;
     address: string;
@@ -138,7 +138,8 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                             <input
                                 type="email"
                                 className={inputClass()}
-                                disabled
+                                placeholder="Enter your email"
+                                disabled={!!user?.email}
                                 {...register("email", { required: true })}
                             />
                         </Field>
@@ -198,7 +199,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     </Field>
 
                     {/* STATE */}
-                    <Field label="STATE *" error={errors.state}>
+                    {/* <Field label="STATE *" error={errors.state}>
                         <div className="relative flex">
                             <select
                                 className={`pb-0.5 appearance-none w-full ${inputClass()}`}
@@ -210,7 +211,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                                 <ChevronDownIcon width={16} height={16} />
                             </div>
                         </div>
-                    </Field>
+                    </Field> */}
 
                     {/* CITY + ZIP */}
                     <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-8">

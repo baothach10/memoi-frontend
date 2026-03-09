@@ -37,26 +37,43 @@ export type UserProfileResponse = {
 };
 
 export async function getUserProfile(): Promise<UserProfileResponse> {
-  const supabase = await createServerSupabaseClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL!}/rest/v1/rpc/get_user_profile`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.access_token}`,
-        apiKey: process.env.NEXT_PUBLIC_API_KEY!,
-      },
-      body: JSON.stringify({}),
+  try {
+    const supabase = await createServerSupabaseClient();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      return { authenticated: false, profile_completed: false };
     }
-  );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL!}/rest/v1/rpc/get_user_profile`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.access_token}`,
+          apiKey: process.env.NEXT_PUBLIC_API_KEY!,
+        },
+        body: JSON.stringify({}),
+      }
+    );
+
+    if (!res.ok) {
+      return {
+        authenticated: false,
+        profile_completed: false,
+        error: "Failed to fetch profile",
+      };
+    }
+
+    return res.json();
+  } catch (error: any) {
+    return {
+      authenticated: false,
+      profile_completed: false,
+      error: error.message || "An unexpected error occurred",
+    };
   }
-
-  return res.json();
 }

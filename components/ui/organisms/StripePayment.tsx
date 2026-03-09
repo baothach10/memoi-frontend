@@ -91,7 +91,6 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
             options={{
                 clientSecret,
                 appearance,
-                disableLink: true,
                 fonts: [
                     {
                         cssSrc: "/fonts/font.css",
