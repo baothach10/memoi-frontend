@@ -17,10 +17,11 @@ const appearance = {
         colorBackground: "#fffefa",
         colorText: "#000000",
         colorDanger: "#df1b41",
-        fontFamily: "HelveticaNeueLightWoff, sans-serif",
+        fontFamily: "HelveticaNeueRegularWoff, sans-serif",
         spacingUnit: "4px",
         borderRadius: "0px",
-        colorTextSecondary: "rgba(0, 0, 0, 0.6)",
+        colorTextSecondary: "rgba(0, 0, 0, 1)",
+
         colorTextPlaceholder: "rgba(0, 0, 0, 0.4)",
     },
     rules: {
@@ -28,25 +29,36 @@ const appearance = {
             border: "1px solid rgba(0, 0, 0, 0.1)",
             boxShadow: "none",
         },
-        ".Tab:hover": {
-            color: "#000000",
+        ".TabLabel": {
+            fontWeight: '200',
         },
-        ".Tab--selected": {
+        ".Tab:hover": {
+            color: "rgba(0, 0, 0, 1)",
+        },
+        ".Tab--selected, .Tab--selected:hover, .Tab--selected:focus": {
             border: "1px solid #000000",
+            backgroundColor: "#fffefa",
+            color: "rgba(0, 0, 0, 1)",
             boxShadow: "none",
+        },
+        ".TabIcon--selected": {
+            fill: "rgba(0, 0, 0, 1)",
+            color: "rgba(0, 0, 0, 1)",
         },
         ".Input": {
             border: "1px solid rgba(0, 0, 0, 0.2)",
             boxShadow: "none",
+            fontWeight: '200',
         },
         ".Input:focus": {
             border: "1px solid rgba(0, 0, 0, 0.6)",
             boxShadow: "none",
         },
         ".Label": {
-            fontSize: "14px",
-            fontWeight: "400",
-            color: "rgba(0, 0, 0, 0.7)",
+            fontSize: "16px",
+            fontWeight: '200',
+            textTransform: "uppercase",
+            color: "rgba(0, 0, 0, 1)",
         },
     },
 };
@@ -75,9 +87,11 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
     return (
         <Elements
             stripe={stripePromise}
+            
             options={{
                 clientSecret,
                 appearance,
+                disableLink: true,
                 fonts: [
                     {
                         cssSrc: "/fonts/font.css",

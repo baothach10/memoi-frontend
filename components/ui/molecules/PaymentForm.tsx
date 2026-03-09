@@ -43,6 +43,7 @@ const PaymentForm = forwardRef<PaymentFormRef>(function PaymentForm(_props, ref)
             <PaymentElement
                 options={{
                     layout: "tabs",
+                    
                     wallets: {
                         applePay: "auto",
                         googlePay: "auto",
