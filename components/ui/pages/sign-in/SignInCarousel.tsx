@@ -5,12 +5,9 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 // Styles (ts may not have types for these side-effect imports)
-// @ts-expect-error - side-effect CSS import may not have TS types
 import "swiper/css";
 // Styles (ts may not have types for these side-effect imports)
-// @ts-expect-error - side-effect CSS import may not have TS types
 import "swiper/css/pagination";
-// @ts-expect-error - side-effect CSS import may not have TS types
 import "swiper/css/autoplay";
 
 type SignInCarousel = {
@@ -76,7 +73,7 @@ export default function SignInCarousel({
   const pagination = {
     clickable: true,
     renderBullet: function (index: number, className: string) {
-      return '<span class="' + className + '"></span>';
+      return '<span className="' + className + '"></span>';
     },
   };
 

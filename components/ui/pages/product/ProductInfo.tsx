@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ProductDetailsResponse } from "@/app/api/getProductDetails";
 import Link from "next/link";
+import DetailsOverlay from "../../organisms/DetailsOverlay";
+import ShippingPolicyOverlay from "../../organisms/ShippingPolicyOverlay";
+import SizingOverlay from "../../organisms/SizingOverlay";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
@@ -21,6 +24,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   const [selectedColor, setSelectedColor] = useState(() => product.color || "");
   const [showSizeOverlay, setShowSizeOverlay] = useState(false);
+  const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
+  const [showShippingOverlay, setShowShippingOverlay] = useState(false);
+  const [showSizingOverlay, setShowSizingOverlay] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -190,10 +196,26 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
         {/* FOOTER LINKS */}
         <div className="flex gap-6 text-xs underline mt-4">
-          <button>Details</button>
-          <button>Sizing</button>
-          <button>Shipping & Returns</button>
+          <button onClick={() => setShowDetailsOverlay(true)} onTouchEnd={() => setShowDetailsOverlay(true)}>Details</button>
+          <button onClick={() => setShowSizingOverlay(true)} onTouchEnd={() => setShowSizingOverlay(true)}>Sizing</button>
+          <button onClick={() => setShowShippingOverlay(true)} onTouchEnd={() => setShowShippingOverlay(true)}>Shipping & Returns</button>
         </div>
+
+        <DetailsOverlay 
+            isOpen={showDetailsOverlay} 
+            onClose={() => setShowDetailsOverlay(false)} 
+            description={product.description}
+        />
+
+        <ShippingPolicyOverlay 
+            isOpen={showShippingOverlay} 
+            onClose={() => setShowShippingOverlay(false)} 
+        />
+
+        <SizingOverlay 
+            isOpen={showSizingOverlay} 
+            onClose={() => setShowSizingOverlay(false)} 
+        />
       </div>
     </div>
   );
