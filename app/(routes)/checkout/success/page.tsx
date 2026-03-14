@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Footer from "@/components/ui/organisms/Footer";
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [isValid, setIsValid] = useState(false);
@@ -62,5 +62,13 @@ export default function CheckoutSuccessPage() {
             </section>
             <Footer />
         </div>
+    );
+}
+
+export default function CheckoutSuccessPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
+            <CheckoutSuccessContent />
+        </Suspense>
     );
 }

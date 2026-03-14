@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Footer from "@/components/ui/organisms/Footer";
 import { useRouter, useSearchParams } from "next/navigation";
 import ShippingExchanges from "@/components/ui/pages/help/ShippingExchanges";
@@ -8,9 +9,7 @@ import MemoiHouse from "@/components/ui/pages/help/MemoiHouse";
 import MemoiCare from "@/components/ui/pages/help/MemoiCare";
 import LeftHelpNavigation from "@/components/ui/pages/help/LeftHelpNavigation";
 
-
-
-export default function HelpPage() {
+function HelpPageContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -62,5 +61,13 @@ export default function HelpPage() {
             {/* FOOTER (outside sticky boundary) */}
             <Footer />
         </div>
+    );
+}
+
+export default function HelpPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
+            <HelpPageContent />
+        </Suspense>
     );
 }
