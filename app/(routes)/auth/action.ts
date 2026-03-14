@@ -11,7 +11,6 @@ export async function loginWithGoogle() {
     provider: "google",
     options: {
       redirectTo: `${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}/auth/callback`,
-      // redirectTo: `http://localhost:3000/auth/callback`,
     },
   });
 

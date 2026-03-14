@@ -7,6 +7,9 @@ import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 import ChevronDownIcon from "../../atoms/ChevronDownIcon";
 
+import { UserProfileResponse } from "@/app/api/getUserProfile";
+import Link from "next/link";
+
 countries.registerLocale(en);
 
 type FormValues = {
@@ -20,17 +23,23 @@ type FormValues = {
 };
 
 function inputClass() {
-  return `w-full border-b bg-transparent pt-4 pb-2 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2`;
+  return `w-full border-b bg-transparent pt-4 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2`;
 }
 
 const buttonClass = `
-  w-full border border-black py-4 text-[10px] uppercase tracking-[0.2em] font-regular
+  w-full border border-black/20 py-4 text-sm font-regular
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
 `;
 
-export default function AccountProfileForm() {
+interface AccountProfileFormProps {
+  userProfile: UserProfileResponse;
+}
+
+export default function AccountProfileForm({ userProfile }: AccountProfileFormProps) {
+  const user = userProfile.user;
+
   const {
     register,
     handleSubmit,
@@ -38,13 +47,13 @@ export default function AccountProfileForm() {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      email: "thanhngo@gmail.com", // Mock data for now
-      firstName: "Ngo",
-      lastName: "Duong",
-      phoneZone: "+84",
-      phone: "912345678",
-      dob: "13/03/2000",
-      marketing: true,
+      email: user?.email || "",
+      firstName: user?.first_name || "",
+      lastName: user?.last_name || "",
+      phoneZone: user?.phone_country_code || "+1",
+      phone: user?.phone_number || "",
+      dob: "", // We don't have this in UserProfile yet, keeping empty or default
+      marketing: user?.marketing_opt_in || false,
     },
   });
 
@@ -74,14 +83,18 @@ export default function AccountProfileForm() {
         const code = `+${getCountryCallingCode(country)}`;
         return [
           code,
-          { code },
+          {
+            iso: country,
+            label: countries.getName(country, "en") ?? country,
+            code,
+          },
         ];
       })
     ).values()
-  ).sort((a, b) => a.code.localeCompare(b.code));
+  ).sort((a, b) => a.label.localeCompare(b.label));
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-12">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-regular uppercase tracking-tight">PROFILE</h2>
         <p className="text-sm text-black/60 leading-relaxed font-light">
@@ -89,12 +102,13 @@ export default function AccountProfileForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12">
         <div className="flex flex-col gap-12">
           {/* EMAIL */}
           <Field label="EMAIL *" error={errors.email}>
             <input
               type="email"
+              placeholder="Enter your email"
               className={`${inputClass()} text-black/40 cursor-not-allowed`}
               disabled
               {...register("email")}
@@ -105,6 +119,7 @@ export default function AccountProfileForm() {
           <Field label="FIRST NAME *" error={errors.firstName}>
             <input
               type="text"
+              placeholder="Enter your first name"
               className={inputClass()}
               {...register("firstName", { required: true })}
             />
@@ -114,6 +129,7 @@ export default function AccountProfileForm() {
           <Field label="LAST NAME *" error={errors.lastName}>
             <input
               type="text"
+              placeholder="Enter your last name"
               className={inputClass()}
               {...register("lastName", { required: true })}
             />
@@ -122,24 +138,26 @@ export default function AccountProfileForm() {
           {/* PHONE */}
           <Field label="PHONE NUMBER *" error={errors.phone || errors.phoneZone}>
             <div className="flex gap-4">
-              <div className="relative flex min-w-[80px]">
+              <div className="relative flex flex-1 max-mobile:flex-2">
                 <select
                   className={`appearance-none bg-transparent ${inputClass()}`}
                   {...register("phoneZone", { required: true })}
                 >
+                  <option value="">+Code</option>
                   {PHONE_ZONES.map((z) => (
-                    <option key={z.code} value={z.code}>
+                    <option key={z.code + z.label} value={z.code}>
                       {z.code}
                     </option>
                   ))}
                 </select>
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <ChevronDownIcon width={12} height={12} />
+                <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
+                  <ChevronDownIcon width={16} height={16} />
                 </div>
               </div>
               <input
                 type="tel"
-                className={inputClass()}
+                placeholder="Phone number"
+                className={`flex-9 max-mobile:flex-8 ${inputClass()}`}
                 {...register("phone", { required: true })}
               />
             </div>
@@ -149,31 +167,44 @@ export default function AccountProfileForm() {
           <Field label="DATE OF BIRTH *" error={errors.dob}>
             <input
               type="text"
+              placeholder="dd / mm / yyyy"
               className={inputClass()}
-              {...register("dob", { required: true })}
+              {...register("dob", {
+                required: "Date of birth is required",
+                pattern: {
+                  value:
+                    /^(0[1-9]|[12][0-9]|3[01])\s*\/\s*(0[1-9]|1[0-2])\s*\/\s*(19|20)\d{2}$/,
+                  message: "Please enter a valid date in dd/mm/yyyy format",
+                },
+              })}
               onChange={handleDateInput}
             />
           </Field>
 
           {/* Marketing */}
-          <label className="flex items-center gap-3 text-sm text-black font-light cursor-pointer group">
+          <label className="flex items-start gap-3 text-sm text-black font-light cursor-pointer group">
             <div className="relative flex items-center justify-center">
               <input
                 type="checkbox"
-                className="peer appearance-none w-4 h-4 border border-black/20 checked:bg-black transition-all"
+                className="peer appearance-none w-4 h-4 border border-black/60 bg-transparent transition-all cursor-pointer"
                 {...register("marketing")}
               />
               <svg 
-                className="absolute w-2.5 h-2.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none" 
+                className="absolute w-4 h-4 text-black/60 opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
-                strokeWidth="4"
+                strokeWidth="2"
               >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
-            I would like to receive information about the latest updates from MEMOÍ by email. By submitting I agree to the MEMOÍ Privacy Policy
+            <div>
+              I would like to receive information about the latest updates from MEMOÍ by email. By submitting I agree to the MEMOÍ{" "}
+              <Link href={"/"} className="text-sm inline text-black relative underline decoration-black/40 cursor-pointer max-mobile:text-xs">
+                Privacy Policy
+              </Link>
+            </div>
           </label>
         </div>
 

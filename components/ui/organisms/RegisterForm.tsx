@@ -290,9 +290,18 @@ export default function RegisterForm() {
             <label className="flex items-start text-left gap-3 text-sm text-black/70 max-mobile:text-xs">
               <input
                 type="checkbox"
-                className="accent-black mt-0.5 max-mobile:mt-px"
+                className="peer appearance-none w-4 h-4 border border-black/60 bg-transparent transition-all cursor-pointer"
                 {...register("marketing")}
               />
+              <svg
+                className="absolute w-4 h-4 text-black/60 opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               I would like to receive information about the latest updates from
               MEMOI by email.
             </label>

@@ -7,11 +7,13 @@ import { getCountries } from "libphonenumber-js";
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 
+import { UserProfileResponse } from "@/app/api/getUserProfile";
+
 countries.registerLocale(en);
 
 type FormValues = {
   country: string;
-  state: string;
+  // state: string;
   city: string;
   zipCode: string;
   address: string;
@@ -19,28 +21,35 @@ type FormValues = {
 };
 
 function inputClass() {
-  return `w-full border-b bg-transparent pt-4 pb-2 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2`;
+  return `w-full border-b bg-transparent pt-4 text-sm outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2`;
 }
 
 const buttonClass = `
-  w-full border border-black py-4 text-[10px] uppercase tracking-[0.2em] font-regular
+  w-full border border-black/20 py-4 text-sm font-regular
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
 `;
 
-export default function AccountAddressForm() {
+interface AccountAddressFormProps {
+  userProfile: UserProfileResponse;
+}
+
+export default function AccountAddressForm({ userProfile }: AccountAddressFormProps) {
+  const defaultAddress = userProfile.addresses?.[0];
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      country: "VN",
-      city: "",
-      zipCode: "",
-      address: "",
-      optionalAddress: "",
+      country: defaultAddress?.country || "VN",
+      // state: defaultAddress?.state || "",
+      city: defaultAddress?.city || "",
+      zipCode: defaultAddress?.zip_postal_code || "",
+      address: defaultAddress?.address_line_1 || "",
+      optionalAddress: defaultAddress?.address_line_2 || "",
     },
   });
 
@@ -56,7 +65,7 @@ export default function AccountAddressForm() {
     .sort((a, b) => a.label.localeCompare(b.label));
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-12">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-regular uppercase tracking-tight">ADDRESS INFORMATION</h2>
         <p className="text-sm text-black/60 leading-relaxed font-light">
@@ -64,13 +73,13 @@ export default function AccountAddressForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12">
         <div className="flex flex-col gap-12">
           {/* COUNTRY */}
           <Field label="COUNTRY *" error={errors.country}>
-            <div className="relative">
+            <div className="relative flex">
               <select
-                className={`appearance-none bg-transparent ${inputClass()}`}
+                className={` appearance-none bg-transparent ${inputClass()}`}
                 {...register("country", { required: true })}
               >
                 <option value="">Select country</option>
@@ -80,26 +89,26 @@ export default function AccountAddressForm() {
                   </option>
                 ))}
               </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                <ChevronDownIcon width={12} height={12} />
+              <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
+                <ChevronDownIcon width={16} height={16} />
               </div>
             </div>
           </Field>
 
           {/* STATE */}
-          <Field label="STATE *" error={errors.state}>
-            <div className="relative">
+          {/* <Field label="STATE *" error={errors.state}>
+            <div className="relative flex">
               <select
-                className={`appearance-none bg-transparent ${inputClass()}`}
+                className={` appearance-none bg-transparent ${inputClass()}`}
                 {...register("state")}
               >
                 <option value="">Choose your state</option>
               </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                <ChevronDownIcon width={12} height={12} />
+              <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
+                <ChevronDownIcon width={16} height={16} />
               </div>
             </div>
-          </Field>
+          </Field> */}
 
           {/* CITY */}
           <Field label="CITY *" error={errors.city}>
