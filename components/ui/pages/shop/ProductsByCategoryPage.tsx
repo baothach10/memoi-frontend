@@ -91,6 +91,7 @@ export default function ProductsByCategoryPage({
           {data?.products.map((item) => (
             <ShopInteractiveItem
               key={item.product_id}
+              id={item.product_id}
               image={item.images[0].url}
               hoveredImage={item.images[1].url}
               name={item.name}

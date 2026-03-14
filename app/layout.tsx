@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThreeModelProvider } from "@/context/ThreeModelContext";
 import ConditionalHeader from "@/components/ui/organisms/ConditionalHeader";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import SignUpModal from "@/components/ui/molecules/SignUpModal";
 
 export const metadata: Metadata = {
   title: "MEMOI Website",
@@ -21,6 +22,7 @@ export default function RootLayout({
           <ThreeModelProvider>
             <ConditionalHeader />
             {children}
+            <SignUpModal />
           </ThreeModelProvider>
         </ReactQueryProvider>
       </body>

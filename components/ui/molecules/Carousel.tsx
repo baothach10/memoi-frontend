@@ -5,9 +5,7 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 // Styles (ts may not have types for these side-effect imports)
-// @ts-expect-error - side-effect CSS import may not have TS types
 import 'swiper/css'
-// @ts-expect-error - side-effect CSS import may not have TS types
 import 'swiper/css/autoplay'
 
 type CarouselProps = {

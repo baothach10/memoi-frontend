@@ -11,9 +11,10 @@ type Props = {
     children?: React.ReactNode
     className?: string
     defaultOpen?: boolean
+    titleClassName?: string
 }
 
-export default function ExpandableSection({ title, children, className = "", defaultOpen = false }: Props) {
+export default function ExpandableSection({ title, children, className = "", defaultOpen = false, titleClassName = "" }: Props) {
     const [open, setOpen] = useState<boolean>(defaultOpen)
     const contentRef = useRef<HTMLDivElement | null>(null)
     const isMobile = useIsMobile(768);
@@ -61,7 +62,7 @@ export default function ExpandableSection({ title, children, className = "", def
 
     return (
         <div className={` ${className}`}>
-            <div className="flex items-center justify-between cursor-pointer" role="heading" aria-level={3}>
+            <div className={`flex items-center justify-between cursor-pointer ${titleClassName}`} role="heading" aria-level={3}>
                 <button
                     type="button"
                     aria-expanded={open}
@@ -76,7 +77,7 @@ export default function ExpandableSection({ title, children, className = "", def
             </div>
 
             <div ref={contentRef} aria-hidden={!open} style={{ overflow: "hidden" }}>
-                <div className={`pt-2`}>
+                <div>
                     {children}
                 </div>
             </div>

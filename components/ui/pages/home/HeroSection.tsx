@@ -29,6 +29,9 @@ type HeroSectionProps = {
   firstParameter?: FirstParameter;
   secondParameter?: SecondParameter;
   children?: React.ReactNode;
+  desktopImageClassName?: string;
+  tabletImageClassName?: string;
+  mobileImageClassName?: string;
 };
 
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
@@ -40,6 +43,9 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
       firstParameter,
       secondParameter,
       children,
+      desktopImageClassName,
+      tabletImageClassName,
+      mobileImageClassName,
     },
     ref
   ) => {
@@ -70,7 +76,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
             fill
             loading="eager"
             sizes="(min-width: 1025px) 100vw, 0px"
-            className="object-cover object-center laptop:block hidden"
+            className={`object-cover ${desktopImageClassName ? desktopImageClassName : "object-center"} laptop:block hidden`}
             priority
           />
         ) : (
@@ -97,7 +103,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               fill
               loading="eager"
               sizes="(min-width: 768px) and (max-width: 1024px) 100vw, 0px"
-              className="object-cover object-center smaller-tablet:max-tablet:block hidden"
+              className={`object-cover ${tabletImageClassName ? tabletImageClassName : "object-center"} smaller-tablet:max-tablet:block hidden`}
               priority
             />
           ) : (
@@ -124,7 +130,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               fill
               loading="eager"
               sizes="(max-width: 767px) 100vw, 0px"
-              className="object-cover object-center max-mobile:block hidden"
+              className={`object-cover ${mobileImageClassName ? mobileImageClassName : "object-center"} max-mobile:block hidden`}
               priority
             />
           ) : (

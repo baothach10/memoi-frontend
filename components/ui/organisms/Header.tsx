@@ -17,22 +17,21 @@ export function Header() {
   const textColor = menuOpen || theme === "light" ? "black" : "white";
   return (
     <header
-      className={`fixed w-screen top-0 left-0 right-0 z-50 ${
-        menuOpen ? "bg-[#fffefa]" : "bg-transparent"
-      } pt-10 max-mobile:py-4`}
+      className={`fixed w-screen top-0 left-0 right-0 z-50 ${menuOpen ? "bg-[#fffefa]" : "bg-transparent pointer-events-none"
+        } pt-10 max-mobile:py-4`}
     >
       <div className="relative w-full px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-4 flex items-center justify-between transition-all ease-in">
         <MobileMenu
           open={menuOpen}
           onToggle={setMenuOpen}
-          className="max-tablet:block hidden"
+          className="max-tablet:block hidden pointer-events-auto"
         />
-        <Logo color={textColor} onClose={() => setMenuOpen(false)} />
+        <Logo color={textColor} onClose={() => setMenuOpen(false)} className="pointer-events-auto" />
         <NavigationBar
-          className="max-tablet:hidden block"
+          className="max-tablet:hidden block pointer-events-auto"
           inlineColor={textColor}
         />
-        <RightNavigation color={textColor} onClose={() => setMenuOpen(false)} />
+        <RightNavigation color={textColor} onClose={() => setMenuOpen(false)} className="pointer-events-auto" />
       </div>
     </header>
   );

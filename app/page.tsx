@@ -104,12 +104,12 @@ export default function HomePage() {
    * -------------------------------------------------------- */
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
-      // If the mobile menu is open, ignore wheel events for page snapping
+      // If the mobile menu is open or overlay is open, ignore wheel events for page snapping
       if (
         typeof document !== "undefined" &&
-        document.body.classList.contains("menu-open")
+        (document.body.classList.contains("menu-open") ||
+          document.body.style.overflow === "hidden")
       ) {
-        e.preventDefault();
         return;
       }
       const gridEl = gridSectionRef.current;
@@ -165,12 +165,12 @@ export default function HomePage() {
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      // If mobile menu is open, ignore touch move for page snapping
+      // If mobile menu is open or overlay is open, ignore touch move for page snapping
       if (
         typeof document !== "undefined" &&
-        document.body.classList.contains("menu-open")
+        (document.body.classList.contains("menu-open") ||
+          document.body.style.overflow === "hidden")
       ) {
-        e.preventDefault();
         return;
       }
 

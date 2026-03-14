@@ -26,7 +26,7 @@ export default function ContactUsPage() {
     },
     {
       title: "The MEMOÍ House",
-      href: "/explore",
+      href: "/the-memoi-house",
     },
     {
       title: "Our Commitments",

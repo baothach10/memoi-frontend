@@ -200,7 +200,7 @@ export default function EmailVerificationForm({ email }: Props) {
             </button>
           ) : (
             <p className="text-sm text-black/70 max-mobile:text-xs">
-              Request new code in <span className="font-medium">{seconds}</span>{" "}
+              Request new code in <span>{seconds}</span>{" "}
               seconds
             </p>
           )}

@@ -408,7 +408,8 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                 <div className="grid grid-cols-4 gap-2.5 max-tablet:grid-cols-2 max-mobile:grid-cols-2 w-full px-2.5 smaller-tablet:max-tablet:px-10 max-mobile:px-5">
                   {data?.products.map((item) => (
                     <ShopInteractiveItem
-                      key={item.product_id}
+                      key={item.product_id} id={item.product_id}
+
                       image={item.images[0].url}
                       hoveredImage={item.images[1].url}
                       name={item.name}
