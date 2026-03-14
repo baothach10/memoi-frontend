@@ -195,7 +195,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
 
         {/* FOOTER LINKS */}
-        <div className="flex gap-6 text-xs underline mt-4">
+        <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4">
           <button onClick={() => setShowDetailsOverlay(true)} onTouchEnd={() => setShowDetailsOverlay(true)}>Details</button>
           <button onClick={() => setShowSizingOverlay(true)} onTouchEnd={() => setShowSizingOverlay(true)}>Sizing</button>
           <button onClick={() => setShowShippingOverlay(true)} onTouchEnd={() => setShowShippingOverlay(true)}>Shipping & Returns</button>

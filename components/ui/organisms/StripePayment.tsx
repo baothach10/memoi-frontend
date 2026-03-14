@@ -57,14 +57,10 @@ const appearance = {
             fontSize: "16px",
             fontWeight: '200',
             marginBottom: "16px",
+            marginTop: "48px",
             textTransform: "uppercase",
             color: "rgba(0, 0, 0, 1)",
         },
-        ".p-CardForm": {
-            display: "flex",
-            flexDirection: "column",
-            gap: "48px",
-        }
     },
 };
 

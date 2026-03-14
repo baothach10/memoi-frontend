@@ -79,17 +79,17 @@ export default function CheckoutSummary({ onPlaceOrder, isProcessing }: Checkout
             )}
             <div className="flex flex-col gap-8">
                 {/* Promo Code */}
-                <div className="flex gap-2.5">
+                <div className="flex gap-2.5 items-end justify-end">
                     <input
                         type="text"
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="Promocode"
-                        className="flex-1 border-b border-black/40 bg-transparent text-sm outline-none py-2 focus:border-black/60 placeholder:text-black/40"
+                        className="relative h-fit flex-1 border-b border-black/40 pb-2 bg-transparent text-sm outline-none focus:border-black/60 placeholder:text-black/40"
                     />
                     <button
                         type="button"
-                        className="border border-black/20 px-18 py-3 text-sm hover:border-black/40 transition-colors"
+                        className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 tran psition-colors"
                     >
                         Apply
                     </button>
@@ -134,11 +134,11 @@ export default function CheckoutSummary({ onPlaceOrder, isProcessing }: Checkout
             {/* Terms */}
             <p className="text-sm text-black leading-relaxed">
                 By proceeding, I confirm that I have read and accept the{" "}
-                <Link href="/explore/terms-conditions" className="underline underline-offset-2">
+                <Link href="/explore/terms-conditions" className="underline underline-offset-4">
                     Terms and Conditions
                 </Link>{" "}
                 and the{" "}
-                <Link href="/explore/privacy-policy" className="underline underline-offset-2">
+                <Link href="/explore/privacy-policy" className="underline underline-offset-4">
                     Privacy Policy
                 </Link>
                 .

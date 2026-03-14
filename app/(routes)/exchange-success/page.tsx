@@ -23,7 +23,7 @@ export default function ExchangeSuccessPage() {
                                     Our team will contact you within 48 business hours via email to guide you through the next steps!
                                 </p>
                                 <p>
-                                    If you have any questions regarding your order or our process, you can find information in our <Link href="/help" className="underline underline-offset-2 decoration-black/80">FAQ</Link> or visit <Link href="/explore/contact-us" className="underline underline-offset-2 decoration-black/80">Contact Us</Link> for direct assistance.
+                                    If you have any questions regarding your order or our process, you can find information in our <Link href="/help" className="underline underline-offset-4 decoration-black/80">FAQ</Link> or visit <Link href="/explore/contact-us" className="underline underline-offset-4 decoration-black/80">Contact Us</Link> for direct assistance.
                                 </p>
                             </div>
                         </div>

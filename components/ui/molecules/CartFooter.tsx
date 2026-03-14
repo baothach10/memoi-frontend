@@ -42,7 +42,7 @@ export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
                     Need help?{" "}
                     <Link
                         href="/explore/contact-us"
-                        className="underline underline-offset-2 hover:text-black transition-colors"
+                        className="underline underline-offset-4 hover:text-black transition-colors"
                     >
                         Contact us
                     </Link>
@@ -51,7 +51,7 @@ export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
                     By proceeding, you agree to our{" "}
                     <Link
                         href="/terms"
-                        className="underline underline-offset-2 hover:text-black transition-colors"
+                        className="underline underline-offset-4 hover:text-black transition-colors"
                     >
                         Terms & Conditions
                     </Link>

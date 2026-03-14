@@ -255,7 +255,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                 </div>
 
                 {/* Payment Method */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-12">
                     <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Payment Method
                     </h2>

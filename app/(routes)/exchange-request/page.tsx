@@ -107,7 +107,7 @@ export default function ExchangeRequestPage() {
                             <div className="text-center">
                                 <h1 className="text-2xl font-regular max-mobile:text-lg">EXCHANGE YOUR ORDER</h1>
                                 <p className="text-sm text-black/80 mt-8 max-mobile:text-xs max-mobile:text-left max-mobile:mt-4">
-                                    To proceed with your exchange request, please note that we accept exchanges for size only within 7 days of receipt. For full terms and conditions, please refer to our <a className="underline underline-offset-2 decoration-black/80" href="#">Shipping & Exchange Policy</a>
+                                    To proceed with your exchange request, please note that we accept exchanges for size only within 7 days of receipt. For full terms and conditions, please refer to our <a className="underline underline-offset-4 decoration-black/80" href="#">Shipping & Exchange Policy</a>
                                 </p>
                             </div>
 
