@@ -21,7 +21,6 @@ const appearance = {
         spacingUnit: "4px",
         borderRadius: "0px",
         colorTextSecondary: "rgba(0, 0, 0, 1)",
-
         colorTextPlaceholder: "rgba(0, 0, 0, 0.4)",
     },
     rules: {
@@ -57,9 +56,15 @@ const appearance = {
         ".Label": {
             fontSize: "16px",
             fontWeight: '200',
+            marginBottom: "16px",
             textTransform: "uppercase",
             color: "rgba(0, 0, 0, 1)",
         },
+        ".p-CardForm": {
+            display: "flex",
+            flexDirection: "column",
+            gap: "48px",
+        }
     },
 };
 
