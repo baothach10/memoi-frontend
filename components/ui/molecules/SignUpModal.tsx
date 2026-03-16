@@ -77,7 +77,7 @@ export default function SignUpModal() {
   return (
     <div
       ref={modalRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 laptop:p-6"
     >
       {/* Overlay */}
       <div
@@ -89,17 +89,17 @@ export default function SignUpModal() {
       {/* Modal Container */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[900px] bg-[#fffefa] overflow-hidden shadow-2xl flex md:flex-row h-[600px] md:min-h-[600px]"
+        className="relative z-10 w-full max-w-[900px] bg-[#fffefa] overflow-hidden shadow-2xl flex laptop:flex-row h-[600px] laptop:min-h-[600px] max-tablet:flex-col max-tablet:h-auto max-tablet:px-8 max-tablet:pt-8 max-tablet:pb-12 max-tablet:max-w-[494px] max-mobile:px-4 max-mobile:pt-4 max-mobile:pb-6"
       >
         {/* Close Button */}
         <button
           onClick={() => handleClose(true)}
-          className="absolute top-6 right-6 z-20 text-black/50 hover:text-black transition-colors"
+          className="absolute top-6 right-6 max-tablet:top-4 max-tablet:right-4 z-20 text-black/50 hover:text-black transition-colors"
           aria-label="Close modal"
         >
           <svg
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             viewBox="0 0 16 16"
             fill="none"
             stroke="currentColor"
@@ -110,7 +110,7 @@ export default function SignUpModal() {
         </button>
 
         {/* Left Side: Image */}
-        <div className="relative w-1/2 h-full overflow-hidden">
+        <div className="relative hidden laptop:block w-1/2 h-full overflow-hidden">
           <Image
             src="/images/collection-becoming-gallery-look-1.webp"
             alt="MEMOÍ High Fashion"
@@ -121,28 +121,31 @@ export default function SignUpModal() {
         </div>
 
         {/* Right Side: Content */}
-        <div className="relative w-1/2 py-8 px-13 flex flex-col items-center justify-between text-center bg-[#fffefa]">
-          <div>
+        <div className="relative w-1/2 py-8 px-13 flex flex-col items-center justify-between text-center bg-[#fffefa] max-tablet:w-full max-tablet:py-0 max-tablet:px-0 max-tablet:pt-4">
+          <div className="hidden laptop:block">
             <MemoiGraphicLogo width={49} height={32} />
           </div>
 
-          <div className="flex flex-col items-center gap-6">
-            <div className="px-5">
-              <p className="text-sm leading-normal text-black/80">
-                Join The MEMOÍ House and immediately receive SGD 10 off your first purchase!
+          <div className="flex flex-col items-center gap-6 laptop:gap-6">
+            <div className="flex flex-col gap-4 laptop:px-5">
+              <h2 className="text-xl laptop:hidden font-regular tracking-tight text-black max-tablet:text-sm">
+                Get 10% off today!
+              </h2>
+              <p className="text-sm leading-relaxed text-black/80 w-full max-tablet:text-xs">
+                Join The MEMOÍ House and immediately receive 10% off your first purchase!
               </p>
             </div>
 
             <Link
               href="/sign-in"
               onClick={() => handleClose(true)}
-              className=" block border border-black/20 py-3 px-8 text-xs tracking-widest leading-normal uppercase bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out"
+              className="w-full laptop:w-auto border border-black/20 py-4 laptop:py-3 px-12 laptop:px-8 text-xs tracking-[0.2em] leading-normal uppercase bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out max-tablet:text-xs"
             >
               Sign up
             </Link>
           </div>
 
-          <div>
+          <div className="hidden laptop:block">
             <p className="text-xs tracking-widest text-black/60 leading-normal uppercase">
               Copyright © 2025 MEMOÍ, LLC
             </p>
