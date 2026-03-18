@@ -28,16 +28,16 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                 {/* Product Details */}
                 <div className="flex flex-col justify-between flex-1 min-w-0 py-[2.5%]">
                     <div className="flex flex-col gap-2">
-                        <h3 className="text-sm font-normal leading-snug font-regular">
+                        <h3 className="text-sm leading-snug font-regular max-mobile:text-xs ">
                             {item.productName}
                         </h3>
-                        <p className="text-sm text-black/60 tracking-wide">
+                        <p className="text-sm text-black/60 tracking-wide max-mobile:text-xs ">
                             {getColorName(item.color)}, {item.size}
                         </p>
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <p className="text-base font-normal font-regular">
+                        <p className="text-base font-regular max-mobile:text-xs ">
                             SGD {item.price}
                         </p>
 
@@ -51,7 +51,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                             {/* Remove Button */}
                             <button
                                 onClick={onRemove}
-                                className="text-xs text-black/60 hover:text-black tracking-wide transition-colors uppercase underline decoration-black/40"
+                                className="text-xs text-black/60 hover:text-black tracking-wide transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
                             >
                                 Remove
                             </button>

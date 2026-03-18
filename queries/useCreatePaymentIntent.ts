@@ -18,7 +18,7 @@ export function useCreatePaymentIntent() {
   return useMutation({
     mutationFn: () => {
       const items = getCartItems();
-      if (items.length === 0) throw new Error("Your cart is empty");
+      if (items.length === 0) throw new Error("There’s nothing in your Cart, yet.");
       return createPaymentIntent(items);
     },
   });

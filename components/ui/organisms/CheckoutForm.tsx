@@ -1,9 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Field from "@/components/ui/molecules/Field";
-import CheckoutSummary from "@/components/ui/molecules/CheckoutSummary";
+import CheckoutSummary, { 
+    SummaryHeader, 
+    SummaryItems, 
+    SummaryPromo, 
+    SummaryTotals, 
+    SummaryTotalAmount, 
+    SummaryActions, 
+    MobileSummaryTotalAmount
+} from "@/components/ui/molecules/CheckoutSummary";
 import ChevronDownIcon from "@/components/ui/atoms/ChevronDownIcon";
 import { getCountries, getCountryCallingCode } from "libphonenumber-js";
 import countries from "i18n-iso-countries";
@@ -11,15 +19,32 @@ import en from "i18n-iso-countries/langs/en.json";
 import { UserProfileResponse } from "@/app/api/getUserProfile";
 import StripePayment from "@/components/ui/organisms/StripePayment";
 import { PaymentFormRef } from "@/components/ui/molecules/PaymentForm";
+import { CartItem, getCartItems } from "@/utils/cartUtils";
 
 countries.registerLocale(en);
+
+const SHIPPING_METHODS = [
+    {
+        id: "express",
+        title: "2 TO 3 BUSINESS DAYS",
+        description: "Express Courier (Air)",
+        price: "FREE",
+        priceValue: 0,
+    },
+    // {
+    //     id: "standard",
+    //     title: "5 TO 7 BUSINESS DAYS",
+    //     description: "Standard Shipping (Sea)",
+    //     price: "SGD 10.00",
+    //     priceValue: 10,
+    // },
+];
 
 type CheckoutFormValues = {
     email: string;
     firstName: string;
     lastName: string;
     country: string;
-    // state: string;
     city: string;
     zipCode: string;
     address: string;
@@ -43,6 +68,50 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const defaultAddress = userProfile.addresses?.[0];
     const paymentRef = useRef<PaymentFormRef>(null);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [selectedShippingId, setSelectedShippingId] = useState(
+        SHIPPING_METHODS[0].id
+    );
+    const [items, setItems] = useState<CartItem[]>([]);
+    const [promoCode, setPromoCode] = useState("");
+
+    useEffect(() => {
+        setItems(getCartItems());
+
+        const handleUpdate = () => setItems(getCartItems());
+        window.addEventListener("cartUpdated", handleUpdate);
+        return () => window.removeEventListener("cartUpdated", handleUpdate);
+    }, []);
+
+    const subtotal = items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
+
+    const selectedShipping =
+        SHIPPING_METHODS.find((m) => m.id === selectedShippingId) ||
+        SHIPPING_METHODS[0];
+
+    const updateLocalStorage = (newItems: CartItem[]) => {
+        setItems(newItems);
+        localStorage.setItem("itemList", JSON.stringify(newItems));
+        window.dispatchEvent(new Event("cartUpdated"));
+    };
+
+    const removeItem = (index: number) => {
+        const newItems = items.filter((_, i) => i !== index);
+        updateLocalStorage(newItems);
+    };
+
+    const updateQuantity = (index: number, delta: number) => {
+        const newItems = items.map((item, i) => {
+            if (i === index) {
+                const newQty = Math.max(1, item.quantity + delta);
+                return { ...item, quantity: newQty };
+            }
+            return item;
+        });
+        updateLocalStorage(newItems);
+    };
 
     const {
         register,
@@ -103,17 +172,32 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     };
 
     return (
-        <div className="w-full grid grid-cols-10 gap-20 max-tablet:grid-cols-1 max-tablet:gap-12">
+        <div className="w-full grid grid-cols-10 gap-20 max-tablet:flex max-tablet:flex-col max-tablet:gap-12 max-mobile:gap-5">
+
+            {/* TOP MOBILE — items and totals */}
+            <div className="laptop:hidden flex flex-col max-tablet:gap-8 max-mobile:gap-5">
+                {items.length > 0 && (
+                    <SummaryItems
+                        items={items}
+                        onRemove={removeItem}
+                        onIncrease={(idx) => updateQuantity(idx, 1)}
+                        onDecrease={(idx) => updateQuantity(idx, -1)}
+                    />
+                )}
+                <MobileSummaryTotalAmount total={subtotal + selectedShipping.priceValue} />
+            </div>
+
+
             {/* LEFT — Personal Info + Billing + Payment */}
-            <div className="col-span-6 max-tablet:col-span-1 flex flex-col gap-10 max-mobile:gap-8">
+            <div className="col-span-6 max-tablet:col-span-1 flex flex-col gap-10 max-tablet:gap-12 max-tablet:pt-8 max-tablet:border-t max-tablet:border-black/10 max-mobile:gap-16">
                 {/* Personal Information */}
-                <div className="flex flex-col gap-10 max-mobile:gap-8">
+                <div className="flex flex-col gap-10 max-tablet:gap-12 max-mobile:gap-9">
                     <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Personal Information
                     </h1>
 
                     {/* FIRST NAME + LAST NAME */}
-                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-8">
+                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-9">
                         <Field label="FIRST NAME *" error={errors.firstName}>
                             <input
                                 type="text"
@@ -133,7 +217,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     </div>
 
                     {/* EMAIL + PHONE */}
-                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-8">
+                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-9">
                         <Field label="EMAIL *" error={errors.email}>
                             <input
                                 type="email"
@@ -173,7 +257,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                 </div>
 
                 {/* Billing Address */}
-                <div className="flex flex-col gap-10 max-mobile:gap-8">
+                <div className="flex flex-col gap-10 max-mobile:gap-9 max-tablet:gap-12">
                     <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Billing Address
                     </h2>
@@ -198,23 +282,9 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         </div>
                     </Field>
 
-                    {/* STATE */}
-                    {/* <Field label="STATE *" error={errors.state}>
-                        <div className="relative flex">
-                            <select
-                                className={`pb-0.5 appearance-none w-full ${inputClass()}`}
-                                {...register("state")}
-                            >
-                                <option value="">Choose your state</option>
-                            </select>
-                            <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
-                                <ChevronDownIcon width={16} height={16} />
-                            </div>
-                        </div>
-                    </Field> */}
 
                     {/* CITY + ZIP */}
-                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-8">
+                    <div className="grid grid-cols-2 gap-8 max-mobile:grid-cols-1 max-mobile:gap-9">
                         <Field label="CITY *" error={errors.city}>
                             <input
                                 type="text"
@@ -254,8 +324,39 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     </Field>
                 </div>
 
+                {/* Shipping Method */}
+                <div className="flex flex-col gap-10 max-mobile:gap-8 max-tablet:gap-12">
+                    <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
+                        Shipping Method
+                    </h2>
+                    <div className="flex flex-col gap-4">
+                        {SHIPPING_METHODS.map((method) => (
+                            <div
+                                key={method.id}
+                                onClick={() => setSelectedShippingId(method.id)}
+                                className={`flex justify-between items-center border p-6 max-mobile:p-4 cursor-pointer transition-all duration-300 ${selectedShippingId === method.id
+                                    ? "border-black bg-black/[0.02]"
+                                    : "border-black/20 hover:border-black/40"
+                                    }`}
+                            >
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-sm font-bold uppercase tracking-wider max-mobile:text-xs">
+                                        {method.title}
+                                    </span>
+                                    <span className="text-xs text-black/60">
+                                        {method.description}
+                                    </span>
+                                </div>
+                                <span className="text-sm font-regular uppercase max-mobile:text-xs">
+                                    {method.price}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Payment Method */}
-                <div className="flex flex-col gap-12">
+                <div className="flex flex-col gap-12 max-mobile:gap-8">
                     <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Payment Method
                     </h2>
@@ -264,8 +365,30 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
             </div>
 
             {/* RIGHT — Summary */}
-            <div className="col-span-4 max-tablet:col-span-1 max-tablet:order-first">
+            <div className="col-span-4 max-tablet:hidden">
                 <CheckoutSummary
+                    onPlaceOrder={handlePlaceOrder}
+                    isProcessing={isProcessing}
+                    shippingCost={selectedShipping.priceValue}
+                    shippingLabel={selectedShipping.price}
+                />
+            </div>
+
+            {/* BOTTOM MOBILE — promo, totals and place order button */}
+            <div className="laptop:hidden flex flex-col gap-10">
+                <div className="flex flex-col gap-8">
+                    <SummaryPromo
+                        promoCode={promoCode}
+                        setPromoCode={setPromoCode}
+                    />
+                    <SummaryTotals
+                        subtotal={subtotal}
+                        shippingLabel={selectedShipping.price}
+                    />
+                    <SummaryTotalAmount total={subtotal + selectedShipping.priceValue} />
+                </div>
+
+                <SummaryActions
                     onPlaceOrder={handlePlaceOrder}
                     isProcessing={isProcessing}
                 />
