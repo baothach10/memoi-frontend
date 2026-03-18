@@ -107,8 +107,8 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
           <div className="flex-1 overflow-y-auto">
             {items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-[7%]">
-                <p className="text-sm text-black/50 mb-6">
-                  Your cart is empty
+                <p className="text-sm font-regular text-black mb-6">
+                  There’s nothing in your Cart, yet.
                 </p>
                 <button
                   onClick={onClose}

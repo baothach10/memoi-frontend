@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, forwardRef } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useCreatePaymentIntent } from "@/queries/useCreatePaymentIntent";
@@ -10,7 +10,7 @@ const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-const appearance = {
+const appearance = (isMobile: boolean) => ({
     theme: "flat" as const,
     variables: {
         colorPrimary: "#000000",
@@ -54,18 +54,27 @@ const appearance = {
             boxShadow: "none",
         },
         ".Label": {
-            fontSize: "16px",
+            fontSize: isMobile ? "14px" : "16px",
             fontWeight: '200',
-            marginBottom: "16px",
-            marginTop: "48px",
+            marginBottom: isMobile ? "8px" : "16px",
+            marginTop: isMobile ? "36px" : "48px",
             textTransform: "uppercase",
             color: "rgba(0, 0, 0, 1)",
         },
     },
-};
+});
 
 const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, ref) {
     const { mutate, data: clientSecret, error, isPending } = useCreatePaymentIntent();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 640px)");
+        setIsMobile(mediaQuery.matches);
+        const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+        mediaQuery.addEventListener("change", handler);
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
 
     useEffect(() => {
         mutate();
@@ -91,7 +100,7 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
             
             options={{
                 clientSecret,
-                appearance,
+                appearance: appearance(isMobile),
                 fonts: [
                     {
                         cssSrc: "/fonts/font.css",
