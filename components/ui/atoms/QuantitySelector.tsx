@@ -19,7 +19,7 @@ export default function QuantitySelector({ quantity, onIncrease, onDecrease }: Q
                 −
             </button>
             <div className="py-0.5 bg-[#fffefa] relative h-full">
-                <div className="relative w-12 h-6 flex items-center justify-center text-sm max-mobile:w-8 max-mobile:h-3.5 max-mobile:text-xs">
+                <div className="relative w-10 h-6 flex items-center justify-center text-sm max-mobile:w-7 max-mobile:h-3.5 max-mobile:text-xs">
                     {quantity}
                 </div>
             </div>

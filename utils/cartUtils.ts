@@ -3,6 +3,7 @@ export interface CartItem {
   productName: string;
   productImage: string;
   color: string;
+  color_name: string;
   size: string;
   price: number;
   quantity: number;
