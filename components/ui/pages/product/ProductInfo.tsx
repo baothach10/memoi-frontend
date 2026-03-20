@@ -74,6 +74,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       productName: product.name,
       productImage: product.images[0].url,
       color: product.color,
+      color_name: product.color_name,
       quantity: 1,
       size,
       price,
@@ -114,7 +115,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
         {/* COLOR SELECTOR */}
         <div className="mb-10 flex flex-col items-center justify-center text-center">
-          <p className="text-xs mb-2">COLOR: {product.color.toUpperCase()}</p>
+          <p className="text-xs mb-2">COLOR: {product.color_name.toUpperCase()}</p>
 
           <div className="flex gap-2">
             <div className="relative w-4 h-4 flex items-center justify-center">

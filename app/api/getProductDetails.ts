@@ -27,6 +27,7 @@ export type ProductDetailsResponse = {
   currency: string;
   description: string;
   color: string;
+  color_name: string;
   colors: ProductColor[];
   seo_meta_description: string;
   status: string;

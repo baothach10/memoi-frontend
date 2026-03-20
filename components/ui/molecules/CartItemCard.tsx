@@ -1,6 +1,6 @@
 import Image from "next/image";
 import QuantitySelector from "@/components/ui/atoms/QuantitySelector";
-import { CartItem, getColorName } from "@/utils/cartUtils";
+import { CartItem } from "@/utils/cartUtils";
 
 interface CartItemCardProps {
     item: CartItem;
@@ -32,16 +32,39 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                             {item.productName}
                         </h3>
                         <p className="text-sm text-black/60 tracking-wide max-mobile:text-xs ">
-                            {getColorName(item.color)}, {item.size}
+                            {item.color_name.toUpperCase()}, {item.size}
                         </p>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between max-mobile:hidden">
                         <p className="text-base font-regular max-mobile:text-xs ">
                             SGD {item.price}
                         </p>
 
                         <div className="flex items-center gap-3">
+                            <QuantitySelector
+                                quantity={item.quantity}
+                                onIncrease={onIncrease}
+                                onDecrease={onDecrease}
+                            />
+
+                            {/* Remove Button */}
+                            <button
+                                onClick={onRemove}
+                                className="text-xs text-black/60 hover:text-black tracking-wide transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div className="hidden max-mobile:flex max-mobile:flex-col max-mobile:justify-between max-mobile:gap-2 max-mobile:pt-4">
+                        <p className="text-base font-regular max-mobile:text-xs ">
+                            SGD {item.price}
+                        </p>
+
+                        <div className="flex items-center gap-3 justify-between">
                             <QuantitySelector
                                 quantity={item.quantity}
                                 onIncrease={onIncrease}

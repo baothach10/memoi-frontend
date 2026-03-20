@@ -25,12 +25,13 @@ export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
 
             {/* Buttons */}
             <div className="px-[5%] pb-[2%] flex gap-3 max-mobile:pb-[4%]">
-                <button
+                <Link 
+                    href="/cart"
                     onClick={onClose}
-                    className="flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs"
+                    className="block text-center flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs"
                 >
                     View cart
-                </button>
+                </Link>
                 <Link href="/checkout" onClick={onClose} className="block text-center flex-[1.5] py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs">
                     Checkout
                 </Link>
