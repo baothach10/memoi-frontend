@@ -19,6 +19,7 @@ export default function HomePage() {
   const isAnimatingRef = useRef(false);
 
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
   const SCROLL_DEBOUNCE = 1500; // ms
   const lastScrollTimeRef = useRef(0);
@@ -94,6 +95,7 @@ export default function HomePage() {
 
     if (newIndex !== currentIndexRef.current) {
       currentIndexRef.current = newIndex;
+      setCurrentSectionIndex(newIndex);
 
       scrollToSection(newIndex);
     }
@@ -178,7 +180,8 @@ export default function HomePage() {
       if (isAtBottom) return;
       const currentY = e.touches[0].clientY;
       const deltaY = startY - currentY;
-      if (Math.abs(deltaY) < 0) return;
+      // Ignore tiny movements (< 5px) to avoid accidental triggers
+      if (Math.abs(deltaY) < 5) return;
 
       // If touch starts inside the grid section and it can scroll, allow native scrolling unless at boundary
       const gridEl = gridSectionRef.current;
@@ -198,6 +201,15 @@ export default function HomePage() {
           }
           // else, fall through to handle section snap when at boundary
         }
+      }
+
+      const isScrollingUp = deltaY < 0;
+      const isAtFirstSection = currentIndexRef.current === 0;
+
+      // At the first section, scrolling up → allow native browser behavior
+      // (e.g. pull-to-refresh). Don't prevent default.
+      if (isAtFirstSection && isScrollingUp) {
+        return;
       }
 
       // Intercept and snap when not handled by native scroll
@@ -326,6 +338,10 @@ export default function HomePage() {
       <div
         ref={smoothWrapperRef}
         className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}
+        style={{
+          overscrollBehaviorY:
+            currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
+        }}
       >
         <div ref={smoothContentRef}>
           <div
