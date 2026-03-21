@@ -18,6 +18,9 @@ export default function DetailsOverlay({
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     // Disable body scroll when overlay is open
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -43,7 +46,7 @@ export default function DetailsOverlay({
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -66,20 +69,20 @@ export default function DetailsOverlay({
               </svg>
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto flex flex-col gap-9 px-23 justify-center">
-            <h2 className="text-xl uppercase">Details</h2>
+          <div className="flex-1 overflow-y-auto flex flex-col gap-9 px-23 justify-center max-mobile:px-5">
+            <h2 className="text-xl uppercase font-regular max-mobile:text-lg">Details</h2>
             {/* Content Area */}
             <div className="flex flex-col gap-8">
               <div className="space-y-5">
-                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40">Description</h3>
-                <p className="text-sm leading-relaxed font-light text-black/80">
+                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">Description</h3>
+                <p className="text-sm leading-relaxed font-light text-black/80 max-mobile:text-xs">
                   {description}
                 </p>
               </div>
 
               <div className="space-y-5">
-                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40">Care Guide</h3>
-                <div className="text-sm leading-normal text-black space-y-1">
+                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">Care Guide</h3>
+                <div className="text-sm leading-normal text-black space-y-1 max-mobile:text-xs">
                   <p>Caring for your garments to extend their useful life.</p>
                   <p>
                     Lower temperature washes and delicate spin cycles are gentler on garments and help to protect the color, shape and structure of the fabric.

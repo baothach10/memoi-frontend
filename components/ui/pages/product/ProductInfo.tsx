@@ -10,9 +10,10 @@ import SizingOverlay from "../../organisms/SizingOverlay";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
+  isMobileLayout?: boolean;
 }
 
-export default function ProductInfo({ product }: ProductInfoProps) {
+export default function ProductInfo({ product, isMobileLayout = false }: ProductInfoProps) {
   /* ---------------------------------------------
    * COLORS
    --------------------------------------------- */
@@ -20,9 +21,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   //   () => Array.from(new Set(product.variants.map((v) => v.color))),
   //   [product.variants]
   // );
-  const colors = ["#000000", "#ffffff", "#ff0000"]; // Placeholder until variants are set up
-
-  const [selectedColor, setSelectedColor] = useState(() => product.color || "");
   const [showSizeOverlay, setShowSizeOverlay] = useState(false);
   const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
   const [showShippingOverlay, setShowShippingOverlay] = useState(false);
@@ -90,7 +88,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
    * RENDER
    --------------------------------------------- */
   return (
-    <div className="sticky top-0 h-screen flex items-center justify-center">
+    <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-screen flex items-center justify-center"}>
       {/* BACKDROP */}
       {showSizeOverlay && (
         <div
@@ -99,19 +97,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         />
       )}
 
-      <div className="px-16 flex flex-col items-center justify-center w-full max-w-sm">
+      <div className="px-16 flex flex-col items-center justify-center w-full">
         {/* CATEGORY */}
         <p className="text-xs tracking-widest mb-2">
           {product.category.name.toUpperCase()}
         </p>
 
         {/* NAME */}
-        <h1 className="text-xl font-regular mb-4 text-center uppercase">
+        <h1 className="text-2xl font-regular mb-4 text-center uppercase max-mobile:text-lg">
           {product.name}
         </h1>
 
         {/* PRICE */}
-        <p className="text-sm mb-8 text-center">{product.currency} {displayPrice.toFixed(2)}</p>
+        <p className="text-[16px] mb-8 text-center max-mobile:text-sm">{product.currency} {displayPrice.toFixed(2)}</p>
 
         {/* COLOR SELECTOR */}
         <div className="mb-10 flex flex-col items-center justify-center text-center">
@@ -147,17 +145,18 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
 
         {/* ADD TO CART + SIZE OVERLAY */}
-        <div className="relative w-full mb-6">
+        <div className="relative w-full mb-6 flex flex-col items-center">
           {/* SIZE OVERLAY */}
           <div
             ref={overlayRef}
             className="
-              absolute left-0 z-10
-              w-full min-h-[200px]
+              absolute mx-auto z-10
+              w-1/3 min-h-[200px]
               bg-white border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
               gap-3 py-6 text-sm
               opacity-0 pointer-events-none
+              max-mobile:w-full
             "
           >
             {sizes.map(({ size, stock, price }) => {
@@ -189,33 +188,33 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           {/* ADD TO CART BUTTON */}
           <button
             onClick={handleAddToCartClick}
-            className="w-full bg-black text-white py-3 text-sm"
+            className="w-1/3 bg-black text-white py-3 text-sm max-mobile:w-full"
           >
             Add to cart
           </button>
         </div>
 
         {/* FOOTER LINKS */}
-        <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4">
-          <button onClick={() => setShowDetailsOverlay(true)} onTouchEnd={() => setShowDetailsOverlay(true)}>Details</button>
-          <button onClick={() => setShowSizingOverlay(true)} onTouchEnd={() => setShowSizingOverlay(true)}>Sizing</button>
-          <button onClick={() => setShowShippingOverlay(true)} onTouchEnd={() => setShowShippingOverlay(true)}>Shipping & Returns</button>
+        <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4 max-mobile:text-xs">
+          <button onClick={() => setShowDetailsOverlay(true)}>Details</button>
+          <button onClick={() => setShowSizingOverlay(true)}>Sizing</button>
+          <button onClick={() => setShowShippingOverlay(true)}>Shipping & Returns</button>
         </div>
 
-        <DetailsOverlay 
-            isOpen={showDetailsOverlay} 
-            onClose={() => setShowDetailsOverlay(false)} 
-            description={product.description}
+        <DetailsOverlay
+          isOpen={showDetailsOverlay}
+          onClose={() => setShowDetailsOverlay(false)}
+          description={product.description}
         />
 
-        <ShippingPolicyOverlay 
-            isOpen={showShippingOverlay} 
-            onClose={() => setShowShippingOverlay(false)} 
+        <ShippingPolicyOverlay
+          isOpen={showShippingOverlay}
+          onClose={() => setShowShippingOverlay(false)}
         />
 
-        <SizingOverlay 
-            isOpen={showSizingOverlay} 
-            onClose={() => setShowSizingOverlay(false)} 
+        <SizingOverlay
+          isOpen={showSizingOverlay}
+          onClose={() => setShowSizingOverlay(false)}
         />
       </div>
     </div>
