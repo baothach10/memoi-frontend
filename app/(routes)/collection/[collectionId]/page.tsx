@@ -183,17 +183,25 @@ function CollectionDetailPage() {
       }
 
       // If we've reached the last section, allow native touch scrolling freely
-      // but prevent pull-to-refresh when wrapper is scrolled to the top
+      // but prevent pull-to-refresh when page is scrolled to the top
       if (isAtBottom) {
-        const wrapper = smoothWrapperRef.current;
         const currentY = e.touches[0].clientY;
         const deltaY = startY - currentY;
         const isScrollingUp = deltaY < 0;
+        const pageScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
 
-        // When wrapper is at the very top and user swipes up,
-        // prevent default to block pull-to-refresh
-        if (wrapper && wrapper.scrollTop <= 0 && isScrollingUp) {
+        // When page is at the very top and user swipes up,
+        // prevent pull-to-refresh and snap back to previous section
+        if (isScrollingUp && pageScrollTop <= 1) {
           e.preventDefault();
+
+          if (!isAnimatingRef.current) {
+            window.scrollTo(0, 0);
+            setIsAtBottom(false);
+            // Reset debounce so handleScrollGesture responds immediately
+            lastScrollTimeRef.current = 0;
+            handleScrollGesture("up");
+          }
         }
         return;
       }
