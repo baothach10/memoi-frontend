@@ -22,9 +22,6 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const isMobile = useIsMobile(768);
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
 
     // Disable body scroll when overlay is open
     if (isOpen) {
@@ -90,15 +87,15 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between px-6 pt-6">
-            <h2 className="text-xl font-regular">Search</h2>
+            <h2 className="text-xl font-regular max-mobile:text-sm">Search</h2>
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 transition-colors"
+              className="text-black hover:text-gray-600 transition-colors w-5 h-5 max-mobile:w-4.5 max-mobile:h-4.5"
               aria-label="Close search"
             >
               <svg
-                width="20"
-                height="20"
+                // width="20"
+                // height="20"
                 viewBox="0 0 20 20"
                 fill="none"
                 stroke="currentColor"
@@ -112,8 +109,8 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           {/* Search Input */}
           <div className="p-6">
             <div className="relative flex items-center justify-between border-[#7E7D78] border-b">
-              <div>
-                <SearchIcon width={16} height={16} color="rgba(0,0,0,0.6)" />
+              <div className="w-4.5 h-auto max-mobile:w-4 max-mobile:h-auto">
+                <SearchIcon width="100%" height="100%" color="rgba(0,0,0,0.6)" />
               </div>
               <input
                 ref={inputRef}
@@ -124,11 +121,11 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 className="w-full text-[14px] font-regular text-black mx-3 bg-transparent py-3 outline-none focus:border-black placeholder:text-[14px] placeholder:text-black/60"
               />
               <div
-                className="cursor-pointer"
+                className="cursor-pointer w-4.5 h-auto max-mobile:w-4 max-mobile:h-auto"
                 onClick={handleSearchRedirect}
                 onTouchEnd={handleSearchRedirect}
               >
-                <ArrowRight size={16} color="rgba(0, 0, 0, 0.6)" />
+                <ArrowRight width="100%" height="100%" color="rgba(0, 0, 0, 0.6)" />
               </div>
             </div>
           </div>
@@ -181,7 +178,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 <div className="p-2.5 text-center cursor-pointer"
                   onClick={handleSearchRedirect}
                   onTouchEnd={handleSearchRedirect}>
-                  <div className="relative text-black text-[16px] inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40">
+                  <div className="relative text-black text-[16px] inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 max-mobile:text-sm">
                     Show more
                   </div>
                 </div>

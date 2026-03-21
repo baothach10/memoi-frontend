@@ -5,7 +5,7 @@ import SearchInteractiveItem from "../pages/overlay/SearchInteractiveItem";
 
 
 
-function SearchProductSuggestions({ numberOfSuggestions }: { numberOfSuggestions: number }) {
+function SearchProductSuggestions({ numberOfSuggestions, gridClassName }: { numberOfSuggestions: number; gridClassName?: string }) {
     const { data: productSuggestions, isLoading, isFetching, isError } = useProductSuggestionsQuery();
 
     if (isLoading || isFetching) {
@@ -18,7 +18,7 @@ function SearchProductSuggestions({ numberOfSuggestions }: { numberOfSuggestions
 
     return (
         <div className="relative w-full h-full">
-            <div className={`grid grid-cols-${numberOfSuggestions} gap-2.5`}>
+            <div className={gridClassName || `grid grid-cols-${numberOfSuggestions} gap-2.5`}>
                 {productSuggestions && productSuggestions?.length > 0 ?
                     productSuggestions.slice(0, numberOfSuggestions).map((product) => (
                         <SearchInteractiveItem
