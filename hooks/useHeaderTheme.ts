@@ -10,6 +10,9 @@ export function useHeaderTheme() {
     const sections = document.querySelectorAll("[data-header-theme]");
 
     if (!sections.length) return;
+    
+    const bottomOffset = Math.max(window.innerHeight - 60, 0);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -22,7 +25,7 @@ export function useHeaderTheme() {
         });
       },
       {
-        rootMargin: "-20px 0px -99% 0px",
+        rootMargin: `-20px 0px -${bottomOffset}px 0px`,
         threshold: 0,
       }
     );
