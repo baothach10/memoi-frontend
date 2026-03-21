@@ -70,7 +70,7 @@ export default function ShopInteractiveItem({
         ))}
 
         <div className="flex flex-col items-center mt-4 w-full gap-2">
-          <h3 className="text-center font-regular text-[14px]">{name}</h3>
+          <h3 className="text-center font-regular text-sm max-mobile:text-xs">{name}</h3>
           <div className="flex flex-row items-center text-xs">
             <span className="mr-1">{currency}</span>
             <span>{price.toFixed(2)}</span>
