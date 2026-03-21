@@ -177,7 +177,20 @@ export default function HomePage() {
       }
 
       // If we've reached the last section, allow native touch scrolling freely
-      if (isAtBottom) return;
+      // but prevent pull-to-refresh when wrapper is scrolled to the top
+      if (isAtBottom) {
+        const wrapper = smoothWrapperRef.current;
+        const currentY = e.touches[0].clientY;
+        const deltaY = startY - currentY;
+        const isScrollingUp = deltaY < 0;
+
+        // When wrapper is at the very top and user swipes up,
+        // prevent default to block pull-to-refresh
+        if (wrapper && wrapper.scrollTop <= 0 && isScrollingUp) {
+          e.preventDefault();
+        }
+        return;
+      }
       const currentY = e.touches[0].clientY;
       const deltaY = startY - currentY;
       // Ignore tiny movements (< 5px) to avoid accidental triggers

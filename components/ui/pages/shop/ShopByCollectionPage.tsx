@@ -30,6 +30,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
   const isAnimatingRef = useRef(false);
 
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const isMobile = useIsMobile(1024);
   const isLargeTablet = useIsMobile(1200);
 
@@ -132,6 +133,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
 
     if (newIndex !== currentIndexRef.current) {
       currentIndexRef.current = newIndex;
+      setCurrentSectionIndex(newIndex);
 
       scrollToSection(newIndex);
     }
@@ -213,10 +215,24 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
       }
 
       // If we've reached the last section, allow native touch scrolling freely
-      if (isAtBottom) return;
+      // but prevent pull-to-refresh when wrapper is scrolled to the top
+      if (isAtBottom) {
+        const wrapper = smoothWrapperRef.current;
+        const currentY = e.touches[0].clientY;
+        const deltaY = startY - currentY;
+        const isScrollingUp = deltaY < 0;
+
+        // When wrapper is at the very top and user swipes up,
+        // prevent default to block pull-to-refresh
+        if (wrapper && wrapper.scrollTop <= 0 && isScrollingUp) {
+          e.preventDefault();
+        }
+        return;
+      }
       const currentY = e.touches[0].clientY;
       const deltaY = startY - currentY;
-      if (Math.abs(deltaY) < 0) return;
+      // Ignore tiny movements (< 5px) to avoid accidental triggers
+      if (Math.abs(deltaY) < 5) return;
 
       // If touch starts inside the grid section and it can scroll, allow native scrolling unless at boundary
       const gridEl = gridSectionRef.current;
@@ -236,6 +252,15 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
           }
           // else, fall through to handle section snap when at boundary
         }
+      }
+
+      const isScrollingUp = deltaY < 0;
+      const isAtFirstSection = currentIndexRef.current === 0;
+
+      // At the first section, scrolling up → allow native browser behavior
+      // (e.g. pull-to-refresh). Don't prevent default.
+      if (isAtFirstSection && isScrollingUp) {
+        return;
       }
 
       // Intercept and snap when not handled by native scroll
@@ -359,6 +384,10 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
       <div
         ref={smoothWrapperRef}
         className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}
+        style={{
+          overscrollBehaviorY:
+            currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
+        }}
       >
         <div ref={smoothContentRef} className="bg-[#fffefa]">
           <div
