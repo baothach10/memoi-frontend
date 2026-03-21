@@ -16,6 +16,9 @@ export default function ShippingPolicyOverlay({
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     // Disable body scroll when overlay is open
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -41,7 +44,7 @@ export default function ShippingPolicyOverlay({
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] shadow-2xl z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"
+        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -64,13 +67,13 @@ export default function ShippingPolicyOverlay({
               </svg>
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto flex flex-col gap-9 px-23 justify-center">
-            <h2 className="text-xl uppercase">SHIPPING & EXCHANGES</h2>
+          <div className="flex-1 overflow-y-auto flex flex-col gap-9 px-23 justify-center max-mobile:px-5">
+            <h2 className="text-xl uppercase font-regular max-mobile:text-lg">SHIPPING & EXCHANGES</h2>
             {/* Content Area */}
             <div className="flex flex-col gap-8">
               <div className="space-y-5">
-                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40">SHIPPING POLICY</h3>
-                <div className="text-sm leading-normal text-black font-light space-y-2">
+                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">SHIPPING POLICY</h3>
+                <div className="text-sm leading-normal text-black font-light space-y-2 max-mobile:text-xs">
                   <p>
                     At MEMOÍ, we meticulously prepare and package every order for perfect arrival. We offer Worldwide Shipping originating from Singapore.
                   </p>
@@ -83,8 +86,8 @@ export default function ShippingPolicyOverlay({
               </div>
 
               <div className="space-y-5">
-                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40">EXCHANGE POLICY</h3>
-                <div className="text-sm leading-normal text-black font-light space-y-2">
+                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">EXCHANGE POLICY</h3>
+                <div className="text-sm leading-normal text-black font-light space-y-2 max-mobile:text-xs">
                   <p>We accept exchanges within 7 days of receipt for size exchange only.</p>
                   <ul className="space-y-2">
                     <li>- Eligibility: Items must be unworn, unwashed, unaltered, and returned with all original tags, labels, and packaging intact.</li>
@@ -95,8 +98,8 @@ export default function ShippingPolicyOverlay({
               </div>
 
               <div className="space-y-5">
-                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40">ADDITIONAL INFORMATION</h3>
-                <div className="text-sm leading-normal text-black font-light space-y-2">
+                <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">ADDITIONAL INFORMATION</h3>
+                <div className="text-sm leading-normal text-black font-light space-y-2 max-mobile:text-xs">
                   <p>
                     MEMOÍ reserves the right to reject any items that do not meet the exchange conditions. Our Customer Care team will guide you through the next steps once your request is approved.
                   </p>
