@@ -319,7 +319,7 @@ function TheMemoiHousePage() {
         <div className="relative w-full h-full bg-[#fffefa]">
             <div
                 ref={smoothWrapperRef}
-                className={`h-screen ${isAtBottom ? "" : "overflow-hidden"} `}
+                className={`h-svh ${isAtBottom ? "" : "overflow-hidden"} `}
                 style={{
                     overscrollBehaviorY:
                         currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",

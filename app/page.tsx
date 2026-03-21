@@ -358,7 +358,7 @@ export default function HomePage() {
     <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
-        className={`h-screen relative ${isAtBottom ? "" : "overflow-hidden"}`}
+        className={`h-svh relative ${isAtBottom ? "" : "overflow-hidden"}`}
         style={{
           overscrollBehaviorY:
             currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
