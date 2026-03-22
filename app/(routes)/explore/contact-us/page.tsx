@@ -21,7 +21,7 @@ export default function ContactUsPage() {
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">MAIL US</h3>
                                 <div className="leading-normal gap-1 flex flex-col">
-                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs" >Send your inquiries to <span className="underline">info@memoiofficial.com</span>. We will respond within 48 business hours.</p>
+                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs" >Send your inquiries to <span className="underline decoration-black/40 underline-offset-4">info@memoiofficial.com</span>. We will respond within 48 business hours.</p>
                                     <p className="text-black/60 text-xs">Service available from Monday to Sunday from 10am to 9pm (ICT).</p>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@ export default function ContactUsPage() {
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">CALL US</h3>
                                 <div className="leading-normal gap-1 flex flex-col">
-                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">Our Client Advisors would be delighted to assist you. You may contact us at <span className="underline">(+65) 85939373</span></p>
+                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">Our Client Advisors would be delighted to assist you. You may contact us at <span className="underline decoration-black/40 underline-offset-4">(+65) 85939373</span></p>
                                     <p className="text-black/60 text-xs">Calls may be recorded for quality assurance.</p>
                                 </div>
                             </div>

@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "memoi-product-per.s3-website-ap-southeast-1.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "memoi-product-per.s3-website-ap-southeast-1.amazonaws.com",
+        pathname: "/**",
+      },
     ],
   },
 };

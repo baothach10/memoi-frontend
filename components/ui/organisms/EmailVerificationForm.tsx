@@ -209,7 +209,7 @@ export default function EmailVerificationForm({ email }: Props) {
         {/* Footer */}
         <Link
           href={"/"}
-          className="text-sm underline cursor-pointer max-mobile:text-xs"
+          className="text-sm underline decoration-black/40 underline-offset-4 cursor-pointer max-mobile:text-xs"
         >
           Need help?
         </Link>

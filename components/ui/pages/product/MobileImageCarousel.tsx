@@ -48,7 +48,7 @@ export default function MobileImageCarousel({
       </Swiper>
 
       {/* Slide counter */}
-      <div className="text-center text-[16px] font-regular text-black max-mobile:mt-3 mt-5">
+      <div className="text-center text-[16px] font-regular text-black max-mobile:mt-3 mt-5 max-mobile:text-xs">
         {activeIndex + 1}/{images.length}
       </div>
     </div>
