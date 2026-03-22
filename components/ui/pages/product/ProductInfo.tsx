@@ -115,8 +115,6 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
         {/* COLOR SELECTOR */}
         <div className="mb-10 flex flex-col items-center justify-center text-center">
-          <p className="text-xs mb-2">COLOR: {product.color_name.toUpperCase()}</p>
-
           <div className="flex gap-2">
             <div className="relative w-4 h-4 flex items-center justify-center">
               {/* Outer ring (with offset) */}
@@ -173,7 +171,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                     transition
                     ${disabled
                       ? "opacity-40 line-through cursor-not-allowed"
-                      : "hover:underline"
+                      : "hover:underline decoration-black/40 underline-offset-4"
                     }
                   `}
                 >

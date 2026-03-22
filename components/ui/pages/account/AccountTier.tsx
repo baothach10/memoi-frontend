@@ -46,7 +46,7 @@ export default function AccountTier({ userProfile }: AccountTierProps) {
         <h2 className="text-2xl font-regular uppercase tracking-tight">ACCOUNT TIER</h2>
         <p className="text-sm text-black/80 leading-relaxed">
           Elevate your status to unlock new levels of privilege and reward. View full details at{" "}
-          <Link href="/the-memoi-house" className="inline underline underline-offset-4 decoration-black/20 hover:decoration-black transition-colors">The MEMOÍ House</Link>
+          <Link href="/the-memoi-house" className="inline underline underline-offset-4 decoration-black/40 hover:decoration-black transition-colors">The MEMOÍ House</Link>
         </p>
       </div>
 

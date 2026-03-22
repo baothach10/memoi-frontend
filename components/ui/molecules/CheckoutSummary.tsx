@@ -133,14 +133,14 @@ export const SummaryActions = ({
             By proceeding, I confirm that I have read and accept the{" "}
             <Link
                 href="/explore/terms-conditions"
-                className="underline underline-offset-4"
+                className="underline underline-offset-4 decoration-black/40"
             >
                 Terms and Conditions
             </Link>{" "}
             and the{" "}
             <Link
                 href="/explore/privacy-policy"
-                className="underline underline-offset-4"
+                className="underline underline-offset-4 decoration-black/40"
             >
                 Privacy Policy
             </Link>
