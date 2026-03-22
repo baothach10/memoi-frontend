@@ -22,18 +22,18 @@ export default function MobileImageCarousel({
   if (!images || images.length === 0) return null;
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col pb-6 bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa] max-mobile:pb-5">
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
         onSlideChange={handleSlideChange}
         allowTouchMove={true}
         grabCursor={true}
-        className="w-full"
+        className="w-full "
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full aspect-4/5 bg-linear-to-b from-[#fffefa] via-black/2 to-[#fffefa] max-mobile:aspect-3/4">
+            <div className="relative w-full aspect-4/5 max-mobile:aspect-3/4">
               <Image
                 src={src}
                 alt={`Product image ${index + 1}`}

@@ -90,7 +90,7 @@ export default function SizingOverlay({
             </div>
 
             <div className="flex flex-col gap-6">
-              <p className="text-sm text-center underline font-regular tracking-widest uppercase decoration-black/40">CM</p>
+              <p className="text-sm text-center underline font-regular uppercase decoration-black/40">CM</p>
               
               <div className="w-full">
                 <table className="w-full text-center table-layout-fixed" style={{ tableLayout: 'fixed' }}>

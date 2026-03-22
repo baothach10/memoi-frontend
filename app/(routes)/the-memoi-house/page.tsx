@@ -367,7 +367,7 @@ function TheMemoiHousePage() {
                                         transition-all
                                         duration-500
                                         ease-out
-                                        hover:bg-white
+                                        hover:bg-transparent
                                         hover:text-black
                                         hover:border-white
                                         max-mobile:text-xs
