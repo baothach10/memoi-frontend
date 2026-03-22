@@ -223,7 +223,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           isOpen={showSizeSuggestion}
           onClose={() => setShowSizeSuggestion(false)}
           onAddSize={(size) => {
-            const variant = product.variants.find((v) => v.size === size);
+            const variant = product.variants.find((v) => v.size.toLowerCase() === size.toLowerCase());
             if (variant) {
               handleSizeSelect(variant.size, variant.price);
             }
