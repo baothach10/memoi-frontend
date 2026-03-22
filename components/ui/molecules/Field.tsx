@@ -4,16 +4,23 @@ function Field({
   label,
   error,
   children,
+  labelSuffix,
+  suffix,
 }: {
   label: string;
   error?: any;
   children: React.ReactNode;
+  labelSuffix?: React.ReactNode;
+  suffix?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col">
-      <label className="text-left text-[16px] font-regular max-mobile:text-sm">
-        {label}
-      </label>
+      <div className="flex justify-between items-baseline mb-1">
+        <label className="text-left text-[16px] font-regular max-mobile:text-sm">
+          {label} {labelSuffix}
+        </label>
+        {suffix}
+      </div>
 
       {children}
 

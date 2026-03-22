@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { ArrowBack, ArrowForward, ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 type PaginationComponentType = {
     totalPage: number;

@@ -7,6 +7,7 @@ import Link from "next/link";
 import DetailsOverlay from "../../organisms/DetailsOverlay";
 import ShippingPolicyOverlay from "../../organisms/ShippingPolicyOverlay";
 import SizingOverlay from "../../organisms/SizingOverlay";
+import SizeSuggestionOverlay from "../../organisms/SizeSuggestionOverlay";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
@@ -25,6 +26,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
   const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
   const [showShippingOverlay, setShowShippingOverlay] = useState(false);
   const [showSizingOverlay, setShowSizingOverlay] = useState(false);
+  const [showSizeSuggestion, setShowSizeSuggestion] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -152,7 +154,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
             className="
               absolute mx-auto z-10
               w-1/3 min-h-[200px]
-              bg-white border border-neutral-300 shadow-lg
+              bg-[#FFFEFA] border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
               gap-3 py-6 text-sm
               opacity-0 pointer-events-none
@@ -180,7 +182,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               );
             })}
 
-            <button onClick={() => { }} className="text-xs underline mt-2">
+            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="text-sm underline decoration-black/40 underline-offset-4">
               Size Suggestion
             </button>
           </div>
@@ -215,6 +217,18 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         <SizingOverlay
           isOpen={showSizingOverlay}
           onClose={() => setShowSizingOverlay(false)}
+        />
+
+        <SizeSuggestionOverlay
+          isOpen={showSizeSuggestion}
+          onClose={() => setShowSizeSuggestion(false)}
+          onAddSize={(size) => {
+            const variant = product.variants.find((v) => v.size === size);
+            if (variant) {
+              handleSizeSelect(variant.size, variant.price);
+            }
+            setShowSizeSuggestion(false);
+          }}
         />
       </div>
     </div>
