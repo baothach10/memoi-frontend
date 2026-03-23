@@ -101,7 +101,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
       <div className="px-16 flex flex-col items-center justify-center w-full">
         {/* CATEGORY */}
-        <p className="text-xs tracking-widest mb-2">
+        <p className="text-xs font-regular text-black/40 mb-2">
           {product.category.name.toUpperCase()}
         </p>
 
@@ -111,10 +111,10 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </h1>
 
         {/* PRICE */}
-        <p className="text-[16px] mb-8 text-center max-mobile:text-sm">{product.currency} {displayPrice.toFixed(2)}</p>
+        <p className="text-[16px] mb-8 text-center font-regular max-mobile:text-sm">{product.currency} {displayPrice.toFixed(2)}</p>
 
         {/* COLOR SELECTOR */}
-        <div className="mb-10 flex flex-col items-center justify-center text-center">
+        <div className="mb-10 flex flex-col items-center justify-center text-center max-mobile:mb-8">
           <div className="flex gap-2">
             <div className="relative w-4 h-4 flex items-center justify-center">
               {/* Outer ring (with offset) */}
@@ -145,7 +145,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </div>
 
         {/* ADD TO CART + SIZE OVERLAY */}
-        <div className="relative w-full mb-6 flex flex-col items-center">
+        <div className="relative w-full mb-6 flex flex-col items-center max-mobile:mb-8">
           {/* SIZE OVERLAY */}
           <div
             ref={overlayRef}
@@ -188,7 +188,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           {/* ADD TO CART BUTTON */}
           <button
             onClick={handleAddToCartClick}
-            className="w-1/3 bg-black text-white py-3 text-sm max-mobile:w-full"
+            className="w-1/3 bg-black text-white py-3 max-mobile:py-5 text-sm max-mobile:w-full"
           >
             Add to cart
           </button>
