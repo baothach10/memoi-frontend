@@ -12,7 +12,7 @@ export default function AccountNavigation({ active, setActive }: AccountNavigati
   ];
 
   return (
-    <nav className="sticky top-24 max-tablet:static text-[16px]">
+    <nav className="sticky max-tablet:static text-[16px]">
       {sections.map((section) => (
         <div
           key={section.id}
