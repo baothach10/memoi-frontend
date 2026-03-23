@@ -334,16 +334,16 @@ export default function HomePage() {
     firstParameter: [
       "MEMOÍ - for the woman becoming herself",
       [
-        { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Her Edge" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "Her Edge" },
       ],
       [
-        { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Summer Summer" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "Summer Summer" },
       ],
       [
-        { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Reborn" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "Reborn" },
       ],
     ],
     secondParameter: [
