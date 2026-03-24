@@ -2,15 +2,7 @@
 
 import Image from "next/image";
 
-interface OrderItem {
-  id: string;
-  name: string;
-  color: string;
-  size: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { OrderItem } from "./types";
 
 interface OrderItemCardProps {
   item: OrderItem;
@@ -40,7 +32,7 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
               {item.name}
             </h3>
             <p className="text-sm text-black/60 uppercase max-mobile:text-xs">
-              {item.color}, {item.size}
+              {item.color}{item.size ? `, ${item.size}` : ''}
             </p>
           </div>
 
