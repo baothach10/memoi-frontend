@@ -121,14 +121,14 @@ export default function OrdersContent() {
   };
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 max-mobile:gap-9">
       {/* Tabs */}
       <div className="flex gap-2.5">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`w-[200px] py-5 px-10 border transition-all text-sm group ${
+            className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${
               activeTab === tab
               ? "bg-black text-white border-black"
               : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
@@ -142,7 +142,7 @@ export default function OrdersContent() {
       </div>
 
       {/* Orders List */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 max-mobile:gap-9">
         {filteredOrders.length > 0 ? (
           filteredOrders.map((order, idx) => (
             <OrderCard key={`${order.id}-${idx}`} order={order} />
