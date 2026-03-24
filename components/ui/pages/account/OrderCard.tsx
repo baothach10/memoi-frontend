@@ -3,26 +3,7 @@
 import { useState } from "react";
 import OrderItemCard from "./OrderItemCard";
 
-interface OrderItem {
-  id: string;
-  name: string;
-  color: string;
-  size: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-interface Order {
-  id: string;
-  date: string;
-  shipTo: string;
-  status: string;
-  deliveryDetail: string;
-  items: OrderItem[];
-  total: number;
-  currency: string;
-}
+import { Order } from "./types";
 
 interface OrderCardProps {
   order: Order;

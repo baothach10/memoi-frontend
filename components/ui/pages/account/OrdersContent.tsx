@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Order } from "./types";
 import OrderCard from "./OrderCard";
 
 // Mock data based on the provided images
-const MOCK_ORDERS = [
+const MOCK_ORDERS: Order[] = [
   {
     id: "ABC123DE45",
     date: "22 March 2026",
