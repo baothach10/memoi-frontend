@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import OrderItemCard from "./OrderItemCard";
 
 import { Order } from "./types";
@@ -78,9 +79,12 @@ export default function OrderCard({ order }: OrderCardProps) {
           <span className=" font-regular">Total: {order.currency} {order.total}</span>
           <span className=" text-black/60">({order.items.length} items)</span>
         </div>
-        <button className="w-[200px] py-4 border border-black/10 text-sm hover:bg-black hover:text-white transition-all max-mobile:w-[120px] max-mobile:text-xs">
+        <Link 
+          href={`/account/orders/${order.id}`}
+          className="w-[200px] py-4 border border-black/10 text-sm hover:bg-black hover:text-white transition-all max-mobile:w-[120px] max-mobile:text-xs text-center"
+        >
           View details
-        </button>
+        </Link>
       </div>
     </div>
   );
