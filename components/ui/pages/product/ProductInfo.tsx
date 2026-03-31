@@ -71,7 +71,6 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
   const updateCartMutation = useUpdateCart();
 
   const handleSizeSelect = async (size: string, price: number) => {
-    console.log('buy', product);
     
     // Find the variant for the selected size to get its ID
     const variant = product.variants.find(v => v.size === size);
@@ -86,8 +85,6 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
       size,
       price,
     });
-
-    console.log('updatedItems', updatedItems) 
 
     await updateCartMutation.mutateAsync({ products: updatedItems });
     setShowSizeOverlay(false);

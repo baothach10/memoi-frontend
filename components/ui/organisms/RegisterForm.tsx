@@ -54,8 +54,7 @@ export default function RegisterForm() {
       const supabase = createBrowserSupabaseClient();
       const {
         data: { user },
-      } = await supabase.auth.getUser();
-      console.log('user',user); 
+      } = await supabase.auth.getUser(); 
       if (user?.email) {
         setValue("email", user.email);
       }
@@ -107,7 +106,6 @@ export default function RegisterForm() {
 
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
     mutate(
       {
         firstName: data.firstName,

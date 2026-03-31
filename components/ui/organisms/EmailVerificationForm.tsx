@@ -89,7 +89,6 @@ export default function EmailVerificationForm({ email }: Props) {
     formData.append("email", email);
     const otp = data.code.join("");
     formData.append("token", otp);
-    console.log("OTP:", otp);
     handleVerifyOtp(formData)
   };
 
@@ -113,7 +112,6 @@ export default function EmailVerificationForm({ email }: Props) {
     if (!canResend) return;
     const formData = new FormData();
     formData.append("email", email);
-    console.log("Resending code to:", email);
     // Reset timer and disable resend again
     setSeconds(60);
     handleSendOtp(formData)

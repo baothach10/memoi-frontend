@@ -65,22 +65,13 @@ export default function AccountTier() {
   };
 
   const getMarkerStyle = (active: boolean) => {
-    if (active) {
-      return (
-        <div className="relative w-4 h-4 flex items-center justify-center">
-          {/* Outer ring (with offset) */}
-          <span className="absolute inset-0 rounded-full ring-1 ring-black/20 ring-offset-2 ring-offset-white" />
-          {/* Inner ring + color */}
-          <span className="relative z-10 w-3.5 h-3.5 rounded-full bg-black ring-1 ring-black/20" />
-        </div>
-      );
-    }
     return (
-      <div className="relative w-4 h-4 flex items-center justify-center rounded-full">
-
-        <span className="absolute inset-0 rounded-full ring-1 ring-black/20 ring-offset-2 ring-offset-white" />
-        {/* Inner base ring + color */}
-        <span className="relative z-10 w-3.5 h-3.5 rounded-full bg-white ring-1 ring-black/20" />
+      <div className="w-6 h-6 rounded-full border border-black/10 bg-[#fffefa] flex items-center justify-center ring-1 ring-white z-20">
+        {active ? (
+          <div className="w-4 h-4 rounded-full bg-black" />
+        ) : (
+          <div className="w-4 h-4 rounded-full bg-[#fffefa] border border-black/10" />
+        )}
       </div>
     );
   };
@@ -117,26 +108,29 @@ export default function AccountTier() {
         </div>
 
         {/* Progress Bar */}
-        <div className="relative pt-2">
-          <div className="h-px w-full bg-black/10 relative">
-            <div className="absolute left-0 top-0 h-[1.5px] bg-black transition-all duration-500" style={{ width: `${getProgressPercent()}%` }} />
+        <div className="relative w-full">
+          {/* Track */}
+          <div className="h-0.5 w-full bg-black/10 absolute top-[11px] left-0" />
+          {/* Fill */}
+          <div
+            className="absolute top-[11px] left-0 h-0.5 bg-black transition-all duration-500 z-10"
+            style={{ width: `${getProgressPercent()}%` }}
+          />
 
-            {/* Tiers Markers */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0">
-              {getMarkerStyle(tier === "MEMOÍ" || tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}
+          {/* Markers */}
+          <div className="flex justify-between relative">
+            <div className="flex flex-col items-start relative z-20">
+              <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ" || tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}</div>
+              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ" ? "" : "text-black/40"}`}>MEMOÍ</p>
             </div>
-            <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-              {getMarkerStyle(tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}
+            <div className="flex flex-col items-center relative z-20">
+              <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}</div>
+              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ +" ? "" : "text-black/40"}`}>MEMOÍ +</p>
             </div>
-            <div className="absolute top-1/2 -translate-y-1/2 left-full -translate-x-full">
-              {getMarkerStyle(tier === "MEMOÍ ELITE")}
+            <div className="flex flex-col items-end relative z-20">
+              <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ ELITE")}</div>
+              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ ELITE" ? "" : "text-black/40"}`}>MEMOÍ ELITE</p>
             </div>
-          </div>
-
-          <div className="flex justify-between mt-6 text-sm uppercase font-regular">
-            <span className={tier === "MEMOÍ" ? "" : "text-black/40"}>MEMOÍ</span>
-            <span className={tier === "MEMOÍ +" ? "" : "text-black/40"}>MEMOÍ +</span>
-            <span className={tier === "MEMOÍ ELITE" ? "" : "text-black/40"}>MEMOÍ ELITE</span>
           </div>
         </div>
 

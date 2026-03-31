@@ -29,9 +29,9 @@ export default function OrderProgress({ steps }: OrderProgressProps) {
     <div className="w-full p-8 border border-black/10 bg-[#fffefa] max-mobile:p-4">
       {/* Desktop Horizontal View */}
       <div className="relative w-full hidden smaller-tablet:block">
-        <div className="h-px w-full bg-black/10 absolute top-3 left-0" />
+        <div className="h-0.5 w-full bg-black/10 absolute top-[11px] left-0" />
         <div
-          className="absolute top-3 left-0 h-px bg-black transition-all duration-500 z-10"
+          className="absolute top-[11px] left-0 h-0.5 bg-black transition-all duration-500 z-10"
           style={{ width: `${progressPercent}%` }}
         />
 

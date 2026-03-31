@@ -25,8 +25,6 @@ interface CreateIntentParams {
 
 async function createPaymentIntent({ products, billingInfo, promoCode }: CreateIntentParams) {
 
-  console.log('createPaymentIntent', products, billingInfo, promoCode)
-
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

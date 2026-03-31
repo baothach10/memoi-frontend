@@ -25,7 +25,6 @@ export default function LoginForm() {
   const onSubmit = (data: FormValues) => {
     const formData = new FormData();
     formData.append("email", data.email);
-    console.log(data);
     setSubmittedEmail(data.email);
     setShowVerification(true);
     handleSendOtp(formData)

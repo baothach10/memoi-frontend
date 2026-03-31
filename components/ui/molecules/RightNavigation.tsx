@@ -62,25 +62,21 @@ function RightNavigation({
   }, [activeOverlay]);
 
   const handleSearchClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log('asd')
+    e.preventDefault()
     setActiveOverlay(activeOverlay === "search" ? null : "search");
   };
 
   const handleSearchTouch = (e: React.TouchEvent) => {
     e.preventDefault();
-    console.log('asdasdasd')
     setActiveOverlay(activeOverlay === "search" ? null : "search");
   }
   const handleCartClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log('click')
     setActiveOverlay(activeOverlay === "cart" ? null : "cart");
   };
 
   const handleCartTouch = (e: React.TouchEvent) => {
     e.preventDefault();
-    console.log('touch')
     setActiveOverlay(activeOverlay === "cart" ? null : "cart");
   }
 
