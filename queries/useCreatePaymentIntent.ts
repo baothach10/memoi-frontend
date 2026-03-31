@@ -1,14 +1,42 @@
-import { CartItem, getCartItems } from "@/utils/cartUtils";
 import { useMutation } from "@tanstack/react-query";
 
-async function createPaymentIntent(items: CartItem[]) {
+export interface BillingInfo {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  optional_address?: string;
+  city: string;
+  zip_code: string;
+  country: string;
+}
+
+export interface ProductItem {
+  product_variant_id: string;
+  quantity: number;
+}
+
+interface CreateIntentParams {
+  products: ProductItem[];
+  billingInfo: BillingInfo;
+  promoCode?: string;
+}
+
+async function createPaymentIntent({ products, billingInfo, promoCode }: CreateIntentParams) {
+
+  console.log('createPaymentIntent', products, billingInfo, promoCode)
+
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ products, billingInfo, promoCode }),
   });
 
-  if (!res.ok) throw new Error("Failed to create payment intent");
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.details || "Failed to create payment intent");
+  }
 
   const data = await res.json();
   return data.clientSecret as string;
@@ -16,10 +44,9 @@ async function createPaymentIntent(items: CartItem[]) {
 
 export function useCreatePaymentIntent() {
   return useMutation({
-    mutationFn: () => {
-      const items = getCartItems();
-      if (items.length === 0) throw new Error("There’s nothing in your Cart, yet.");
-      return createPaymentIntent(items);
+    mutationFn: (params: CreateIntentParams) => {
+      if (params.products.length === 0) throw new Error("There’s nothing in your Cart, yet.");
+      return createPaymentIntent(params);
     },
   });
 }

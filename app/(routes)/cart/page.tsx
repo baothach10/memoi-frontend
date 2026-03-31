@@ -4,53 +4,51 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import CartItemCard from "@/components/ui/molecules/CartItemCard";
 import ExpandableSection from "@/components/ui/molecules/ExpandableSection";
-import { CartItem, getCartItems } from "@/utils/cartUtils";
+import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
+import { useUpdateCart } from "@/queries/useUpdateCart";
 import Footer from "@/components/ui/organisms/Footer";
 
 export default function CartPage() {
-    const [items, setItems] = useState<CartItem[]>([]);
+    const updateCartMutation = useUpdateCart();
+    const [localItems, setLocalItems] = useState<CartItem[]>([]);
 
     useEffect(() => {
-        const updateCartItems = () => {
-            setItems(getCartItems());
-        };
-
-        updateCartItems();
-        window.addEventListener("cartUpdated", updateCartItems);
-
-        return () => {
-            window.removeEventListener("cartUpdated", updateCartItems);
-        };
+        setLocalItems(getCartItems());
     }, []);
 
-    const updateLocalStorage = (newItems: CartItem[]) => {
-        setItems(newItems);
-        localStorage.setItem("itemList", JSON.stringify(newItems));
-        window.dispatchEvent(new Event("cartUpdated"));
+    const itemsToDisplay = localItems.map(item => ({
+        ...item,
+        productId: item.product_id, // ensure compatibility with CartItemCard
+    }));
+
+    const updateLocalStorage = async (newItems: CartItem[]) => {
+        setLocalItems(newItems);
+        setCartItems(newItems);
+        await updateCartMutation.mutateAsync({ products: newItems });
     };
 
     const removeItem = (index: number) => {
-        const newItems = items.filter((_, i) => i !== index);
+        const newItems = localItems.filter((_, i) => i !== index);
         updateLocalStorage(newItems);
     };
 
     const updateQuantity = (index: number, delta: number) => {
-        const newItems = items.map((item, i) => {
-            if (i === index) {
-                const newQty = Math.max(1, item.quantity + delta);
-                return { ...item, quantity: newQty };
-            }
-            return item;
+        const newItems = localItems.map((item, i) => {
+            const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
+            return {
+                ...item,
+                quantity: newQty
+            };
         });
         updateLocalStorage(newItems);
     };
 
-    const subtotal = items.reduce(
+    const subtotal = itemsToDisplay.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
 
-    if (items.length === 0) {
+    if (itemsToDisplay.length === 0) {
         return (
             <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
                 <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center pt-32 max-tablet:pt-24 max-mobile:pt-16 pb-20 max-mobile:pb-10">
@@ -77,13 +75,13 @@ export default function CartPage() {
                     {/* Left side: Cart Items */}
                     <div className="col-span-6 flex flex-col gap-10">
                         <div className="flex flex-col gap-6">
-                            {items.map((item, index) => (
+                            {itemsToDisplay.map((item, index) => (
                                 <CartItemCard
-                                    key={`${item.productId}-${index}`}
-                                    item={item}
+                                    key={`${item.product_id}-${index}`}
+                                    item={item as any}
                                     onRemove={() => removeItem(index)}
                                     onIncrease={() => updateQuantity(index, 1)}
-                                    onDecrease={() => updateQuantity(index, -1)}
+                                    onDecrease={() => updateQuantity(index,-1)}
                                 />
                             ))}
                         </div>

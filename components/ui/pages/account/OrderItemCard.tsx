@@ -32,7 +32,7 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
               {item.name}
             </h3>
             <p className="text-sm text-black/60 uppercase max-mobile:text-xs">
-              {item.color}{item.size ? `, ${item.size}` : ''}
+              {item.color_name}{item.size ? `, ${item.size}` : ''}
             </p>
           </div>
 

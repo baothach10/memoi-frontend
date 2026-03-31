@@ -35,7 +35,7 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
           </div>
 
           <div className="flex flex-col gap-20">
-            <AccountTier userProfile={userProfile} />
+            <AccountTier/>
             <AccountProfileForm userProfile={userProfile} />
             <AccountAddressForm userProfile={userProfile} />
             <DeleteAccountSection />

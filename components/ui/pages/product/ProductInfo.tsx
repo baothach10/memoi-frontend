@@ -8,6 +8,8 @@ import DetailsOverlay from "../../organisms/DetailsOverlay";
 import ShippingPolicyOverlay from "../../organisms/ShippingPolicyOverlay";
 import SizingOverlay from "../../organisms/SizingOverlay";
 import SizeSuggestionOverlay from "../../organisms/SizeSuggestionOverlay";
+import { addItemToCart } from "@/utils/cartUtils";
+import { useUpdateCart } from "@/queries/useUpdateCart";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
@@ -66,23 +68,28 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
     setShowSizeOverlay(true);
   };
 
-  const handleSizeSelect = (size: string, price: number) => {
-    const cartItems = JSON.parse(localStorage.getItem("itemList") || "[]");
+  const updateCartMutation = useUpdateCart();
 
-    cartItems.push({
-      productId: product.product_id,
+  const handleSizeSelect = async (size: string, price: number) => {
+    console.log('buy', product);
+    
+    // Find the variant for the selected size to get its ID
+    const variant = product.variants.find(v => v.size === size);
+    if (!variant) return;
+
+    const updatedItems = addItemToCart({
+      product_id: variant.id, // Use variant ID instead of product.product_id
       productName: product.name,
       productImage: product.images[0].url,
-      color: product.color,
       color_name: product.color_name,
       quantity: 1,
       size,
       price,
     });
 
-    localStorage.setItem("itemList", JSON.stringify(cartItems));
-    window.dispatchEvent(new Event("cartUpdated"));
+    console.log('updatedItems', updatedItems) 
 
+    await updateCartMutation.mutateAsync({ products: updatedItems });
     setShowSizeOverlay(false);
   };
 
@@ -167,7 +174,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                   key={size}
                   disabled={disabled}
                   onClick={() => !disabled && handleSizeSelect(size, price)}
-                  className={`
+                  className={`x
                     transition
                     ${disabled
                       ? "opacity-40 line-through cursor-not-allowed"

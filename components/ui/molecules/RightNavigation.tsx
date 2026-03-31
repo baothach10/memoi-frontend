@@ -7,6 +7,8 @@ import CartIcon from "../atoms/CartIcon";
 import UserIcon from "../atoms/UserIcon";
 import SearchOverlay from "../organisms/SearchOverlay";
 import CartOverlay from "../organisms/CartOverlay";
+import { getCartItems } from "@/utils/cartUtils";
+import { useCartQuery } from "@/queries/useCartQuery";
 
 type OverlayType = "search" | "cart" | null;
 
@@ -19,28 +21,20 @@ function RightNavigation({
   onClose?: () => void;
   className?: string;
 }) {
+  const { data: backendItems } = useCartQuery();
   const [cartCount, setCartCount] = useState(0);
   const [activeOverlay, setActiveOverlay] = useState<OverlayType>(null);
 
   useEffect(() => {
-
     const updateCartCount = () => {
-      try {
-        const itemList = localStorage.getItem("itemList");
-        if (itemList) {
-          const items = JSON.parse(itemList);
-          if (Array.isArray(items)) {
-            setCartCount(items.length);
-          }
-        } else {
-          setCartCount(0);
-        }
-      } catch (error) {
-        console.error("Error reading cart items:", error);
+      if (backendItems && backendItems.length > 0) {
+        setCartCount(backendItems.length);
+      } else {
+        const items = getCartItems();
+        setCartCount(items.length);
       }
     };
 
-    // Initial load
     updateCartCount();
 
     // Listen for storage changes (for updates from other tabs)
@@ -53,7 +47,19 @@ function RightNavigation({
       window.removeEventListener("storage", updateCartCount);
       window.removeEventListener("cartUpdated", updateCartCount);
     };
-  }, []);
+  }, [backendItems]);
+
+  useEffect(() => {
+    if (activeOverlay) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeOverlay]);
 
   const handleSearchClick = (e: React.MouseEvent) => {
     e.preventDefault();

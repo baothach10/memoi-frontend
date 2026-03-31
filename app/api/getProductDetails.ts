@@ -4,10 +4,11 @@ export type ProductImage = {
 };
 
 export type ProductVariant = {
+  id: string;
   size: string;
-  color: string;
   price: number;
   stock: number;
+  currency: string;
 };
 
 export type ProductCategory = {

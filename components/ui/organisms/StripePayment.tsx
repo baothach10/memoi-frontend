@@ -3,7 +3,7 @@
 import { useEffect, useState, forwardRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useCreatePaymentIntent } from "@/queries/useCreatePaymentIntent";
+import { BillingInfo, ProductItem } from "@/queries/useCreatePaymentIntent";
 import PaymentForm, { PaymentFormRef } from "@/components/ui/molecules/PaymentForm";
 
 const stripePromise = loadStripe(
@@ -64,8 +64,21 @@ const appearance = (isMobile: boolean) => ({
     },
 });
 
-const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, ref) {
-    const { mutate, data: clientSecret, error, isPending } = useCreatePaymentIntent();
+interface StripePaymentProps {
+    items: ProductItem[];
+    billingInfo: BillingInfo | null;
+    promoCode?: string;
+    amount: number; // in cents
+    currency: string;
+}
+
+const StripePayment = forwardRef<PaymentFormRef, StripePaymentProps>(function StripePayment({ 
+    items, 
+    billingInfo, 
+    promoCode,
+    amount,
+    currency
+}, ref) {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -76,20 +89,12 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
         return () => mediaQuery.removeEventListener("change", handler);
     }, []);
 
-    useEffect(() => {
-        mutate();
-    }, [mutate]);
-
-    if (error) {
+    if (!items.length || !billingInfo || !billingInfo.first_name || !billingInfo.address) {
         return (
-            <div className="text-sm text-black/50 py-4">{error.message}</div>
-        );
-    }
-
-    if (isPending || !clientSecret) {
-        return (
-            <div className="py-4 text-sm text-black/50 animate-pulse">
-                Loading payment methods...
+            <div className="py-8 px-6 border border-black/10 bg-black/[0.02]">
+                <p className="text-sm text-black/40 uppercase tracking-widest font-light">
+                    Please complete your shipping information to continue to payment.
+                </p>
             </div>
         );
     }
@@ -97,9 +102,11 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
     return (
         <Elements
             stripe={stripePromise}
-            
             options={{
-                clientSecret,
+                mode: "payment",
+                amount: Math.max(1, amount), 
+                currency: currency.toLowerCase(),
+                paymentMethodTypes: ['card', 'paynow'],
                 appearance: appearance(isMobile),
                 fonts: [
                     {
@@ -108,7 +115,12 @@ const StripePayment = forwardRef<PaymentFormRef>(function StripePayment(_props, 
                 ],
             }}
         >
-            <PaymentForm ref={ref} />
+            <PaymentForm 
+                ref={ref} 
+                items={items} 
+                billingInfo={billingInfo} 
+                promoCode={promoCode} 
+            />
         </Elements>
     );
 });

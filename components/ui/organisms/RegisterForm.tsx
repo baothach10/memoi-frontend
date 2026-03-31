@@ -11,8 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 import ChevronDownIcon from "../atoms/ChevronDownIcon";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 countries.registerLocale(en);
@@ -56,7 +55,7 @@ export default function RegisterForm() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-
+      console.log('user',user); 
       if (user?.email) {
         setValue("email", user.email);
       }
@@ -323,7 +322,6 @@ export default function RegisterForm() {
           </p>
         </div>
       </form>
-      <ToastContainer position="top-right" />
     </div>
   );
 }

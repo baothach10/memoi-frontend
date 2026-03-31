@@ -8,6 +8,7 @@ export type UserProfile = {
   phone_country_code: string;
   phone_number: string;
   country: string;
+  date_of_birth: string;
   marketing_opt_in: boolean;
   created_at: string;
   updated_at: string;
@@ -32,7 +33,6 @@ export type UserProfileResponse = {
   error?: string;
   user_id?: string;
   message?: string;
-  addresses?: UserAddress[];
   user?: UserProfile;
 };
 
@@ -42,6 +42,8 @@ export async function getUserProfile(): Promise<UserProfileResponse> {
     const {
       data: { session },
     } = await supabase.auth.getSession();
+
+    console.log(session?.access_token);
 
     if (!session) {
       return { authenticated: false, profile_completed: false };
@@ -60,6 +62,7 @@ export async function getUserProfile(): Promise<UserProfileResponse> {
       }
     );
 
+    
     if (!res.ok) {
       return {
         authenticated: false,

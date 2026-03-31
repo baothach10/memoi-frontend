@@ -1,21 +1,66 @@
-import { UserProfileResponse } from "@/app/api/getUserProfile";
+"use client";
+
+import { useMembershipQuery } from "@/queries/useMembershipQuery";
 import Link from "next/link";
 
-interface AccountTierProps {
-  userProfile: UserProfileResponse;
+
+type TierLevel = "MEMOÍ" | "MEMOÍ +" | "MEMOÍ ELITE";
+
+function mapTierName(tierName: string): TierLevel {
+  switch (tierName.toLowerCase()) {
+    case "basic":
+      return "MEMOÍ";
+    case "plus":
+      return "MEMOÍ +";
+    case "elite":
+      return "MEMOÍ ELITE";
+    default:
+      return "MEMOÍ";
+  }
 }
 
-export default function AccountTier({ userProfile }: AccountTierProps) {
-  // Logic to determine tier - this is a placeholder. 
-  // You might want to get this from userProfile in the future.
-  const tier = "MEMOÍ" as "MEMOÍ" | "MEMOÍ +" | "MEMOÍ ELITE";
+function formatCurrency(amount: number): string {
+  return `S$${amount.toLocaleString()}`;
+}
 
-  const getProgress = () => {
+function formatExpiryDate(dateString: string): string {
+  const date = new Date(dateString);
+  return `${date.getDate().toString().padStart(2, "0")}/${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}/${date.getFullYear()}`;
+}
+
+export default function AccountTier() {
+  const { data: membership, isLoading } = useMembershipQuery();
+
+  const tier: TierLevel = membership ? mapTierName(membership.tier_name) : "MEMOÍ";
+  const currentSpending = membership?.current_spending ?? 0;
+  const tierExpiry = membership?.tier_expiry ?? "";
+
+  const PLUS_THRESHOLD = 3000;
+  const ELITE_THRESHOLD = 8000;
+
+  const getProgressPercent = () => {
+    if (currentSpending <= 0) return 0;
+    if (currentSpending >= ELITE_THRESHOLD) return 100;
+    if (currentSpending <= PLUS_THRESHOLD) {
+      // 0 to 3000 maps to 0% – 50%
+      return (currentSpending / PLUS_THRESHOLD) * 50;
+    }
+    // 3000 to 8000 maps to 50% – 100%
+    return 50 + ((currentSpending - PLUS_THRESHOLD) / (ELITE_THRESHOLD - PLUS_THRESHOLD)) * 50;
+  };
+
+  const getNextTierMessage = () => {
     switch (tier) {
-      case "MEMOÍ": return "w-0";
-      case "MEMOÍ +": return "w-1/2";
-      case "MEMOÍ ELITE": return "w-full";
-      default: return "w-0";
+      case "MEMOÍ":
+        return `Reach S$3,000 to unlock MEMOÍ +`;
+      case "MEMOÍ +":
+        return `Reach S$8,000 to unlock MEMOÍ ELITE`;
+      case "MEMOÍ ELITE":
+        return `You have reached the highest tier`;
+      default:
+        return "";
     }
   };
 
@@ -40,6 +85,21 @@ export default function AccountTier({ userProfile }: AccountTierProps) {
     );
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-6">
+          <h2 className="text-2xl font-regular uppercase">ACCOUNT TIER</h2>
+          <div className="animate-pulse space-y-4">
+            <div className="h-4 bg-black/5 rounded w-3/4"></div>
+            <div className="h-8 bg-black/5 rounded w-1/2"></div>
+            <div className="h-1 bg-black/5 rounded w-full"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-12">
       <div className="flex flex-col gap-6">
@@ -52,14 +112,14 @@ export default function AccountTier({ userProfile }: AccountTierProps) {
 
       <div className="flex flex-col gap-8">
         <div className="space-y-2">
-          <p className="text-xl font-regular uppercase">S$1,000</p>
-          <p className="text-sm text-black/80 uppercase tracking-widest">Reach S$3,000 to unlock MEMOÍ +</p>
+          <p className="text-xl font-regular uppercase">{formatCurrency(currentSpending)}</p>
+          <p className="text-sm text-black/80 uppercase tracking-widest">{getNextTierMessage()}</p>
         </div>
 
         {/* Progress Bar */}
         <div className="relative pt-2">
           <div className="h-px w-full bg-black/10 relative">
-            <div className={`absolute left-0 top-0 h-[1.5px] bg-black ${getProgress()}`} />
+            <div className="absolute left-0 top-0 h-[1.5px] bg-black transition-all duration-500" style={{ width: `${getProgressPercent()}%` }} />
 
             {/* Tiers Markers */}
             <div className="absolute top-1/2 -translate-y-1/2 left-0">
@@ -80,9 +140,11 @@ export default function AccountTier({ userProfile }: AccountTierProps) {
           </div>
         </div>
 
-        <p className="text-sm text-black/80 font-regular">
-          Status valid until 31/12/2025. Buy more to upgrade to the next level and unlock exclusive benefits.
-        </p>
+        {tierExpiry && (
+          <p className="text-sm text-black/80 font-regular">
+            Status valid until {formatExpiryDate(tierExpiry)}. Buy more to upgrade to the next level and unlock exclusive benefits.
+          </p>
+        )}
       </div>
     </div>
   );

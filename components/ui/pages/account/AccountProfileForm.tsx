@@ -1,6 +1,6 @@
-"use client";
-
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import Field from "../../molecules/Field";
 import { getCountries, getCountryCallingCode } from "libphonenumber-js";
 import countries from "i18n-iso-countries";
@@ -8,7 +8,9 @@ import en from "i18n-iso-countries/langs/en.json";
 import ChevronDownIcon from "../../atoms/ChevronDownIcon";
 
 import { UserProfileResponse } from "@/app/api/getUserProfile";
+import { useUpdatePersonalInfo } from "@/queries/useUpdatePersonalInfo";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 countries.registerLocale(en);
 
@@ -33,12 +35,16 @@ const buttonClass = `
   hover:bg-black hover:text-[#fffefa]
 `;
 
+
+
 interface AccountProfileFormProps {
   userProfile: UserProfileResponse;
 }
 
 export default function AccountProfileForm({ userProfile }: AccountProfileFormProps) {
   const user = userProfile.user;
+  const queryClient = useQueryClient();
+  const { mutate: updateProfile, isPending } = useUpdatePersonalInfo();
 
   const {
     register,
@@ -52,13 +58,31 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
       lastName: user?.last_name || "",
       phoneZone: user?.phone_country_code || "+1",
       phone: user?.phone_number || "",
-      dob: "", // We don't have this in UserProfile yet, keeping empty or default
+      dob: user?.date_of_birth,
       marketing: user?.marketing_opt_in || false,
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log("Updating profile:", data);
+    updateProfile(
+      {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        phone_number: data.phone,
+        phone_country_code: data.phoneZone,
+        date_of_birth: data.dob,
+        marketing_opt_in: data.marketing,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+          toast.success("Profile updated successfully.");
+        },
+        onError: (error) => {
+          toast.error(error.message || "Failed to update profile.");
+        },
+      }
+    );
   };
 
   const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +101,7 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
     setValue("dob", formattedValue);
   };
 
+
   const PHONE_ZONES = Array.from(
     new Map(
       getCountries().map((country) => {
@@ -92,6 +117,8 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
       })
     ).values()
   ).sort((a, b) => a.label.localeCompare(b.label));
+
+
 
   return (
     <div className="flex flex-col gap-12">
@@ -134,6 +161,7 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
               {...register("lastName", { required: true })}
             />
           </Field>
+
 
           {/* PHONE */}
           <Field label="PHONE NUMBER *" error={errors.phone || errors.phoneZone}>
@@ -189,11 +217,11 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
                 className="peer appearance-none w-4 h-4 border border-black/60 bg-transparent transition-all cursor-pointer"
                 {...register("marketing")}
               />
-              <svg 
-                className="absolute w-4 h-4 text-black/60 opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="absolute w-4 h-4 text-black/60 opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth="2"
               >
                 <polyline points="20 6 9 17 4 12" />
@@ -208,8 +236,8 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
           </label>
         </div>
 
-        <button type="submit" className={buttonClass}>
-          Save changes
+        <button type="submit" className={buttonClass} disabled={isPending}>
+          {isPending ? "Saving..." : "Save changes"}
         </button>
       </form>
     </div>

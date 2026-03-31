@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { MoveRight, MoveLeft } from "lucide-react";
 
 type PaginationComponentType = {
     totalPage: number;
@@ -34,7 +34,7 @@ export default function PaginationComponent({
                     height: 40,
                 }}
             >
-                <ChevronLeft />
+                < MoveLeft width="100%" height="100%" strokeWidth={1} />
             </IconButton>
 
             {/* 🔢 NUMBERS (GROUPED) */}
@@ -74,7 +74,7 @@ export default function PaginationComponent({
                     height: 40,
                 }}
             >
-                <ChevronRight />
+                <MoveRight width="100%" height="100%" strokeWidth={1} />
             </IconButton>
         </Stack>
     );

@@ -1,14 +1,32 @@
 "use client";
 
-import { BillingInfo, PaymentInfo } from "./types";
-
 interface BillingPaymentInfoProps {
-  billingInfo: BillingInfo;
-  paymentInfo: PaymentInfo;
+  customer: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+  };
+  address: string;
+  subtotal: number;
+  tierDiscount: number;
+  promoDiscount: number;
+  shippingFee: number;
+  total: number;
   currency: string;
 }
 
-export default function BillingPaymentInfo({ billingInfo, paymentInfo, currency }: BillingPaymentInfoProps) {
+export default function BillingPaymentInfo({
+  customer,
+  address,
+  subtotal,
+  tierDiscount,
+  promoDiscount,
+  shippingFee,
+  total,
+  currency
+}: BillingPaymentInfoProps) {
+
   return (
     <div className="flex flex-col gap-12 max-mobile:gap-9">
       {/* Billing Information */}
@@ -16,20 +34,24 @@ export default function BillingPaymentInfo({ billingInfo, paymentInfo, currency 
         <h3 className="text-xl font-regular uppercase text-black">Billing Information</h3>
         <div className="flex flex-col gap-5 text-sm font-regular text-black">
           <div className="grid grid-cols-3 gap-4">
-            <span>Full name</span>
-            <span className="col-span-2 text-right">{billingInfo.fullName}</span>
+            <span>First Name</span>
+            <span className="col-span-2 text-right">{customer.first_name}</span>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <span>Last Name</span>
+            <span className="col-span-2 text-right">{customer.last_name}</span>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <span>Email</span>
-            <span className="col-span-2 text-right">{billingInfo.email}</span>
+            <span className="col-span-2 text-right">{customer.email}</span>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <span>Phone number</span>
-            <span className="col-span-2 text-right">{billingInfo.phone}</span>
+            <span>Phone</span>
+            <span className="col-span-2 text-right">{customer.phone_number}</span>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <span>Address</span>
-            <span className="col-span-2 text-right">{billingInfo.address}</span>
+            <span className="col-span-2 text-right">{address}</span>
           </div>
         </div>
       </div>
@@ -40,16 +62,24 @@ export default function BillingPaymentInfo({ billingInfo, paymentInfo, currency 
         <div className="flex flex-col gap-5 text-sm font-regular">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>{currency} {paymentInfo.subtotal}</span>
+            <span>{currency} {subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
             <span>Shipping</span>
-            <span>{paymentInfo.shipping}</span>
+            <span>{shippingFee > 0 ? `${currency} ${shippingFee.toFixed(2)}` : 'Free'}</span>
           </div>
-          <div className="flex justify-between">
-            <span>Discount</span>
-            <span>{currency} {paymentInfo.discount.toFixed(2)}</span>
-          </div>
+          {
+            <div className="flex justify-between">
+              <span>Tier Discount</span>
+              <span>{currency} {tierDiscount > 0 ? (subtotal * tierDiscount).toFixed(2) : '0.00'}</span>
+            </div>
+          }
+          {
+            <div className="flex justify-between">
+              <span>Promo Discount</span>
+              <span>{currency} {promoDiscount > 0 ? (subtotal * promoDiscount).toFixed(2) : '0.00'}</span>
+            </div>
+          }
         </div>
 
         {/* Total Amount */}
@@ -58,7 +88,7 @@ export default function BillingPaymentInfo({ billingInfo, paymentInfo, currency 
             <span>Total</span>
             <span className=" text-black/40 uppercase">(TAX INCLUDED)</span>
           </div>
-          <span>{currency} {paymentInfo.subtotal - paymentInfo.discount}</span>
+          <span>{currency} {total.toFixed(2)}</span>
         </div>
       </div>
     </div>
