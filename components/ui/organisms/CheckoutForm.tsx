@@ -19,7 +19,10 @@ import en from "i18n-iso-countries/langs/en.json";
 import { UserProfileResponse } from "@/app/api/getUserProfile";
 import StripePayment from "@/components/ui/organisms/StripePayment";
 import { PaymentFormRef } from "@/components/ui/molecules/PaymentForm";
-import { CartItem, getCartItems } from "@/utils/cartUtils";
+import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
+import { useUpdateCart } from "@/queries/useUpdateCart";
+import { BillingInfo, ProductItem } from "@/queries/useCreatePaymentIntent";
+import { useAddressInfoQuery } from "@/queries/useAddressInfoQuery";
 
 countries.registerLocale(en);
 
@@ -65,50 +68,51 @@ interface CheckoutFormProps {
 
 export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const user = userProfile.user;
-    const defaultAddress = userProfile.addresses?.[0];
+    const { data: addressInfo } = useAddressInfoQuery();
     const paymentRef = useRef<PaymentFormRef>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedShippingId, setSelectedShippingId] = useState(
         SHIPPING_METHODS[0].id
     );
-    const [items, setItems] = useState<CartItem[]>([]);
+    const updateCartMutation = useUpdateCart();
+    const [localItems, setLocalItems] = useState<CartItem[]>([]);
     const [promoCode, setPromoCode] = useState("");
 
     useEffect(() => {
-        setItems(getCartItems());
-
-        const handleUpdate = () => setItems(getCartItems());
-        window.addEventListener("cartUpdated", handleUpdate);
-        return () => window.removeEventListener("cartUpdated", handleUpdate);
+        setLocalItems(getCartItems());
     }, []);
 
-    const subtotal = items.reduce(
+    const itemsToDisplay = localItems.map(item => ({
+        ...item,
+        productId: item.product_id, // ensure compatibility with SummaryItems
+    }));
+
+    const updateLocalStorage = async (newItems: CartItem[]) => {
+        setLocalItems(newItems);
+        setCartItems(newItems);
+        await updateCartMutation.mutateAsync({ products: newItems });
+    };
+
+    const subtotal = itemsToDisplay.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
-
     const selectedShipping =
         SHIPPING_METHODS.find((m) => m.id === selectedShippingId) ||
         SHIPPING_METHODS[0];
 
-    const updateLocalStorage = (newItems: CartItem[]) => {
-        setItems(newItems);
-        localStorage.setItem("itemList", JSON.stringify(newItems));
-        window.dispatchEvent(new Event("cartUpdated"));
-    };
-
     const removeItem = (index: number) => {
-        const newItems = items.filter((_, i) => i !== index);
+        const newItems = localItems.filter((_, i) => i !== index);
         updateLocalStorage(newItems);
     };
 
     const updateQuantity = (index: number, delta: number) => {
-        const newItems = items.map((item, i) => {
-            if (i === index) {
-                const newQty = Math.max(1, item.quantity + delta);
-                return { ...item, quantity: newQty };
-            }
-            return item;
+        const newItems = localItems.map((item, i) => {
+            const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
+            return {
+                ...item,
+                quantity: newQty
+            };
         });
         updateLocalStorage(newItems);
     };
@@ -116,6 +120,8 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const {
         register,
         trigger,
+        reset,
+        watch,
         formState: { errors },
     } = useForm<CheckoutFormValues>({
         mode: "onChange",
@@ -123,15 +129,46 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
             email: user?.email || "",
             firstName: user?.first_name || "",
             lastName: user?.last_name || "",
-            country: user?.country || "",
-            city: defaultAddress?.city || "",
-            zipCode: defaultAddress?.zip_postal_code || "",
-            address: defaultAddress?.address_line_1 || "",
-            optionalAddress: defaultAddress?.address_line_2 || "",
+            country: addressInfo?.country || user?.country || "",
+            city: addressInfo?.city || "",
+            zipCode: addressInfo?.zip_code || "",
+            address: addressInfo?.address || "",
+            optionalAddress: addressInfo?.optional_address || "",
             phoneZone: user?.phone_country_code || "+1",
             phone: user?.phone_number || "",
         },
     });
+
+    const watchedValues = watch();
+
+    const billingInfo: BillingInfo = {
+        first_name: watchedValues.firstName,
+        last_name: watchedValues.lastName,
+        email: watchedValues.email,
+        phone_number: `${watchedValues.phoneZone} ${watchedValues.phone}`,
+        address: watchedValues.address,
+        optional_address: watchedValues.optionalAddress,
+        city: watchedValues.city,
+        zip_code: watchedValues.zipCode,
+        country: watchedValues.country,
+    };
+
+    useEffect(() => {
+        if (addressInfo || user) {
+            reset({
+                email: user?.email || "",
+                firstName: user?.first_name || "",
+                lastName: user?.last_name || "",
+                country: addressInfo?.country || user?.country || "",
+                city: addressInfo?.city || "",
+                zipCode: addressInfo?.zip_code || "",
+                address: addressInfo?.address || "",
+                optionalAddress: addressInfo?.optional_address || "",
+                phoneZone: user?.phone_country_code || "+1",
+                phone: user?.phone_number || "",
+            });
+        }
+    }, [addressInfo, user, reset]);
 
     const PHONE_ZONES = Array.from(
         new Map(
@@ -176,9 +213,9 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
 
             {/* TOP MOBILE — items and totals */}
             <div className="laptop:hidden flex flex-col max-tablet:gap-8 max-mobile:gap-5">
-                {items.length > 0 && (
+                {itemsToDisplay.length > 0 && (
                     <SummaryItems
-                        items={items}
+                        items={itemsToDisplay as any}
                         onRemove={removeItem}
                         onIncrease={(idx) => updateQuantity(idx, 1)}
                         onDecrease={(idx) => updateQuantity(idx, -1)}
@@ -360,7 +397,17 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Payment Method
                     </h2>
-                    <StripePayment ref={paymentRef} />
+                    <StripePayment 
+                        ref={paymentRef} 
+                        items={localItems.map((item) => ({
+                            product_variant_id: item.product_id,
+                            quantity: item.quantity,
+                        }) as ProductItem )}
+                        billingInfo={billingInfo}
+                        promoCode={promoCode}
+                        amount={Math.round((subtotal + selectedShipping.priceValue) * 100)}
+                        currency="sgd"
+                    />
                 </div>
             </div>
 

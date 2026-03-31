@@ -1,55 +1,62 @@
 export interface CartItem {
-  productId: number;
-  productName: string;
-  productImage: string;
-  color: string;
-  color_name: string;
+  product_id: string | number; // Support variant IDs (strings) or product IDs (numbers)
   size: string;
+  productImage: string;
+  color_name: string;
+  productName: string;
   price: number;
   quantity: number;
-}
-
-export const COLOR_NAME_MAP: Record<string, string> = {
-  "#FFFFFF": "WHITE",
-  "#ffffff": "WHITE",
-  "#000000": "BLACK",
-  "#FF0000": "RED",
-  "#ff0000": "RED",
-  "#A52A2A": "BROWN",
-  "#a52a2a": "BROWN",
-  "#808080": "GREY",
-  "#C0C0C0": "SILVER",
-  "#FFC0CB": "PINK",
-  "#ffc0cb": "PINK",
-  "#0000FF": "BLUE",
-  "#0000ff": "BLUE",
-  "#008000": "GREEN",
-  "#FFFF00": "YELLOW",
-  "#ffff00": "YELLOW",
-  "#FFA500": "ORANGE",
-  "#ffa500": "ORANGE",
-  "#800080": "PURPLE",
-  "#F5F5DC": "BEIGE",
-  "#f5f5dc": "BEIGE",
-  "#000080": "NAVY",
-  "#800000": "MAROON",
-};
-
-export const getColorName = (hex: string): string => {
-  return COLOR_NAME_MAP[hex] || hex.toUpperCase();
-};
+} 
 
 export const getCartItems = (): CartItem[] => {
   try {
-    const itemList = localStorage.getItem("itemList");
+    const itemList = localStorage.getItem("products");
     if (itemList) {
-      const parsedItems = JSON.parse(itemList);
-      if (Array.isArray(parsedItems)) {
-        return parsedItems;
+      const parsed = JSON.parse(itemList);
+      // Support both new { products: [...] } and old [...] format during transition
+      const items = Array.isArray(parsed) ? parsed : parsed.products;
+      if (Array.isArray(items)) {
+        return items;
       }
     }
   } catch (error) {
     console.error("Error reading cart items:", error);
   }
   return [];
+};
+
+export const setCartItems = (items: CartItem[]) => {
+  try {
+    const storageData = {
+      products: items.length > 0 ? items : []
+    };
+    localStorage.setItem("products", JSON.stringify(storageData));
+    window.dispatchEvent(new Event("cartUpdated"));
+  } catch (error) {
+    console.error("Error saving cart items:", error);
+  }
+};
+
+export const addItemToCart = (newItem: CartItem) => {
+  const items = getCartItems();
+  const existingIndex = items.findIndex(
+    (item) => item.product_id === newItem.product_id && item.size === newItem.size
+  );
+
+  if (existingIndex > -1) {
+    items[existingIndex].quantity += newItem.quantity;
+  } else {
+    items.push(newItem);
+  }
+  setCartItems(items);
+  return items;
+};
+
+export const clearCart = () => {
+  try {
+    localStorage.removeItem("products");
+    window.dispatchEvent(new Event("cartUpdated"));
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+  }
 };

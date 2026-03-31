@@ -7,7 +7,7 @@ export function useUserQuery() {
   return useQuery<UserProfileResponse>({
     queryKey: ["userProfile"],
     queryFn: async () => {
-      const res = await fetch("/api/user/profile");
+      const res = await fetch("/api/users/profile");
       if (!res.ok) {
         return { authenticated: false, profile_completed: false };
       }

@@ -23,7 +23,7 @@ export default function OrderCard({ order }: OrderCardProps) {
       <div className="flex gap-8 text-xs text-black/40 px-8 max-tablet:gap-0 justify-between max-mobile:px-4">
         <div className="flex flex-col gap-3 justify-between">
           <p className="font-regular uppercase max-mobile:text-[10px]">Order ID</p>
-          <p className="text-black text-2xl font-regular max-mobile:text-lg">{order.id}</p>
+          <p className="text-black text-2xl font-regular max-mobile:text-lg">{order.order_number}</p>
         </div>
         <div className="flex flex-col gap-3 justify-between max-mobile:hidden">
           <p className="font-regular uppercase">Order Placed</p>
@@ -35,8 +35,10 @@ export default function OrderCard({ order }: OrderCardProps) {
         </div>
         <div className="flex flex-col gap-3 text-right font-regular justify-between max-mobile:text-xs">
           <div className="flex items-center justify-end gap-2">
-            <span className={`w-2 h-2 rounded-full ${order.status === 'Completed' ? 'bg-[#079455]' : 'bg-[#BE123C]'}`}></span>
-            <p className={`${order.status === 'Completed' ? 'text-[#079455]' : 'text-[#BE123C]'} font-medium`}>{order.status}</p>
+            <span className={`w-2 h-2 rounded-full ${order.status === 'COMPLETED' ? 'bg-[#079455]' : 'bg-[#BE123C]'}`}></span>
+            <p className={`${order.status === 'COMPLETED' ? 'text-[#079455]' : 'text-[#BE123C]'} font-medium`}>
+              {order.status === 'COMPLETED' ? 'Completed' : 'In progress'}
+            </p>
           </div>
           <p className="text-black text-sm">{order.deliveryDetail}</p>
         </div>

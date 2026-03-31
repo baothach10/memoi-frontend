@@ -40,7 +40,7 @@ export default function MobileImageCarousel({
                 fill
                 priority={index === 0}
                 className="object-cover"
-                sizes="100vw"
+                sizes="100%"
               />
             </div>
           </SwiperSlide>

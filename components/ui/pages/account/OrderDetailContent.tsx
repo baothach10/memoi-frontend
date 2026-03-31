@@ -3,75 +3,36 @@
 import OrderItemCard from "./OrderItemCard";
 import OrderProgress from "./OrderProgress";
 import BillingPaymentInfo from "./BillingPaymentInfo";
-import { OrderDetails } from "./types";
-
-const MOCK_ORDER_DETAILS: OrderDetails = {
-  id: "ABC123DE45",
-  date: "23 March 2026",
-  shipTo: "Ho Chi Minh City, Vietnam",
-  status: "In progress",
-  deliveryDetail: "Estimated arrival: 28 May 2026",
-  total: 1680,
-  currency: "SGD",
-  progress: [
-    { label: "ORDER PLACED", date: "23 March 2026", completed: true },
-    { label: "ORDER PACKED", date: "24 March 2026", completed: true, active: true },
-    { label: "IN TRANSIT", date: "25 March 2026", completed: false },
-    { label: "DELIVERED", date: "28 March 2026", completed: false }
-  ],
-  items: [
-    {
-      id: "item-1",
-      name: "Sparrow V-cut Silk Top",
-      color: "WHITE",
-      size: "L",
-      price: 420,
-      quantity: 1,
-      image: "https://d380qwdachaae3.cloudfront.net/molting-mesh-evening-gown-1.png",
-    },
-    {
-      id: "item-2",
-      name: "Hand-embroidered Rose Skirt",
-      color: "PINK",
-      price: 420,
-      quantity: 1,
-      image: "https://d380qwdachaae3.cloudfront.net/molting-mesh-evening-gown-1.png",
-    },
-    {
-      id: "item-3",
-      name: "Paradise White Corset",
-      color: "WHITE",
-      size: "L",
-      price: 420,
-      quantity: 1,
-      image: "https://d380qwdachaae3.cloudfront.net/molting-mesh-evening-gown-1.png",
-    },
-    {
-      id: "item-4",
-      name: "Paradise Stripe Corset",
-      color: "BLACK",
-      size: "L",
-      price: 420,
-      quantity: 1,
-      image: "https://d380qwdachaae3.cloudfront.net/molting-mesh-evening-gown-1.png",
-    }
-  ],
-  billingInfo: {
-    fullName: "Duong Vu Thanh Ngoc",
-    email: "thanhngoc17@gmail.com",
-    phone: "+84 909003667",
-    address: "A57 Nam Thong 3, W. Tan Phu, D. 7, Ho Chi Minh City, Vietnam"
-  },
-  paymentInfo: {
-    subtotal: 1680,
-    shipping: "Free",
-    discount: 0
-  }
-};
+import { useOrderDetailQuery } from "@/queries/useOrderDetailQuery";
 
 export default function OrderDetailContent({ orderId }: { orderId: string }) {
-  // In a real app, we would fetch the order by ID here
-  const order = MOCK_ORDER_DETAILS;
+  const { data: order, isLoading, isError } = useOrderDetailQuery(orderId);
+
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-[600px] flex items-center justify-center pt-32">
+        <p className="text-sm text-black/40 uppercase tracking-widest font-light animate-pulse">
+          Loading order details...
+        </p>
+      </div>
+    );
+  }
+
+  if (isError || !order) {
+    return (
+      <div className="w-full min-h-[600px] flex flex-col items-center justify-center pt-32 gap-6">
+        <p className="text-sm text-black/40 uppercase tracking-widest font-light">
+          Failed to load order details
+        </p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="text-xs underline underline-offset-4 decoration-black/40"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full flex flex-col gap-14 max-tablet:gap-14 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16 max-mobile:gap-9">
@@ -82,11 +43,13 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
             {/* Status and Action Row (Mobile) / Left Content (Desktop) */}
             <div className="flex justify-between flex-col items-start tablet:gap-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#BE123C]"></span>
-                <span className="text-[#BE123C] text-sm font-regular">{order.status}</span>
+                <span className={`w-2 h-2 rounded-full ${order.status === 'COMPLETED' ? 'bg-[#079455]' : 'bg-[#BE123C]'}`}></span>
+                <span className={`${order.status === 'COMPLETED' ? 'text-[#079455]' : 'text-[#BE123C]'} text-sm font-regular`}>
+                  {order.status === 'COMPLETED' ? 'Completed' : 'In progress'}
+                </span>
               </div>
           
-              <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">ORDER ID #{order.id}</h1>
+              <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">ORDER ID #{order.order_number}</h1>
             </div>
 
             {/* View Tracking Button (Desktop) */}
@@ -115,8 +78,13 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
         {/* Right Column - Info */}
         <div className="col-span-12 laptop:col-span-4 flex flex-col gap-12 max-tablet:pt-14 max-mobile:pt-9">
           <BillingPaymentInfo
-            billingInfo={order.billingInfo}
-            paymentInfo={order.paymentInfo}
+            customer={order.customer}
+            address={order.shipTo}
+            subtotal={order.items.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+            tierDiscount={order.tier_discount_amount}
+            promoDiscount={order.promo_discount_amount}
+            shippingFee={order.shipping_fee}
+            total={order.total}
             currency={order.currency}
           />
         </div>

@@ -21,19 +21,6 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [hasSearched, setHasSearched] = useState(false);
   const isMobile = useIsMobile(768);
 
-  useEffect(() => {
-
-    // Disable body scroll when overlay is open
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
 
   // Debounced search
   useEffect(() => {

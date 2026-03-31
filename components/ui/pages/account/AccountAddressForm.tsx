@@ -1,6 +1,6 @@
-"use client";
-
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import Field from "../../molecules/Field";
 import ChevronDownIcon from "../../atoms/ChevronDownIcon";
 import { getCountries } from "libphonenumber-js";
@@ -8,12 +8,14 @@ import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 
 import { UserProfileResponse } from "@/app/api/getUserProfile";
+import { useAddressInfoQuery } from "@/queries/useAddressInfoQuery";
+import { useUpdatePersonalInfo } from "@/queries/useUpdatePersonalInfo";
+import { toast } from "react-toastify";
 
 countries.registerLocale(en);
 
 type FormValues = {
   country: string;
-  // state: string;
   city: string;
   zipCode: string;
   address: string;
@@ -36,25 +38,56 @@ interface AccountAddressFormProps {
 }
 
 export default function AccountAddressForm({ userProfile }: AccountAddressFormProps) {
-  const defaultAddress = userProfile.addresses?.[0];
+  const queryClient = useQueryClient();
+  const { data: addressInfo, isLoading } = useAddressInfoQuery();
+  const { mutate: updateAddress, isPending } = useUpdatePersonalInfo();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      country: defaultAddress?.country || "VN",
-      // state: defaultAddress?.state || "",
-      city: defaultAddress?.city || "",
-      zipCode: defaultAddress?.zip_postal_code || "",
-      address: defaultAddress?.address_line_1 || "",
-      optionalAddress: defaultAddress?.address_line_2 || "",
+      country: addressInfo?.country || "VN",
+      city: addressInfo?.city || "",
+      zipCode: addressInfo?.zip_code || "",
+      address: addressInfo?.address || "",
+      optionalAddress: addressInfo?.optional_address || "",
     },
   });
 
+  useEffect(() => {
+    if (addressInfo) {
+      reset({
+        country: addressInfo.country || "VN",
+        city: addressInfo.city || "",
+        zipCode: addressInfo.zip_code || "",
+        address: addressInfo.address || "",
+        optionalAddress: addressInfo.optional_address || "",
+      });
+    }
+  }, [addressInfo, reset]);
+
   const onSubmit = (data: FormValues) => {
-    console.log("Updating address:", data);
+    updateAddress(
+      {
+        country: data.country,
+        city: data.city,
+        zip_code: data.zipCode,
+        address: data.address,
+        optional_address: data.optionalAddress,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["userAddressInfo"] });
+          toast.success("Address updated successfully.");
+        },
+        onError: (error) => {
+          toast.error(error.message || "Failed to update address.");
+        },
+      }
+    );
   };
 
   const COUNTRIES = getCountries()
@@ -95,20 +128,6 @@ export default function AccountAddressForm({ userProfile }: AccountAddressFormPr
             </div>
           </Field>
 
-          {/* STATE */}
-          {/* <Field label="STATE *" error={errors.state}>
-            <div className="relative flex">
-              <select
-                className={` appearance-none bg-transparent ${inputClass()}`}
-                {...register("state")}
-              >
-                <option value="">Choose your state</option>
-              </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/4 pointer-events-none">
-                <ChevronDownIcon width={16} height={16} />
-              </div>
-            </div>
-          </Field> */}
 
           {/* CITY */}
           <Field label="CITY *" error={errors.city}>
@@ -151,8 +170,8 @@ export default function AccountAddressForm({ userProfile }: AccountAddressFormPr
           </Field>
         </div>
 
-        <button type="submit" className={buttonClass}>
-          Save changes
+        <button type="submit" className={buttonClass} disabled={isPending}>
+          {isPending ? "Saving..." : "Save changes"}
         </button>
       </form>
     </div>

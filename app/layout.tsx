@@ -4,6 +4,8 @@ import { ThreeModelProvider } from "@/context/ThreeModelContext";
 import ConditionalHeader from "@/components/ui/organisms/ConditionalHeader";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import SignUpModal from "@/components/ui/molecules/SignUpModal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "MEMOI Website",
@@ -23,6 +25,7 @@ export default function RootLayout({
             <ConditionalHeader />
             {children}
             <SignUpModal />
+            <ToastContainer position="top-right" autoClose={5000} />
           </ThreeModelProvider>
         </ReactQueryProvider>
       </body>

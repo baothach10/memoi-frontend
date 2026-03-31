@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { CartItem, getCartItems, getColorName } from "@/utils/cartUtils";
+import { useUpdateCart } from "@/queries/useUpdateCart";
+import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
 import CartItemCard from "./CartItemCard";
 
 interface CheckoutSummaryProps {
@@ -35,7 +35,7 @@ export const SummaryItems = ({
     <div className="flex flex-col px-[5%] gap-2.5">
         {items.map((item, index) => (
             <CartItemCard
-                key={`${item.productId}-${index}`}
+                key={`${item.product_id}-${index}`}
                 item={item}
                 onRemove={() => onRemove(index)}
                 onIncrease={() => onIncrease(index)}
@@ -157,51 +157,54 @@ export default function CheckoutSummary({
     shippingCost,
     shippingLabel,
 }: CheckoutSummaryProps) {
-    const [items, setItems] = useState<CartItem[]>([]);
-    const [promoCode, setPromoCode] = useState("");
+    const updateCartMutation = useUpdateCart();
+    const [localItems, setLocalItems] = useState<CartItem[]>([]);
 
     useEffect(() => {
-        setItems(getCartItems());
-
-        const handleUpdate = () => setItems(getCartItems());
-        window.addEventListener("cartUpdated", handleUpdate);
-        return () => window.removeEventListener("cartUpdated", handleUpdate);
+        setLocalItems(getCartItems());
     }, []);
 
-    const updateLocalStorage = (newItems: CartItem[]) => {
-        setItems(newItems);
-        localStorage.setItem("itemList", JSON.stringify(newItems));
-        window.dispatchEvent(new Event("cartUpdated"));
+    const itemsToDisplay = localItems.map(item => ({
+        ...item,
+        productId: item.product_id, // ensure compatibility with SummaryItems
+    }));
+
+    const updateLocalStorage = async (newItems: CartItem[]) => {
+        setLocalItems(newItems);
+        setCartItems(newItems);
+        await updateCartMutation.mutateAsync({ products: newItems });
     };
 
     const removeItem = (index: number) => {
-        const newItems = items.filter((_, i) => i !== index);
+        const newItems = localItems.filter((_, i) => i !== index);
         updateLocalStorage(newItems);
     };
 
     const updateQuantity = (index: number, delta: number) => {
-        const newItems = items.map((item, i) => {
-            if (i === index) {
-                const newQty = Math.max(1, item.quantity + delta);
-                return { ...item, quantity: newQty };
-            }
-            return item;
+        const newItems = localItems.map((item, i) => {
+            const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
+            return {
+                ...item,
+                quantity: newQty
+            };
         });
         updateLocalStorage(newItems);
     };
 
-    const subtotal = items.reduce(
+    const subtotal = itemsToDisplay.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
+
+    const [promoCode, setPromoCode] = useState("");
 
     return (
         <div className="flex flex-col gap-12">
             <SummaryHeader />
 
-            {items.length > 0 && (
+            {itemsToDisplay.length > 0 && (
                 <SummaryItems
-                    items={items}
+                    items={itemsToDisplay as any}
                     onRemove={removeItem}
                     onIncrease={(idx) => updateQuantity(idx, 1)}
                     onDecrease={(idx) => updateQuantity(idx, -1)}

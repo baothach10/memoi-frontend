@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import CartItemCard from "@/components/ui/molecules/CartItemCard";
 import CartFooter from "@/components/ui/molecules/CartFooter";
-import { CartItem, getCartItems } from "@/utils/cartUtils";
+import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
+import { useUpdateCart } from "@/queries/useUpdateCart";
 
 interface CartOverlayProps {
   isOpen: boolean;
@@ -11,54 +12,43 @@ interface CartOverlayProps {
 }
 
 export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const updateCartMutation = useUpdateCart();
+  const [localItems, setLocalItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    const updateCartItems = () => {
-      setItems(getCartItems());
-    };
-
     if (isOpen) {
-      updateCartItems();
+      setLocalItems(getCartItems());
     }
-
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    window.addEventListener("cartUpdated", updateCartItems);
-
-    return () => {
-      window.removeEventListener("cartUpdated", updateCartItems);
-      document.body.style.overflow = "";
-    };
   }, [isOpen]);
 
-  const updateLocalStorage = (newItems: CartItem[]) => {
-    setItems(newItems);
-    localStorage.setItem("itemList", JSON.stringify(newItems));
-    window.dispatchEvent(new Event("cartUpdated"));
+  const itemsToDisplay = localItems.map(item => ({
+    ...item,
+    productId: item.product_id, // ensure compatibility with CartItemCard
+  }));
+
+  const updateLocalStorage = async (newItems: CartItem[]) => {
+    setLocalItems(newItems);
+    setCartItems(newItems);
+    await updateCartMutation.mutateAsync({ products: newItems });
   };
 
   const removeItem = (index: number) => {
-    const newItems = items.filter((_, i) => i !== index);
+    const newItems = localItems.filter((_, i) => i !== index);
     updateLocalStorage(newItems);
   };
 
   const updateQuantity = (index: number, delta: number) => {
-    const newItems = items.map((item, i) => {
-      if (i === index) {
-        const newQty = Math.max(1, item.quantity + delta);
-        return { ...item, quantity: newQty };
-      }
-      return item;
+    const newItems = localItems.map((item, i) => {
+      const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
+      return {
+        ...item,
+        quantity: newQty,
+      };
     });
     updateLocalStorage(newItems);
   };
 
-  const subtotal = items.reduce(
+  const subtotal = itemsToDisplay.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
@@ -105,7 +95,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto">
-            {items.length === 0 ? (
+            {itemsToDisplay.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-[7%]">
                 <p className="text-sm font-regular text-black mb-6">
                   There’s nothing in your Cart, yet.
@@ -119,10 +109,10 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
               </div>
             ) : (
               <div className="flex flex-col px-[5%] gap-2.5">
-                {items.map((item, index) => (
+                {itemsToDisplay.map((item, index) => (
                   <CartItemCard
-                    key={`${item.productId}-${index}`}
-                    item={item}
+                    key={`${item.product_id}-${index}`}
+                    item={item as CartItem}
                     onRemove={() => removeItem(index)}
                     onIncrease={() => updateQuantity(index, 1)}
                     onDecrease={() => updateQuantity(index, -1)}
@@ -133,7 +123,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
           </div>
 
           {/* Footer */}
-          {items.length > 0 && (
+          {itemsToDisplay.length > 0 && (
             <CartFooter subtotal={subtotal} onClose={onClose} />
           )}
         </div>

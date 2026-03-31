@@ -1,15 +1,18 @@
 import { NextResponse } from "next/server";
+import { createServerSupabaseClient } from "@/utils/supabase/server";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const { products, billingInfo, promoCode } = body;
+    const supabase = await createServerSupabaseClient();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    const { items } = body;
-
-    const products = items.map((item: { productId: number; quantity: number }) => ({
-      product_id: item.productId,
-      quantity: item.quantity,
-    }));
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL!}/api/stripe/payments/create-intent`,
@@ -17,17 +20,19 @@ export async function POST(request: Request) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ACCESS_TOKEN!}`,
+          Authorization: `Bearer ${!session ? process.env.NEXT_PUBLIC_SUPABASE_ACCESS_TOKEN! : session.access_token}`,
           apiKey: process.env.NEXT_PUBLIC_API_KEY!,
         },
-        body: JSON.stringify({ products }),
+        body: JSON.stringify({ 
+          products,
+          billingInfo,
+          promoCode: promoCode || null
+        }),
       }
     );
 
     if (!res.ok) {
       const errorData = await res.text();
-      console.error("Stripe API error status:", res.status);
-      console.error("Stripe API error body:", errorData);
       return NextResponse.json(
         { error: "Failed to create payment intent", details: errorData },
         { status: res.status }
@@ -35,7 +40,8 @@ export async function POST(request: Request) {
     }
 
     const data = await res.json();
-    return NextResponse.json({ clientSecret: data.clientSecret });
+    const clientSecret = data.clientSecret || data.client_secret;
+    return NextResponse.json({ clientSecret });
   } catch (error) {
     console.error("Error creating payment intent:", error);
     return NextResponse.json(

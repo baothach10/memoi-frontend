@@ -18,6 +18,7 @@ export default function ImageColumn({ images }: ImageColumnProps) {
             fill
             priority={index === 0}
             className="object-contain"
+            sizes="100%"
           />
         </div>
       ))}
