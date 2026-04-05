@@ -36,7 +36,7 @@ export default function GeneralShopPage() {
   if (isLoading || isFetching)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="h-screen" data-header-theme="dark">
+        <section className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
           <div>Loading products...</div>
         </section>
       </div>
@@ -45,7 +45,7 @@ export default function GeneralShopPage() {
   if (isError)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="h-screen" data-header-theme="dark">
+        <section className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
           <div>Failed to load products...</div>
         </section>
       </div>

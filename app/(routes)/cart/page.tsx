@@ -76,15 +76,15 @@ export default function CartPage() {
         return (
             <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
                 <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center pt-32 max-tablet:pt-24 max-mobile:pt-16 pb-20 max-mobile:pb-10">
-                    <h1 className="text-2xl font-regular uppercase mb-6 tracking-widest">Your cart is empty</h1>
+                    <h1 className="text-2xl font-regular uppercase mb-6 ">Your cart is empty</h1>
                     <p className="text-sm text-black/60 mb-10 max-w-sm">
                         Looks like you haven&apos;t added anything to your cart yet.
                     </p>
                     <Link
                         href="/shop"
-                        className="px-12 py-4 bg-black text-white text-sm tracking-widest hover:opacity-90 transition uppercase"
+                        className="px-12 py-4 bg-black text-white text-sm  hover:opacity-90 transition  max-mobile:text-xs max-mobile:py-3.5"
                     >
-                        Continue Shopping
+                        Continue shopping
                     </Link>
                 </section>
                 <Footer />
@@ -94,11 +94,11 @@ export default function CartPage() {
 
     return (
         <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
-            <section className="w-full px-[100px] max-tablet:px-10 pt-32 max-tablet:pt-24 max-mobile:pt-16 pb-20 max-mobile:pb-10 max-mobile:px-5">
+            <section className="w-full px-[100px] max-tablet:px-10 pt-32 max-tablet:pt-24 max-mobile:pt-24 pb-20 max-mobile:pb-10 max-mobile:px-5">
                 <div className="grid grid-cols-10 gap-20 max-tablet:grid-cols-1 max-tablet:gap-8 max-mobile:gap-5">
                     {/* Left side: Cart Items */}
                     <div className="col-span-6 flex flex-col gap-10">
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2.5">
                             {itemsToDisplay.map((item, index) => (
                                 <CartItemCard
                                     key={`${item.product_id}-${index}`}
@@ -147,7 +147,7 @@ export default function CartPage() {
                                             return;
                                         }
                                     }}
-                                    className={`w-full bg-black text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-4 max-mobile:text-xs ${hasStockError ? "cursor-not-allowed opacity-50" : ""}`}
+                                    className={`w-full bg-black text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-3.5 max-mobile:text-xs ${hasStockError ? "cursor-not-allowed opacity-50" : ""}`}
                                 >
                                     Proceed to checkout
                                 </Link>
@@ -163,7 +163,7 @@ export default function CartPage() {
 
                                 <Link
                                     href="/shop"
-                                    className="w-full border border-black/10 py-5 text-sm text-center hover:bg-black/2 transition-colors max-mobile:py-4 max-mobile:text-xs"
+                                    className="w-full border border-black/10 py-5 text-sm text-center hover:bg-black/2 transition-colors max-mobile:py-3.5 max-mobile:text-xs"
                                 >
                                     Continue shopping
                                 </Link>
@@ -178,21 +178,23 @@ export default function CartPage() {
                         </div>
 
                         {/* Information Sections */}
-                        <div className="flex flex-col border-t border-black/10">
+                        <div className="flex flex-col">
                             <ExpandableSection
                                 title={<span>Secure Payment</span>}
-                                titleClassName="font-regular py-8 text-[16px] border-b border-black/10 max-mobile:py-6 max-mobile:text-sm"
+                                titleClassName=" py-8 text-[16px] max-mobile:py-4 max-mobile:text-sm"
+                                className="border-b border-black/10"
                             >
-                                <div className="py-8 text-sm text-black/60 space-y-4 font-regular max-mobile:py-6 max-mobile:text-xs max-mobile:space-y-2.5">
+                                <div className="pb-8 text-sm text-black space-y-4 max-mobile:pb-4 max-mobile:text-xs max-mobile:space-y-2.5">
                                     All our transactions are safe and encrypted. We accept all major credit cards, Apple Pay, and Google Pay.
                                 </div>
                             </ExpandableSection>
 
                             <ExpandableSection
                                 title={<span>Free Delivery & Returns</span>}
-                                titleClassName="font-regular py-8 text-[16px] border-b border-black/10 max-mobile:py-6 max-mobile:text-sm"
+                                titleClassName=" py-8 text-[16px] max-mobile:py-4 max-mobile:text-sm"
+                                className="border-b border-black/10"
                             >
-                                <div className="py-8 text-sm text-black/60 space-y-4 font-regular max-mobile:py-6 max-mobile:text-xs max-mobile:space-y-2.5">
+                                <div className="pb-8 text-sm text-black space-y-4 max-mobile:pb-4 max-mobile:text-xs max-mobile:space-y-2.5">
                                     <p>Free shipping in 3-5 business days from order confirmation.</p>
                                     <p>Shipping status can be verified at any time by using the tracking number provided via e-mail. You can also access this information within MyAccount.</p>
                                     <p>As per our legal terms, please be reminded that an adult signature is required upon delivery.</p>
@@ -202,9 +204,10 @@ export default function CartPage() {
 
                             <ExpandableSection
                                 title={<span>Need help? Contact us</span>}
-                                titleClassName="font-regular py-8 text-[16px] border-b border-black/10 max-mobile:py-6 max-mobile:text-sm"
+                                titleClassName=" py-8 text-[16px] max-mobile:py-4 max-mobile:text-sm"
+                                className="border-b border-black/10"
                             >
-                                <div className="py-8 text-sm text-black/60 space-y-4 font-regular max-mobile:py-6 max-mobile:text-xs max-mobile:space-y-2.5">
+                                <div className="pb-8 text-sm text-black space-y-4 max-mobile:pb-4 max-mobile:text-xs max-mobile:space-y-2.5">
                                     Our customer service is available Monday to Saturday, 10am to 7pm SGT. You can reach us via email or phone.
                                 </div>
                             </ExpandableSection>

@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header
       className={`fixed w-screen top-0 left-0 right-0 z-50 ${menuOpen ? "bg-[#fffefa]" : "bg-transparent pointer-events-none"
-        } pt-10 max-mobile:py-4`}
+        } pt-10 max-mobile:py-8`}
     >
       <div className="relative w-full px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-4 flex items-center justify-between transition-all ease-in">
         <MobileMenu

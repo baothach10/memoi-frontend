@@ -51,7 +51,7 @@ export default function ThreeScene() {
     controls.dampingFactor = 0.05;
     controls.enableZoom = false;
 
-    camera.position.set(0, 0, 1.5);
+    camera.position.set(0, 0, 1.7);
 
     controls.target.copy(model.position);
 

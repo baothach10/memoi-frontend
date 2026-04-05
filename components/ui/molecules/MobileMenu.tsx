@@ -8,6 +8,7 @@ import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useHeaderTheme } from "@/hooks/useHeaderTheme";
 import { useCategoriesQuery } from "@/queries/useCategoriesQuery";
+import { DESKTOP_LOGO_SIZE, MOBILE_LOGO_SIZE } from "@/constants";
 
 type Props = {
   className?: string;
@@ -25,7 +26,7 @@ export default function MobileMenu({
   const theme = useHeaderTheme();
   const open = isControlled ? (openProp as boolean) : internalOpen;
   const isMobile = useIsMobile(768);
-  const iconSize = isMobile ? 14 : 18;
+  const iconSize = isMobile ? MOBILE_LOGO_SIZE : DESKTOP_LOGO_SIZE;
   const textColor = open || theme === "light" ? "black" : "white";
 
   const toggle = () => {
@@ -60,7 +61,7 @@ export default function MobileMenu({
 
   return (
     <div className={`relative ${className}`}>
-      <div className="flex relative items-center gap-6 max-mobile:gap-4">
+      <div className="flex relative items-center gap-6 max-mobile:gap-5">
         <button
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -68,9 +69,9 @@ export default function MobileMenu({
           className="z-10 relative items-center justify-center max-mobile:flex hidden transition-all ease-in"
         >
           {open ? (
-            <ExitIcon width={14} height={14} color={textColor} />
+            <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={textColor} />
           ) : (
-            <HamburgerMenuIcon width={14} height={14} color={textColor} />
+            <HamburgerMenuIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={textColor} />
           )}
         </button>
         <button
@@ -97,7 +98,7 @@ export default function MobileMenu({
       </div>
 
       {open && (
-        <div className="fixed top-16 max-mobile:top-12 left-0 w-full h-full bg-[#fffefa] text-black">
+        <div className="fixed top-16 max-mobile:top-14 left-0 w-full h-full bg-[#fffefa] text-black">
           <nav className="absolute top-[76px] max-mobile:top-10 h-full w-full overflow-auto">
             <div className="flex flex-col mx-auto">
               <ExpandableSection
@@ -109,14 +110,23 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
+                <ul className="text-sm space-y-3 max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
                   <li>
                     <Link
-                      href="/collection/SS26"
+                      href="/collection/ss26-the-becoming"
                       onClick={closeMenu}
                       className=" text-[14px] uppercase max-mobile:text-xs"
                     >
-                      SS26 BECOMING
+                      SS26 THE BECOMING
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      onClick={closeMenu}
+                      className=" text-[14px] uppercase max-mobile:text-xs"
+                    >
+                      FW26 COMING SOON
                     </Link>
                   </li>
                 </ul>
@@ -131,7 +141,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
+                <ul className="text-sm space-y-3 max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
                   {itemsList &&
                     itemsList.map((category) => (
                       <li key={category.id}>
@@ -143,6 +153,15 @@ export default function MobileMenu({
                         </Link>
                       </li>
                     ))}
+
+                  <li>
+                    <Link
+                      className="flex"
+                      href={`/shop/all-products`}
+                    >
+                      All Products
+                    </Link>
+                  </li>
                 </ul>
               </ExpandableSection>
 
@@ -155,7 +174,7 @@ export default function MobileMenu({
                   </span>
                 }
               >
-                <ul className="text-sm space-y-2 max-mobile:text-xs max-mobile:mt-2 max-tablet:mt-3">
+                <ul className="text-sm space-y-3 max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
                   <li>
                     <Link
                       href="/explore/about-us"
@@ -191,7 +210,7 @@ export default function MobileMenu({
                 </ul>
               </ExpandableSection>
             </div>
-            <div className="px-10 flex flex-col gap-4 max-mobile:px-4">
+            <div className="px-10 flex flex-col gap-4 max-mobile:px-4 max-tablet:pt-8">
               <Link href="#" onClick={closeMenu}>
                 <span className="font-regular text-[16px] uppercase max-mobile:text-sm">
                   Shopping cart

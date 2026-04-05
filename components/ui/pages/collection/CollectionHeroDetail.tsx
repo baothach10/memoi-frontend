@@ -16,9 +16,9 @@ function CollectionHeroDetail({
   url,
 }: CollectionHeroDetailProps) {
   return (
-    <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-5">
-      <div className="mx-auto text-center space-y-2">
-        <div className="text-white text-[1rem] leading-[1.2] gap-3 max-mobile:text-sm">
+    <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-8">
+      <div className="mx-auto text-center space-y-2 max-mobile:text-sm">
+        <div className="text-white text-[1rem] leading-[1.2] gap-3">
           <div className="flex flex-wrap justify-center gap-4 leading-[1.2]">
             <div
               className={`uppercase text-white hover:text-gray-200 transition-colors leading-[1.2] decoration-white/40`}

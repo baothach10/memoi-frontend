@@ -15,7 +15,7 @@ export default function AboutUsPage() {
   return (
     <div className={`min-h-screen relative w-full bg-[#fffefa]`}>
       <section
-        className="min-h-screen h-full w-full text-black pt-36 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-6 max-mobile:pt-16 max-mobile:pb-10"
+        className="min-h-screen h-full w-full text-black pt-36 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-10 max-mobile:pt-24 max-mobile:pb-10"
         data-header-theme="light"
       >
         <div className="relative w-2/3 flex flex-col items-center text-center max-mobile:w-full max-mobile:px-4">
@@ -26,14 +26,14 @@ export default function AboutUsPage() {
           <div className="relative w-[680px] h-[470px] laptop:max-desktop:w-[780px] laptop:max-desktop:h-[470px] smaller-tablet:max-tablet:w-[488px] smaller-tablet:max-tablet:h-[348px] max-mobile:w-[355px] max-mobile:h-[255px]">
             <ThreeScene />
           </div>
-          <div className="relative w-full flex flex-col gap-10 pt-16 max-mobile:pt-6">
+          <div className="relative w-full flex flex-col gap-10 pt-16 max-mobile:pt-6 max-mobile:gap-6">
             <div className="flex flex-col items-center gap-3">
               <div>
                 <Logo />
               </div>
               <div className="text-xs leading-[18px]">since 2025</div>
             </div>
-            <div className="text-center space-y-2 leading-[150%] text-sm mx-auto max-w-[778px] smaller-tablet:max-tablet:max-w-[522px]">
+            <div className="text-center space-y-2 leading-[150%] text-sm mx-auto max-w-[778px] smaller-tablet:max-tablet:max-w-[522px] max-mobile:text-xs">
               <div>
                 Empowering Quiet Elegance, Timeless Transformation - To inspire
                 customers to embrace a confidently chic and elegant lifestyle -
@@ -41,7 +41,7 @@ export default function AboutUsPage() {
                 quiet power.
               </div>
               <div>
-                FOUNDED IN 2025, BASED IN SAIGON, VIETNAM. MEMOÍ was born from a
+                Founded in 2025. MEMOÍ was born from a
                 simple yet powerful belief: every woman deserves to feel
                 beautiful, confident, and true to herself—every single day.
               </div>

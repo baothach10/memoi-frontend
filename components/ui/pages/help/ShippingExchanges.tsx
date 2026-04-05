@@ -27,7 +27,7 @@ export default function ShippingExchanges() {
                 <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs max-mobile:pb-6">
                     <div className="space-y-2">
                         <p>We want every MEMOÍ piece to fit you perfectly. Exchanges are accepted within 7 days from the date of receipt, for SIZE EXCHANGE ONLY.</p>
-                        <ul className="list-['-_'] list-inside text-sm space-y-2">
+                        <ul className="list-['-_'] list-inside pace-y-2">
                             <li>Domestic Orders (Singapore): One-time free return shipping is provided for size exchanges.</li>
                             <li>International Orders: Customers are responsible for return and reshipment costs.</li>
                         </ul>

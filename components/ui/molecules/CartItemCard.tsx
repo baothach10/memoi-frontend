@@ -13,7 +13,7 @@ interface CartItemCardProps {
 export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }: CartItemCardProps) {
     return (
         <div className="bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]">
-            <div className="flex gap-8">
+            <div className="flex gap-8  max-mobile:gap-4">
                 {/* Product Image */}
                 <div className="w-[25%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
                     <Image
@@ -40,7 +40,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                                 </div>
                             )}
                         </div>
-                        <p className="text-sm text-black/60 tracking-wide max-mobile:text-xs ">
+                        <p className="text-sm text-black/60 max-mobile:text-xs ">
                             {item.color_name.toUpperCase()}, {item.size}
                         </p>
                     </div>

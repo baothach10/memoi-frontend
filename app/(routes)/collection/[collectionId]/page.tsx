@@ -374,15 +374,15 @@ function CollectionDetailPage() {
       "MEMOÍ - for the woman becoming herself",
       [
         { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Her Edge" },
+        { url: "/collection", title: "THE BECOMING" },
       ],
       [
         { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Summer Summer" },
+        { url: "/collection", title: "THE BECOMING" },
       ],
       [
         { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "Reborn" },
+        { url: "/collection", title: "THE BECOMINGe" },
       ],
     ],
     secondParameter: [
@@ -393,7 +393,7 @@ function CollectionDetailPage() {
     ],
     heroDetail: {
       id: "SS26",
-      title: "Becoming",
+      title: "THE BECOMING",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop/collection",
@@ -461,16 +461,16 @@ function CollectionDetailPage() {
 
           <section
             ref={gridSectionRef}
-            className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
+            className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
             data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">
               <div className="relative flex flex-col items-center text-center gap-6 max-w-[480px] smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:gap-4">
                 <div className="font-regular p-2.5 text-2xl max-tablet:text-lg max-mobile:p-0">
-                  SS26 BECOMING
+                  SS26 THE BECOMING
                 </div>
                 <div className="text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:p-2.5 max-mobile:text-xs">
-                  <div>“BECOMING” is a woman’s journey of finding herself.</div>
+                  <div>“THE BECOMING” is a woman’s journey of finding herself.</div>
                   <div>
                     The collection is the perspective reflected through the
                     mirror in which she sees her own image. This becoming is not
@@ -616,7 +616,7 @@ function CollectionDetailPage() {
                   speed={1800}
                 />
               </div>
-              <div>
+              <div className="text-[16px] max-mobile:text-sm">
                 <LinkItem
                   url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
                   title={exampleWithLinks.heroDetail.urlTitle}

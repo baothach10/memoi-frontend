@@ -31,7 +31,7 @@ export default function ExchangeSuccessPage() {
 
                     {/* Button */}
                     <Link href="/">
-                        <button className="w-full bg-black text-white py-4 text-sm">
+                        <button className="w-full bg-black text-white py-4 text-sm max-mobile:py-3.5 max-mobile:text-xs">
                             Return to Home
                         </button>
                     </Link>

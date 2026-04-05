@@ -30,7 +30,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                 <Link
                     href="/cart"
                     onClick={onClose}
-                    className="block text-center flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs"
+                    className="block text-center flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-3 max-mobile:text-xs"
                 >
                     View cart
                 </Link>
@@ -43,7 +43,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                         }
                         onClose();
                     }}
-                    className={`block text-center flex-1 py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs ${showStockError ? "cursor-not-allowed opacity-50" : ""}`}
+                    className={`block text-center flex-1 py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-3 max-mobile:text-xs ${showStockError ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                     Checkout
                 </Link>
@@ -60,7 +60,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
             )}
 
             {/* Footer Links */}
-            <div className="px-[5%] pb-[5%] flex items-center justify-between text-sm text-black/60 decoration-black/60 h-[25%] max-mobile:flex-col max-mobile:gap-2 max-mobile:text-xs max-mobile:items-start">
+            <div className="px-[5%] pb-[5%] flex items-center justify-between text-sm text-black/60 decoration-black/60 h-[25%] max-mobile:flex-col max-mobile:gap-2 max-mobile:text-xs max-mobile:items-start max-mobile:pb-[8%]">
                 <p>
                     Need help?{" "}
                     <Link

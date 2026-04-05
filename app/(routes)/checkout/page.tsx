@@ -7,7 +7,7 @@ export default async function CheckoutPage() {
 
     return (
         <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
-            <section className="w-full px-[100px] max-tablet:px-[5%] pt-32 max-tablet:pt-24 max-mobile:pt-16 pb-20 max-mobile:pb-10">
+            <section className="w-full px-[100px] max-tablet:px-[5%] pt-32 max-tablet:pt-24 max-mobile:pt-24 pb-20 max-mobile:pb-10">
                 <CheckoutForm userProfile={userProfile} />
             </section>
             <Footer />

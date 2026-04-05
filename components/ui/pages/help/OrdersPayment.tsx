@@ -5,9 +5,9 @@ import ExpandableSection from "@/components/ui/molecules/ExpandableSection";
 export default function OrdersPayment() {
     return (
         <div className="text-sm">
-            <h2 className="uppercase text-[16px] leading-[120%] py-4">Orders & Payment</h2>
-            <ExpandableSection title={"PLACING AN ORDER"} titleClassName="text-[16px] py-5 border-t border-t-black/10" defaultOpen={true}>
-                <div className="leading-normal space-y-2 text-sm pb-8">
+            <h2 className="uppercase text-[16px] leading-[120%] py-4 max-mobile:text-sm">Orders & Payment</h2>
+            <ExpandableSection title={"PLACING AN ORDER"} titleClassName="text-[16px] py-5 border-t border-t-black/10 max-mobile:text-sm" defaultOpen={true}>
+                <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
                     <p>
                         All orders can be placed directly through the official MEMOI website. Upon completing your purchase,
                         you will receive an order confirmation email detailing your order summary and payment information.
@@ -23,24 +23,21 @@ export default function OrdersPayment() {
                 </div>
             </ExpandableSection>
 
-            <ExpandableSection title={"PAYMENT METHODS"} titleClassName="text-[16px] py-5 border-t border-t-black/10" defaultOpen={true}>
-                <div className="space-y-2 pb-8">
+            <ExpandableSection title={"PAYMENT METHODS"} titleClassName="text-[16px] py-5 border-t border-t-black/10 max-mobile:text-sm" defaultOpen={true}>
+                <div className="space-y-2 pb-8 max-mobile:text-xs">
                     <p>
                         MEMOI accepts the following secure payment options:
                     </p>
                     <ul className="mt-3 list-disc list-inside text-sm space-y-2">
                         <li>Visa, MasterCard, American Express</li>
-                        <li>PayPal</li>
-                        <li>Apple Pay</li>
-                        <li>Bank Transfer</li>
-                        <li>PayNow, PayLah!</li>
+                        <li>PayNow</li>
                     </ul>
                     <p className="mt-4 text-sm">All prices displayed on our website are in Singapore Dollars (SGD) and inclusive of GST.</p>
                 </div>
             </ExpandableSection>
-            <div className="border-t pt-8 space-y-8 border-t-black/10">
-                <h2 className=" text-[16px] font-regular">Additional Information</h2>
-                <div className="text-black leading-normal space-y-2">
+            <div className="border-t pt-8 space-y-8 border-t-black/10 max-mobile:pt-5 max-mobile:space-y-5">
+                <h2 className=" text-[16px] font-regular max-mobile:text-sm">Additional Information</h2>
+                <div className="text-black leading-normal space-y-2  max-mobile:text-xs">
                     <p>Once your payment is successfully processed, you will receive a confirmation email with a digital invoice for your records.</p>
                     <p>For any questions regarding orders or payments, please contact our Customer Care team at support@memoiofficial.com.</p>
                 </div>

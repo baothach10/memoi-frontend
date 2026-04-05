@@ -7,6 +7,8 @@ import SearchInteractiveItem from "../pages/overlay/SearchInteractiveItem";
 import { ArrowRight } from "lucide-react";
 import SearchProductSuggestions from "./SearchProductSuggestions";
 import useIsMobile from "@/hooks/useIsMobile";
+import { MOBILE_LOGO_SIZE } from "@/constants";
+import ExitIcon from "../atoms/ExitIcon";
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -74,22 +76,13 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between px-6 pt-6">
-            <h2 className="text-xl font-regular max-mobile:text-sm">Search</h2>
+            <h2 className="text-base font-regular max-mobile:text-sm">Search</h2>
             <button
               onClick={onClose}
               className="text-black hover:text-gray-600 transition-colors w-5 h-5 max-mobile:w-4.5 max-mobile:h-4.5"
               aria-label="Close search"
             >
-              <svg
-                // width="20"
-                // height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M15 5L5 15M5 5l10 10" />
-              </svg>
+              <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />
             </button>
           </div>
 
@@ -105,7 +98,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 placeholder="What are you looking for?"
                 value={searchQuery}
                 onChange={handleInputChange}
-                className="w-full text-[14px] font-regular text-black mx-3 bg-transparent py-3 outline-none focus:border-black placeholder:text-[14px] placeholder:text-black/60"
+                className="w-full text-sm font-regular text-black mx-3 bg-transparent py-3 outline-none focus:border-black placeholder:text-sm placeholder:text-black/60 max-mobile:text-xs max-mobile:py-2 max-mobile:placeholder:text-xs"
               />
               <div
                 className="cursor-pointer w-4.5 h-auto max-mobile:w-4 max-mobile:h-auto"
@@ -120,7 +113,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           {/* Content Area */}
           <div className="flex-1 overflow-y-auto p-6 flex flex-col">
             {isLoading ? (
-              <p className="text-sm text-black font-regular">Searching...</p>
+              <p className="text-sm text-black font-regular max-mobile:text-xs">Searching...</p>
             ) : !hasSearched ? (
               <div className="mt-auto w-full h-fit flex flex-col gap-5">
                 <p className="text-sm text-black font-regular">
@@ -132,7 +125,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               </div>
             ) : products.length === 0 ? (
               <>
-                <p className="text-sm text-black font-regular">
+                <p className="text-sm text-black font-regular max-mobile:text-xs">
                   There are no results for your search &quot;{searchQuery}
                   &quot;. Please try again.
                 </p>
@@ -162,7 +155,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     />
                   ))}
                 </div>
-                <div className="p-2.5 text-center cursor-pointer"
+                <div className="p-8 text-center cursor-pointer"
                   onClick={handleSearchRedirect}
                   onTouchEnd={handleSearchRedirect}>
                   <div className="relative text-black text-[16px] inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 max-mobile:text-sm">

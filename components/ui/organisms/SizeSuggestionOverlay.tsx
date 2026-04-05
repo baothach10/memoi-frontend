@@ -8,7 +8,7 @@ import { ArrowLeft } from "lucide-react";
 
 function inputClass() {
   return `
-    w-full border-b bg-transparent pt-4 text-sm pb-2 outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2 max-mobile:text-xs
+    w-full border-b bg-transparent pt-4 text-sm pb-2 outline-none border-black/40 focus:border-black/60 max-mobile:text-xs max-mobile:pt-2 max-mobile:text-xs max-mobile:pb-1
   `;
 }
 

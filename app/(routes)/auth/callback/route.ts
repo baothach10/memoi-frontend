@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
       const user = session.user;
       const accessToken = session.access_token;
-      //
+      // 
       const refreshToken = session.refresh_token;
 
       // save to session or local storage

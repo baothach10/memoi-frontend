@@ -9,6 +9,7 @@ import SearchOverlay from "../organisms/SearchOverlay";
 import CartOverlay from "../organisms/CartOverlay";
 import { getCartItems } from "@/utils/cartUtils";
 import { useCartQuery } from "@/queries/useCartQuery";
+import { MOBILE_LOGO_SIZE } from "@/constants";
 
 type OverlayType = "search" | "cart" | null;
 
@@ -86,13 +87,13 @@ function RightNavigation({
 
   return (
     <>
-      <div className={`relative flex items-center gap-6 max-mobile:gap-4 ${className}`}>
+      <div className={`relative flex items-center gap-6 max-mobile:gap-5 ${className}`}>
         <button
           onClick={handleSearchClick}
           onTouchEnd={handleSearchTouch}
           className="relative group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
         >
-          <SearchIcon width={14} height={14} color={color} />
+          <SearchIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             Search products
           </span>
@@ -102,7 +103,7 @@ function RightNavigation({
           onTouchEnd={handleSearchTouch}
           className="relative group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
-          <SearchIcon width={14} height={14} color={color} />
+          <SearchIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
         </button>
 
         <button
@@ -110,7 +111,7 @@ function RightNavigation({
           onTouchEnd={handleCartTouch}
           className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
         >
-          <CartIcon width={14} height={14} color={color} />
+          <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (
             <span
               className="h-4 flex items-center text-[14px] font-medium"
@@ -128,7 +129,7 @@ function RightNavigation({
           onTouchEnd={handleCartTouch}
           className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
-          <CartIcon width={14} height={14} color={color} />
+          <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (
             <span
               className="h-4 flex items-center text-[14px] font-medium"
@@ -144,7 +145,7 @@ function RightNavigation({
           onClick={() => onClose?.()}
           className="relative group text-white hover:text-gray-300 transition-all ease-in"
         >
-          <UserIcon width={14} height={14} color={color} />
+          <UserIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             Your profile
           </span>

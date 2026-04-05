@@ -6,6 +6,7 @@ import InstagramIcon from "../atoms/InstagramIcon";
 import TiktokIcon from "../atoms/TiktokIcon";
 import ExpandableSection from "../molecules/ExpandableSection";
 import useIsMobile from "@/hooks/useIsMobile";
+import Link from "next/link";
 
 export function MobileFooter() {
     const isMobile = useIsMobile(768);
@@ -24,24 +25,24 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Dresses
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Tops
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
-                                    Skirts
-                                </a>
+                                <Link href="#" className="hover:text-black transition">
+                                    Shorts
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Pants
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </ExpandableSection>
@@ -49,24 +50,24 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Explore</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     About us
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     The MEMOÍ House
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Our Commitments
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Contact us
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </ExpandableSection>
@@ -74,24 +75,24 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Shipping & Exchanges
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Orders & Payment
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     MEMOÍ care
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Exchange Request
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </ExpandableSection>
@@ -99,24 +100,24 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Privacy Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Terms & Conditions
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Cookies Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition">
                                     Cookies Settings
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </ExpandableSection>
