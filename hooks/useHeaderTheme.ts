@@ -11,7 +11,7 @@ export function useHeaderTheme() {
 
     if (!sections.length) return;
     
-    const bottomOffset = Math.max(window.innerHeight - 60, 0);
+    const bottomOffset = Math.max(window.innerHeight - 100, 0);
 
     const observer = new IntersectionObserver(
       (entries) => {

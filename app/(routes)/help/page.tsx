@@ -24,9 +24,9 @@ function HelpPageContent() {
     };
 
     return (
-        <div className="px-[100px] max-tablet:px-[5%] relative w-full bg-[#fffefa]" data-header-theme="light">
+        <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
             {/* FAQ CONTENT WRAPPER (sticky boundary) */}
-            <section className="mx-auto grid grid-cols-10 max-tablet:grid-cols-1 gap-32 max-tablet:gap-10 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16" id="help-section">
+            <section className="px-[100px] max-tablet:px-[5%] mx-auto grid grid-cols-10 max-tablet:grid-cols-1 gap-32 max-tablet:gap-10 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-24" id="help-section">
 
                 {/* LEFT – STICKY side section (hidden on tablet/mobile) */}
                 <aside className="col-span-3 self-start h-full max-tablet:hidden">

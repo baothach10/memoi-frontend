@@ -133,7 +133,7 @@ export function Footer() {
         </div>
         <div className="grid grid-cols-1 w-full mx-auto text-center max-tablet:px-10 max-mobile:px-5 laptop:hidden">
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:py-4 max-mobile:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
-            <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-2 max-tablet:mt-3">
+            <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
               {itemsList &&
                 itemsList.map((category) => (
                   <li key={category.id}>
@@ -151,7 +151,7 @@ export function Footer() {
           {/* <div className="laptop:max-desktop:w-px max-tablet:h-px border-b-black/10 self-stretch max-mobile:mx-5" /> */}
 
           <ExpandableSection defaultOpen={false} className="relative  mx-10  py-6 border-b border-b-black/10 max-mobile:py-4 max-mobile:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Explore</h4>}>
-            <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-2 max-tablet:mt-3">
+            <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-4 max-tablet:mt-3">
               <li>
                 <Link
                   href="/explore/about-us"
@@ -185,7 +185,7 @@ export function Footer() {
           </ExpandableSection>
 
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:py-4 max-mobile:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
-            <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-2 max-tablet:mt-3">
+            <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-4 max-tablet:mt-3">
               <li>
                 <Link href="/help?tab=shipping" className="hover:text-black transition">
                   Shipping & Exchanges
@@ -210,7 +210,7 @@ export function Footer() {
           </ExpandableSection>
 
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 max-mobile:py-4 max-mobile:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
-            <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-2 max-tablet:mt-3">
+            <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-4 max-tablet:mt-3">
               <li>
                 <Link href="#" className="hover:text-black transition">
                   Privacy Policy

@@ -6,27 +6,27 @@ import FacebookIcon from "@/components/ui/atoms/FacebookIcon";
 import InstagramIcon from "@/components/ui/atoms/InstagramIcon";
 
 export default function ContactUsPage() {
-    const mailTo = "mailto:hello@memoi.com";
+    const mailTo = "mailto:memoi@memoiofficial.com";
     const whatsapp = "https://wa.me/6591234567?text=Hi%20MEMO%C3%8D%20team,%20I%20have%20a%20question";
 
     return (
         <div className="min-h-screen h-full w-full relative" data-header-theme="light">
             <section className="relative flex w-full min-h-screen justify-center px-25 flex-col max-tablet:px-0 smaller-tablet:max-tablet:max-w-[375px] max-tablet:mx-auto max-mobile:px-5">
                 <div className="relative w-full h-full text-center">
-                    <h1 className="text-2xl tracking-widest mb-12 font-regular py-3.5 max-mobile:text-lg max-mobile:mb-[18px]">CONTACT US</h1>
+                    <h1 className="text-2xl tracking-widest mb-12 font-regular py-3.5 max-mobile:text-lg max-mobile:mb-[22px]">CONTACT US</h1>
 
-                    <div className="grid grid-cols-3 gap-10 max-tablet:grid-cols-1 text-center px-20 max-tablet:px-0 max-mobile:gap-8">
+                    <div className="grid grid-cols-3 gap-10 max-tablet:grid-cols-1 text-center px-20 max-tablet:px-0 max-mobile:gap-10">
                         {/* Mail */}
                         <div className="flex flex-col items-center gap-8 max-mobile:gap-5">
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">MAIL US</h3>
-                                <div className="leading-normal gap-1 flex flex-col">
-                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs" >Send your inquiries to <span className="underline decoration-black/40 underline-offset-4">info@memoiofficial.com</span>. We will respond within 48 business hours.</p>
+                                <div className="leading-normal gap-2 flex flex-col">
+                                    <p className="text-sm text-black max-mobile:text-xs" >Send your inquiries to <span>memoi@memoiofficial.com</span>. We will respond within 48 business hours.</p>
                                     <p className="text-black/60 text-xs">Service available from Monday to Sunday from 10am to 9pm (ICT).</p>
                                 </div>
                             </div>
                             <Link href={mailTo} className="relative w-full" target="_blank" rel="noreferrer">
-                                <span className="block w-full bg-transparent text-black border border-black/20  py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3">
+                                <span className="block w-full bg-transparent text-black border border-black/20  py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
                                     Mail us
                                 </span>
                             </Link>
@@ -36,13 +36,13 @@ export default function ContactUsPage() {
                         <div className="flex flex-col items-center gap-8 max-mobile:gap-5">
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">CALL US</h3>
-                                <div className="leading-normal gap-1 flex flex-col">
-                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">Our Client Advisors would be delighted to assist you. You may contact us at <span className="underline decoration-black/40 underline-offset-4">(+65) 85939373</span></p>
+                                <div className="leading-normal gap-2 flex flex-col">
+                                    <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">Our Client Advisors would be delighted to assist you. You may contact us at <span>(+65) 85939373</span></p>
                                     <p className="text-black/60 text-xs">Calls may be recorded for quality assurance.</p>
                                 </div>
                             </div>
                             <Link href={whatsapp} target="_blank" rel="noreferrer" className="relative w-full">
-                                <span className="block w-full bg-transparent text-black border border-black/20 py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3">
+                                <span className="block w-full bg-transparent text-black border border-black/20 py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
                                     Whatsapp us
                                 </span>
                             </Link>

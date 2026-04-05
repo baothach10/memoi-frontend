@@ -73,17 +73,17 @@ export default function BenefitTable() {
                 <div />
                 {TIERS.map((t) => (
                     <div key={t} className="text-center pb-4 flex flex-col items-center max-mobile:text-sm justify-between">
-                        <div className="text-[16px] font-regular">{t}</div>
-                        <div className="text-[16px] text-black/60 mt-2 max-mobile:gap-2">{TIERS_PRICE[t]}</div>
+                        <div className="text-[16px] font-regular max-mobile:text-sm">{t}</div>
+                        <div className="text-[16px] text-black/60 mt-2 max-mobile:gap-2 max-mobile:text-sm">{TIERS_PRICE[t]}</div>
                     </div>
                 ))}
 
                 {/* Rows */}
                 {BENEFITS.map((b, idx) => (
-                    <div key={idx} className="contents max-mobile:text-xs">
+                    <div key={idx} className="contents text-sm max-mobile:text-xs">
                         <div className={idx === BENEFITS.length - 1 ? "mb-0" : "mb-8"}>
-                            <div className="text-sm font-regular">{b.title}</div>
-                            {b.subtitle && <div className="text-sm text-black/60 mt-2 max-mobile:mt-1">{b.subtitle}</div>}
+                            <div className=" font-regular">{b.title}</div>
+                            {b.subtitle && <div className=" text-black/60 mt-2 max-mobile:mt-1">{b.subtitle}</div>}
                         </div>
 
                         {TIERS.map((t) => (

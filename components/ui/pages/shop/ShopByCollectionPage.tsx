@@ -381,7 +381,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
   if (isError) return (
 
     <div className="relative w-full h-full bg-[#fffefa]">
-      <section className="h-screen" data-header-theme="dark">
+      <section className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
         <div>Failed to load products...</div>
       </section>
     </div>
@@ -420,7 +420,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
           <section
             ref={gridSectionRef}
             data-header-theme="light"
-            className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:py-10"
+            className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
           >
             {isLoading || isFetching ? (
               <div>Loading products...</div>
@@ -436,7 +436,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                       </div>
                     </div>
                   </div>
-                  <div className="text-black/60 text-[14px]">
+                  <div className="text-black/60 text-sm">
                     {data?.total_products} products
                   </div>
                 </div>

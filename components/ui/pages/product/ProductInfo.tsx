@@ -111,15 +111,15 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </p>
 
         {/* NAME */}
-        <h1 className="text-2xl font-regular mb-4 text-center uppercase max-mobile:text-lg">
+        <h1 className="text-2xl font-regular mb-4 text-center uppercase max-mobile:text-lg max-mobile:mb-3">
           {product.name}
         </h1>
 
         {/* PRICE */}
-        <p className="text-[16px] mb-8 text-center font-regular max-mobile:text-sm">{product.currency} {displayPrice.toFixed(2)}</p>
+        <p className="text-[16px] mb-8 text-center font-regular max-mobile:text-sm max-mobile:mb-6">{product.currency} {displayPrice.toFixed(2)}</p>
 
         {/* COLOR SELECTOR */}
-        <div className="mb-10 flex flex-col items-center justify-center text-center max-mobile:mb-8">
+        <div className="mb-10 flex flex-col items-center justify-center text-center max-mobile:mb-6">
           <div className="flex gap-2">
             <div className="relative w-4 h-4 flex items-center justify-center">
               {/* Outer ring (with offset) */}
@@ -150,18 +150,20 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </div>
 
         {/* ADD TO CART + SIZE OVERLAY */}
-        <div className="relative w-full mb-6 flex flex-col items-center max-mobile:mb-8">
+        <div className="relative w-full mb-6 flex flex-col items-center max-mobile:mb-6">
           {/* SIZE OVERLAY */}
           <div
             ref={overlayRef}
             className="
               absolute mx-auto z-10
-              w-1/3 min-h-[200px]
+              w-1/3 
               bg-[#FFFEFA] border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
               gap-3 py-6 text-sm
               opacity-0 pointer-events-none
               max-mobile:w-full
+              max-mobile:text-xs
+              max-mobile:gap-5
             "
           >
             {sizes.map(({ size, stock, price }) => {
@@ -185,7 +187,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               );
             })}
 
-            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="text-sm underline decoration-black/40 underline-offset-4">
+            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="underline decoration-black/40 underline-offset-4">
               Size Suggestion
             </button>
           </div>
@@ -193,14 +195,14 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           {/* ADD TO CART BUTTON */}
           <button
             onClick={handleAddToCartClick}
-            className="w-1/3 bg-black text-white py-3 max-mobile:py-5 text-sm max-mobile:w-full"
+            className="w-1/3 bg-black text-white py-3 max-mobile:py-3.5 text-sm max-mobile:w-full max-mobile:text-xs"
           >
             Add to cart
           </button>
         </div>
 
         {/* FOOTER LINKS */}
-        <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4 max-mobile:text-xs">
+        <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4 max-mobile:text-xs max-mobile:mt-0">
           <button onClick={() => setShowDetailsOverlay(true)}>Details</button>
           <button onClick={() => setShowSizingOverlay(true)}>Sizing</button>
           <button onClick={() => setShowShippingOverlay(true)}>Shipping & Returns</button>

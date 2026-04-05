@@ -61,8 +61,8 @@ function CheckoutSuccessContent() {
 
                         {/* Button */}
                         <Link href="/">
-                            <button className="w-full bg-black text-white py-4 text-sm">
-                                Continue Shopping
+                                <button className="w-full bg-black text-white py-4 text-sm  max-mobile:text-xs max-mobile:py-3.5">
+                                Continue shopping
                             </button>
                         </Link>
                     </div>

@@ -46,7 +46,7 @@ export default function ProductsByCategoryPage({
       <div className="relative w-full h-full bg-[#fffefa]">
         <section
           data-header-theme="light"
-          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
+          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
         >
           <div>Loading products...</div>
         </section>
@@ -58,7 +58,7 @@ export default function ProductsByCategoryPage({
       <div className="relative w-full h-full bg-[#fffefa]">
         <section
           data-header-theme="light"
-          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
+          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
         >
           <div>Failed to load products...</div>
         </section>
@@ -69,7 +69,7 @@ export default function ProductsByCategoryPage({
     <div className="relative w-full h-full bg-[#fffefa]">
       <section
         data-header-theme="light"
-        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-16"
+        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
       >
         <div className="mx-auto text-center space-y-2">
           <div className="text-black leading-[1.2] text-2xl max-mobile:text-sm">

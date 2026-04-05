@@ -5,6 +5,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { gsap } from "gsap";
 import BenefitTable from "@/components/ui/pages/help/BenefitTable";
+import Link from "next/link";
 
 function TheMemoiHousePage() {
     const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -356,7 +357,8 @@ function TheMemoiHousePage() {
                                         </div>
                                     </div>
                                 </div>
-                                <button
+                                <Link
+                                    href="/sign-in"
                                     className="
                                         px-10 py-4
                                         border border-white/80
@@ -371,22 +373,24 @@ function TheMemoiHousePage() {
                                         hover:text-black
                                         hover:border-white
                                         max-mobile:text-xs
+                                        max-mobile:py-3
+                                        max-mobile:px-8
                                     "
                                 >
                                     Join The MEMOÍ House
-                                </button>
+                                </Link>
                             </div>
                         </HeroSection>
                     </div>
 
                     <section
                         ref={gridSectionRef}
-                        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-10"
+                        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
                         data-header-theme="light"
                     >
-                        <div className="relative h-full max-w-[904px] px-10 space-y-16 max-mobile:px-5 max-mobile:space-y-8">
-                            <div className="space-y-20 max-mobile:space-y-8">
-                                <div className="text-center space-y-2">
+                        <div className="relative h-full max-w-[904px] px-10 space-y-16 max-mobile:px-5 max-mobile:space-y-10">
+                            <div className="space-y-20 max-mobile:space-y-10">
+                                <div className="text-center space-y-4">
                                     <h2 className="font-regular uppercase text-2xl max-mobile:text-lg">Benefits for House Members</h2>
                                     <p className="text-[16px] leading-[140%] max-mobile:text-sm">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
                                 </div>

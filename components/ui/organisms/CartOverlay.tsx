@@ -6,6 +6,8 @@ import CartFooter from "@/components/ui/molecules/CartFooter";
 import { CartItem, getCartItems, setCartItems, clearCart } from "@/utils/cartUtils";
 import { useUpdateCart } from "@/queries/useUpdateCart";
 import { useCartQuery } from "@/queries/useCartQuery";
+import { MOBILE_LOGO_SIZE } from "@/constants";
+import ExitIcon from "../atoms/ExitIcon";
 
 interface CartOverlayProps {
   isOpen: boolean;
@@ -35,7 +37,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
         clearCart();
         setLocalItems([]);
       }
-  } else if (isOpen) {
+    } else if (isOpen) {
       setLocalItems(getCartItems());
     }
   }, [backendItems, isOpen]);
@@ -94,23 +96,14 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between px-[5%] py-[3%]">
-            <h2 className="text-base font-regular leading-tight tracking-wide">Cart</h2>
+          <div className="flex items-center justify-between p-6">
+            <h2 className="text-base font-regular leading-tight tracking-wide max-mobile:text-sm">Cart</h2>
             <button
               onClick={onClose}
               className="text-black hover:text-gray-500 transition-colors"
               aria-label="Close cart"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              >
-                <path d="M12 4L4 12M4 4l8 8" />
-              </svg>
+              <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />
             </button>
           </div>
 
@@ -118,14 +111,14 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
           <div className="flex-1 overflow-y-auto">
             {itemsToDisplay.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-[7%]">
-                <p className="text-sm font-regular text-black mb-6">
+                <p className="text-sm font-regular text-black mb-6 max-mobile:text-xs">
                   There’s nothing in your Cart, yet.
                 </p>
                 <button
                   onClick={onClose}
-                  className="px-[7%] py-[2.5%] bg-black text-white text-xs tracking-wider hover:opacity-90 transition"
+                  className="px-[7%] py-[2.5%] bg-black text-white text-xs tracking-wider hover:opacity-90 transition max-mobile:py-3.5 max-mobile:text-xs max-mobile:px-[10%]"
                 >
-                  CONTINUE SHOPPING
+                  Continue shopping
                 </button>
               </div>
             ) : (
@@ -145,10 +138,10 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
 
           {/* Footer */}
           {itemsToDisplay.length > 0 && (
-            
-            <CartFooter 
-              subtotal={subtotal} 
-              onClose={onClose} 
+
+            <CartFooter
+              subtotal={subtotal}
+              onClose={onClose}
               showStockError={hasStockError}
             />
           )}

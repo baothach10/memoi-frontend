@@ -11,7 +11,7 @@ export default function QuantitySelector({ quantity, onIncrease, onDecrease, isI
             <button
                 onClick={onDecrease}
                 disabled={quantity <= 1}
-                className={`w-8 h-8 flex items-center justify-center transition-colors text-sm max-mobile:w-5 max-mobile:h-5 max-mobile:text-xs ${quantity <= 1
+                className={`w-8 h-8 flex items-center justify-center transition-colors text-sm max-mobile:w-5 max-mobile:h-5 max-mobile:text-xs transform -translate-y-px ${quantity <= 1
                     ? "text-black/20 cursor-not-allowed"
                     : "text-black hover:text-black/70"
                     }`}
@@ -27,7 +27,7 @@ export default function QuantitySelector({ quantity, onIncrease, onDecrease, isI
             <button
                 onClick={onIncrease}
                 disabled={isIncreaseDisabled}
-                className={`w-8 h-8 flex items-center justify-center transition-colors text-sm max-mobile:w-4.5 max-mobile:h-4.5 max-mobile:text-xs ${isIncreaseDisabled
+                className={`w-8 h-8 flex items-center justify-center transition-colors text-sm max-mobile:w-4.5 max-mobile:h-4.5 max-mobile:text-xs transform -translate-y-px ${isIncreaseDisabled
                     ? "text-black/20 cursor-not-allowed"
                     : "text-black hover:text-black/70"
                     }`}

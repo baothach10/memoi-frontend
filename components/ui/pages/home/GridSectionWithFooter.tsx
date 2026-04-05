@@ -50,7 +50,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
         </div>
         <div className="px-25 py-16 smaller-tablet:max-tablet:px-10 smaller-tablet:max-tablet:py-0 smaller-tablet:max-tablet:pt-16 max-mobile:px-5 max-mobile:py-10">
           <div className={`flex items-center max-tablet:flex-col`}>
-            <div className="flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=shipping'} className="block flex-1 smaller-tablet:max-tablet:w-full">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Shipping Icon"
@@ -58,29 +58,29 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
                 title="Free Delivery & Exchanges"
                 description="Complimentary standard shipping and returns & exchanges within 30 days"
               />
-            </div>
+            </Link>
 
             <div className="laptop:max-desktop:w-px max-tablet:h-px bg-gray-200 self-stretch max-mobile:my-[5px]" />
 
-            <div className="flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=orders'} className="block flex-1 smaller-tablet:max-tablet:w-full">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Payment Icon"
                 title="Secure Payment & Information"
                 description="Your payment and information details are encrypted and securely processed"
               />
-            </div>
+            </Link>
 
             <div className="laptop:max-desktop:w-px max-tablet:h-px bg-gray-200 self-stretch max-mobile:my-[5px]" />
 
-            <div className="flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=house'} className="block flex-1 smaller-tablet:max-tablet:w-full">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Check Icon"
                 title="The MEMOI Membership"
                 description="Your Memoí membership elevates your experience with tiered loyalty rewards"
               />
-            </div>
+            </Link>
           </div>
         </div>
         <Footer />
