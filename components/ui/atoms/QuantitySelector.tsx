@@ -2,9 +2,10 @@ interface QuantitySelectorProps {
     quantity: number;
     onIncrease: () => void;
     onDecrease: () => void;
-}
-
-export default function QuantitySelector({ quantity, onIncrease, onDecrease }: QuantitySelectorProps) {
+    isIncreaseDisabled?: boolean;
+} 
+ 
+export default function QuantitySelector({ quantity, onIncrease, onDecrease, isIncreaseDisabled }: QuantitySelectorProps) {
     return (
         <div className="flex items-center bg-black/10">
             <button
@@ -25,7 +26,11 @@ export default function QuantitySelector({ quantity, onIncrease, onDecrease }: Q
             </div>
             <button
                 onClick={onIncrease}
-                className="w-8 h-8 flex items-center justify-center text-black hover:text-black transition-colors text-sm max-mobile:w-4.5 max-mobile:h-4.5 max-mobile:text-xs"
+                disabled={isIncreaseDisabled}
+                className={`w-8 h-8 flex items-center justify-center transition-colors text-sm max-mobile:w-4.5 max-mobile:h-4.5 max-mobile:text-xs ${isIncreaseDisabled
+                    ? "text-black/20 cursor-not-allowed"
+                    : "text-black hover:text-black/70"
+                    }`}
                 aria-label="Increase quantity"
             >
                 +

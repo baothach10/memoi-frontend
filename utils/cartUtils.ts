@@ -6,6 +6,7 @@ export interface CartItem {
   productName: string;
   price: number;
   quantity: number;
+  stock: number;
 } 
 
 export const getCartItems = (): CartItem[] => {

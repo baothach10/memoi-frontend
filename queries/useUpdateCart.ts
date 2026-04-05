@@ -62,10 +62,10 @@ export function useUpdateCart() {
           product_variant_id: item.product_id,
           size: item.size,
           quantity: item.quantity,
-          product_name: "Updating...",
-          image_url: "",
-          unit_price: 0,
-          color_name: "",
+          product_name: item.productName || "Updating...",
+          image_url: item.productImage || "",
+          unit_price: item.price || 0,
+          color_name: item.color_name || "",
         } as unknown as BackendCartItem;
       });
 

@@ -80,6 +80,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
       product_id: variant.id, // Use variant ID instead of product.product_id
       productName: product.name,
       productImage: product.images[0].url,
+      stock: variant.stock,
       color_name: product.color_name,
       quantity: 1,
       size,

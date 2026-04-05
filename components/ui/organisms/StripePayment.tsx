@@ -99,6 +99,9 @@ const StripePayment = forwardRef<PaymentFormRef, StripePaymentProps>(function St
         );
     }
 
+    console.log("Amount:", amount);
+    console.log("Currency:", currency);
+
     return (
         <Elements
             stripe={stripePromise}

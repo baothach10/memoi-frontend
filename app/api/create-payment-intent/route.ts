@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       const errorData = await res.text();
+      console.log("Error creating payment intent 1:", errorData);
       return NextResponse.json(
         { error: "Failed to create payment intent", details: errorData },
         { status: res.status }
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ clientSecret });
   } catch (error) {
     console.error("Error creating payment intent:", error);
+     console.log("Error creating payment intent 2");
     return NextResponse.json(
       { error: "Failed to create payment intent" },
       { status: 500 }

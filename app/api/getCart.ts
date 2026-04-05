@@ -17,6 +17,8 @@ export async function getCart() {
     },
   });
 
+  console.log(session.access_token)
+
   if (!res.ok) {
     throw new Error("Failed to fetch cart from backend");
   }

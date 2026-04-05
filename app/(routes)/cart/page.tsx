@@ -4,17 +4,39 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import CartItemCard from "@/components/ui/molecules/CartItemCard";
 import ExpandableSection from "@/components/ui/molecules/ExpandableSection";
-import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
+import { CartItem, clearCart, getCartItems, setCartItems } from "@/utils/cartUtils";
 import { useUpdateCart } from "@/queries/useUpdateCart";
 import Footer from "@/components/ui/organisms/Footer";
+import { useCartQuery } from "@/queries/useCartQuery";
+import { AlertCircle } from "lucide-react";
 
 export default function CartPage() {
     const updateCartMutation = useUpdateCart();
     const [localItems, setLocalItems] = useState<CartItem[]>([]);
+    const { data: backendItems } = useCartQuery();
 
     useEffect(() => {
-        setLocalItems(getCartItems());
-    }, []);
+        if (backendItems) {
+            if (backendItems.length > 0) {
+                const mappedItems = backendItems.map(item => ({
+                    product_id: item.product_variant_id,
+                    size: item.size,
+                    quantity: item.quantity,
+                    productName: item.product_name,
+                    productImage: item.image_url,
+                    color_name: item.color_name,
+                    price: item.unit_price,
+                    stock: item.stock,
+                }));
+                setLocalItems(mappedItems);
+            } else {
+                clearCart();
+                setLocalItems([]);
+            }
+        } else {
+            setLocalItems(getCartItems());
+        }
+    }, [backendItems]);
 
     const itemsToDisplay = localItems.map(item => ({
         ...item,
@@ -48,6 +70,8 @@ export default function CartPage() {
         0
     );
 
+    const hasStockError = itemsToDisplay.some(item => (item.stock === 0 || item.quantity > item.stock));
+
     if (itemsToDisplay.length === 0) {
         return (
             <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
@@ -78,10 +102,10 @@ export default function CartPage() {
                             {itemsToDisplay.map((item, index) => (
                                 <CartItemCard
                                     key={`${item.product_id}-${index}`}
-                                    item={item as any}
+                                    item={item}
                                     onRemove={() => removeItem(index)}
                                     onIncrease={() => updateQuantity(index, 1)}
-                                    onDecrease={() => updateQuantity(index,-1)}
+                                    onDecrease={() => updateQuantity(index, -1)}
                                 />
                             ))}
                         </div>
@@ -117,10 +141,26 @@ export default function CartPage() {
                             <div className="flex flex-col gap-2.5">
                                 <Link
                                     href="/checkout"
-                                    className="w-full bg-black text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-4 max-mobile:text-xs"
+                                    onClick={(e) => {
+                                        if (hasStockError) {
+                                            e.preventDefault();
+                                            return;
+                                        }
+                                    }}
+                                    className={`w-full bg-black text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-4 max-mobile:text-xs ${hasStockError ? "cursor-not-allowed opacity-50" : ""}`}
                                 >
                                     Proceed to checkout
                                 </Link>
+
+                                {hasStockError && (
+                                    <div className="flex items-start gap-1 text-[#B3261E] text-xs">
+                                        <AlertCircle size={12} className="mt-px max-tablet:mt-px" />
+
+                                        Remove or adjust quantities for unavailable or excess items before checkout.
+
+                                    </div>
+                                )}
+
                                 <Link
                                     href="/shop"
                                     className="w-full border border-black/10 py-5 text-sm text-center hover:bg-black/2 transition-colors max-mobile:py-4 max-mobile:text-xs"

@@ -27,7 +27,7 @@ function RightNavigation({
 
   useEffect(() => {
     const updateCartCount = () => {
-      if (backendItems && backendItems.length > 0) {
+      if (backendItems) {
         setCartCount(backendItems.length);
       } else {
         const items = getCartItems();

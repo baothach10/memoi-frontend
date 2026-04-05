@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import CartItemCard from "@/components/ui/molecules/CartItemCard";
 import CartFooter from "@/components/ui/molecules/CartFooter";
-import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
+import { CartItem, getCartItems, setCartItems, clearCart } from "@/utils/cartUtils";
 import { useUpdateCart } from "@/queries/useUpdateCart";
+import { useCartQuery } from "@/queries/useCartQuery";
 
 interface CartOverlayProps {
   isOpen: boolean;
@@ -13,13 +14,31 @@ interface CartOverlayProps {
 
 export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
   const updateCartMutation = useUpdateCart();
+  const { data: backendItems } = useCartQuery();
   const [localItems, setLocalItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (backendItems) {
+      if (backendItems.length > 0) {
+        const mappedItems = backendItems.map((item) => ({
+          product_id: item.product_variant_id,
+          size: item.size,
+          quantity: item.quantity,
+          productName: item.product_name,
+          productImage: item.image_url,
+          color_name: item.color_name,
+          price: item.unit_price,
+          stock: item.stock,
+        }));
+        setLocalItems(mappedItems);
+      } else {
+        clearCart();
+        setLocalItems([]);
+      }
+  } else if (isOpen) {
       setLocalItems(getCartItems());
     }
-  }, [isOpen]);
+  }, [backendItems, isOpen]);
 
   const itemsToDisplay = localItems.map(item => ({
     ...item,
@@ -52,6 +71,8 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const hasStockError = itemsToDisplay.some(item => (item.stock === 0 || item.quantity > item.stock));
 
   return (
     <>
@@ -124,7 +145,12 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
 
           {/* Footer */}
           {itemsToDisplay.length > 0 && (
-            <CartFooter subtotal={subtotal} onClose={onClose} />
+            
+            <CartFooter 
+              subtotal={subtotal} 
+              onClose={onClose} 
+              showStockError={hasStockError}
+            />
           )}
         </div>
       </div>

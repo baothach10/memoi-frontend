@@ -12,6 +12,7 @@ export interface BackendCartItem {
   unit_price: number;
   total_price: number;
   currency: string;
+  stock: number;
   created_at: string;
   image_url: string;
   size: string;
@@ -66,6 +67,7 @@ export function useCartQuery() {
           quantity: item.quantity,
           productName: item.product_name,
           productImage: item.image_url,
+          stock: item.stock,
           color_name: item.color_name,
           price: item.unit_price,
         }));

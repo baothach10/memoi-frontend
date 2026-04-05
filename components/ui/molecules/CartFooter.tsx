@@ -1,15 +1,17 @@
+import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 interface CartFooterProps {
     subtotal: number;
     onClose: () => void;
+    showStockError?: boolean;
 }
 
-export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
+export default function CartFooter({ subtotal, onClose, showStockError }: CartFooterProps) {
     return (
-        <div className="border-t border-black/10">
+        <div className="border-t border-black/10 relative h-fit">
             {/* Subtotal */}
-            <div className="px-[5%] pt-[2%] pb-[2%] max-mobile:pt-[4%] max-mobile:pb-[4%]">
+            <div className="px-[5%] pt-[3%] pb-[5%] max-mobile:pt-[4%] max-mobile:pb-[4%]">
                 <div className="flex items-start justify-between">
                     <div>
                         <p className="text-xl tracking-wider uppercase font-regular max-mobile:text-[16px]">
@@ -24,21 +26,41 @@ export default function CartFooter({ subtotal, onClose }: CartFooterProps) {
             </div>
 
             {/* Buttons */}
-            <div className="px-[5%] pb-[2%] flex gap-3 max-mobile:pb-[4%]">
-                <Link 
+            <div className="px-[5%] pb-[3%] flex gap-3 max-mobile:pb-[4%]">
+                <Link
                     href="/cart"
                     onClick={onClose}
                     className="block text-center flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs"
                 >
                     View cart
                 </Link>
-                <Link href="/checkout" onClick={onClose} className="block text-center flex-[1.5] py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs">
+                <Link
+                    href="/checkout"
+                    onClick={(e) => {
+                        if (showStockError) {
+                            e.preventDefault();
+                            return;
+                        }
+                        onClose();
+                    }}
+                    className={`block text-center flex-1 py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-[4%] max-mobile:text-xs ${showStockError ? "cursor-not-allowed opacity-50" : ""}`}
+                >
                     Checkout
                 </Link>
             </div>
 
+            {/* Stock Error Message */}
+            {showStockError && (
+                <div className="px-[5%] pb-[3%] flex items-start gap-1 text-[#B3261E] text-xs max-mobile:pb-5">
+                    <AlertCircle size={12} className="mt-px max-tablet:mt-px" />
+
+                    Remove or adjust quantities for unavailable or excess items before checkout.
+
+                </div>
+            )}
+
             {/* Footer Links */}
-            <div className="px-[5%] pb-[2%] flex items-center justify-between text-sm text-black/60 decoration-black/60 h-[25%] max-mobile:flex-col max-mobile:gap-2 max-mobile:text-xs max-mobile:items-start">
+            <div className="px-[5%] pb-[5%] flex items-center justify-between text-sm text-black/60 decoration-black/60 h-[25%] max-mobile:flex-col max-mobile:gap-2 max-mobile:text-xs max-mobile:items-start">
                 <p>
                     Need help?{" "}
                     <Link
