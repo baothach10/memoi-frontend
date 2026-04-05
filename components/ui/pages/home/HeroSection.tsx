@@ -66,7 +66,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
     return (
       <section
         ref={ref}
-        className="h-svh w-full snap-start relative overflow-hidden"
+        className="h-dvh w-full snap-start relative overflow-hidden"
       >
         {/* Desktop Media */}
         {media.type === "image" ? (
