@@ -97,7 +97,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
    * RENDER
    --------------------------------------------- */
   return (
-    <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-svh flex items-center justify-center"}>
+    <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-dvh flex items-center justify-center"}>
       {/* BACKDROP */}
       {showSizeOverlay && (
         <div

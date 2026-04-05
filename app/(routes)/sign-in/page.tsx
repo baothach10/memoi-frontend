@@ -24,7 +24,7 @@ function SignInPage() {
     ],
   };
   return (
-    <div className="relative w-screen h-svh flex items-center justify-center bg-[#fffefa] text-black overflow-hidden">
+    <div className="relative w-screen h-dvh flex items-center justify-center bg-[#fffefa] text-black overflow-hidden">
       <SignInPortal />
 
 

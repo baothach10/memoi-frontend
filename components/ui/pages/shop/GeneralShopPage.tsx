@@ -36,7 +36,7 @@ export default function GeneralShopPage() {
   if (isLoading || isFetching)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
+        <section className="min-h-dvh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
           <div>Loading products...</div>
         </section>
       </div>
@@ -45,15 +45,15 @@ export default function GeneralShopPage() {
   if (isError)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
+        <section className="min-h-dvh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
           <div>Failed to load products...</div>
         </section>
       </div>
     );
   return (
     <div className="relative w-full h-full bg-[#fffefa]">
-      <div className={`h-svh overflow-hidden`}>
-        <div className="h-svh" data-header-theme="dark">
+      <div className={`h-dvh overflow-hidden`}>
+        <div className="h-dvh" data-header-theme="dark">
           <div className="relative h-full w-full">
             <HeroSection
               media={exampleWithLinks.media[0]}

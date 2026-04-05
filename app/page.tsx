@@ -358,7 +358,7 @@ export default function HomePage() {
     <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
-        className={`h-svh relative ${isAtBottom ? "" : "overflow-hidden"}`}
+        className={`h-dvh relative ${isAtBottom ? "" : "overflow-hidden"}`}
         style={{
           overscrollBehaviorY:
             currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
@@ -367,7 +367,7 @@ export default function HomePage() {
         <div ref={smoothContentRef}>
           <div
             ref={heroSection1Ref}
-            className="h-svh relative"
+            className="h-dvh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -382,7 +382,7 @@ export default function HomePage() {
 
           <div
             ref={heroSection2Ref}
-            className="h-svh relative"
+            className="h-dvh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -397,7 +397,7 @@ export default function HomePage() {
 
           <div
             ref={heroSection3Ref}
-            className="h-svh relative"
+            className="h-dvh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -411,7 +411,7 @@ export default function HomePage() {
           </div>
           <div
             ref={heroSection4Ref}
-            className="h-svh relative"
+            className="h-dvh relative"
             data-header-theme="dark"
           >
             <HeroSection

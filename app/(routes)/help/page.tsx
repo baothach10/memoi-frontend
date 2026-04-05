@@ -66,7 +66,7 @@ function HelpPageContent() {
 
 export default function HelpPage() {
     return (
-        <Suspense fallback={<div className="min-h-svh py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
+        <Suspense fallback={<div className="min-h-dvh py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
             <HelpPageContent />
         </Suspense>
     );
