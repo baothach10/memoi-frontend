@@ -47,7 +47,7 @@ export default function LoginForm() {
         className="relative flex flex-col w-full h-full text-center gap-12"
       >
         <div className="gap-3">
-          <h1 className="text-2xl font-medium tracking-wide font-regular max-mobile:text-lg">
+          <h1 className="text-2xl tracking-wide font-regular max-mobile:text-lg">
             LOG IN OR REGISTER
           </h1>
           <p className="text-sm text-black/80 max-mobile:text-xs">
@@ -85,7 +85,7 @@ export default function LoginForm() {
             {/* Continue button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-4 text-sm hover:opacity-90 transition max-mobile:text-xs"
+              className="w-full bg-black text-white py-4 text-sm hover:cursor-pointer transition max-mobile:text-xs"
             >
               Continue
             </button>
@@ -98,7 +98,7 @@ export default function LoginForm() {
             {/* Google */}
             <button
               type="button"
-              className="w-full border py-4 text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition max-mobile:text-xs"
+              className="w-full border py-4 text-sm flex items-center justify-center gap-2 hover:cursor-pointer transition max-mobile:text-xs"
               onTouchEnd={loginWithGoogle}
               onClick={loginWithGoogle}
             >
