@@ -28,7 +28,7 @@ export default function MemoiCare() {
                     <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
                         <div className="space-y-2">
                             <p>To ensure lasting softness and color integrity:</p>
-                            <ul className="list-['-_'] list-inside text-sm space-y-2">
+                            <ul className="list-['-_'] list-inside  space-y-2">
                                 <li>Dry clean is recommended for silk, satin, taffeta, and chiffon.</li>
                                 <li>For cotton-blend pieces, use a gentle hand wash in cold water with mild detergent.</li>
                                 <li>Avoid wringing or twisting. Gently press excess water with a soft towel.</li>
@@ -40,7 +40,7 @@ export default function MemoiCare() {
                 <ExpandableSection title={"IRONING & STEAMING"} titleClassName="text-[16px] py-8 border-t border-t-black/10 max-mobile:text-sm max-mobile:py-5" defaultOpen={true}>
                     <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
 
-                        <ul className="list-['-_'] list-inside text-sm space-y-2">
+                        <ul className="list-['-_'] list-inside  space-y-2">
                             <li>Use a steamer for a natural, crease-free finish.</li>
                             <li>If ironing is necessary, use the lowest heat setting and place a cloth between the iron and the fabric.</li>
                             <li>Do not apply direct heat to delicate surfaces or embroidery details.</li>
@@ -52,7 +52,7 @@ export default function MemoiCare() {
                 <ExpandableSection title={"STORAGE & HANDLING"} titleClassName="text-[16px] py-8 border-t border-t-black/10 max-mobile:text-sm max-mobile:py-5" defaultOpen={true}>
                     <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
 
-                        <ul className="list-['-_'] list-inside text-sm space-y-2">
+                        <ul className="list-['-_'] list-inside space-y-2">
                             <li>Store garments in a cool, dry place away from sunlight.</li>
                             <li>Hang dresses and tops on padded hangers to maintain their silhouette.</li>
                             <li>For silk and taffeta pieces, use breathable garment bags to prevent moisture buildup.</li>

@@ -205,9 +205,9 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
         {/* FOOTER LINKS */}
         <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4 max-mobile:text-xs max-mobile:mt-0">
-          <button onClick={() => setShowDetailsOverlay(true)}>Details</button>
-          <button onClick={() => setShowSizingOverlay(true)}>Sizing</button>
-          <button onClick={() => setShowShippingOverlay(true)}>Shipping & Returns</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowDetailsOverlay(true)}>Details</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowSizingOverlay(true)}>Sizing</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowShippingOverlay(true)}>Shipping & Exchanges</button>
         </div>
 
         <DetailsOverlay
