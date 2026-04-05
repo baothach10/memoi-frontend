@@ -43,7 +43,7 @@ export default function SearchPage({ searchQuery }: SearchPageProps) {
       <div className="relative w-full h-full bg-[#fffefa]">
         <section
           data-header-theme="light"
-          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
+          className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
         >
           <div>Searching...</div>
         </section>
@@ -55,7 +55,7 @@ export default function SearchPage({ searchQuery }: SearchPageProps) {
       <div className="relative w-full h-full bg-[#fffefa]">
         <section
           data-header-theme="light"
-          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
+          className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
         >
           <div>Failed to search products...</div>
         </section>
@@ -67,7 +67,7 @@ export default function SearchPage({ searchQuery }: SearchPageProps) {
       <div className="relative w-full h-full bg-[#fffefa]">
         <section
           data-header-theme="light"
-          className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+          className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
         >
           <div>Please enter a search query</div>
         </section>
@@ -80,7 +80,7 @@ export default function SearchPage({ searchQuery }: SearchPageProps) {
     <div className="relative w-full h-full bg-[#fffefa]">
       <section
         data-header-theme="light"
-        className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+        className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
       >
         <div className="mx-auto text-center space-y-2">
           <div className="text-black leading-[1.2] text-2xl max-mobile:text-lg">

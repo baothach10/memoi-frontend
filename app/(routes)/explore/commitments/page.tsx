@@ -5,9 +5,9 @@ import GridImageItem from "@/components/ui/pages/collection/GridImageItem";
 
 function CommitmentsPage() {
   return (
-    <div className={`min-h-screen relative w-full bg-[#fffefa]`}>
+    <div className={`min-h-svh relative w-full bg-[#fffefa]`}>
       <section
-        className="min-h-screen h-full w-full text-black pt-36 pb-32 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-6 max-mobile:pt-24 max-mobile:pb-10 max-mobile:px-4"
+        className="min-h-svh h-full w-full text-black pt-36 pb-32 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-6 max-mobile:pt-24 max-mobile:pb-10 max-mobile:px-4"
         data-header-theme="light"
       >
         <div className="relative w-full px-[100px] flex flex-col items-center gap-10 text-center max-mobile:w-full max-mobile:px-0 max-mobile:gap-4 max-tablet:gap-6 smaller-tablet:max-tablet:w-2/3 smaller-tablet:max-tablet:px-0">

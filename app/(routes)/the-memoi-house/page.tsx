@@ -329,7 +329,7 @@ function TheMemoiHousePage() {
                 <div ref={smoothContentRef} className="bg-[#fffefa]">
                     <div
                         ref={heroSection1Ref}
-                        className="h-screen"
+                        className="h-svh"
                         data-header-theme="dark"
                     >
                         <HeroSection
@@ -385,7 +385,7 @@ function TheMemoiHousePage() {
 
                     <section
                         ref={gridSectionRef}
-                        className="min-h-screen w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+                        className="min-h-svh w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
                         data-header-theme="light"
                     >
                         <div className="relative h-full max-w-[904px] px-10 space-y-16 max-mobile:px-5 max-mobile:space-y-10">

@@ -72,7 +72,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
   const handleSizeSelect = async (size: string, price: number) => {
 
-    
+
     // Find the variant for the selected size to get its ID
     const variant = product.variants.find(v => v.size === size);
     console.log('add to cart', variant)
@@ -97,7 +97,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
    * RENDER
    --------------------------------------------- */
   return (
-    <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-screen flex items-center justify-center"}>
+    <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-svh flex items-center justify-center"}>
       {/* BACKDROP */}
       {showSizeOverlay && (
         <div

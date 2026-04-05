@@ -381,7 +381,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
   if (isError) return (
 
     <div className="relative w-full h-full bg-[#fffefa]">
-      <section className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
+      <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm" data-header-theme="dark">
         <div>Failed to load products...</div>
       </section>
     </div>
@@ -400,7 +400,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
         <div ref={smoothContentRef} className="bg-[#fffefa]">
           <div
             ref={heroSection1Ref}
-            className="h-screen"
+            className="h-svh"
             data-header-theme="dark"
           >
             <HeroSection
@@ -420,7 +420,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
           <section
             ref={gridSectionRef}
             data-header-theme="light"
-            className="min-h-screen w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
+            className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:py-10 max-mobile:text-sm"
           >
             {isLoading || isFetching ? (
               <div>Loading products...</div>

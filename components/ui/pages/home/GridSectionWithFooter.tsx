@@ -12,7 +12,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
   return (
     <section
       ref={ref}
-      className="min-h-screen w-full snap-start relative flex flex-col bg-[#fffefa] overflow-y-auto"
+      className="min-h-svh w-full snap-start relative flex flex-col bg-[#fffefa] overflow-y-auto"
       data-header-theme="light"
     >
       <div className="relative h-full w-full flex flex-col justify-around">
