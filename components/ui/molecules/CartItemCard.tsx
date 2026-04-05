@@ -79,7 +79,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                                 quantity={item.quantity}
                                 onIncrease={onIncrease}
                                 onDecrease={onDecrease}
-                                isIncreaseDisabled={item.quantity >= item.stock}
+                                isIncreaseDisabled={item.quantity > item.stock}
                             />
 
                             {/* Remove Button */}

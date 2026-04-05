@@ -3,12 +3,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 import { clearCart } from "@/utils/cartUtils";
+import { clearCacheSignUpModal } from "@/utils/signUpUtils";
 
 export function useDeleteAccount() {
   const router = useRouter();
-  const supabase = createBrowserSupabaseClient();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -29,11 +28,10 @@ export function useDeleteAccount() {
       queryClient.clear();
       clearCart();
 
-      // Sign out and redirect
-      supabase.auth.signOut().then(() => {
-          router.push("/");
-          router.refresh();
-      });
+      clearCacheSignUpModal();
+
+      router.push("/");
+      router.refresh();
     },
     onError: (error: any) => {
       toast.error(error.message || "Failed to delete account");

@@ -33,6 +33,8 @@ const buttonClass = `
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
+  max-mobile:text-xs
+  max-mobile:py-3
 `;
 
 
@@ -121,16 +123,16 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
 
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 max-mobile:gap-9">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-regular uppercase tracking-tight">PROFILE</h2>
-        <p className="text-sm text-black/60 leading-relaxed font-light">
+        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">PROFILE</h2>
+        <p className="text-sm text-black/60 max-mobile:text-xs">
           Make changes to your profile here. Click save when you are done.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12">
-        <div className="flex flex-col gap-12">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12 max-mobile:gap-9">
+        <div className="flex flex-col gap-12 max-mobile:gap-9">
           {/* EMAIL */}
           <Field label="EMAIL *" error={errors.email}>
             <input
@@ -227,9 +229,9 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
-            <div>
+            <div className="text-sm max-mobile:text-xs text-black">
               I would like to receive information about the latest updates from MEMOÍ by email. By submitting I agree to the MEMOÍ{" "}
-              <Link href={"/"} className="text-sm inline text-black relative underline decoration-black/40 cursor-pointer max-mobile:text-xs">
+              <Link href={"/"} className=" inline relative underline decoration-black/40 cursor-pointer underline-offset-4">
                 Privacy Policy
               </Link>
             </div>

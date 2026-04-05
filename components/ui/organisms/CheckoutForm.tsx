@@ -395,7 +395,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                                 key={method.id}
                                 onClick={() => setSelectedShippingId(method.id)}
                                 className={`flex justify-between items-center border p-6 max-mobile:p-4 cursor-pointer transition-all duration-300 ${selectedShippingId === method.id
-                                    ? "border-black bg-black/[0.02]"
+                                    ? "border-black"
                                     : "border-black/20 hover:border-black/40"
                                     }`}
                             >

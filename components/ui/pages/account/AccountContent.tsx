@@ -14,6 +14,7 @@ import OrdersContent from "@/components/ui/pages/account/OrdersContent";
 import { clearCart } from "@/utils/cartUtils";
 import DeleteAccountModal from "./DeleteAccountModal";
 import { useDeleteAccount } from "@/queries/useDeleteAccount";
+import { clearCacheSignUpModal } from "@/utils/signUpUtils";
 
 interface AccountContentProps {
   userProfile: UserProfileResponse;
@@ -28,6 +29,7 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
   const handleLogOut = async () => {
     await supabase.auth.signOut();
     clearCart()
+    clearCacheSignUpModal();
     router.push("/");
     router.refresh();
   }
@@ -40,7 +42,7 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
   };
 
   return (
-    <div className="w-full grid grid-cols-10 max-tablet:grid-cols-1 gap-32 max-tablet:gap-10 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16">
+    <div className="px-[100px] max-tablet:px-[5%] w-full grid grid-cols-10 max-tablet:grid-cols-1 gap-32 max-tablet:gap-10 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16">
 
       {/* LEFT – STICKY side section */}
       <aside className="col-span-3 laptop:sticky top-32 self-start h-[80vh] flex flex-col justify-between max-tablet:hidden">
@@ -73,14 +75,14 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
                   className="w-full max-w-[180px] border border-black/20 py-4 text-sm font-regular
                   transition-all duration-300 ease-in-out
                   bg-[#fffefa] text-black
-                  hover:bg-black hover:text-[#fffefa]"
+                  hover:bg-black hover:text-[#fffefa] max-mobile:py-3 max-mobile:text-xs"
                 >
                   Logout
                 </button>
               </div>
             </div>
 
-            <div className="flex flex-col gap-20">
+            <div className="flex flex-col gap-20 max-mobile:gap-16">
               <AccountTier />
               <AccountProfileForm userProfile={userProfile} />
               <AccountAddressForm userProfile={userProfile} />
