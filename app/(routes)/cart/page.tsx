@@ -16,7 +16,8 @@ export default function CartPage() {
     const { data: backendItems } = useCartQuery();
 
     useEffect(() => {
-        if (backendItems) {
+        // If backendItems is non-null, it means we are authenticated and the backend is the source of truth.
+        if (backendItems !== null && backendItems !== undefined) {
             if (backendItems.length > 0) {
                 const mappedItems = backendItems.map(item => ({
                     product_id: item.product_variant_id,
@@ -30,10 +31,12 @@ export default function CartPage() {
                 }));
                 setLocalItems(mappedItems);
             } else {
+                // Only clear if the user is authenticated and the backend says the cart is empty.
                 clearCart();
                 setLocalItems([]);
             }
         } else {
+            // For guest users (backendItems is null) or before initial fetch, use local storage.
             setLocalItems(getCartItems());
         }
     }, [backendItems]);

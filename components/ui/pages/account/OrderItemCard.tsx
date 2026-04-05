@@ -36,7 +36,9 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
             </p>
           </div>
 
-          <div className="flex items-center justify-between font-regular">
+
+
+          <div className="flex items-center justify-between font-regular max-mobile:mt-11">
             <p className="text-[16px] uppercase max-mobile:text-sm">
               SGD {item.price}
             </p>

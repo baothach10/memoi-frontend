@@ -31,6 +31,8 @@ const buttonClass = `
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
+  max-mobile:text-xs
+  max-mobile:py-3
 `;
 
 interface AccountAddressFormProps {
@@ -98,16 +100,16 @@ export default function AccountAddressForm({ userProfile }: AccountAddressFormPr
     .sort((a, b) => a.label.localeCompare(b.label));
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 max-mobile:gap-9">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-regular uppercase tracking-tight">ADDRESS INFORMATION</h2>
-        <p className="text-sm text-black/60 leading-relaxed font-light">
+        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ADDRESS INFORMATION</h2>
+        <p className="text-sm text-black/60 max-mobile:text-xs">
           Make changes to your address here. Click save when you are done.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12">
-        <div className="flex flex-col gap-12">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-12 max-mobile:gap-9">
+        <div className="flex flex-col gap-12 max-mobile:gap-9">
           {/* COUNTRY */}
           <Field label="COUNTRY *" error={errors.country}>
             <div className="relative flex">

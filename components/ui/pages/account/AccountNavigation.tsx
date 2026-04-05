@@ -14,13 +14,13 @@ export default function AccountNavigation({ active, setActive }: AccountNavigati
 
 
   return (
-    <nav className="sticky max-tablet:static text-[16px]">
+    <nav className="sticky max-tablet:static text-[16px] max-mobile:text-sm">
       {sections.map((section) => (
         <div
           key={section.id}
           onClick={() => setActive(section.id)}
-          className={`block py-6 transition cursor-pointer capitalize tracking-widest ${active === section.id
-            ? "border-b border-black font-medium"
+          className={`block py-6 transition cursor-pointer capitalize  ${active === section.id
+            ? "border-b border-black"
             : "border-b border-b-black/10 text-black/70 hover:text-black"
             }`}
         >

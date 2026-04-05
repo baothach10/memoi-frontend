@@ -25,13 +25,13 @@ import { setCartItems } from "@/utils/cartUtils";
 export function useCartQuery() {
   const supabase = createBrowserSupabaseClient();
 
-  const query = useQuery<BackendCartItem[]>({
+  const query = useQuery<BackendCartItem[] | null>({
     queryKey: ["cart"],
     queryFn: async () => {
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
-        return [];
+        return null;
       }
 
       const res = await fetch(`/api/users/cart`, {
@@ -61,7 +61,7 @@ export function useCartQuery() {
       if (!session) return;
 
       if (query.data && query.data.length > 0) {
-        const localFormat = query.data.map(item => ({
+        const localFormat = query.data.map((item: BackendCartItem) => ({
           product_id: item.product_variant_id, 
           size: item.size,
           quantity: item.quantity,

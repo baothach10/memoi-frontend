@@ -79,8 +79,8 @@ export default function AccountTier() {
   if (isLoading) {
     return (
       <div className="flex flex-col gap-12">
-        <div className="flex flex-col gap-6">
-          <h2 className="text-2xl font-regular uppercase">ACCOUNT TIER</h2>
+        <div className="flex flex-col gap-6 max-mobile:gap-4">
+          <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
           <div className="animate-pulse space-y-4">
             <div className="h-4 bg-black/5 rounded w-3/4"></div>
             <div className="h-8 bg-black/5 rounded w-1/2"></div>
@@ -92,19 +92,21 @@ export default function AccountTier() {
   }
 
   return (
-    <div className="flex flex-col gap-12">
-      <div className="flex flex-col gap-6">
-        <h2 className="text-2xl font-regular uppercase">ACCOUNT TIER</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
+    <div className="flex flex-col gap-12 max-mobile:gap-9">
+      <div className="flex flex-col gap-6 max-mobile:gap-4">
+        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
+        <p className="text-sm text-black/80 max-mobile:text-xs">
           Elevate your status to unlock new levels of privilege and reward. View full details at{" "}
           <Link href="/the-memoi-house" className="inline underline underline-offset-4 decoration-black/40 hover:decoration-black transition-colors">The MEMOÍ House</Link>
         </p>
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 max-mobile:gap-6">
         <div className="space-y-2">
-          <p className="text-xl font-regular uppercase">{formatCurrency(currentSpending)}</p>
-          <p className="text-sm text-black/80 uppercase tracking-widest">{getNextTierMessage()}</p>
+          <p className="text-xl font-regular uppercase max-mobile:text-[16px]">{formatCurrency(currentSpending)}</p>
+          <p className="text-sm text-black/80 max-mobile:text-xs">
+            {getNextTierMessage()}
+          </p>
         </div>
 
         {/* Progress Bar */}
@@ -121,22 +123,22 @@ export default function AccountTier() {
           <div className="flex justify-between relative">
             <div className="flex flex-col items-start relative z-20">
               <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ" || tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}</div>
-              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ" ? "" : "text-black/40"}`}>MEMOÍ</p>
+              <p className={`mt-6 text-sm uppercase font-regular max-mobile:mt-4 ${tier === "MEMOÍ" ? "" : "text-black/40"}`}>MEMOÍ</p>
             </div>
             <div className="flex flex-col items-center relative z-20">
               <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ +" || tier === "MEMOÍ ELITE")}</div>
-              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ +" ? "" : "text-black/40"}`}>MEMOÍ +</p>
+              <p className={`mt-6 text-sm uppercase font-regular max-mobile:mt-4 ${tier === "MEMOÍ +" ? "" : "text-black/40"}`}>MEMOÍ +</p>
             </div>
             <div className="flex flex-col items-end relative z-20">
               <div className="h-6 flex items-center">{getMarkerStyle(tier === "MEMOÍ ELITE")}</div>
-              <p className={`mt-6 text-sm uppercase font-regular ${tier === "MEMOÍ ELITE" ? "" : "text-black/40"}`}>MEMOÍ ELITE</p>
+              <p className={`mt-6 text-sm uppercase font-regular max-mobile:mt-4 ${tier === "MEMOÍ ELITE" ? "" : "text-black/40"}`}>MEMOÍ ELITE</p>
             </div>
           </div>
         </div>
 
         {tierExpiry && (
-          <p className="text-sm text-black/80 font-regular">
-            Status valid until {formatExpiryDate(tierExpiry)}. Buy more to upgrade to the next level and unlock exclusive benefits.
+          <p className="text-sm text-black/80 max-mobile:text-xs">
+            <span className="font-regular">Status valid until {formatExpiryDate(tierExpiry)}.</span> Buy more to upgrade to the next level and unlock exclusive benefits.
           </p>
         )}
       </div>
