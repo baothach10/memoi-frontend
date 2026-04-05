@@ -1,6 +1,7 @@
 import Image from "next/image";
 import QuantitySelector from "@/components/ui/atoms/QuantitySelector";
 import { CartItem } from "@/utils/cartUtils";
+import { AlertCircle } from "lucide-react";
 
 interface CartItemCardProps {
     item: CartItem;
@@ -28,9 +29,17 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                 {/* Product Details */}
                 <div className="flex flex-col justify-between flex-1 min-w-0 py-[2.5%]">
                     <div className="flex flex-col gap-2">
-                        <h3 className="text-sm leading-snug font-regular max-mobile:text-xs ">
-                            {item.productName}
-                        </h3>
+                        <div className="flex items-start justify-between gap-4">
+                            <h3 className="text-sm leading-snug font-regular max-mobile:text-xs">
+                                {item.productName}
+                            </h3>
+                            {(item.stock === 0 || item.quantity > item.stock) && (
+                                <div className="flex items-start gap-1 text-[#B3261E] text-xs">
+                                    <AlertCircle size={12} className="mt-px max-tablet:mt-px" />
+                                    {item.stock === 0 ? "Out of stock" : `${item.stock} lefts in stock`}
+                                </div>
+                            )}
+                        </div>
                         <p className="text-sm text-black/60 tracking-wide max-mobile:text-xs ">
                             {item.color_name.toUpperCase()}, {item.size}
                         </p>
@@ -46,6 +55,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                                 quantity={item.quantity}
                                 onIncrease={onIncrease}
                                 onDecrease={onDecrease}
+                                isIncreaseDisabled={item.quantity > item.stock}
                             />
 
                             {/* Remove Button */}
@@ -69,6 +79,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                                 quantity={item.quantity}
                                 onIncrease={onIncrease}
                                 onDecrease={onDecrease}
+                                isIncreaseDisabled={item.quantity >= item.stock}
                             />
 
                             {/* Remove Button */}

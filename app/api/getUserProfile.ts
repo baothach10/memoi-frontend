@@ -43,8 +43,6 @@ export async function getUserProfile(): Promise<UserProfileResponse> {
       data: { session },
     } = await supabase.auth.getSession();
 
-    console.log(session?.access_token);
-
     if (!session) {
       return { authenticated: false, profile_completed: false };
     }

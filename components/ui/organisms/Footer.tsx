@@ -131,7 +131,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="grid grid-cols-1 w-full mx-auto text-center laptop:hidden">
+        <div className="grid grid-cols-1 w-full mx-auto text-center max-tablet:px-10 max-mobile:px-5 laptop:hidden">
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:py-4 max-mobile:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
             <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-2 max-tablet:mt-3">
               {itemsList &&

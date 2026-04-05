@@ -2,11 +2,9 @@
 
 import Link from "next/link";
 
-export default function DeleteAccountSection() {
+export default function DeleteAccountSection({ onDelete }: { onDelete: () => void }) {
   const handleDelete = () => {
-    if (confirm("Are you sure you want to delete your account? This action is permanent.")) {
-      console.log("Deleting account...");
-    }
+    onDelete();
   };
 
   return (

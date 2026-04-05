@@ -3,13 +3,12 @@
 import { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Field from "@/components/ui/molecules/Field";
-import CheckoutSummary, { 
-    SummaryHeader, 
-    SummaryItems, 
-    SummaryPromo, 
-    SummaryTotals, 
-    SummaryTotalAmount, 
-    SummaryActions, 
+import CheckoutSummary, {
+    SummaryItems,
+    SummaryPromo,
+    SummaryTotals,
+    SummaryTotalAmount,
+    SummaryActions,
     MobileSummaryTotalAmount
 } from "@/components/ui/molecules/CheckoutSummary";
 import ChevronDownIcon from "@/components/ui/atoms/ChevronDownIcon";
@@ -19,10 +18,11 @@ import en from "i18n-iso-countries/langs/en.json";
 import { UserProfileResponse } from "@/app/api/getUserProfile";
 import StripePayment from "@/components/ui/organisms/StripePayment";
 import { PaymentFormRef } from "@/components/ui/molecules/PaymentForm";
-import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
-import { useUpdateCart } from "@/queries/useUpdateCart";
+import { CartItem, clearCart, getCartItems } from "@/utils/cartUtils";
 import { BillingInfo, ProductItem } from "@/queries/useCreatePaymentIntent";
 import { useAddressInfoQuery } from "@/queries/useAddressInfoQuery";
+import { useDiscountMutation } from "@/queries/useDiscountMutation";
+import { useCartQuery } from "@/queries/useCartQuery";
 
 countries.registerLocale(en);
 
@@ -74,24 +74,60 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const [selectedShippingId, setSelectedShippingId] = useState(
         SHIPPING_METHODS[0].id
     );
-    const updateCartMutation = useUpdateCart();
+    const discountMutation = useDiscountMutation();
     const [localItems, setLocalItems] = useState<CartItem[]>([]);
     const [promoCode, setPromoCode] = useState("");
+    const [promoError, setPromoError] = useState<string | null>(null);
+    const [discountInfo, setDiscountInfo] = useState<{ amount: number, unit: string } | null>(null);
+    const { data: backendItems } = useCartQuery();
+
+    const handleApplyPromo = async () => {
+        if (!promoCode) return;
+        setPromoError(null);
+        try {
+            const data = await discountMutation.mutateAsync(promoCode);
+            if (data && data.valid) {
+                setDiscountInfo({ amount: data.discount_amount, unit: data.unit });
+                setPromoError(null);
+            } else {
+                const errorMsg = (data as any)?.reason || "Invalid or expired promocode";
+                setPromoError(errorMsg);
+                setPromoCode("");
+                setDiscountInfo(null);
+            }
+        } catch (error) {
+            setPromoError("Failed to validate promocode");
+            setDiscountInfo(null);
+        }
+    };
+
+    const isValidatingPromo = discountMutation.isPending;
 
     useEffect(() => {
-        setLocalItems(getCartItems());
-    }, []);
+        if (backendItems) {
+            if (backendItems.length > 0) {
+            const mappedItems = backendItems.map(item => ({
+                product_id: item.product_variant_id,
+                size: item.size,
+                quantity: item.quantity,
+                productName: item.product_name,
+                productImage: item.image_url,
+                stock: item.stock,
+                color_name: item.color_name,
+                price: item.unit_price,
+            }));
+            setLocalItems(mappedItems);
+            } else {
+                clearCart();
+                setLocalItems([])
+            }
+        }
+        else {
+            setLocalItems(getCartItems());
+        }
+    }, [backendItems]);
 
-    const itemsToDisplay = localItems.map(item => ({
-        ...item,
-        productId: item.product_id, // ensure compatibility with SummaryItems
-    }));
-
-    const updateLocalStorage = async (newItems: CartItem[]) => {
-        setLocalItems(newItems);
-        setCartItems(newItems);
-        await updateCartMutation.mutateAsync({ products: newItems });
-    };
+    const itemsToDisplay = localItems;
 
     const subtotal = itemsToDisplay.reduce(
         (sum, item) => sum + item.price * item.quantity,
@@ -101,21 +137,11 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
         SHIPPING_METHODS.find((m) => m.id === selectedShippingId) ||
         SHIPPING_METHODS[0];
 
-    const removeItem = (index: number) => {
-        const newItems = localItems.filter((_, i) => i !== index);
-        updateLocalStorage(newItems);
-    };
+    const discountAmount = discountInfo
+        ? (discountInfo.unit === "percent" ? (subtotal * discountInfo.amount) / 100 : discountInfo.amount)
+        : 0;
 
-    const updateQuantity = (index: number, delta: number) => {
-        const newItems = localItems.map((item, i) => {
-            const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
-            return {
-                ...item,
-                quantity: newQty
-            };
-        });
-        updateLocalStorage(newItems);
-    };
+    const total = subtotal + selectedShipping.priceValue - discountAmount;
 
     const {
         register,
@@ -215,13 +241,10 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
             <div className="laptop:hidden flex flex-col max-tablet:gap-8 max-mobile:gap-5">
                 {itemsToDisplay.length > 0 && (
                     <SummaryItems
-                        items={itemsToDisplay as any}
-                        onRemove={removeItem}
-                        onIncrease={(idx) => updateQuantity(idx, 1)}
-                        onDecrease={(idx) => updateQuantity(idx, -1)}
+                        items={itemsToDisplay}
                     />
                 )}
-                <MobileSummaryTotalAmount total={subtotal + selectedShipping.priceValue} />
+                <MobileSummaryTotalAmount total={total} />
             </div>
 
 
@@ -397,15 +420,15 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
                         Payment Method
                     </h2>
-                    <StripePayment 
-                        ref={paymentRef} 
+                    <StripePayment
+                        ref={paymentRef}
                         items={localItems.map((item) => ({
                             product_variant_id: item.product_id,
                             quantity: item.quantity,
-                        }) as ProductItem )}
+                        }) as ProductItem)}
                         billingInfo={billingInfo}
                         promoCode={promoCode}
-                        amount={Math.round((subtotal + selectedShipping.priceValue) * 100)}
+                        amount={Math.round(total * 100)}
                         currency="sgd"
                     />
                 </div>
@@ -418,6 +441,15 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     isProcessing={isProcessing}
                     shippingCost={selectedShipping.priceValue}
                     shippingLabel={selectedShipping.price}
+                    items={itemsToDisplay}
+                    subtotal={subtotal}
+                    discountAmount={discountAmount}
+                    total={total}
+                    promoCode={promoCode}
+                    setPromoCode={setPromoCode}
+                    onApplyPromo={handleApplyPromo}
+                    isValidatingPromo={isValidatingPromo}
+                    promoError={promoError}
                 />
             </div>
 
@@ -427,12 +459,17 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     <SummaryPromo
                         promoCode={promoCode}
                         setPromoCode={setPromoCode}
+                        onApply={handleApplyPromo}
+                        isValidating={isValidatingPromo}
+                        error={promoError}
                     />
                     <SummaryTotals
                         subtotal={subtotal}
+                        shippingCost={selectedShipping.priceValue}
                         shippingLabel={selectedShipping.price}
+                        discount={discountAmount}
                     />
-                    <SummaryTotalAmount total={subtotal + selectedShipping.priceValue} />
+                    <SummaryTotalAmount total={total} />
                 </div>
 
                 <SummaryActions

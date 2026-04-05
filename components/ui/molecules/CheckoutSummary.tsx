@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useUpdateCart } from "@/queries/useUpdateCart";
-import { CartItem, getCartItems, setCartItems } from "@/utils/cartUtils";
-import CartItemCard from "./CartItemCard";
+import { CartItem } from "@/utils/cartUtils";
+import OrderItemCard from "../pages/account/OrderItemCard";
+import { AlertCircle } from "lucide-react";
 
 interface CheckoutSummaryProps {
     onPlaceOrder: () => void;
@@ -21,25 +20,26 @@ export const SummaryHeader = () => (
     </h2>
 );
 
-export const SummaryItems = ({ 
+export const SummaryItems = ({
     items,
-    onRemove,
-    onIncrease,
-    onDecrease
-}: { 
+}: {
     items: CartItem[];
-    onRemove: (index: number) => void;
-    onIncrease: (index: number) => void;
-    onDecrease: (index: number) => void;
 }) => (
-    <div className="flex flex-col px-[5%] gap-2.5">
+    <div className="flex flex-col gap-2.5">
         {items.map((item, index) => (
-            <CartItemCard
+            <OrderItemCard
                 key={`${item.product_id}-${index}`}
-                item={item}
-                onRemove={() => onRemove(index)}
-                onIncrease={() => onIncrease(index)}
-                onDecrease={() => onDecrease(index)}
+                item={
+                    {
+                        id: item.product_id as string,
+                        name: item.productName,
+                        color_name: item.color_name,
+                        size: item.size,
+                        price: item.price,
+                        quantity: item.quantity,
+                        image: item.productImage,
+                    }
+                }
             />
         ))}
     </div>
@@ -48,46 +48,66 @@ export const SummaryItems = ({
 export const SummaryPromo = ({
     promoCode,
     setPromoCode,
+    onApply,
+    isValidating,
+    error,
 }: {
     promoCode: string;
     setPromoCode: (val: string) => void;
+    onApply: () => void;
+    isValidating: boolean;
+    error: string | null;
 }) => (
-    <div className="flex gap-2.5 items-end justify-end">
-        <input
-            type="text"
-            value={promoCode}
-            onChange={(e) => setPromoCode(e.target.value)}
-            placeholder="Promocode"
-            className="relative h-fit flex-1 border-b border-black/40 pb-2 bg-transparent text-sm outline-none focus:border-black/60 placeholder:text-black/40"
-        />
-        <button
-            type="button"
-            className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 transition-colors"
-        >
-            Apply
-        </button>
+    <div className="flex flex-col gap-2">
+        <div className="flex gap-2.5 items-end justify-end">
+            <input
+                type="text"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                placeholder="Promocode"
+                className="relative h-fit flex-1 border-b border-black/40 pb-2 bg-transparent text-sm outline-none focus:border-black/60 placeholder:text-black/40"
+            />
+            <button
+                type="button"
+                onClick={onApply}
+                disabled={isValidating || !promoCode}
+                className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 transition-colors disabled:opacity-50"
+            >
+                {isValidating ? "Checking..." : "Apply"}
+            </button>
+        </div>
+        {error && (
+            <div className="flex items-start gap-1 text-[#B3261E] text-xs">
+                <AlertCircle size={12} className="mt-px max-tablet:mt-px" />
+                <span>{error}</span>
+            </div>
+        )}
     </div>
 );
 
 export const SummaryTotals = ({
     subtotal,
     shippingLabel,
+    shippingCost,
+    discount,
 }: {
     subtotal: number;
     shippingLabel: string;
+    shippingCost: number;
+    discount: number;
 }) => (
     <div className="flex flex-col gap-2 text-sm font-regular">
         <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>SGD {subtotal}</span>
+            <span>SGD {subtotal.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
             <span>Shipping</span>
-            <span>{shippingLabel}</span>
+            <span>{shippingCost == 0 ? shippingLabel : `SGD ${shippingCost.toFixed(2)}`}</span>
         </div>
         <div className="flex justify-between">
             <span>Discount</span>
-            <span>SGD 0.00</span>
+            <span>SGD {discount > 0 ? `${discount.toFixed(2)}` : "0.00"}</span>
         </div>
     </div>
 );
@@ -98,7 +118,7 @@ export const SummaryTotalAmount = ({ total }: { total: number }) => (
             <span className=" font-regular">Total</span>
             <span className="text-black/50">(TAX INCLUDED)</span>
         </div>
-        <span className=" font-regular">SGD {total}</span>
+        <span className=" font-regular">SGD {total.toFixed(2)}</span>
     </div>
 );
 
@@ -108,7 +128,7 @@ export const MobileSummaryTotalAmount = ({ total }: { total: number }) => (
             <span className=" font-regular">Total</span>
             <span className="text-black/50">(TAX INCLUDED)</span>
         </div>
-        <span className=" font-regular">SGD {total}</span>
+        <span className=" font-regular">SGD {total.toFixed(2)}</span>
     </div>
 );
 
@@ -149,6 +169,22 @@ export const SummaryActions = ({
     </div>
 );
 
+interface CheckoutSummaryProps {
+    onPlaceOrder: () => void;
+    isProcessing: boolean;
+    shippingCost: number;
+    shippingLabel: string;
+    items: CartItem[];
+    subtotal: number;
+    discountAmount: number;
+    total: number;
+    promoCode: string;
+    setPromoCode: (val: string) => void;
+    onApplyPromo: () => void;
+    isValidatingPromo: boolean;
+    promoError: string | null;
+}
+
 // --- Main Component ---
 
 export default function CheckoutSummary({
@@ -156,58 +192,23 @@ export default function CheckoutSummary({
     isProcessing,
     shippingCost,
     shippingLabel,
+    items,
+    subtotal,
+    discountAmount,
+    total,
+    promoCode,
+    setPromoCode,
+    onApplyPromo,
+    isValidatingPromo,
+    promoError,
 }: CheckoutSummaryProps) {
-    const updateCartMutation = useUpdateCart();
-    const [localItems, setLocalItems] = useState<CartItem[]>([]);
-
-    useEffect(() => {
-        setLocalItems(getCartItems());
-    }, []);
-
-    const itemsToDisplay = localItems.map(item => ({
-        ...item,
-        productId: item.product_id, // ensure compatibility with SummaryItems
-    }));
-
-    const updateLocalStorage = async (newItems: CartItem[]) => {
-        setLocalItems(newItems);
-        setCartItems(newItems);
-        await updateCartMutation.mutateAsync({ products: newItems });
-    };
-
-    const removeItem = (index: number) => {
-        const newItems = localItems.filter((_, i) => i !== index);
-        updateLocalStorage(newItems);
-    };
-
-    const updateQuantity = (index: number, delta: number) => {
-        const newItems = localItems.map((item, i) => {
-            const newQty = i === index ? Math.max(1, item.quantity + delta) : item.quantity;
-            return {
-                ...item,
-                quantity: newQty
-            };
-        });
-        updateLocalStorage(newItems);
-    };
-
-    const subtotal = itemsToDisplay.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
-    );
-
-    const [promoCode, setPromoCode] = useState("");
-
     return (
         <div className="flex flex-col gap-12">
             <SummaryHeader />
 
-            {itemsToDisplay.length > 0 && (
+            {items.length > 0 && (
                 <SummaryItems
-                    items={itemsToDisplay as any}
-                    onRemove={removeItem}
-                    onIncrease={(idx) => updateQuantity(idx, 1)}
-                    onDecrease={(idx) => updateQuantity(idx, -1)}
+                    items={items}
                 />
             )}
 
@@ -215,12 +216,17 @@ export default function CheckoutSummary({
                 <SummaryPromo
                     promoCode={promoCode}
                     setPromoCode={setPromoCode}
+                    onApply={onApplyPromo}
+                    isValidating={isValidatingPromo}
+                    error={promoError}
                 />
                 <SummaryTotals
                     subtotal={subtotal}
                     shippingLabel={shippingLabel}
+                    shippingCost={shippingCost}
+                    discount={discountAmount}
                 />
-                <SummaryTotalAmount total={subtotal + shippingCost} />
+                <SummaryTotalAmount total={total} />
             </div>
 
             <SummaryActions

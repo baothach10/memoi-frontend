@@ -27,7 +27,7 @@ function Field({
       {/* Reserved space for error */}
       {error && (
         <div className="pt-3">
-          <div className="flex items-start gap-1 text-red-600 text-xs">
+          <div className="flex items-start gap-1 text-[#B3261E] text-xs">
             <AlertCircle size={12} className="mt-px max-tablet:mt-px" />
             <span>{error.message || "This field is required"}</span>
           </div>

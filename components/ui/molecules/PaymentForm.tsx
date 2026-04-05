@@ -51,7 +51,7 @@ const PaymentForm = forwardRef<PaymentFormRef, PaymentFormProps>(function Paymen
                     promoCode
                 });
 
-                if (!clientSecret) {
+                if (!clientSecret) {               
                     throw new Error("Failed to create payment intent");
                 }
 
