@@ -7,13 +7,9 @@ export function useHeaderTheme() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const sections = document.querySelectorAll("[data-header-theme]");
-
-    if (!sections.length) return;
-    
     const bottomOffset = Math.max(window.innerHeight - 100, 0);
 
-    const observer = new IntersectionObserver(
+    const intersectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -30,10 +26,30 @@ export function useHeaderTheme() {
       }
     );
 
-    sections.forEach((s) => observer.observe(s));
+    const observeSections = () => {
+      const sections = document.querySelectorAll("[data-header-theme]");
+      sections.forEach((s) => intersectionObserver.observe(s));
+    };
 
-    return () => observer.disconnect();
-  }, [pathname]); // 🔥 re-run on navigation
+    // Use MutationObserver to watch for elements added dynamicially
+    const mutationObserver = new MutationObserver(() => {
+      observeSections();
+    });
+
+    // Start observing the wrapper element or document body
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Initial run
+    observeSections();
+
+    return () => {
+      intersectionObserver.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [pathname]);
 
   return theme;
 }

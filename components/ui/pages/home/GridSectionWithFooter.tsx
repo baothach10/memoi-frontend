@@ -17,7 +17,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
     >
       <div className="relative h-full w-full flex flex-col justify-around">
 
-        <div className="flex flex-col items-center text-center text-black gap-3 pt-20 pb-8 max-mobile:text-[14px] max-mobile:gap-2 max-mobile:pt-10 max-mobile:pb-6">
+        <div className="flex flex-col items-center text-center text-black gap-3 pt-20 pb-8 max-mobile:text-[14px] max-mobile:gap-2 max-mobile:pt-24 max-mobile:pb-6">
           <span className="uppercase text-2xl leading-none font-regular max-mobile:text-[14px]">Follow us on Instagram</span>
           <span>
             <Link
