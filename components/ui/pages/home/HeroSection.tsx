@@ -66,7 +66,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
     return (
       <section
         ref={ref}
-        className="h-screen w-full snap-start relative overflow-hidden"
+        className="h-svh w-full snap-start relative overflow-hidden"
       >
         {/* Desktop Media */}
         {media.type === "image" ? (
@@ -151,7 +151,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
         {children}
 
         {firstParameter && secondParameter && (
-          <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-14">
+          <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-8">
             <div className="mx-auto text-center space-y-3">
               {/* First Parameter - Links or Text */}
               <div className="text-white text-[1rem] leading-[1.2] max-mobile:text-sm">

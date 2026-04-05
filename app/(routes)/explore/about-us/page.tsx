@@ -13,9 +13,9 @@ export default function AboutUsPage() {
   const isLargeTablet = useIsMobile(1200);
 
   return (
-    <div className={`min-h-screen relative w-full bg-[#fffefa]`}>
+    <div className={`min-h-svh relative w-full bg-[#fffefa]`}>
       <section
-        className="min-h-screen h-full w-full text-black pt-36 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-10 max-mobile:pt-24 max-mobile:pb-10"
+        className="min-h-svh h-full w-full text-black pt-36 gap-[100px] relative flex flex-col items-center text-center smaller-tablet:max-tablet:pb-20 smaller-tablet:max-tablet:gap-16 max-mobile:gap-10 max-mobile:pt-24 max-mobile:pb-10"
         data-header-theme="light"
       >
         <div className="relative w-2/3 flex flex-col items-center text-center max-mobile:w-full max-mobile:px-4">

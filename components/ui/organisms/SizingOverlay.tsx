@@ -42,17 +42,15 @@ export default function SizingOverlay({
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/30 z-100 transition-opacity duration-300 max-tablet:w-full ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/30 z-100 transition-opacity duration-300 max-tablet:w-full ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={onClose}
       />
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-screen w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${
-          isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
-        }`}
+        className={`fixed top-0 right-0 h-svh w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Close Button Header */}
@@ -91,7 +89,7 @@ export default function SizingOverlay({
 
             <div className="flex flex-col gap-6">
               <p className="text-sm text-center underline font-regular uppercase decoration-black/40">CM</p>
-              
+
               <div className="w-full">
                 <table className="w-full text-center table-layout-fixed" style={{ tableLayout: 'fixed' }}>
                   <thead>

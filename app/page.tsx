@@ -367,7 +367,7 @@ export default function HomePage() {
         <div ref={smoothContentRef}>
           <div
             ref={heroSection1Ref}
-            className="h-screen relative"
+            className="h-svh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -382,7 +382,7 @@ export default function HomePage() {
 
           <div
             ref={heroSection2Ref}
-            className="h-screen relative"
+            className="h-svh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -397,7 +397,7 @@ export default function HomePage() {
 
           <div
             ref={heroSection3Ref}
-            className="h-screen relative"
+            className="h-svh relative"
             data-header-theme="dark"
           >
             <HeroSection
@@ -411,7 +411,7 @@ export default function HomePage() {
           </div>
           <div
             ref={heroSection4Ref}
-            className="h-screen relative"
+            className="h-svh relative"
             data-header-theme="dark"
           >
             <HeroSection

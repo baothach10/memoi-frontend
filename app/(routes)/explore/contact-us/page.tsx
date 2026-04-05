@@ -10,8 +10,8 @@ export default function ContactUsPage() {
     const whatsapp = "https://wa.me/6591234567?text=Hi%20MEMO%C3%8D%20team,%20I%20have%20a%20question";
 
     return (
-        <div className="min-h-screen h-full w-full relative" data-header-theme="light">
-            <section className="relative flex w-full min-h-screen justify-center px-25 flex-col max-tablet:px-0 smaller-tablet:max-tablet:max-w-[375px] max-tablet:mx-auto max-mobile:px-5">
+        <div className="min-h-svh h-full w-full relative" data-header-theme="light">
+            <section className="relative flex w-full min-h-svh justify-center px-25 flex-col max-tablet:px-0 smaller-tablet:max-tablet:max-w-[375px] max-tablet:mx-auto max-mobile:px-5">
                 <div className="relative w-full h-full text-center">
                     <h1 className="text-2xl tracking-widest mb-12 font-regular py-3.5 max-mobile:text-lg max-mobile:mb-[22px]">CONTACT US</h1>
 

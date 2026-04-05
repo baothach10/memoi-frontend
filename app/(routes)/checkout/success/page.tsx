@@ -61,7 +61,7 @@ function CheckoutSuccessContent() {
 
                         {/* Button */}
                         <Link href="/">
-                                <button className="w-full bg-black text-white py-4 text-sm  max-mobile:text-xs max-mobile:py-3.5">
+                            <button className="w-full bg-black text-white py-4 text-sm  max-mobile:text-xs max-mobile:py-3.5">
                                 Continue shopping
                             </button>
                         </Link>
@@ -75,7 +75,7 @@ function CheckoutSuccessContent() {
 
 export default function CheckoutSuccessPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
+        <Suspense fallback={<div className="min-h-svh py-50 flex justify-center text-sm text-black/50">Loading...</div>}>
             <CheckoutSuccessContent />
         </Suspense>
     );
