@@ -381,7 +381,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
   if (isError) return (
 
     <div className="relative w-full h-full bg-[#fffefa]">
-      <section className="min-h-dvh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24" data-header-theme="dark">
+      <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24" data-header-theme="dark">
         <div>Failed to load products...</div>
       </section>
     </div>
@@ -391,7 +391,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
     <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
-        className={`h-dvh ${isAtBottom ? "" : "overflow-hidden"} `}
+        className={`h-svh ${isAtBottom ? "" : "overflow-hidden"} `}
         style={{
           overscrollBehaviorY:
             currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
@@ -400,7 +400,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
         <div ref={smoothContentRef} className="bg-[#fffefa]">
           <div
             ref={heroSection1Ref}
-            className="h-dvh"
+            className="h-svh"
             data-header-theme="dark"
           >
             <HeroSection
@@ -420,7 +420,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
           <section
             ref={gridSectionRef}
             data-header-theme="light"
-            className="min-h-dvh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24"
+            className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24"
           >
             {isLoading || isFetching ? (
               <div>Loading products...</div>

@@ -431,7 +431,7 @@ function CollectionDetailPage() {
     <div className="relative w-full h-full bg-[#fffefa]">
       <div
         ref={smoothWrapperRef}
-        className={`h-dvh ${isAtBottom ? "" : "overflow-hidden"} `}
+        className={`h-svh ${isAtBottom ? "" : "overflow-hidden"} `}
         style={{
           overscrollBehaviorY:
             currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
@@ -440,7 +440,7 @@ function CollectionDetailPage() {
         <div ref={smoothContentRef} className="bg-[#fffefa]">
           <div
             ref={heroSection1Ref}
-            className="h-dvh"
+            className="h-svh"
             data-header-theme="dark"
           >
             <HeroSection
@@ -461,7 +461,7 @@ function CollectionDetailPage() {
 
           <section
             ref={gridSectionRef}
-            className="min-h-dvh w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+            className="min-h-svh w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
             data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">

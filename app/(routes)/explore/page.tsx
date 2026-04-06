@@ -40,9 +40,9 @@ export default function ContactUsPage() {
 
   return (
     <div className="relative">
-      <div className={`h-dvh overflow-hidden`}>
+      <div className={`h-svh overflow-hidden`}>
         <div className="bg-[#fffefa]">
-          <div className="h-dvh" data-header-theme="dark">
+          <div className="h-svh" data-header-theme="dark">
             <HeroSection
               ref={null}
               media={exampleWithLinks.media}
