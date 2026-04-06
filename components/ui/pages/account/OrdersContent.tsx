@@ -94,8 +94,8 @@ export default function OrdersContent() {
             <OrderCard key={`${order.id}-${idx}`} order={order} />
           ))
         ) : (
-          <div className="min-h-[400px] flex items-center justify-center border border-black/10">
-            <p className="text-sm text-black/40 uppercase tracking-widest font-light">
+          <div className="min-h-[400px] flex items-center justify-center">
+            <p className="text-sm text-black/40">
               No orders found in this category
             </p>
           </div>

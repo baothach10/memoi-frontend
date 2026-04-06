@@ -27,18 +27,18 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
 
         {/* Product Details */}
         <div className="flex flex-col justify-between flex-1 min-w-0 py-[2.5%]">
-          <div className="flex flex-col gap-2 font-regular max-mobile:gap-1">
-            <h3 className="text-[16px] max-mobile:text-xs">
+          <div className="flex flex-col gap-2 max-mobile:gap-2">
+            <h3 className="text-[16px] font-regular max-mobile:text-xs">
               {item.name}
             </h3>
-            <p className="text-sm text-black/60 uppercase max-mobile:text-xs">
-              {item.color_name}{item.size ? `, ${item.size}` : ''}
+            <p className="text-sm text-black/60 max-mobile:text-xs">
+              <span className="uppercase">{item.color_name}</span>{item.size ? `, ${item.size}` : ''}
             </p>
           </div>
 
 
 
-          <div className="flex items-center justify-between font-regular max-mobile:mt-11">
+          <div className="flex items-center justify-between font-regular max-mobile:mt-10">
             <p className="text-[16px] uppercase max-mobile:text-sm">
               SGD {item.price}
             </p>

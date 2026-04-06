@@ -392,7 +392,7 @@ function TheMemoiHousePage() {
                             <div className="space-y-20 max-mobile:space-y-10">
                                 <div className="text-center space-y-4">
                                     <h2 className="font-regular uppercase text-2xl max-mobile:text-lg">Benefits for House Members</h2>
-                                    <p className="text-[16px] leading-[140%] max-mobile:text-sm">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
+                                    <p className="text-[16px] leading-[140%] max-mobile:text-xs">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
                                 </div>
                                 <div>
                                     <BenefitTable />
