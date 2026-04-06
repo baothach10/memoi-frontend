@@ -26,7 +26,7 @@ export default function CollectionPage() {
 
   return (
     <div className="relative">
-      <div id="smooth-wrapper" className="h-dvh overflow-hidden">
+      <div id="smooth-wrapper" className="h-svh overflow-hidden">
         <div id="smooth-content">
           <HeroSection ref={null} media={exampleWithLinks.media} tabletMedia={exampleWithLinks.tabletMedia} mobileMedia={exampleWithLinks.mobileMedia} />
         </div>
