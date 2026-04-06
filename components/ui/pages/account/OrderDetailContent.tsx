@@ -10,8 +10,8 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
 
   if (isLoading) {
     return (
-      <div className="w-full min-h-[600px] flex items-center justify-center pt-32">
-        <p className="text-sm text-black/40 uppercase tracking-widest font-light animate-pulse">
+      <div className="w-full min-h-dvh flex items-center justify-center pt-32">
+        <p className="text-sm text-black/40">
           Loading order details...
         </p>
       </div>
@@ -20,7 +20,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
 
   if (isError || !order) {
     return (
-      <div className="w-full min-h-[600px] flex flex-col items-center justify-center pt-32 gap-6">
+      <div className="w-full min-h-dvh flex flex-col items-center justify-center pt-32 gap-6">
         <p className="text-sm text-black/40 uppercase tracking-widest font-light">
           Failed to load order details
         </p>
@@ -35,7 +35,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
   }
 
   return (
-    <div className="w-full flex flex-col gap-14 max-tablet:gap-14 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-16 max-mobile:gap-9">
+    <div className="w-full flex flex-col gap-14 max-tablet:gap-14 pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-24 max-mobile:gap-9">
       <div className="w-full flex flex-col gap-12 max-tablet:gap-8 max-mobile:gap-6">
         {/* Header */}
         <div className="flex flex-col gap-4 tablet:gap-8">

@@ -396,7 +396,7 @@ function CollectionDetailPage() {
       title: "THE BECOMING",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
-      url: "/shop/collection",
+      url: "/shop/collection/Becoming",
     },
     slider: [
       {
@@ -454,7 +454,7 @@ function CollectionDetailPage() {
                 title={exampleWithLinks.heroDetail.title}
                 numberOfItems={exampleWithLinks.heroDetail.numberOfItems}
                 urlTitle={exampleWithLinks.heroDetail.urlTitle}
-                url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
+                url={`${exampleWithLinks.heroDetail.url}`}
               />
             </HeroSection>
           </div>

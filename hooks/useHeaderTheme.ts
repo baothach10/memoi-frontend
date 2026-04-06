@@ -7,7 +7,7 @@ export function useHeaderTheme() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const bottomOffset = Math.max(window.innerHeight - 100, 0);
+    const bottomOffset = Math.max(window.innerHeight * 0.5, 0);
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {

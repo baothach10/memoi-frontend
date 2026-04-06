@@ -249,7 +249,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
 
 
             {/* LEFT — Personal Info + Billing + Payment */}
-            <div className="col-span-6 max-tablet:col-span-1 flex flex-col gap-10 max-tablet:gap-12 max-tablet:pt-8 max-tablet:border-t max-tablet:border-black/10 max-mobile:gap-16">
+            <div className="col-span-6 max-tablet:col-span-1 flex flex-col gap-10 max-tablet:gap-12 max-tablet:pt-8 max-tablet:border-t max-tablet:border-black/10 max-mobile:gap-16 max-tablet:pb-16 max-mobile:pb-11">
                 {/* Personal Information */}
                 <div className="flex flex-col gap-10 max-tablet:gap-12 max-mobile:gap-9">
                     <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">
@@ -454,7 +454,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
             </div>
 
             {/* BOTTOM MOBILE — promo, totals and place order button */}
-            <div className="laptop:hidden flex flex-col gap-10">
+            <div className="laptop:hidden flex flex-col gap-10 max-tablet:pt-16 max-tablet:border-t max-tablet:border-black/10 max-mobile:pt-8">
                 <div className="flex flex-col gap-8">
                     <SummaryPromo
                         promoCode={promoCode}

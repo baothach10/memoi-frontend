@@ -71,7 +71,7 @@ export const SummaryPromo = ({
                 type="button"
                 onClick={onApply}
                 disabled={isValidating || !promoCode}
-                className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 transition-colors disabled:opacity-50"
+                className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 transition-colors disabled:opacity-50 max-mobile:text-xs max-mobile:py-3 max-mobile:px-14"
             >
                 {isValidating ? "Checking..." : "Apply"}
             </button>
@@ -144,12 +144,12 @@ export const SummaryActions = ({
             type="button"
             onClick={onPlaceOrder}
             disabled={isProcessing}
-            className="w-full bg-black text-white py-4 text-sm tracking-wider hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white py-4 text-sm tracking-wider hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
         >
             {isProcessing ? "Processing..." : "Pre-order"}
         </button>
 
-        <p className="text-sm text-black leading-relaxed">
+        <p className="text-sm text-black max-mobile:text-xs">
             By proceeding, I confirm that I have read and accept the{" "}
             <Link
                 href="/explore/terms-conditions"
@@ -212,7 +212,7 @@ export default function CheckoutSummary({
                 />
             )}
 
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 ">
                 <SummaryPromo
                     promoCode={promoCode}
                     setPromoCode={setPromoCode}
