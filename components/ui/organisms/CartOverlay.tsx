@@ -83,7 +83,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-100 transition-opacity duration-300 max-tablet:w-full ${isOpen
+        className={`fixed inset-0 h-dvh bg-black/30 z-100 transition-opacity duration-300 max-tablet:w-full ${isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
           }`}
