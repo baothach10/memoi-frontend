@@ -42,27 +42,72 @@ export default function OrdersContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center border border-black/10">
-        <p className="text-sm text-black/40 uppercase tracking-widest font-light animate-pulse">
-          Loading orders...
-        </p>
+      <div className="flex flex-col gap-12 max-mobile:gap-9">
+        {/* Tabs */}
+        <div className="flex gap-2.5 max-mobile:flex-col">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
+                ? "bg-black text-white border-black"
+                : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
+                }`}
+            >
+              {TAB_LABELS[tab]} <span className={`transition-all ${activeTab === tab ? "text-white/40" : "text-black/60 group-hover:text-white/40"
+                }`}>({getCount(tab)})</span>
+            </button>
+          ))}
+        </div>
+
+
+
+        <div className="min-h-[400px] flex items-center justify-center">
+          <p className="text-sm text-black/40 animate-pulse">
+            Loading...
+          </p>
+        </div>
       </div>
+
     );
   }
 
   if (isError) {
     return (
-      <div className="min-h-[400px] flex flex-col items-center justify-center border border-black/10 gap-4">
-        <p className="text-sm text-black/40 uppercase tracking-widest font-light">
-          Failed to load orders
-        </p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="text-xs underline underline-offset-4 decoration-black/40"
-        >
-          Retry
-        </button>
+      <div className="flex flex-col gap-12 max-mobile:gap-9">
+        {/* Tabs */}
+        <div className="flex gap-2.5 max-mobile:flex-col">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
+                ? "bg-black text-white border-black"
+                : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
+                }`}
+            >
+              {TAB_LABELS[tab]} <span className={`transition-all ${activeTab === tab ? "text-white/40" : "text-black/60 group-hover:text-white/40"
+                }`}>({getCount(tab)})</span>
+            </button>
+          ))}
+        </div>
+
+
+
+        <div className="min-h-[400px] flex flex-col items-center justify-center gap-4">
+          <p className="text-sm text-black/40">
+            Failed to load orders
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="text-xs underline underline-offset-4 decoration-black/40"
+          >
+            Retry
+          </button>
+        </div>
+
       </div>
+
     );
   }
 
@@ -74,18 +119,18 @@ export default function OrdersContent() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${
-              activeTab === tab
+            className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
               ? "bg-black text-white border-black"
               : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
               }`}
           >
-            {TAB_LABELS[tab]} <span className={`transition-all ${
-              activeTab === tab ? "text-white/40" : "text-black/60 group-hover:text-white/40"
-            }`}>({getCount(tab)})</span>
+            {TAB_LABELS[tab]} <span className={`transition-all ${activeTab === tab ? "text-white/40" : "text-black/60 group-hover:text-white/40"
+              }`}>({getCount(tab)})</span>
           </button>
         ))}
       </div>
+
+
 
       {/* Orders List */}
       <div className="flex flex-col gap-8 max-mobile:gap-9">

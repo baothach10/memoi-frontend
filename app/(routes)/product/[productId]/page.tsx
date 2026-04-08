@@ -26,7 +26,7 @@ export default function ProductPage() {
           data-header-theme="light"
           className="min-h-dvh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24"
         >
-          <div>Loading product...</div>
+          <div>Loading...</div>
         </section>
       </div>
     );

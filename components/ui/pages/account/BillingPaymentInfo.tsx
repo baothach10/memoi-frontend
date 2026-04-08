@@ -71,13 +71,13 @@ export default function BillingPaymentInfo({
           {
             <div className="flex justify-between">
               <span>Tier Discount</span>
-              <span>{currency} {tierDiscount > 0 ? (subtotal * tierDiscount).toFixed(2) : '0.00'}</span>
+              <span>{currency} {tierDiscount > 0 ? (tierDiscount).toFixed(2) : '0.00'}</span>
             </div>
           }
           {
             <div className="flex justify-between">
               <span>Promo Discount</span>
-              <span>{currency} {promoDiscount > 0 ? (subtotal * promoDiscount).toFixed(2) : '0.00'}</span>
+              <span>{currency} {promoDiscount > 0 ? (promoDiscount).toFixed(2) : '0.00'}</span>
             </div>
           }
         </div>

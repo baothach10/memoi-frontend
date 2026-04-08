@@ -347,7 +347,7 @@ export default function HomePage() {
       ],
     ],
     secondParameter: [
-      { url: "/shop", title: "Shop" },
+      { url: "/shop/all-products", title: "Shop" },
       { url: "/collection", title: "Discover" },
       { url: "/collection", title: "Discover" },
       { url: "/collection", title: "Discover" },

@@ -423,7 +423,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
             className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24"
           >
             {isLoading || isFetching ? (
-              <div>Loading products...</div>
+              <div>Loading...</div>
             ) : (
               <>
                 <div className="mx-auto text-center space-y-2">

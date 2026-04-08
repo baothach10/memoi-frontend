@@ -17,7 +17,7 @@ const appearance = (isMobile: boolean) => ({
         colorBackground: "#fffefa",
         colorText: "#000000",
         colorDanger: "#df1b41",
-        fontFamily: "HelveticaNeueRegularWoff, sans-serif",
+        fontFamily: "HelveticaNeueRegular, sans-serif",
         spacingUnit: "4px",
         borderRadius: "0px",
         colorTextSecondary: "rgba(0, 0, 0, 1)",
@@ -47,6 +47,7 @@ const appearance = (isMobile: boolean) => ({
         ".Input": {
             border: "1px solid rgba(0, 0, 0, 0.2)",
             boxShadow: "none",
+            fontSize: isMobile ? "12px" : "14px",
             fontWeight: '200',
         },
         ".Input:focus": {
@@ -55,9 +56,8 @@ const appearance = (isMobile: boolean) => ({
         },
         ".Label": {
             fontSize: isMobile ? "14px" : "16px",
-            fontWeight: '200',
             marginBottom: isMobile ? "8px" : "16px",
-            marginTop: isMobile ? "36px" : "48px",
+            marginTop: isMobile ? "24px" : "36px",
             textTransform: "uppercase",
             color: "rgba(0, 0, 0, 1)",
         },
@@ -111,11 +111,6 @@ const StripePayment = forwardRef<PaymentFormRef, StripePaymentProps>(function St
                 currency: currency.toLowerCase(),
                 paymentMethodTypes: ['card', 'paynow'],
                 appearance: appearance(isMobile),
-                fonts: [
-                    {
-                        cssSrc: "/fonts/font.css",
-                    },
-                ],
             }}
         >
             <PaymentForm 
