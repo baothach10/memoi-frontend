@@ -6,7 +6,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
 
   return (
 
-    <div className="px-[100px] max-tablet:px-[5%] relative w-full bg-[#fffefa]" data-header-theme="light">
+    <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
 
       <OrderDetailContent orderId={id} />
 

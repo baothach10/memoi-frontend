@@ -138,7 +138,7 @@ export default function EmailVerificationForm({ email }: Props) {
       <ErrorModal open={errorOpen} onClose={handleErrorClose} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="relative flex flex-col w-full h-full text-center gap-12"
+        className="relative flex flex-col w-full h-full text-center gap-12 max-mobile:gap-9"
       >
         {/* Header */}
         <div className="gap-3">

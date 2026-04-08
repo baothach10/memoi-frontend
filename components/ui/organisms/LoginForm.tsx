@@ -44,7 +44,7 @@ export default function LoginForm() {
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        className="relative flex flex-col w-full h-full text-center gap-12"
+        className="relative flex flex-col w-full h-full text-center gap-12 max-mobile:gap-9"
       >
         <div className="gap-3">
           <h1 className="text-2xl tracking-wide font-regular max-mobile:text-lg">
@@ -110,7 +110,7 @@ export default function LoginForm() {
             <p className=" text-sm text-black/80 leading-[150%] max-mobile:text-xs">
               By logging in with my social login, I agree to link my account in
               accordance with the{" "}
-              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
+              <Link href={"/"} className="text-sm text-black relative inline-flex  cursor-pointer max-mobile:text-xs">
                 Privacy Policy
               </Link>
             </p>
@@ -120,7 +120,7 @@ export default function LoginForm() {
 
           <Link
             href={"/"}
-            className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40 cursor-pointer max-mobile:text-xs"
+            className="text-sm text-black relative inline-flexcursor-pointer max-mobile:text-xs"
           >
             Need help?
           </Link>
