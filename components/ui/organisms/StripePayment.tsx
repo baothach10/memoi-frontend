@@ -91,16 +91,13 @@ const StripePayment = forwardRef<PaymentFormRef, StripePaymentProps>(function St
 
     if (!items.length || !billingInfo || !billingInfo.first_name || !billingInfo.address) {
         return (
-            <div className="py-8 px-6 border border-black/10 bg-black/[0.02]">
-                <p className="text-sm text-black/40 uppercase tracking-widest font-light">
+            <div className="border border-black/10 p-6 max-mobile:p-4">
+                <p className="text-sm text-black/40">
                     Please complete your shipping information to continue to payment.
                 </p>
             </div>
         );
     }
-
-    console.log("Amount:", amount);
-    console.log("Currency:", currency);
 
     return (
         <Elements

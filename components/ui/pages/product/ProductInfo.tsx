@@ -75,7 +75,6 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
     // Find the variant for the selected size to get its ID
     const variant = product.variants.find(v => v.size === size);
-    console.log('add to cart', variant)
     if (!variant) return;
 
     const updatedItems = addItemToCart({
