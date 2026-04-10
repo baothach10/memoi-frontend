@@ -30,7 +30,7 @@ function CheckoutSuccessContent() {
     }, [searchParams, router, updateCartMutation, isValid]);
 
     return (
-        <div className="" data-header-theme="light">
+        <div data-header-theme="light">
             {!isValid ? (
                 <div className="flex justify-center py-50 text-sm text-black/50">
                     Validating order...
