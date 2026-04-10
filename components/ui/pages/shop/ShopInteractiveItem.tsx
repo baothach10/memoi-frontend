@@ -26,6 +26,7 @@ export default function ShopInteractiveItem({
   return (
     <Link
       href={`/product/${id}`}
+      className="cursor-pointer"
     >
       <div className="flex flex-col items-center bg-linear-to-b from-[#fffefa] via-black/2 to-[#fffefa] smaller-tablet:pb-8 max-mobile:pb-4">
         {[

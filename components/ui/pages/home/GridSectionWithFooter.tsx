@@ -24,7 +24,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               href={"https://www.instagram.com/memoi.official/"}
               target="_blank"
               rel="noopener noreferrer"
-              className="leading-[1.2]"
+              className="cursor-pointer"
             >
               @memoi.official
             </Link>
@@ -50,7 +50,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
         </div>
         <div className="px-25 py-16 smaller-tablet:max-tablet:px-10 smaller-tablet:max-tablet:py-0 smaller-tablet:max-tablet:pt-16 max-mobile:px-5 max-mobile:py-10">
           <div className={`flex items-center max-tablet:flex-col`}>
-            <Link href={'/help?tab=shipping'} className="block flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=shipping'} className="block flex-1 smaller-tablet:max-tablet:w-full cursor-pointer">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Shipping Icon"
@@ -62,7 +62,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
 
             <div className="laptop:max-desktop:w-px max-tablet:h-px bg-gray-200 self-stretch max-mobile:my-[5px]" />
 
-            <Link href={'/help?tab=orders'} className="block flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=orders'} className="block flex-1 smaller-tablet:max-tablet:w-full cursor-pointer">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Payment Icon"
@@ -73,7 +73,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
 
             <div className="laptop:max-desktop:w-px max-tablet:h-px bg-gray-200 self-stretch max-mobile:my-[5px]" />
 
-            <Link href={'/help?tab=house'} className="block flex-1 smaller-tablet:max-tablet:w-full">
+            <Link href={'/help?tab=house'} className="block flex-1 smaller-tablet:max-tablet:w-full cursor-pointer">
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Check Icon"

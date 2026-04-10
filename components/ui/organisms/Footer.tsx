@@ -32,7 +32,7 @@ export function Footer() {
                 itemsList.map((category) => (
                   <li key={category.id}>
                     <Link
-                      className="hover:text-black transition"
+                      className="hover:text-black transition cursor-pointer"
                       href={`/shop/category/${category.name}`}
                     >
                       {category.name}
@@ -49,7 +49,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/explore/about-us"
-                  className="hover:text-black transition"
+                  className="hover:text-black transition cursor-pointer"
                 >
                   About us
                 </Link>
@@ -57,7 +57,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/the-memoi-house"
-                  className="hover:text-black transition"
+                  className="hover:text-black transition cursor-pointer"
                 >
                   The MEMOÍ House
                 </Link>
@@ -65,7 +65,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/explore/commitments"
-                  className="hover:text-black transition"
+                  className="hover:text-black transition cursor-pointer"
                 >
                   Our Commitments
                 </Link>
@@ -73,7 +73,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/explore/contact-us"
-                  className="hover:text-black transition"
+                  className="hover:text-black transition cursor-pointer"
                 >
                   Contact us
                 </Link>
@@ -84,22 +84,22 @@ export function Footer() {
             <h4 className="font-regular mb-2 text-[16px] uppercase">Help</h4>
             <ul className="space-y-2 text-black/60 text-sm">
               <li>
-                <Link href="/help?tab=shipping" className="hover:text-black transition">
+                <Link href="/help?tab=shipping" className="hover:text-black transition cursor-pointer">
                   Shipping & Exchanges
                 </Link>
               </li>
               <li>
-                <Link href="/help?tab=orders" className="hover:text-black transition">
+                <Link href="/help?tab=orders" className="hover:text-black transition cursor-pointer">
                   Orders & Payment
                 </Link>
               </li>
               <li>
-                <Link href="/help?tab=care" className="hover:text-black transition">
+                <Link href="/help?tab=care" className="hover:text-black transition cursor-pointer">
                   MEMOÍ care
                 </Link>
               </li>
               <li>
-                <Link href="/exchange-request" className="hover:text-black transition">
+                <Link href="/exchange-request" className="hover:text-black transition cursor-pointer">
                   Exchange Request
                 </Link>
               </li>
@@ -109,22 +109,22 @@ export function Footer() {
             <h4 className="font-regular mb-2 text-[16px] uppercase">Legal</h4>
             <ul className="space-y-2 text-black/60 text-sm">
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="/privacy-policy" className="hover:text-black transition cursor-pointer">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Cookies Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Cookies Settings
                 </Link>
               </li>
@@ -187,22 +187,22 @@ export function Footer() {
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 border-b border-b-black/10 max-mobile:py-4 max-tablet:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
             <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-4 max-tablet:mt-3">
               <li>
-                <Link href="/help?tab=shipping" className="hover:text-black transition">
+                <Link href="/help?tab=shipping" className="hover:text-black transition cursor-pointer">
                   Shipping & Exchanges
                 </Link>
               </li>
               <li>
-                <Link href="/help?tab=orders" className="hover:text-black transition">
+                <Link href="/help?tab=orders" className="hover:text-black transition cursor-pointer">
                   Orders & Payment
                 </Link>
               </li>
               <li>
-                <Link href="/help?tab=care" className="hover:text-black transition">
+                <Link href="/help?tab=care" className="hover:text-black transition cursor-pointer">
                   MEMOÍ care
                 </Link>
               </li>
               <li>
-                <Link href="/exchange-request" className="hover:text-black transition">
+                <Link href="/exchange-request" className="hover:text-black transition cursor-pointer">
                   Exchange Request
                 </Link>
               </li>
@@ -212,22 +212,22 @@ export function Footer() {
           <ExpandableSection defaultOpen={false} className="relative mx-10 py-6 max-mobile:py-4 max-tablet:mx-0" title={<h4 className="font-regular text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
             <ul className="space-y-3 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs  max-mobile:mt-4 max-tablet:mt-3">
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="/privacy-policy" className="hover:text-black transition cursor-pointer">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Cookies Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition">
+                <Link href="#" className="hover:text-black transition cursor-pointer">
                   Cookies Settings
                 </Link>
               </li>

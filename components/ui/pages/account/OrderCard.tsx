@@ -83,7 +83,7 @@ export default function OrderCard({ order }: OrderCardProps) {
         </div>
         <Link 
           href={`/account/orders/${order.id}`}
-          className="w-[200px] py-4 border border-black/10 text-sm hover:bg-black hover:text-white transition-all max-mobile:w-[120px] max-mobile:text-xs text-center max-mobile:py-3"
+          className="w-[200px] py-4 border border-black/10 text-sm cursor-pointer hover:bg-black hover:text-white transition-all max-mobile:w-[120px] max-mobile:text-xs text-center max-mobile:py-3"
         >
           View details
         </Link>

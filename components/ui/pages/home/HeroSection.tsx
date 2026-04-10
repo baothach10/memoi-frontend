@@ -162,7 +162,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                         key={index}
                         url={link.url}
                         title={link.title}
-                        style={`uppercase relative inline-flex leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40`}
+                        style={`uppercase relative inline-flex cursor-pointer leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40`}
                       />
                     ))}
                   </div>
@@ -176,7 +176,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                 <LinkItem
                   url={secondParameter.url}
                   title={secondParameter.title}
-                  style="capitalize relative inline-flex leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
+                  style="capitalize relative inline-flex leading-[18px] cursor-pointer text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
                 />
               </div>
             </div>

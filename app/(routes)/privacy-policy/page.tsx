@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
                         <ul className="list-disc pl-6 flex flex-col gap-3">
                             <li>
                                 Visit our website at{" "}
-                                <Link href="#" target="_blank" rel="noopener noreferrer">
+                                <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                     http://www.memoiofficial.com
                                 </Link>{" "}
                                 or any website of ours that links to this Privacy Notice
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
                         </ul>
                         <p>
                             Questions or concerns? Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at{" "}
-                            <Link href="mailto:memoi@memoiofficial.com">
+                            <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>.
                         </p>
@@ -94,7 +94,7 @@ export default function PrivacyPolicyPage() {
                             </p>
                             <p>
                                 How do you exercise your rights? The easiest way to exercise your rights is by visiting{" "}
-                                <Link href="#" target="_blank" rel="noopener noreferrer">
+                                <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                     http://www.memoiofficial.com/user-dashboard
                                 </Link>
                                 , or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.
@@ -133,7 +133,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p >
                             <strong className="text-black">Payment Data.</strong> We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by Stripe. You may find their privacy notice link(s) here:{" "}
-                            <Link href="#" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 https://stripe.com/privacy
                             </Link>.
                         </p>
@@ -155,7 +155,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p >
                             Like many businesses, we also collect information through cookies and similar technologies. You can find out more about this in our Cookie Notice:{" "}
-                            <Link href="#" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.memoiofficial.com/cookie-policy
                             </Link>.
                         </p>
@@ -298,7 +298,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p>
                             Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice:{" "}
-                            <Link href="#" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.memoiofficial.com/cookie-policy
                             </Link>.
                         </p>
@@ -308,15 +308,15 @@ export default function PrivacyPolicyPage() {
                         </h3>
                         <p>
                             We may share your information with Google Analytics to track and analyze the use of the Services. The Google Analytics Advertising Features that we may use include: Google Analytics Demographics and Interests Reporting. To opt out of being tracked by Google Analytics across the Services, visit{" "}
-                            <Link href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">
+                            <Link href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 https://tools.google.com/dlpage/gaoptout
                             </Link>
                             . You can opt out of Google Analytics Advertising Features through Ads Settings and Ad Settings for mobile apps. Other opt out means include{" "}
-                            <Link href="http://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer">
+                            <Link href="http://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://optout.networkadvertising.org/
                             </Link>{" "}
                             and{" "}
-                            <Link href="http://www.networkadvertising.org/mobile-choice" target="_blank" rel="noopener noreferrer">
+                            <Link href="http://www.networkadvertising.org/mobile-choice" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.networkadvertising.org/mobile-choice
                             </Link>
                             . For more information on the privacy practices of Google, please visit the Google Privacy &amp; Terms page.
@@ -378,7 +378,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p>
                             We do not knowingly collect, solicit data from, or market to children under 18 years of age or the equivalent age as specified by law in your jurisdiction, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or the equivalent age as specified by law in your jurisdiction or that you are the parent or guardian of such a minor and consent to such minor dependent&apos;s use of the Services. If we learn that personal information from users less than 18 years of age or the equivalent age as specified by law in your jurisdiction has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18 or the equivalent age as specified by law in your jurisdiction, please contact us at{" "}
-                            <Link href="mailto:memoi@memoiofficial.com">
+                            <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>.
                         </p>
@@ -430,13 +430,13 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p>
                             Cookies and similar technologies: Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Services. For further information, please see our Cookie Notice:{" "}
-                            <Link href="#" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.memoiofficial.com/cookie-policy
                             </Link>.
                         </p>
                         <p>
                             If you have questions or comments about your privacy rights, you may email us at{" "}
-                            <Link href="mailto:memoi@memoiofficial.com" >
+                            <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>.
                         </p>
@@ -566,11 +566,11 @@ export default function PrivacyPolicyPage() {
                         </h3>
                         <p >
                             To exercise these rights, you can contact us by visiting{" "}
-                            <Link href="#" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.memoiofficial.com/user-dashboard
                             </Link>
                             , by emailing us at{" "}
-                            <Link href="#" >
+                            <Link href="#" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>
                             , or by referring to the contact details at the bottom of this document.
@@ -594,7 +594,7 @@ export default function PrivacyPolicyPage() {
                         </h3>
                         <p>
                             Under certain US state data protection laws, if we decline to take action regarding your request, you may appeal our decision by emailing us at{" "}
-                            <Link href="mailto:memoi@memoiofficial.com">
+                            <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>
                             . We will inform you in writing of any action taken or not taken in response to the appeal, including a written explanation of the reasons for the decisions. If your appeal is denied, you may submit a complaint to your state attorney general.
@@ -621,7 +621,7 @@ export default function PrivacyPolicyPage() {
                         </h2>
                         <p>
                             If you have questions or comments about this notice, you may email us at{" "}
-                            <Link href="mailto:memoi@memoiofficial.com">
+                            <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>
                         </p>
@@ -634,7 +634,7 @@ export default function PrivacyPolicyPage() {
                         </h2>
                         <p>
                             You have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information. These rights may be limited in some circumstances by applicable law. To request to review, update, or delete your personal information, please visit:{" "}
-                            <Link href="http://www.memoiofficial.com/user-dashboard" target="_blank" rel="noopener noreferrer">
+                            <Link href="#" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                                 http://www.memoiofficial.com/user-dashboard
                             </Link>.
                         </p>

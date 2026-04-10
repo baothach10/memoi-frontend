@@ -149,7 +149,7 @@ export default function SignUpModal() {
             <Link
               href="/sign-in"
               onClick={() => handleClose(true)}
-              className="w-full laptop:w-auto border border-black/20 py-4 laptop:py-3 px-12 laptop:px-8 text-xs bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out max-tablet:text-xs max-mobile:py-3"
+              className="w-full laptop:w-auto border cursor-pointer border-black/20 py-4 laptop:py-3 px-12 laptop:px-8 text-xs bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out max-tablet:text-xs max-mobile:py-3"
             >
               Sign up
             </Link>

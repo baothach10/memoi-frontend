@@ -14,7 +14,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
             <div className="px-[5%] pt-[3%] pb-[5%] max-mobile:pt-[4%] max-mobile:pb-[4%]">
                 <div className="flex items-start justify-between">
                     <div>
-                        <p className="text-xl tracking-wider uppercase font-regular max-mobile:text-[16px]">
+                        <p className="text-xl uppercase font-regular max-mobile:text-[16px]">
                             Subtotal
                         </p>
                         <p className="text-sm text-black/60 mt-4 tracking-wide max-mobile:text-xs max-mobile:mt-2">
@@ -30,7 +30,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                 <Link
                     href="/cart"
                     onClick={onClose}
-                    className="block text-center flex-1 py-[2%] border border-black/20 text-black text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-3 max-mobile:text-xs"
+                    className="block text-center flex-1 py-[2%] border cursor-pointer border-black/20 text-black text-sm hover:bg-black hover:text-white transition-all duration-200 max-mobile:py-3 max-mobile:text-xs"
                 >
                     View cart
                 </Link>
@@ -43,7 +43,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                         }
                         onClose();
                     }}
-                    className={`block text-center flex-1 py-[2%] bg-black text-white text-sm tracking-wider hover:opacity-90 transition-all duration-200 max-mobile:py-3 max-mobile:text-xs ${showStockError ? "cursor-not-allowed opacity-50" : ""}`}
+                    className={`block text-center flex-1 py-[2%] cursor-pointer bg-black text-white text-sm hover:opacity-90 transition-all duration-200 max-mobile:py-3 max-mobile:text-xs ${showStockError ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                     Checkout
                 </Link>
@@ -65,7 +65,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                     Need help?{" "}
                     <Link
                         href="/explore/contact-us"
-                        className="underline underline-offset-4 decoration-black/40 hover:text-black transition-colors"
+                        className="underline underline-offset-4 decoration-black/40 hover:text-black transition-colors cursor-pointer"
                     >
                         Contact us
                     </Link>
@@ -74,7 +74,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                     By proceeding, you agree to our{" "}
                     <Link
                         href="/terms"
-                        className="underline underline-offset-4 decoration-black/40 hover:text-black transition-colors"
+                        className="underline underline-offset-4 decoration-black/40 hover:text-black transition-colors cursor-pointer"
                     >
                         Terms & Conditions
                     </Link>

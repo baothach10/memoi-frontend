@@ -20,6 +20,7 @@ function NavigationBar({
     after:left-0
     after:-bottom-px
     after:h-px
+    cursor-pointer
     after:w-full
     after:origin-left
     after:scale-x-0

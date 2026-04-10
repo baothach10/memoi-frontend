@@ -115,7 +115,7 @@ export default function MobileMenu({
                     <Link
                       href="/collection/ss26-the-becoming"
                       onClick={closeMenu}
-                      className=" text-[14px] uppercase max-mobile:text-xs"
+                      className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
                     >
                       SS26 THE BECOMING
                     </Link>
@@ -124,7 +124,7 @@ export default function MobileMenu({
                     <Link
                       href="#"
                       onClick={closeMenu}
-                      className=" text-[14px] uppercase max-mobile:text-xs"
+                      className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
                     >
                       FW26 COMING SOON
                     </Link>
@@ -146,7 +146,7 @@ export default function MobileMenu({
                     itemsList.map((category) => (
                       <li key={category.id}>
                         <Link
-                          className="flex"
+                          className="flex cursor-pointer"
                           href={`/shop/category/${category.name}`}
                         >
                           {category.name}
@@ -156,7 +156,7 @@ export default function MobileMenu({
 
                   <li>
                     <Link
-                      className="flex"
+                      className="flex cursor-pointer"
                       href={`/shop/all-products`}
                     >
                       All Products
@@ -179,6 +179,7 @@ export default function MobileMenu({
                     <Link
                       href="/explore/about-us"
                       onClick={closeMenu}
+                      className="cursor-pointer"
                     >
                       About us
                     </Link>
@@ -187,6 +188,7 @@ export default function MobileMenu({
                     <Link
                       href="/the-memoi-house"
                       onClick={closeMenu}
+                      className="cursor-pointer"
                     >
                       The MEMOÍ House
                     </Link>
@@ -195,6 +197,7 @@ export default function MobileMenu({
                     <Link
                       href="/explore/commitments"
                       onClick={closeMenu}
+                      className="cursor-pointer"
                     >
                       Our Commitments
                     </Link>
@@ -203,6 +206,7 @@ export default function MobileMenu({
                     <Link
                       href="/explore/contact-us"
                       onClick={closeMenu}
+                      className="cursor-pointer"
                     >
                       Contact us
                     </Link>
@@ -211,12 +215,12 @@ export default function MobileMenu({
               </ExpandableSection>
             </div>
             <div className="px-10 flex flex-col gap-4 max-mobile:px-4 max-tablet:pt-8">
-              <Link href="#" onClick={closeMenu}>
+              <Link href="#" onClick={closeMenu} className="cursor-pointer">
                 <span className="font-regular text-[16px] uppercase max-mobile:text-sm">
                   Shopping cart
                 </span>
               </Link>
-              <Link href="#" onClick={closeMenu}>
+              <Link href="#" onClick={closeMenu} className="cursor-pointer">
                 <span className="font-regular text-[16px] uppercase max-mobile:text-sm">
                   Account
                 </span>

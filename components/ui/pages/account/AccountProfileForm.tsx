@@ -231,7 +231,7 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
             </div>
             <div className="text-sm max-mobile:text-xs text-black">
               I would like to receive information about the latest updates from MEMOÍ by email. By submitting I agree to the MEMOÍ{" "}
-              <Link href={"/"} className=" inline relative underline decoration-black/40 cursor-pointer underline-offset-4">
+              <Link href={"/privacy-policy"} className=" inline relative underline decoration-black/40 cursor-pointer underline-offset-4">
                 Privacy Policy
               </Link>
             </div>

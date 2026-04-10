@@ -61,7 +61,7 @@ export default function BenefitItem({
     if (!href) return content
 
     const isInternal = href.startsWith('/')
-    const wrapperClass = 'block p-3 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    const wrapperClass = 'block p-3 rounded-lg cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200'
 
     return isInternal ? (
         <Link href={href} className={wrapperClass}>

@@ -25,22 +25,22 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Shop</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Dresses
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Tops
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Shorts
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Pants
                                 </Link>
                             </li>
@@ -50,22 +50,22 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Explore</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     About us
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     The MEMOÍ House
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Our Commitments
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Contact us
                                 </Link>
                             </li>
@@ -75,22 +75,22 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 border-b border-b-black/10 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Help</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Shipping & Exchanges
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Orders & Payment
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     MEMOÍ care
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Exchange Request
                                 </Link>
                             </li>
@@ -100,22 +100,22 @@ export function MobileFooter() {
                     <ExpandableSection defaultOpen={false} className="relative w-full px-10 py-6 max-mobile:px-4 max-mobile:py-4" title={<h4 className="font-regular mb-2 text-[16px] uppercase max-mobile:text-[14px]">Legal</h4>}>
                         <ul className="space-y-2 text-black/60 text-sm flex flex-col items-start max-mobile:text-xs">
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="/privacy-policy" className="hover:text-black transition cursor-pointer">
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Terms & Conditions
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Cookies Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-black transition">
+                                <Link href="#" className="hover:text-black transition cursor-pointer">
                                     Cookies Settings
                                 </Link>
                             </li>

@@ -138,7 +138,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                 key={id}
                 // onClick={() => setSelectedColor(colorData.color)}
                 href={`/product/${colorData.product_id}`}
-                className="relative w-4 h-4 flex items-center justify-center rounded-full"
+                className="relative w-4 h-4 flex items-center cursor-pointer justify-center rounded-full"
               >
                 {/* Inner base ring + color */}
                 <span

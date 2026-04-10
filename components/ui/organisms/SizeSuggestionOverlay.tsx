@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import gsap from "gsap";
 import Field from "../molecules/Field";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 function inputClass() {
   return `
@@ -360,7 +361,9 @@ export default function SizeSuggestionOverlay({
                     </button>
                     <p className="text-xs text-black/60 text-center">
                       By clicking Continue, you agree to the processing of your personal data, allowing us to recommend the size that suits you best. For more information, consult our{" "}
-                      <span className="underline decoration-black/40 underline-offset-4">Privacy & Policy</span>
+                      <Link href="/privacy-policy" className="underline decoration-black/40 underline-offset-4">
+                        Privacy & Policy
+                      </Link>
                     </p>
                   </div>
                 </div>

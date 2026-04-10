@@ -45,7 +45,7 @@ export default function GridHyperImageItem({
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open on Instagram"
-            className={`block ${className}`}
+            className={`block cursor-pointer ${className}`}
         >
             <div
                 className="relative w-full group"

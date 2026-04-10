@@ -35,7 +35,7 @@ export default function DeleteAccountSection({ onDelete }: { onDelete: () => voi
 
       <p className="text-sm text-black/80 leading-relaxed  mt-8 max-mobile:text-xs max-mobile:mt-7">
         At MEMOÍ, your privacy is our priority. We are committed to protecting your data and handling your information with the utmost integrity and security. Learn how we secure your data in our{" "}
-        <Link href={"/"} className=" inline text-black/80 relative underline decoration-black/40 cursor-pointer">
+        <Link href={"/privacy-policy"} className=" inline cursor-pointer text-black/80 relative underline decoration-black/40 cursor-pointer">
           Privacy Policy
         </Link>
       </p>

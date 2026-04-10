@@ -143,7 +143,7 @@ function RightNavigation({
         <Link
           href="/account"
           onClick={() => onClose?.()}
-          className="relative group text-white hover:text-gray-300 transition-all ease-in"
+          className="relative group text-white hover:text-gray-300 transition-all ease-in cursor-pointer"
         >
           <UserIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
