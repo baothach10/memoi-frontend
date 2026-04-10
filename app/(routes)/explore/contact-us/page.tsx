@@ -25,7 +25,7 @@ export default function ContactUsPage() {
                                     <p className="text-black/60 text-xs">Service available from Monday to Sunday from 10am to 9pm (ICT).</p>
                                 </div>
                             </div>
-                            <Link href={mailTo} className="relative w-full" target="_blank" rel="noreferrer">
+                            <Link href={mailTo} className="relative cursor-pointer w-full" target="_blank" rel="noreferrer">
                                 <span className="block w-full bg-transparent text-black border border-black/20  py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
                                     Mail us
                                 </span>
@@ -41,7 +41,7 @@ export default function ContactUsPage() {
                                     <p className="text-black/60 text-xs">Calls may be recorded for quality assurance.</p>
                                 </div>
                             </div>
-                            <Link href={whatsapp} target="_blank" rel="noreferrer" className="relative w-full">
+                            <Link href={whatsapp} target="_blank" rel="noreferrer" className="relative cursor-pointer w-full">
                                 <span className="block w-full bg-transparent text-black border border-black/20 py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
                                     Whatsapp us
                                 </span>
@@ -55,10 +55,10 @@ export default function ContactUsPage() {
                                 <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">For quick support, message us directly on Facebook (@memoi) or Instagram (@memoi.official). We aim to reply to DMs within 12 hours during service hours.</p>
                             </div>
                             <div className="flex w-full relative gap-4 items-center justify-center">
-                                <Link href="#" className="p-4 border border-black/20 rounded-full inline-flex items-center justify-center max-mobile:p-3">
+                                <Link href="#" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
                                     <FacebookIcon width={20} height={20} />
                                 </Link>
-                                <Link href="#" className="p-4 border border-black/20 rounded-full inline-flex items-center justify-center max-mobile:p-3">
+                                <Link href="#" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
                                     <InstagramIcon width={20} height={20} />
                                 </Link>
                             </div>

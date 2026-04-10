@@ -364,6 +364,7 @@ function TheMemoiHousePage() {
                                         border border-white/80
                                         text-white
                                         text-sm
+                                        cursor-pointer
                                         tracking-[0.12em]
                                         bg-transparent
                                         transition-all

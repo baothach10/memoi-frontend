@@ -7,7 +7,7 @@ import LoginForm from "../../organisms/LoginForm";
 function SignInPortal() {
   return (
     <section className="relative w-full h-full flex flex-col items-center justify-between py-10 max-mobile:py-14">
-      <Link className="relative" href={"/"}>
+      <Link className="relative cursor-pointer" href={"/"}>
         <MemoiGraphicLogo />
       </Link>
       <div className="relative max-w-[471px]">

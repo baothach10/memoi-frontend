@@ -53,7 +53,7 @@ function CheckoutSuccessContent() {
                                         Your order has been successfully placed. You will receive a confirmation email shortly with your order details and tracking information.
                                     </p>
                                     <p>
-                                        If you have any questions regarding your order, you can find information in our <Link href="/help" className="underline underline-offset-4 decoration-black/80">FAQ</Link> or visit <Link href="/explore/contact-us" className="underline underline-offset-4 decoration-black/80">Contact Us</Link> for direct assistance.
+                                            If you have any questions regarding your order, you can find information in our <Link href="/help" className="underline cursor-pointer underline-offset-4 decoration-black/80">FAQ</Link> or visit <Link href="/explore/contact-us" className="underline underline-offset-4 decoration-black/80">Contact Us</Link> for direct assistance.
                                     </p>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ function CheckoutSuccessContent() {
 
                         {/* Button */}
                         <Link href="/">
-                            <button className="w-full bg-black text-white py-4 text-sm  max-mobile:text-xs max-mobile:py-3.5">
+                                <button className="w-full bg-black text-white cursor-pointer py-4 text-sm  max-mobile:text-xs max-mobile:py-3.5">
                                 Continue shopping
                             </button>
                         </Link>

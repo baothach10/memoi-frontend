@@ -277,7 +277,7 @@ export default function RegisterForm() {
               </Link>{" "}
               and understand the information regarding the use of my personal
               details as explained in the{" "}
-              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
+              <Link href={"/privacy-policy"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
                 Privacy Policy
               </Link>
               .

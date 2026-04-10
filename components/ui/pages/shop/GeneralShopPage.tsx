@@ -65,7 +65,7 @@ export default function GeneralShopPage() {
                 {itemsList &&
                   itemsList.map((category) => (
                     <Link
-                      className="flex"
+                      className="flex cursor-pointer"
                       href={`/shop/category/${category.name}`}
                       key={category.id}
                     >
@@ -77,7 +77,7 @@ export default function GeneralShopPage() {
                     </Link>
                   ))}
               </div>
-              <Link href={`/shop/all-products`} className="flex">
+              <Link href={`/shop/all-products`} className="flex cursor-pointer">
                 <span className={`text-[16px] ${underlineLink}`}>
                   All products
                 </span>

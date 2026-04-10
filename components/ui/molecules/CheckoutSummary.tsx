@@ -144,7 +144,7 @@ export const SummaryActions = ({
             type="button"
             onClick={onPlaceOrder}
             disabled={isProcessing}
-            className="w-full bg-black text-white py-4 text-sm tracking-wider hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
+            className="w-full bg-black text-white py-4 text-sm cursor-pointer hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
         >
             {isProcessing ? "Processing..." : "Pre-order"}
         </button>
@@ -153,14 +153,14 @@ export const SummaryActions = ({
             By proceeding, I confirm that I have read and accept the{" "}
             <Link
                 href="/explore/terms-conditions"
-                className="underline underline-offset-4 decoration-black/40"
+                className="underline underline-offset-4 decoration-black/40 cursor-pointer"
             >
                 Terms and Conditions
             </Link>{" "}
             and the{" "}
             <Link
-                href="/explore/privacy-policy"
-                className="underline underline-offset-4 decoration-black/40"
+                href="/privacy-policy"
+                className="underline underline-offset-4 decoration-black/40 cursor-pointer"
             >
                 Privacy Policy
             </Link>

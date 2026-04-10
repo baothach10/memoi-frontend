@@ -85,7 +85,7 @@ export default function CartPage() {
                     </p>
                     <Link
                         href="/shop"
-                        className="px-12 py-4 bg-black text-white text-sm  hover:opacity-90 transition  max-mobile:text-xs max-mobile:py-3.5"
+                        className="px-12 py-4 bg-black text-white text-sm  hover:opacity-90 transition cursor-pointer max-mobile:text-xs max-mobile:py-3.5"
                     >
                         Continue shopping
                     </Link>
@@ -150,7 +150,7 @@ export default function CartPage() {
                                             return;
                                         }
                                     }}
-                                    className={`w-full bg-black text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-3.5 max-mobile:text-xs ${hasStockError ? "cursor-not-allowed opacity-50" : ""}`}
+                                    className={`w-full bg-black cursor-pointer text-white py-5 text-sm text-center hover:opacity-95 transition-opacity max-mobile:py-3.5 max-mobile:text-xs ${hasStockError ? "cursor-not-allowed opacity-50" : ""}`}
                                 >
                                     Proceed to checkout
                                 </Link>
@@ -166,13 +166,13 @@ export default function CartPage() {
 
                                 <Link
                                     href="/shop"
-                                    className="w-full border border-black/10 py-5 text-sm text-center hover:bg-black/2 transition-colors max-mobile:py-3.5 max-mobile:text-xs"
+                                    className="w-full border cursor-pointer border-black/10 py-5 text-sm text-center hover:bg-black/2 transition-colors max-mobile:py-3.5 max-mobile:text-xs"
                                 >
                                     Continue shopping
                                 </Link>
                                 <p className="text-sm text-black/60 text-center px-4 pt-2.5 max-mobile:text-xs max-mobile:pt-1.5">
                                     By proceeding, you agree to our{" "}
-                                    <Link href="/terms" className="underline underline-offset-4 decoration-black/40">
+                                    <Link href="/terms" className="underline cursor-pointer underline-offset-4 decoration-black/40">
                                         Terms & Conditions
                                     </Link>
                                 </p>
