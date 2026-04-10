@@ -124,11 +124,11 @@ export default function CartPage() {
                             {/* Totals */}
                             <div className="flex flex-col gap-5 text-[16px] max-mobile:text-sm max-mobile:gap-3">
                                 <div className="flex justify-between items-center font-regular">
-                                    <span className="">Subtotal</span>
+                                    <span >Subtotal</span>
                                     <span>SGD {subtotal}</span>
                                 </div>
                                 <div className="flex justify-between items-center font-regular">
-                                    <span className="">Shipping</span>
+                                    <span >Shipping</span>
                                     <span>Free</span>
                                 </div>
                                 <div className="flex justify-between items-baseline">

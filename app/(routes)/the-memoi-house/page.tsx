@@ -405,7 +405,7 @@ function TheMemoiHousePage() {
                                         How to Qualify
                                     </h3>
                                     <div className="space-y-2 text-sm max-mobile:text-xs">
-                                        <p className="">Exclusive membership tiers are achieved when your cumulative spending reaches the required threshold:</p>
+                                        <p >Exclusive membership tiers are achieved when your cumulative spending reaches the required threshold:</p>
                                         <ul className="list-['-_'] list-inside space-y-2">
                                             <li><span className="font-regular">MEMOÍ +:</span> Achieve S$3,000 in accumulated spending.</li>
                                             <li><span className="font-regular">MEMOÍ ELITE:</span> Achieve S$8,000 in accumulated spending.</li>
@@ -418,7 +418,7 @@ function TheMemoiHousePage() {
                                         Status Maintenance and Validity
                                     </h3>
                                     <div className="space-y-2 text-sm max-mobile:text-xs">
-                                        <p className="">To ensure the best experience and extend membership benefits, your status is tied to a rolling 6-month period from the date of your last purchase.</p>
+                                        <p >To ensure the best experience and extend membership benefits, your status is tied to a rolling 6-month period from the date of your last purchase.</p>
                                         <ul className="list-['-_'] list-inside space-y-2">
                                             <li><span className="font-regular">Validity Period:</span> Your privileges are active for 6 months after your last transaction.</li>
                                             <li><span className="font-regular">Maintenance & Upgrade:</span> To maintain your current status or upgrade to the next level, you must generate sufficient new spending within this 6-month period.</li>

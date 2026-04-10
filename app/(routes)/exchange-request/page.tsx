@@ -95,7 +95,7 @@ export default function ExchangeRequestPage() {
     };
 
     return (
-        <div className="" data-header-theme="light">
+        <div data-header-theme="light">
             <section className="flex w-full justify-center py-50 max-mobile:py-38 smaller-tablet:max-tablet:py-73">
                 <form
                     noValidate

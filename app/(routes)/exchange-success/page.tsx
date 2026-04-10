@@ -5,7 +5,7 @@ import Footer from "@/components/ui/organisms/Footer";
 
 export default function ExchangeSuccessPage() {
     return (
-        <div className="" data-header-theme="light">
+        <div data-header-theme="light">
             <section className="flex w-full justify-center py-50 max-mobile:py-38 smaller-tablet:max-tablet:py-73">
                 <div className="w-full max-w-[620px] flex flex-col gap-12 text-center max-mobile:px-5 max-mobile:gap-9">
 
