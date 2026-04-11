@@ -152,7 +152,7 @@ export const SummaryActions = ({
         <p className="text-sm text-black max-mobile:text-xs">
             By proceeding, I confirm that I have read and accept the{" "}
             <Link
-                href="/explore/terms-conditions"
+                href="/terms-and-conditions"
                 className="underline underline-offset-4 decoration-black/40 cursor-pointer"
             >
                 Terms and Conditions

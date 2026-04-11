@@ -114,7 +114,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition cursor-pointer">
+                <Link href="/terms-and-conditions" className="hover:text-black transition cursor-pointer">
                   Terms & Conditions
                 </Link>
               </li>
@@ -217,7 +217,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-black transition cursor-pointer">
+                <Link href="/terms-and-conditions" className="hover:text-black transition cursor-pointer">
                   Terms & Conditions
                 </Link>
               </li>
