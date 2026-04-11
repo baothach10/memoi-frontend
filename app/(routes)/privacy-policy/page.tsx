@@ -23,9 +23,9 @@ export default function PrivacyPolicyPage() {
         <div className="relative w-full bg-[#fffefa]" data-header-theme="light">
             <section className="px-[100px] max-tablet:px-[5%] mx-auto max-w-[1080px] pt-32 max-tablet:pt-26 pb-27 max-tablet:pb-24 max-mobile:pb-15 max-mobile:pt-24">
 
-                <div className="flex flex-col gap-9 text-sm text-black/80 max-mobile:text-xs">
+                <div className="flex flex-col gap-9 text-sm text-black/80 max-mobile:text-xs max-mobile:gap-6">
                     {/* Header */}
-                    <div className="h-fit flex flex-col gap-4 mx-auto max-mobile:mb-8 text-center">
+                    <div className="h-fit flex flex-col gap-4 max-mobile:gap-3 mx-auto text-center">
                         <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">
                             Privacy Policy
                         </h1>
@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 max-mobile:gap-3">
                         <p>
                             This Privacy Notice for MEMOÍ (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), describes how and why we might access, collect, store, use, and/or share (&ldquo;process&rdquo;) your personal information when you use our services (&ldquo;Services&rdquo;), including when you:
                         </p>
@@ -64,8 +64,8 @@ export default function PrivacyPolicyPage() {
 
                     {/* Summary of Key Points */}
                     <div>
-                        <div className="flex flex-col gap-4">
-                            <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                        <div className="flex flex-col gap-4 max-mobile:gap-3">
+                            <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                                 SUMMARY OF KEY POINTS
                             </h2>
                             <p>
@@ -106,8 +106,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 1 */}
-                    <div id="section-1" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-1" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             1. WHAT INFORMATION DO WE COLLECT?
                         </h2>
                         <h3 className="text-base font-regular  text-black max-mobile:text-sm">
@@ -175,8 +175,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 2 */}
-                    <div id="section-2" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-2" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             2. HOW DO WE PROCESS YOUR INFORMATION?
                         </h2>
                         <p className="italic ">
@@ -205,8 +205,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 3 */}
-                    <div id="section-3" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-3" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR INFORMATION?
                         </h2>
                         <p className="italic ">
@@ -219,7 +219,7 @@ export default function PrivacyPolicyPage() {
                         <p >
                             The General Data Protection Regulation (GDPR) and UK GDPR require us to explain the valid legal bases we rely on in order to process your personal information. As such, we may rely on the following legal bases to process your personal information:
                         </p>
-                        <ul className="list-disc pl-6 flex flex-col gap-4">
+                        <ul className="list-disc pl-6 flex flex-col gap-4 max-mobile:gap-3">
                             <li>
                                 Consent. We may process your information if you have given us permission (i.e., consent) to use your personal information for a specific purpose. You can withdraw your consent at any time. Learn more about withdrawing your consent.
                             </li>
@@ -262,8 +262,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 4 */}
-                    <div id="section-4" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-4" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
                         </h2>
                         <p className="italic ">
@@ -272,7 +272,7 @@ export default function PrivacyPolicyPage() {
                         <p >
                             We may need to share your personal information in the following situations:
                         </p>
-                        <ul className="list-disc pl-6 flex flex-col gap-4">
+                        <ul className="list-disc pl-6 flex flex-col gap-4 max-mobile:gap-3">
                             <li>
                                 Business Transfers. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
                             </li>
@@ -280,8 +280,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 5 */}
-                    <div id="section-5" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-5" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
                         </h2>
                         <p className="italic ">
@@ -324,8 +324,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 6 */}
-                    <div id="section-6" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-6" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?
                         </h2>
                         <p className="italic ">
@@ -340,8 +340,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 7 */}
-                    <div id="section-7" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-7" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             7. HOW LONG DO WE KEEP YOUR INFORMATION?
                         </h2>
                         <p className="italic ">
@@ -356,8 +356,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 8 */}
-                    <div id="section-8" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-8" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             8. HOW DO WE KEEP YOUR INFORMATION SAFE?
                         </h2>
                         <p className="italic ">
@@ -369,8 +369,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 9 */}
-                    <div id="section-9" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-9" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             9. DO WE COLLECT INFORMATION FROM MINORS?
                         </h2>
                         <p className="italic ">
@@ -385,8 +385,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 10 */}
-                    <div id="section-10" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-10" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             10. WHAT ARE YOUR PRIVACY RIGHTS?
                         </h2>
                         <p className="italic ">
@@ -422,7 +422,7 @@ export default function PrivacyPolicyPage() {
                         <p >
                             If you would at any time like to review or change the information in your account or terminate your account, you can:
                         </p>
-                        <ul className="list-disc pl-6 flex flex-col gap-4 ">
+                        <ul className="list-disc pl-6 flex flex-col gap-4 max-mobile:gap-3 ">
                             <li>Log in to your account settings and update your user account.</li>
                         </ul>
                         <p >
@@ -443,8 +443,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 11 */}
-                    <div id="section-11" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-11" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             11. CONTROLS FOR DO-NOT-TRACK FEATURES
                         </h2>
                         <p >
@@ -456,8 +456,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 12 */}
-                    <div id="section-12" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-12" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             12. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
                         </h2>
                         <p className="italic ">
@@ -472,21 +472,21 @@ export default function PrivacyPolicyPage() {
                         </p>
 
                         {/* Data Table */}
-                        <div className="overflow-x-auto py-5">
+                        <div className="overflow-x-auto py-5 max-mobile:py-3">
                             <table className="w-full text-left text-sm max-mobile:text-xs border border-black/20" style={{ borderCollapse: 'collapse' }}>
                                 <thead>
                                     <tr>
-                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-3 max-mobile:py-3 w-[35%] text-center">Category</th>
-                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-3 max-mobile:py-3 w-[35%]">Examples</th>
-                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-3 max-mobile:py-3 w-[30%]">Collected</th>
+                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-2 max-mobile:py-2 w-[35%] text-center">Category</th>
+                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-2 max-mobile:py-2  w-[35%]">Examples</th>
+                                        <th className="border border-black/20 py-4 px-5 text-black text-sm max-mobile:text-xs max-mobile:px-2 max-mobile:py-2  w-[30%]">Collected</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {TABLE_DATA.map((row, index) => (
                                         <tr key={index}>
-                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-3 max-mobile:py-3">{row.category}</td>
-                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-3 max-mobile:py-3">{row.examples}</td>
-                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-3 max-mobile:py-3">{row.collected}</td>
+                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-2 max-mobile:py-2 ">{row.category}</td>
+                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-2 max-mobile:py-2 ">{row.examples}</td>
+                                            <td className="border border-black/20 py-4 px-5 align-top max-mobile:px-2 max-mobile:py-2 ">{row.collected}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -602,8 +602,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 13 */}
-                    <div id="section-13" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-13" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             13. DO WE MAKE UPDATES TO THIS NOTICE?
                         </h2>
                         <p className="italic ">
@@ -615,8 +615,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 14 */}
-                    <div id="section-14" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-14" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             14. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
                         </h2>
                         <p>
@@ -628,8 +628,8 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     {/* Section 15 */}
-                    <div id="section-15" className="flex flex-col gap-4">
-                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-base">
+                    <div id="section-15" className="flex flex-col gap-4 max-mobile:gap-3">
+                        <h2 className="text-lg font-regular uppercase text-black max-mobile:text-sm">
                             15. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
                         </h2>
                         <p>
