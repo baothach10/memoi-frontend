@@ -2,12 +2,13 @@
 
 import { useProductSuggestionsQuery } from "@/queries/useProductSuggestionsQuery";
 import SearchInteractiveItem from "../pages/overlay/SearchInteractiveItem";
+import { useCurrency } from "@/context/CurrencyContext";
 
 
 
 function SearchProductSuggestions({ numberOfSuggestions, gridClassName }: { numberOfSuggestions: number; gridClassName?: string }) {
     const { data: productSuggestions, isLoading, isFetching, isError } = useProductSuggestionsQuery();
-
+    const { currency } = useCurrency();
     if (isLoading || isFetching) {
         return <div>Loading...</div>;
     }
@@ -29,7 +30,7 @@ function SearchProductSuggestions({ numberOfSuggestions, gridClassName }: { numb
                             }
                             id={product.id}
                             name={product.name}
-                            currency={"SGD"}
+                            currency={currency ?? "SGD"}
                             price={product.price}
                         />
                     )) : <div>No suggestions available.</div>}

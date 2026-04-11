@@ -14,7 +14,7 @@ function transformRawOrder(raw: RawOrder): Order {
     status: raw.status,
     deliveryDetail: raw.status === "IN_PROGRESS" ? "Estimated arrival: Pending" : "Delivered",
     total: raw.total_amount,
-    currency: "SGD",
+    currency: raw.items[0]?.product?.currency?.toUpperCase() || "SGD",
     items: raw.items.map((item, idx): OrderItem => ({
       id: `${raw.id}-item-${idx}`,
       name: item.product.name,

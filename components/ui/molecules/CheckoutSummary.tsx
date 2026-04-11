@@ -4,13 +4,7 @@ import Link from "next/link";
 import { CartItem } from "@/utils/cartUtils";
 import OrderItemCard from "../pages/account/OrderItemCard";
 import { AlertCircle } from "lucide-react";
-
-interface CheckoutSummaryProps {
-    onPlaceOrder: () => void;
-    isProcessing: boolean;
-    shippingCost: number;
-    shippingLabel: string;
-}
+import { useCurrency } from "@/context/CurrencyContext";
 
 // --- Sub-components ---
 
@@ -89,46 +83,54 @@ export const SummaryTotals = ({
     subtotal,
     shippingLabel,
     shippingCost,
-    discount,
+    tierDiscount,
+    promoDiscount,
+    currency
 }: {
     subtotal: number;
     shippingLabel: string;
     shippingCost: number;
-    discount: number;
+    tierDiscount: number;
+    promoDiscount: number;
+    currency: string;
 }) => (
     <div className="flex flex-col gap-2 text-sm font-regular">
         <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>SGD {subtotal.toFixed(2)}</span>
+            <span>{currency} {subtotal.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
             <span>Shipping</span>
-            <span>{shippingCost == 0 ? shippingLabel : `SGD ${shippingCost.toFixed(2)}`}</span>
+            <span>{shippingCost == 0 ? shippingLabel : `${currency} ${shippingCost.toFixed(2)}`}</span>
         </div>
         <div className="flex justify-between">
-            <span>Discount</span>
-            <span>SGD {discount > 0 ? `${discount.toFixed(2)}` : "0.00"}</span>
+            <span>Tier Discount</span>
+            <span>{currency} {tierDiscount > 0 ? `${tierDiscount.toFixed(2)}` : "0.00"}</span>
+        </div>
+        <div className="flex justify-between">
+            <span>Promo Discount</span>
+            <span>{currency} {promoDiscount > 0 ? `${promoDiscount.toFixed(2)}` : "0.00"}</span>
         </div>
     </div>
 );
 
-export const SummaryTotalAmount = ({ total }: { total: number }) => (
+export const SummaryTotalAmount = ({ total, currency }: { total: number, currency: string }) => (
     <div className="flex justify-between items-baseline pt-8 border-t border-black/10 text-2xl max-mobile:text-lg">
         <div className="flex items-baseline gap-2">
             <span className=" font-regular">Total</span>
             <span className="text-black/50">(TAX INCLUDED)</span>
         </div>
-        <span className=" font-regular">SGD {total.toFixed(2)}</span>
+        <span className=" font-regular">{currency} {total.toFixed(2)}</span>
     </div>
 );
 
-export const MobileSummaryTotalAmount = ({ total }: { total: number }) => (
+export const MobileSummaryTotalAmount = ({ total, currency }: { total: number, currency: string }) => (
     <div className="flex justify-between items-baseline border-black/10 text-lg">
         <div className="flex items-baseline gap-2">
             <span className=" font-regular">Total</span>
             <span className="text-black/50">(TAX INCLUDED)</span>
         </div>
-        <span className=" font-regular">SGD {total.toFixed(2)}</span>
+        <span className=" font-regular">{currency} {total.toFixed(2)}</span>
     </div>
 );
 
@@ -176,7 +178,8 @@ interface CheckoutSummaryProps {
     shippingLabel: string;
     items: CartItem[];
     subtotal: number;
-    discountAmount: number;
+    promoDiscountAmount: number;
+    tierDiscountAmount: number;
     total: number;
     promoCode: string;
     setPromoCode: (val: string) => void;
@@ -194,7 +197,8 @@ export default function CheckoutSummary({
     shippingLabel,
     items,
     subtotal,
-    discountAmount,
+    promoDiscountAmount,
+    tierDiscountAmount,
     total,
     promoCode,
     setPromoCode,
@@ -202,6 +206,8 @@ export default function CheckoutSummary({
     isValidatingPromo,
     promoError,
 }: CheckoutSummaryProps) {
+    const { currency } = useCurrency();
+    const activeCurrency = currency || "SGD";
     return (
         <div className="flex flex-col gap-12">
             <SummaryHeader />
@@ -224,9 +230,11 @@ export default function CheckoutSummary({
                     subtotal={subtotal}
                     shippingLabel={shippingLabel}
                     shippingCost={shippingCost}
-                    discount={discountAmount}
+                    tierDiscount={tierDiscountAmount}
+                    promoDiscount={promoDiscountAmount}
+                    currency={activeCurrency}
                 />
-                <SummaryTotalAmount total={total} />
+                <SummaryTotalAmount total={total} currency={activeCurrency} />
             </div>
 
             <SummaryActions

@@ -16,6 +16,9 @@ interface BillingPaymentInfoProps {
   currency: string;
 }
 
+import { useCurrency } from "@/context/CurrencyContext";
+import { useEffect } from "react";
+
 export default function BillingPaymentInfo({
   customer,
   address,
@@ -26,6 +29,13 @@ export default function BillingPaymentInfo({
   total,
   currency
 }: BillingPaymentInfoProps) {
+  const { updateCurrency, currency: globalCurrency } = useCurrency();
+
+  useEffect(() => {
+    if (currency && currency.toUpperCase() !== globalCurrency) {
+      updateCurrency(currency);
+    }
+  }, [currency, updateCurrency]);
 
   return (
     <div className="flex flex-col gap-12 max-mobile:gap-9">

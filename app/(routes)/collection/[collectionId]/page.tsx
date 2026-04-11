@@ -618,7 +618,7 @@ function CollectionDetailPage() {
               </div>
               <div className="text-[16px] max-mobile:text-sm">
                 <LinkItem
-                  url={`${exampleWithLinks.heroDetail.url}/${exampleWithLinks.heroDetail.title}`}
+                  url={`${exampleWithLinks.heroDetail.url}`}
                   title={exampleWithLinks.heroDetail.urlTitle}
                   style="text-black relative inline-flex leading-[18px] after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black/40"
                 />

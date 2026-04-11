@@ -1,3 +1,4 @@
+import { useCurrency } from "@/context/CurrencyContext";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -8,6 +9,7 @@ interface CartFooterProps {
 }
 
 export default function CartFooter({ subtotal, onClose, showStockError }: CartFooterProps) {
+    const { currency } = useCurrency();
     return (
         <div className="border-t border-black/10 relative h-fit">
             {/* Subtotal */}
@@ -21,7 +23,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                             TAX INCLUDED
                         </p>
                     </div>
-                    <p className="text-xl font-regular max-mobile:text-lg">SGD {subtotal}</p>
+                    <p className="text-xl font-regular max-mobile:text-lg">{currency} {subtotal.toFixed(2)}</p>
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import QuantitySelector from "@/components/ui/atoms/QuantitySelector";
 import { CartItem } from "@/utils/cartUtils";
 import { AlertCircle } from "lucide-react";
+import { useCurrency } from "@/context/CurrencyContext";
 
 interface CartItemCardProps {
     item: CartItem;
@@ -11,6 +12,7 @@ interface CartItemCardProps {
 }
 
 export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }: CartItemCardProps) {
+    const { currency } = useCurrency();
     return (
         <div className="bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]">
             <div className="flex gap-8  max-mobile:gap-4">
@@ -47,7 +49,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
 
                     <div className="flex items-center justify-between max-mobile:hidden">
                         <p className="text-base font-regular max-mobile:text-xs ">
-                            SGD {item.price}
+                            {currency} {item.price}
                         </p>
 
                         <div className="flex items-center gap-3">
@@ -71,7 +73,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
 
                     <div className="hidden max-mobile:flex max-mobile:flex-col max-mobile:justify-between max-mobile:gap-2 max-mobile:pt-4">
                         <p className="text-base font-regular max-mobile:text-xs ">
-                            SGD {item.price}
+                            {currency} {item.price}
                         </p>
 
                         <div className="flex items-center gap-3 justify-between">

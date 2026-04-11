@@ -23,6 +23,8 @@ import { BillingInfo, ProductItem } from "@/queries/useCreatePaymentIntent";
 import { useAddressInfoQuery } from "@/queries/useAddressInfoQuery";
 import { useDiscountMutation } from "@/queries/useDiscountMutation";
 import { useCartQuery } from "@/queries/useCartQuery";
+import { useCurrency } from "@/context/CurrencyContext";
+import { useTierDiscountQuery } from "@/queries/useTierDiscountQuery";
 
 countries.registerLocale(en);
 
@@ -80,6 +82,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const [promoError, setPromoError] = useState<string | null>(null);
     const [discountInfo, setDiscountInfo] = useState<{ amount: number, unit: string } | null>(null);
     const { data: backendItems } = useCartQuery();
+    const { currency } = useCurrency();
 
     const handleApplyPromo = async () => {
         if (!promoCode) return;
@@ -141,7 +144,10 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
         ? (discountInfo.unit === "percent" ? (subtotal * discountInfo.amount) / 100 : discountInfo.amount)
         : 0;
 
-    const total = subtotal + selectedShipping.priceValue - discountAmount;
+    const { data: tierDiscountData } = useTierDiscountQuery(subtotal);
+    const tierDiscountAmount = tierDiscountData?.tier_discount_amount || 0;
+
+    const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount;
 
     const {
         register,
@@ -244,7 +250,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         items={itemsToDisplay}
                     />
                 )}
-                <MobileSummaryTotalAmount total={total} />
+                <MobileSummaryTotalAmount total={total} currency={currency || "SGD"} />
             </div>
 
 
@@ -429,7 +435,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         billingInfo={billingInfo}
                         promoCode={promoCode}
                         amount={Math.round(total * 100)}
-                        currency="sgd"
+                        currency={currency?.toLowerCase() || "sgd"}
                     />
                 </div>
             </div>
@@ -443,7 +449,8 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     shippingLabel={selectedShipping.price}
                     items={itemsToDisplay}
                     subtotal={subtotal}
-                    discountAmount={discountAmount}
+                    promoDiscountAmount={discountAmount}
+                    tierDiscountAmount={tierDiscountAmount}
                     total={total}
                     promoCode={promoCode}
                     setPromoCode={setPromoCode}
@@ -467,9 +474,11 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         subtotal={subtotal}
                         shippingCost={selectedShipping.priceValue}
                         shippingLabel={selectedShipping.price}
-                        discount={discountAmount}
+                        tierDiscount={tierDiscountAmount}
+                        promoDiscount={discountAmount}
+                        currency={currency ?? "SGD"}
                     />
-                    <SummaryTotalAmount total={total} />
+                    <SummaryTotalAmount total={total} currency={currency || "SGD"} />
                 </div>
 
                 <SummaryActions
