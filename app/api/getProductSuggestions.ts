@@ -3,6 +3,7 @@ export type ProductSuggestion = {
   name: string;
   price: number;
   images: string[];
+  currency: string;
 };
 
 export type ProductDetailsResponse = Array<ProductSuggestion>;

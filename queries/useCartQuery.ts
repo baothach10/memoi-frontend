@@ -22,8 +22,11 @@ export interface BackendCartItem {
 import { useEffect } from "react";
 import { setCartItems } from "@/utils/cartUtils";
 
+import { useCurrency } from "@/context/CurrencyContext";
+
 export function useCartQuery() {
   const supabase = createBrowserSupabaseClient();
+  const { updateCurrency, currency } = useCurrency();
 
   const query = useQuery<BackendCartItem[] | null>({
     queryKey: ["cart"],
@@ -61,6 +64,12 @@ export function useCartQuery() {
       if (!session) return;
 
       if (query.data && query.data.length > 0) {
+        // Synchronize global currency
+        const cartCurrency = query.data[0].currency;
+        if (cartCurrency && currency !== cartCurrency.toUpperCase()) {
+          updateCurrency(cartCurrency);
+        }
+
         const localFormat = query.data.map((item: BackendCartItem) => ({
           product_id: item.product_variant_id, 
           size: item.size,
@@ -79,7 +88,7 @@ export function useCartQuery() {
     };
 
     syncBackendToLocal();
-  }, [query.data, query.isSuccess, query.isFetched, supabase.auth]);
+  }, [query.data, query.isSuccess, query.isFetched, supabase.auth, updateCurrency]);
 
   return query;
 }

@@ -9,9 +9,11 @@ import { useUpdateCart } from "@/queries/useUpdateCart";
 import Footer from "@/components/ui/organisms/Footer";
 import { useCartQuery } from "@/queries/useCartQuery";
 import { AlertCircle } from "lucide-react";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function CartPage() {
     const updateCartMutation = useUpdateCart();
+    const { currency } = useCurrency();
     const [localItems, setLocalItems] = useState<CartItem[]>([]);
     const { data: backendItems } = useCartQuery();
 
@@ -125,7 +127,7 @@ export default function CartPage() {
                             <div className="flex flex-col gap-5 text-[16px] max-mobile:text-sm max-mobile:gap-3">
                                 <div className="flex justify-between items-center font-regular">
                                     <span >Subtotal</span>
-                                    <span>SGD {subtotal}</span>
+                                    <span>{currency} {subtotal}</span>
                                 </div>
                                 <div className="flex justify-between items-center font-regular">
                                     <span >Shipping</span>
@@ -136,7 +138,7 @@ export default function CartPage() {
                                         <span className="font-regular">Total</span>
                                         <span className="text-sm text-black/60 uppercase">(TAX INCLUDED)</span>
                                     </div>
-                                    <span className="text-2xl font-regular max-mobile:text-lg">SGD {subtotal}</span>
+                                    <span className="text-2xl font-regular max-mobile:text-lg">{currency} {subtotal}</span>
                                 </div>
                             </div>
 

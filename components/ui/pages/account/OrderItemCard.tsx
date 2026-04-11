@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { OrderItem } from "./types";
+import { useCurrency } from "@/context/CurrencyContext";
 
 interface OrderItemCardProps {
   item: OrderItem;
@@ -10,6 +11,7 @@ interface OrderItemCardProps {
 }
 
 export default function OrderItemCard({ item }: OrderItemCardProps) {
+  const { currency } = useCurrency();
   return (
     <div className={` bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]`}>
       <div className="flex gap-8 max-mobile:gap-4">
@@ -40,7 +42,7 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
 
           <div className="flex items-center justify-between font-regular max-mobile:mt-10">
             <p className="text-[16px] uppercase max-mobile:text-sm">
-              SGD {item.price}
+              {currency?.toUpperCase() || "SGD"} {item.price}
             </p>
             <p className="text-sm text-black/60 uppercase pr-8 max-mobile:text-xs max-mobile:pr-2.5">
               Quantity: {item.quantity}

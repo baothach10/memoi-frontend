@@ -3,6 +3,7 @@ import { RawOrderDetails, OrderDetails, OrderItem } from "@/components/ui/pages/
 
 function transformRawOrderDetails(raw: RawOrderDetails): OrderDetails {
   const bi = raw.billing_info;
+  
   return {
     id: raw.id,
     order_number: raw.order_number,
