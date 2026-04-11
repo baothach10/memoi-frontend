@@ -172,7 +172,7 @@ export default function CartPage() {
                                 </Link>
                                 <p className="text-sm text-black/60 text-center px-4 pt-2.5 max-mobile:text-xs max-mobile:pt-1.5">
                                     By proceeding, you agree to our{" "}
-                                    <Link href="/terms" className="underline cursor-pointer underline-offset-4 decoration-black/40">
+                                    <Link href="/terms-and-conditions" className="underline cursor-pointer underline-offset-4 decoration-black/40">
                                         Terms & Conditions
                                     </Link>
                                 </p>

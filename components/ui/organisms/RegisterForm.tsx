@@ -272,7 +272,7 @@ export default function RegisterForm() {
             {/* Terms */}
             <p className="text-sm text-black/70 leading-relaxed text-left max-mobile:text-xs">
               By clicking Create account, I confirm that I have read and accept the{" "}
-              <Link href={"/"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
+              <Link href={"/terms-and-conditions"} className="text-sm text-black relative inline-flex leading-2.5 after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-black cursor-pointer max-mobile:text-xs">
                 Terms & Condition
               </Link>{" "}
               and understand the information regarding the use of my personal

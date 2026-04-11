@@ -73,7 +73,7 @@ export default function CartFooter({ subtotal, onClose, showStockError }: CartFo
                 <p>
                     By proceeding, you agree to our{" "}
                     <Link
-                        href="/terms"
+                        href="/terms-and-conditions"
                         className="underline underline-offset-4 decoration-black/40 hover:text-black transition-colors cursor-pointer"
                     >
                         Terms & Conditions
