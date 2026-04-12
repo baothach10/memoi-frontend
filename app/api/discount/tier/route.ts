@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getTierDiscount } from "@/app/api/getTierDiscount";
+import { getMembershipDiscount } from "@/app/api/getMembershipDiscount";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -9,17 +9,17 @@ export async function GET(request: Request) {
   if (amount === null || isNaN(amount)) {
     return NextResponse.json(
       { error: "Missing or invalid amount parameter" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
-    const result = await getTierDiscount(amount);
+    const result = await getMembershipDiscount(amount);
     return NextResponse.json(result);
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message },
-      { status: error.message === "Unauthorized" ? 401 : 500 }
+      { status: error.message === "Unauthorized" ? 401 : 500 },
     );
   }
 }

@@ -9,6 +9,7 @@ interface BillingPaymentInfoProps {
   };
   address: string;
   subtotal: number;
+  birthMonthDiscount: number;
   tierDiscount: number;
   promoDiscount: number;
   shippingFee: number;
@@ -24,6 +25,7 @@ export default function BillingPaymentInfo({
   address,
   subtotal,
   tierDiscount,
+  birthMonthDiscount,
   promoDiscount,
   shippingFee,
   total,
@@ -82,6 +84,12 @@ export default function BillingPaymentInfo({
             <div className="flex justify-between">
               <span>Tier Discount</span>
               <span>{currency} {tierDiscount > 0 ? (tierDiscount).toFixed(2) : '0.00'}</span>
+            </div>
+          }
+          {
+            <div className="flex justify-between">
+              <span>Birth Month Discount</span>
+              <span>{currency} {birthMonthDiscount > 0 ? (birthMonthDiscount).toFixed(2) : '0.00'}</span>
             </div>
           }
           {

@@ -28,9 +28,6 @@ export async function getDiscountCode(
 
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL!}/api/discount/code/${promoCode}`;
     
-    // Log request details for debugging (server-side only)
-    console.log(`Fetching discount code: ${url}`);
-    
     const res = await fetch(url, {
       method: "GET",
       headers,

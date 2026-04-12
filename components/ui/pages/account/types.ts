@@ -57,6 +57,7 @@ export interface RawBillingInfo {
 
 export interface RawOrderDetails extends RawOrder {
   tier_discount_amount: number;
+  birth_month_discount_amount: number;
   promo_discount_amount: number;
   shipping_fee: number;
   total_taxed: number;
@@ -91,6 +92,7 @@ export interface OrderDetails extends Order {
     email: string;
     phone_number: string;
   };
+  birth_month_discount: number;
   tier_discount_amount: number;
   promo_discount_amount: number;
   shipping_fee: number;
