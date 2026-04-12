@@ -29,7 +29,7 @@ function inputClass() {
 }
 
 const buttonClass = `
-  w-full border border-black/20 py-4 text-sm cursor-pointer font-regular
+  w-full border border-black/20 py-4 leading-none text-sm cursor-pointer font-regular
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
