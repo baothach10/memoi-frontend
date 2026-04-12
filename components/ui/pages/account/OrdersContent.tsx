@@ -49,7 +49,7 @@ export default function OrdersContent() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
+              className={`w-[200px] py-4 leading-none px-12 border cursor-pointer transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
                 ? "bg-black text-white border-black"
                 : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
                 }`}
@@ -63,7 +63,7 @@ export default function OrdersContent() {
 
 
         <div className="min-h-[400px] flex items-center justify-center">
-          <p className="text-sm text-black animate-pulse">
+          <p className="text-sm text-black animate-pulse max-mobile:text-xs">
             Loading...
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function OrdersContent() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
+              className={`w-[200px] py-4 leading-none px-12 border cursor-pointer transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
                 ? "bg-black text-white border-black"
                 : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
                 }`}
@@ -100,7 +100,7 @@ export default function OrdersContent() {
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="text-xs underline underline-offset-4 decoration-black/40"
+            className="text-xs underline underline-offset-4 cursor-pointer decoration-black/40"
           >
             Retry
           </button>
@@ -119,7 +119,7 @@ export default function OrdersContent() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`w-[200px] py-5 px-10 border transition-all text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
+            className={`w-[200px] py-4 leading-none px-12 border transition-all cursor-pointer text-sm group max-tablet:w-full max-tablet:px-0 max-mobile:py-4 max-mobile:text-xs ${activeTab === tab
               ? "bg-black text-white border-black"
               : "bg-transparent text-black border-black/10 hover:bg-black hover:text-white"
               }`}

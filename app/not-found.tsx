@@ -30,7 +30,7 @@ export default function NotFoundPage() {
             {/* Return button */}
             <div className="mt-8 max-w-[375px] mx-auto">
               <Link href="/">
-                <button className="w-full bg-black text-white py-4 text-sm max-mobile:text-xs cursor-pointer">
+                <button className="w-full bg-black text-white py-4 leading-none text-sm max-mobile:text-xs cursor-pointer">
                   Take me home
                 </button>
               </Link>

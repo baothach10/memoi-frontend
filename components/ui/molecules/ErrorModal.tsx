@@ -14,8 +14,8 @@ export default function ErrorModal({ open, onClose }: ErrorModalProps) {
       <div className="absolute inset-0 bg-black/30" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative z-10 w-[900px] max-w-[90%] bg-[#fbf8f3] px-8 py-10 text-center shadow-lg  max-tablet:max-w-[494px] max-mobile:p-4">
-        <h2 className="text-lg font-medium mb-4">
+      <div className="relative z-10 w-[450px] max-w-[90%] bg-[#fbf8f3] px-8 py-10 text-center shadow-lg  max-tablet:max-w-[494px] max-mobile:p-4">
+        <h2 className="text-[16px] mb-4">
           Sorry, something went wrong
         </h2>
 
@@ -27,7 +27,7 @@ export default function ErrorModal({ open, onClose }: ErrorModalProps) {
 
         <button
           onClick={onClose}
-          className="w-full border border-black py-3 text-sm hover:bg-black hover:text-white transition"
+          className="w-full border border-black py-4 leading-none cursor-pointer text-sm hover:bg-black hover:text-white transition"
         >
           OK
         </button>

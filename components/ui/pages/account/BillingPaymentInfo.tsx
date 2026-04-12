@@ -93,7 +93,7 @@ export default function BillingPaymentInfo({
         </div>
 
         {/* Total Amount */}
-        <div className="flex justify-between items-baseline pt-8 border-t border-black/10 font-regular text-xl max-mobile:text-lg max-mobile:pt-6">
+        <div className="flex justify-between items-baseline pt-8 border-t border-black/10 font-regular text-lg max-mobile:text-lg max-mobile:pt-6">
           <div className="flex items-baseline gap-2">
             <span>Total</span>
             <span className=" text-black/40 uppercase">(TAX INCLUDED)</span>

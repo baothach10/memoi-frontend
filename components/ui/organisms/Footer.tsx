@@ -20,7 +20,7 @@ export function Footer() {
           <div className="laptop:hidden">
             <MemoiGraphicLogo width={54} height={35} />
           </div>
-          <div className="w-[600px] text-[18px] leading-normal tracking-[0.07rem] max-mobile:text-xs max-mobile:w-full max-mobile:px-5">
+          <div className="w-[550px] text-[16px] leading-normal tracking-[0.07rem] max-mobile:text-xs max-mobile:w-full max-mobile:px-5">
             MEMOÍ exists for the woman becoming herself. We believe true luxury lies in conscious living and timeless quality. Our pieces are an act of service: accessible elegance designed to honor your choices and support your growth.
           </div>
         </div>

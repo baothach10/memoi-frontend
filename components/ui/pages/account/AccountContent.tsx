@@ -50,7 +50,7 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
         <div className="relative w-full max-tablet:hidden">
           <button
             onClick={handleLogOut}
-            className="w-full max-w-[180px] border border-black/20 py-4 text-sm font-regular
+            className="w-full max-w-[180px] border border-black/20 cursor-pointer leading-none py-4 text-sm font-regular
             transition-all duration-300 ease-in-out
             bg-[#fffefa] text-black
             hover:bg-black hover:text-[#fffefa]"
@@ -72,7 +72,7 @@ export default function AccountContent({ userProfile }: AccountContentProps) {
               <div className="relative w-full">
                 <button
                   onClick={handleLogOut}
-                  className="w-full max-w-[180px] border border-black/20 py-4 text-sm font-regular
+                  className="w-full max-w-[180px] border cursor-pointer border-black/20 leading-none py-4 text-sm font-regular
                   transition-all duration-300 ease-in-out
                   bg-[#fffefa] text-black
                   hover:bg-black hover:text-[#fffefa] max-mobile:py-3 max-mobile:text-xs"

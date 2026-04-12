@@ -103,7 +103,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
             <h2 className="text-base font-regular leading-tight tracking-wide max-mobile:text-sm">Cart</h2>
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-500 transition-colors"
+              className="text-black hover:text-gray-500 cursor-pointer transition-colors"
               aria-label="Close cart"
             >
               <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />
@@ -119,7 +119,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
                 </p>
                 <button
                   onClick={onClose}
-                  className="px-[7%] py-[2.5%] bg-black text-white text-xs tracking-wider hover:opacity-90 transition max-mobile:py-3.5 max-mobile:text-xs max-mobile:px-[10%]"
+                  className="px-12 py-4 leading-none bg-black text-white cursor-pointer text-sm hover:opacity-90 transition max-mobile:py-3.5 max-mobile:text-xs max-mobile:px-10"
                 >
                   Continue shopping
                 </button>

@@ -42,7 +42,7 @@ export default function OrderProgress({ steps }: OrderProgressProps) {
             return (
               <div key={index} className={`flex flex-col relative z-20 ${isFirst ? "items-start" : isLast ? "items-end" : "items-center"}`}>
                 <div className="h-6 flex items-center">{getMarker(step.completed, step.active)}</div>
-                <div className={`mt-8 flex flex-col text-[16px] gap-4 whitespace-nowrap max-tablet:text-sm ${isFirst ? "items-start text-left" : isLast ? "items-end text-right" : "items-start text-left transform translate-x-2/5"}`}>
+                <div className={`mt-6 flex flex-col text-[16px] gap-2 whitespace-nowrap max-tablet:text-sm ${isFirst ? "items-start text-left" : isLast ? "items-end text-right" : "items-start text-left transform translate-x-2/5"}`}>
                   <p className={` uppercase font-regular`}>
                     {step.label}
                   </p>

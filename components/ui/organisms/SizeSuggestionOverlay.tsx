@@ -119,7 +119,7 @@ function PickerDropdown({ values, selectedValue, unit, onSelect, onClose }: Pick
               onSelect(val);
               onClose();
             }}
-            className={`w-full py-2.5 text-center text-sm transition hover:bg-neutral-50 max-mobile:text-xs ${val === selectedValue ? "font-regular text-black" : "font-light text-black/70"
+            className={`w-full py-2.5 text-center text-sm transition hover:bg-neutral-50 cursor-pointer max-mobile:text-xs ${val === selectedValue ? "font-regular text-black" : "font-light text-black/70"
               }`}
           >
             {val} {unit}
@@ -255,7 +255,7 @@ export default function SizeSuggestionOverlay({
             )}
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 transition-colors"
+              className="text-black hover:text-gray-600 cursor-pointer transition-colors"
               aria-label="Close size suggestion"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
@@ -283,7 +283,7 @@ export default function SizeSuggestionOverlay({
                     >
                       <button
                         onClick={() => { setErrors((e) => ({ ...e, height: undefined })); setActivePicker(activePicker === "height" ? null : "height"); }}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`text-center cursor-pointer text-black/60 ${inputClass()}`}
                       >
                         {height || 0} CM
                       </button>
@@ -308,7 +308,7 @@ export default function SizeSuggestionOverlay({
                     >
                       <button
                         onClick={() => { setErrors((e) => ({ ...e, weight: undefined })); setActivePicker(activePicker === "weight" ? null : "weight"); }}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`cursor-pointer text-center text-black/60 ${inputClass()}`}
                       >
                         {weight || 0} KG
                       </button>
@@ -335,7 +335,7 @@ export default function SizeSuggestionOverlay({
                       </p>
                       <button
                         onClick={() => setActivePicker(activePicker === "age" ? null : "age")}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`text-center cursor-pointer text-black/60 ${inputClass()}`}
                       >
                         {age || 0} YEARS
                       </button>
@@ -355,7 +355,7 @@ export default function SizeSuggestionOverlay({
                   <div className="flex flex-col items-center gap-4 mt-4">
                     <button
                       onClick={handleStep1Continue}
-                      className="w-full border border-black/20 py-3 text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
+                      className="w-full border border-black/20 py-4 cursor-pointer leading-none text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
                     >
                       Continue
                     </button>
@@ -388,7 +388,7 @@ export default function SizeSuggestionOverlay({
                     >
                       <button
                         onClick={() => { setErrors((e) => ({ ...e, chest: undefined })); setActivePicker(activePicker === "chest" ? null : "chest"); }}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`text-center cursor-pointer text-black/60 ${inputClass()}`}
                       >
                         {chest || 0} CM
                       </button>
@@ -413,7 +413,7 @@ export default function SizeSuggestionOverlay({
                     >
                       <button
                         onClick={() => { setErrors((e) => ({ ...e, waist: undefined })); setActivePicker(activePicker === "waist" ? null : "waist"); }}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`text-center cursor-pointer text-black/60 ${inputClass()}`}
                       >
                         {waist || 0} CM
                       </button>
@@ -438,7 +438,7 @@ export default function SizeSuggestionOverlay({
                     >
                       <button
                         onClick={() => { setErrors((e) => ({ ...e, hip: undefined })); setActivePicker(activePicker === "hip" ? null : "hip"); }}
-                        className={`text-center text-black/60 ${inputClass()}`}
+                        className={`text-center cursor-pointer text-black/60 ${inputClass()}`}
                       >
                         {hip || 0} CM
                       </button>
@@ -515,7 +515,7 @@ export default function SizeSuggestionOverlay({
                   <div className="flex flex-col items-center gap-4 mt-4">
                     <button
                       onClick={handleStep2Continue}
-                      className="w-full border border-black/20 py-3 text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
+                      className="w-full border border-black/20 py-4 leading-none text-sm font-regular cursor-pointer hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
                     >
                       Continue
                     </button>
@@ -537,7 +537,7 @@ export default function SizeSuggestionOverlay({
                       <p className="text-sm text-black/60 leading-normal max-mobile:text-xs">
                         To be certain this is your ideal fit, you can always contact our team for personal guidance.
                       </p>
-                      <button className="text-sm underline decoration-black/40 underline-offset-4 max-mobile:text-xs">Contact us</button>
+                      <button className="text-sm underline cursor-pointer decoration-black/40 underline-offset-4 max-mobile:text-xs">Contact us</button>
                     </div>
 
                   </div>
@@ -551,20 +551,20 @@ export default function SizeSuggestionOverlay({
                   <div className="flex flex-col gap-3 w-full">
                     <button
                       onClick={handleEdit}
-                      className="w-full border border-black/20 py-4 text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
+                      className="w-full border border-black/20 py-4 cursor-pointer leading-none text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
                     >
                       Edit
                     </button>
                     <button
                       onClick={handleAddSize}
-                      className="w-full bg-black text-white py-4 text-sm font-regular max-mobile:text-xs max-mobile:py-3"
+                      className="w-full bg-black text-white py-4 cursor-pointer leading-none text-sm font-regular max-mobile:text-xs max-mobile:py-3"
                     >
                       Add size {suggestedSize}
                     </button>
                   </div>
                   <button
                     onClick={handleDelete}
-                    className="text-sm underline decoration-black/40 underline-offset-4 max-mobile:text-xs"
+                    className="text-sm underline decoration-black/40 cursor-pointer underline-offset-4 max-mobile:text-xs"
                   >
                     Delete details
                   </button>

@@ -19,14 +19,13 @@ export default function CollectionPage() {
   };
 
   const collectionsList = [
-    { id: "SS26", name: "Her Edge" },
-    { id: "SS27", name: "Summer Summer" },
-    { id: "SS28", name: "Reborn" },
+    { id: "SS26", name: "The Becoming", url: "/collection/SS26" },
+    { id: "FW26", name: "Coming soon", url: undefined },
   ];
 
   return (
     <div className="relative">
-      <div id="smooth-wrapper" className="h-svh overflow-hidden">
+      <div id="smooth-wrapper" className="h-svh overflow-hidden text-sm max-mobile:text-xs">
         <div id="smooth-content">
           <HeroSection ref={null} media={exampleWithLinks.media} tabletMedia={exampleWithLinks.tabletMedia} mobileMedia={exampleWithLinks.mobileMedia} />
         </div>
@@ -37,12 +36,12 @@ export default function CollectionPage() {
                 <CollectionLink
                   id={collection.id}
                   name={collection.name}
-                  href={`/collection/${collection.id}`}
+                  href={collection.url}
                 />
               </div>
             ))}
           </div>
-          <div className="text-[16px]">All collections</div>
+          <div>All collections</div>
         </div>
       </div>
     </div>

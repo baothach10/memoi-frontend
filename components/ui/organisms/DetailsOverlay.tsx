@@ -54,7 +54,7 @@ export default function DetailsOverlay({
             <div />
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 transition-colors"
+              className="text-black hover:text-gray-600 cursor-pointer transition-colors"
               aria-label="Close details"
             >
               <svg

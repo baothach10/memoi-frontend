@@ -365,14 +365,7 @@ function TheMemoiHousePage() {
                                         text-white
                                         text-sm
                                         cursor-pointer
-                                        tracking-[0.12em]
                                         bg-transparent
-                                        transition-all
-                                        duration-500
-                                        ease-out
-                                        hover:bg-transparent
-                                        hover:text-black
-                                        hover:border-white
                                         max-mobile:text-xs
                                         max-mobile:py-3
                                         max-mobile:px-8
@@ -386,14 +379,14 @@ function TheMemoiHousePage() {
 
                     <section
                         ref={gridSectionRef}
-                        className="min-h-svh w-full text-black gap-16 py-20 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+                        className="min-h-svh w-full text-black gap-16 py-22 relative flex flex-col items-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
                         data-header-theme="light"
                     >
                         <div className="relative h-full max-w-[904px] px-10 space-y-16 max-mobile:px-5 max-mobile:space-y-10">
                             <div className="space-y-20 max-mobile:space-y-10">
                                 <div className="text-center space-y-4">
                                     <h2 className="font-regular uppercase text-2xl max-mobile:text-lg">Benefits for House Members</h2>
-                                    <p className="text-[16px] leading-[140%] max-mobile:text-xs">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
+                                    <p className="text-sm leading-[140%] max-mobile:text-xs">Your status within The MEMOÍ House is a measure of your continued relationship with the brand, determined by your total accumulated spending over time.</p>
                                 </div>
                                 <div>
                                     <BenefitTable />

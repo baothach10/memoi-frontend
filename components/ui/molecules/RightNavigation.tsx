@@ -91,7 +91,7 @@ function RightNavigation({
         <button
           onClick={handleSearchClick}
           onTouchEnd={handleSearchTouch}
-          className="relative group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
+          className="relative group text-white hover:text-gray-300 cursor-pointer transition-all ease-in max-tablet:hidden"
         >
           <SearchIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 p-2 bg-black text-white text-xs whitespace-nowrap rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
@@ -101,7 +101,7 @@ function RightNavigation({
         <button
           onClick={handleSearchClick}
           onTouchEnd={handleSearchTouch}
-          className="relative group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
+          className="relative group text-white hover:text-gray-300 cursor-pointer transition-all ease-in laptop:hidden"
         >
           <SearchIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
         </button>
@@ -109,7 +109,7 @@ function RightNavigation({
         <button
           onClick={handleCartClick}
           onTouchEnd={handleCartTouch}
-          className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in max-tablet:hidden"
+          className="relative flex items-center gap-1 group text-white cursor-pointer hover:text-gray-300 transition-all ease-in max-tablet:hidden"
         >
           <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (
@@ -127,7 +127,7 @@ function RightNavigation({
         <button
           onClick={handleCartClick}
           onTouchEnd={handleCartTouch}
-          className="relative flex items-center gap-1 group text-white hover:text-gray-300 transition-all ease-in laptop:hidden"
+          className="relative flex items-center gap-1 group text-white cursor-pointer hover:text-gray-300 transition-all ease-in laptop:hidden"
         >
           <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (

@@ -66,7 +66,7 @@ export default function MobileMenu({
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={toggle}
-          className="z-10 relative items-center justify-center max-mobile:flex hidden transition-all ease-in"
+          className="z-10 relative items-center justify-center cursor-pointer max-mobile:flex hidden transition-all ease-in"
         >
           {open ? (
             <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={textColor} />
@@ -78,7 +78,7 @@ export default function MobileMenu({
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={toggle}
-          className="z-10 relative flex items-center justify-center max-mobile:hidden transition-all ease-in"
+          className="z-10 relative flex items-center cursor-pointer justify-center max-mobile:hidden transition-all ease-in"
         >
           {open ? (
             <ExitIcon width={18} height={18} color={textColor} />

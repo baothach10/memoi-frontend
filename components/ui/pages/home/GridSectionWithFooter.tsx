@@ -17,8 +17,8 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
     >
       <div className="relative h-full w-full flex flex-col justify-around">
 
-        <div className="flex flex-col items-center text-center text-black gap-3 pt-20 pb-8 max-mobile:text-[14px] max-mobile:gap-2 max-mobile:pt-24 max-mobile:pb-6">
-          <span className="uppercase text-2xl leading-none font-regular max-mobile:text-[14px]">Follow us on Instagram</span>
+        <div className="flex flex-col items-center text-center text-black gap-3 pt-22 pb-8 max-mobile:text-sm max-mobile:gap-2 max-mobile:pt-24 max-mobile:pb-6">
+          <span className="uppercase text-2xl leading-none font-regular max-mobile:text-sm">Follow us on Instagram</span>
           <span>
             <Link
               href={"https://www.instagram.com/memoi.official/"}
@@ -77,8 +77,8 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Check Icon"
-                title="The MEMOÍMembership"
-                description="Your Memoí membership elevates your experience with tiered loyalty rewards"
+                title="The MEMOÍ Membership"
+                description="Your MEMOÍ membership elevates your experience with tier rewards"
               />
             </Link>
           </div>

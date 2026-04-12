@@ -10,7 +10,7 @@ export default function DeleteAccountSection({ onDelete }: { onDelete: () => voi
   return (
     <div className="flex flex-col gap-12 max-mobile:gap-9">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">DELETE YOUR ACCOUNT</h2>
+        <h2 className="text-xl font-regular uppercase max-mobile:text-lg">DELETE YOUR ACCOUNT</h2>
         <p className="text-sm text-black/80 max-mobile:text-xs">
           Account deletion is permanent. You will lose access to your account and will no longer be able to track past purchases, returns, or exchanges online.
         </p>
@@ -21,8 +21,8 @@ export default function DeleteAccountSection({ onDelete }: { onDelete: () => voi
         <button
           onClick={handleDelete}
           className=" relative
-        w-full border border-black/20 py-4 text-sm font-regular
-        transition-all duration-300 ease-in-out
+        w-full border border-black/20 py-4 leading-none text-sm font-regular
+        transition-all duration-300 ease-in-out cursor-pointer
         bg-[#fffefa] text-black
         hover:bg-black hover:text-[#fffefa]
         max-mobile:text-xs

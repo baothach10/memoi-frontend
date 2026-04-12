@@ -54,7 +54,7 @@ function CollectionImageShowSlide({
         <button
           onClick={goToPrevious}
           disabled={isFirst}
-          className={`transition-opacity ${isFirst ? "opacity-20 cursor-not-allowed" : "opacity-100"
+          className={`transition-opacity ${isFirst ? "opacity-20 cursor-not-allowed" : "cursor-pointer opacity-100"
             }`}
           aria-label="Previous image"
         >
@@ -70,7 +70,7 @@ function CollectionImageShowSlide({
         <button
           onClick={goToNext}
           disabled={isLast}
-          className={`transition-opacity ${isLast ? "opacity-20 cursor-not-allowed" : "opacity-100"
+          className={`transition-opacity ${isLast ? "opacity-20 cursor-not-allowed" : "cursor-pointer opacity-100"
             }`}
           aria-label="Next image"
         >

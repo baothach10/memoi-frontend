@@ -79,7 +79,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             <h2 className="text-base font-regular max-mobile:text-sm">Search</h2>
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 transition-colors w-5 h-5 max-mobile:w-4.5 max-mobile:h-4.5"
+              className="text-black hover:text-gray-600 transition-colors w-5 h-5 cursor-pointer max-mobile:w-4.5 max-mobile:h-4.5"
               aria-label="Close search"
             >
               <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />

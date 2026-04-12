@@ -85,7 +85,7 @@ export default function LoginForm() {
             {/* Continue button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-4 text-sm hover:cursor-pointer transition max-mobile:text-xs"
+              className="w-full bg-black text-white leading-none py-4 text-sm cursor-pointer transition max-mobile:text-xs"
             >
               Continue
             </button>
@@ -98,7 +98,7 @@ export default function LoginForm() {
             {/* Google */}
             <button
               type="button"
-              className="w-full border py-4 text-sm flex items-center justify-center gap-2 hover:cursor-pointer transition max-mobile:text-xs"
+              className="w-full border leading-none py-4 text-sm flex items-center justify-center gap-2 cursor-pointer transition max-mobile:text-xs"
               onTouchEnd={loginWithGoogle}
               onClick={loginWithGoogle}
             >
