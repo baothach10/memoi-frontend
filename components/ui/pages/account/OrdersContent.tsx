@@ -63,7 +63,7 @@ export default function OrdersContent() {
 
 
         <div className="min-h-[400px] flex items-center justify-center">
-          <p className="text-sm text-black/40 animate-pulse">
+          <p className="text-sm text-black animate-pulse">
             Loading...
           </p>
         </div>

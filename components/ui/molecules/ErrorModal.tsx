@@ -14,7 +14,7 @@ export default function ErrorModal({ open, onClose }: ErrorModalProps) {
       <div className="absolute inset-0 bg-black/30" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative z-10 w-[420px] max-w-[90%] bg-[#fbf8f3] px-8 py-10 text-center shadow-lg">
+      <div className="relative z-10 w-[900px] max-w-[90%] bg-[#fbf8f3] px-8 py-10 text-center shadow-lg  max-tablet:max-w-[494px] max-mobile:p-4">
         <h2 className="text-lg font-medium mb-4">
           Sorry, something went wrong
         </h2>

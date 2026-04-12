@@ -5,7 +5,7 @@ export default function PaymentMethods() {
         <div>
             <h2 className="uppercase text-[16px] leading-[120%] mb-4">PAYMENT METHODS</h2>
             <div className="text-sm text-black/75">
-                <p>MEMOI accepts the following secure payment options:</p>
+                <p>MEMOÍaccepts the following secure payment options:</p>
                 <ul className="mt-3 list-disc list-inside text-sm">
                     <li>Visa, MasterCard, American Express</li>
                     <li>PayPal</li>

@@ -236,7 +236,7 @@ export function Footer() {
         </div>
         <div className="border-t border-black/10 pt-3 text-black text-sm pb-5 max-tablet:pb-8 max-tablet:pt-5">
           <div className="flex justify-between px-25 smaller-tablet:max-tablet:px-10 max-mobile:flex-col max-mobile:gap-4 max-mobile:px-5 max-mobile:items-center max-mobile:text-center max-mobile:text-xs max-mobile:leading-normal">
-            <p>&copy; 2025 MEMOI ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
+            <p>&copy; 2025 MEMOÍ ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
             <div className="flex gap-5 max-mobile:gap-[18px]">
               <FacebookIcon
                 width={16}

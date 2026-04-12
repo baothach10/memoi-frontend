@@ -14,7 +14,7 @@ function SignInPortal() {
         <LoginForm />
       </div>
       <div className="relative text-sm max-mobile:text-xs">
-        Copyright &copy; 2025 MEMOI ™
+        Copyright &copy; 2025 MEMOÍ™
       </div>
     </section>
   );

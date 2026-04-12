@@ -11,7 +11,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
   if (isLoading) {
     return (
       <div className="px-[100px] max-tablet:px-[5%] w-full min-h-dvh flex items-center justify-center pt-32">
-        <p className="text-sm text-black/40">
+        <p className="text-sm text-black">
           Loading...
         </p>
       </div>
@@ -21,7 +21,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
   if (isError || !order) {
     return (
       <div className="px-[100px] max-tablet:px-[5%] w-full min-h-dvh flex flex-col items-center justify-center pt-32 gap-6">
-        <p className="text-sm text-black/40">
+        <p className="text-sm text-black">
           Failed to load order details
         </p>
         <button 

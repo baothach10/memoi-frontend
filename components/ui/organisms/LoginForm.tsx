@@ -110,20 +110,11 @@ export default function LoginForm() {
             <p className=" text-sm text-black/80 leading-[150%] max-mobile:text-xs">
               By logging in with my social login, I agree to link my account in
               accordance with the{" "}
-              <Link href={"/privacy-policy"} className="text-sm text-black relative inline-flex  cursor-pointer max-mobile:text-xs">
+              <Link href={"/privacy-policy"} className="text-sm text-black relative inline-flex cursor-pointer max-mobile:text-xs underline underline-offset-4 decoration-black/40">
                 Privacy Policy
               </Link>
             </p>
           </div>
-        </div>
-        <div>
-
-          <Link
-            href={"/"}
-            className="text-sm text-black relative inline-flex cursor-pointer max-mobile:text-xs"
-          >
-            Need help?
-          </Link>
         </div>
       </form>
     </div >

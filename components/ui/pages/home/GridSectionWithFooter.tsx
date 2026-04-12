@@ -77,7 +77,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Check Icon"
-                title="The MEMOI Membership"
+                title="The MEMOÍMembership"
                 description="Your Memoí membership elevates your experience with tiered loyalty rewards"
               />
             </Link>
