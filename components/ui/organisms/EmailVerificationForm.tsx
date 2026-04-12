@@ -203,14 +203,6 @@ export default function EmailVerificationForm({ email }: Props) {
             </p>
           )}
         </div>
-
-        {/* Footer */}
-        <Link
-          href={"/"}
-          className="text-sm underline cursor-pointer decoration-black/40 underline-offset-4 cursor-pointer max-mobile:text-xs"
-        >
-          Need help?
-        </Link>
       </form>
     </div>
   );

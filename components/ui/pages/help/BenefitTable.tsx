@@ -2,13 +2,13 @@
 
 import TickIcon from "@/components/ui/atoms/TickIcon";
 
-type Tier = "MEMOI" | "MEMOI+" | "MEMOI ELITE";
+type Tier = "MEMOI" | "MEMOI+" | "MEMOÍELITE";
 
-const TIERS: Tier[] = ["MEMOI", "MEMOI+", "MEMOI ELITE"];
+const TIERS: Tier[] = ["MEMOI", "MEMOI+", "MEMOÍELITE"];
 const TIERS_PRICE: Record<Tier, string> = {
     "MEMOI": "",
     "MEMOI+": "S$3,000",
-    "MEMOI ELITE": "S$8,000",
+    "MEMOÍELITE": "S$8,000",
 };
 
 const BENEFITS: Array<{
@@ -19,47 +19,47 @@ const BENEFITS: Array<{
         {
             title: "Welcome Discount",
             subtitle: "S$10 discount for first purchase",
-            included: { "MEMOI": true, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": true, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Community Channel",
             subtitle: "Access to the Private community channel",
-            included: { "MEMOI": true, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": true, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Birth Month Discount",
             subtitle: "10% discount during your birth month",
-            included: { "MEMOI": true, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": true, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Popups",
             subtitle: "Access to MEMOÍ popups",
-            included: { "MEMOI": true, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": true, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Exclusive Lifetime Discount",
             subtitle: "10% discount for all orders",
-            included: { "MEMOI": false, "MEMOI+": true, "MEMOI ELITE": false },
+            included: { "MEMOI": false, "MEMOI+": true, "MEMOÍELITE": false },
         },
         {
             title: "Exclusive Lifetime Discount",
             subtitle: "15% discount for all orders",
-            included: { "MEMOI": false, "MEMOI+": false, "MEMOI ELITE": true },
+            included: { "MEMOI": false, "MEMOI+": false, "MEMOÍELITE": true },
         },
         {
             title: "Exclusive Events",
             subtitle: "Invitations to MEMOÍ events",
-            included: { "MEMOI": false, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": false, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Priority Orders",
             subtitle: "Priority orders limited edition",
-            included: { "MEMOI": false, "MEMOI+": true, "MEMOI ELITE": true },
+            included: { "MEMOI": false, "MEMOI+": true, "MEMOÍELITE": true },
         },
         {
             title: "Personalized Service",
             subtitle: "Personalized styling session",
-            included: { "MEMOI": false, "MEMOI+": false, "MEMOI ELITE": true },
+            included: { "MEMOI": false, "MEMOI+": false, "MEMOÍELITE": true },
         },
     ];
 

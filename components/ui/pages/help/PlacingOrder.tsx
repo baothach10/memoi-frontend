@@ -6,11 +6,11 @@ export default function PlacingOrder() {
             <h2 className="uppercase text-[16px] leading-[120%] mb-4">PLACING AN ORDER</h2>
             <div className="text-sm text-black/75">
                 <p>
-                    All orders can be placed directly through the official MEMOI website. Upon completing your purchase,
+                    All orders can be placed directly through the official MEMOÍwebsite. Upon completing your purchase,
                     you will receive an order confirmation email detailing your order summary and payment information.
                 </p>
                 <p className="mt-4">
-                    MEMOI offers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
+                    MEMOÍoffers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
                     be indicated on the product page.
                 </p>
                 <p className="mt-4">

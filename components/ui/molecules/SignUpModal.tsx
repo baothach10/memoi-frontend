@@ -7,6 +7,8 @@ import { useUserQuery } from "@/queries/useUserQuery";
 import MemoiGraphicLogo from "../atoms/MemoiGraphicLogo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MOBILE_LOGO_SIZE } from "@/constants";
+import ExitIcon from "../atoms/ExitIcon";
 
 export default function SignUpModal() {
   const pathname = usePathname();
@@ -99,7 +101,7 @@ export default function SignUpModal() {
       {/* Modal Container */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[900px] bg-[#fffefa] overflow-hidden shadow-2xl flex laptop:flex-row h-[600px] laptop:min-h-[600px] max-tablet:flex-col max-tablet:h-auto max-tablet:px-8 max-tablet:pt-8 max-tablet:pb-12 max-tablet:max-w-[494px] max-mobile:px-4 max-mobile:pt-4 max-mobile:pb-6"
+        className="relative z-10 w-full max-w-[900px] bg-[#fffefa] overflow-hidden shadow-2xl flex laptop:flex-row h-[600px] laptop:min-h-[600px] max-tablet:flex-col max-tablet:h-auto max-tablet:px-8 max-tablet:pt-8 max-tablet:pb-12 max-tablet:max-w-[494px] max-mobile:p-4"
       >
         {/* Close Button */}
         <button
@@ -107,16 +109,7 @@ export default function SignUpModal() {
           className="absolute top-6 right-6 max-tablet:top-4 max-tablet:right-4 z-20 text-black/50 hover:text-black transition-colors"
           aria-label="Close modal"
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          >
-            <path d="M12 4L4 12M4 4l8 8" />
-          </svg>
+          <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={'black'} />
         </button>
 
         {/* Left Side: Image */}

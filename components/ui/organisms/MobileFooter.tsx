@@ -124,7 +124,7 @@ export function MobileFooter() {
                 </div>
                 <div className="border-t border-black/10 pt-5 text-black text-sm pb-8">
                     <div className="flex justify-between px-10 max-mobile:flex-col max-mobile:gap-4 max-mobile:px-4 max-mobile:items-center max-mobile:text-center">
-                        <p>&copy; 2025 MEMOI ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
+                        <p>&copy; 2025 MEMOÍ ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
                         <div className="flex gap-5 max-mobile:gap-[18px]">
                             <FacebookIcon
                                 width={16}

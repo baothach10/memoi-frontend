@@ -9,11 +9,11 @@ export default function OrdersPayment() {
             <ExpandableSection title={"PLACING AN ORDER"} titleClassName="text-[16px] py-5 border-t border-t-black/10 max-mobile:text-sm" defaultOpen={true}>
                 <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
                     <p>
-                        All orders can be placed directly through the official MEMOI website. Upon completing your purchase,
+                        All orders can be placed directly through the official MEMOÍwebsite. Upon completing your purchase,
                         you will receive an order confirmation email detailing your order summary and payment information.
                     </p>
                     <p className="mt-4">
-                        MEMOI offers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
+                        MEMOÍoffers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
                         be indicated on the product page.
                     </p>
                     <p className="mt-4">
@@ -26,7 +26,7 @@ export default function OrdersPayment() {
             <ExpandableSection title={"PAYMENT METHODS"} titleClassName="text-[16px] py-5 border-t border-t-black/10 max-mobile:text-sm" defaultOpen={true}>
                 <div className="space-y-2 pb-8 max-mobile:text-xs">
                     <p>
-                        MEMOI accepts the following secure payment options:
+                        MEMOÍaccepts the following secure payment options:
                     </p>
                     <ul className="mt-3 list-disc list-inside text-sm space-y-2">
                         <li>Visa, MasterCard, American Express</li>

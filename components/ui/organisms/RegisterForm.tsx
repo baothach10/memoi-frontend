@@ -300,7 +300,7 @@ export default function RegisterForm() {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               I would like to receive information about the latest updates from
-              MEMOI by email.
+              MEMOÍ by email.
             </label>
           </div>
         </div>

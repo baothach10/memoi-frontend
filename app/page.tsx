@@ -348,9 +348,9 @@ export default function HomePage() {
     ],
     secondParameter: [
       { url: "/shop/all-products", title: "Shop" },
-      { url: "/collection", title: "Discover" },
-      { url: "/collection", title: "Discover" },
-      { url: "/collection", title: "Discover" },
+      { url: "/collection/ss26-the-becoming", title: "Discover" },
+      { url: "/collection/ss26-the-becoming", title: "Discover" },
+      { url: "/collection/ss26-the-becoming", title: "Discover" },
     ],
   };
 
