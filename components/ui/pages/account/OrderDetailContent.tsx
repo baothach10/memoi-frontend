@@ -10,7 +10,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
 
   if (isLoading) {
     return (
-      <div className="px-[100px] max-tablet:px-[5%] w-full min-h-dvh flex items-center justify-center pt-32">
+      <div className="px-[100px] max-tablet:px-[5%] text-sm max-mobile:text-xs w-full min-h-dvh flex items-center justify-center pt-32">
         <p className="text-sm text-black">
           Loading...
         </p>
@@ -20,13 +20,13 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
 
   if (isError || !order) {
     return (
-      <div className="px-[100px] max-tablet:px-[5%] w-full min-h-dvh flex flex-col items-center justify-center pt-32 gap-6">
+      <div className="px-[100px] max-tablet:px-[5%] text-sm max-mobile:text-xs w-full min-h-dvh flex flex-col items-center justify-center pt-32 gap-6">
         <p className="text-sm text-black">
           Failed to load order details
         </p>
         <button 
           onClick={() => window.location.reload()}
-          className="text-xs underline underline-offset-4 decoration-black/40"
+          className="text-xs underline underline-offset-4 cursor-pointer decoration-black/40"
         >
           Retry
         </button>
@@ -49,11 +49,11 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
                 </span>
               </div>
           
-              <h1 className="text-2xl font-regular uppercase max-mobile:text-lg leading-none">ORDER ID #{order.order_number}</h1>
+              <h1 className="text-xl font-regular uppercase max-mobile:text-lg leading-none">ORDER ID #{order.order_number}</h1>
             </div>
 
             {/* View Tracking Button (Desktop) */}
-            <button className="self-end h-fit px-14 py-4 border border-black/10 text-sm transition-all hover:bg-black hover:text-white max-mobile:px-6 max-mobile:py-3 max-mobile:text-xs">
+            <button className="self-end h-fit px-12 py-4 leading-none border cursor-pointer border-black/10 text-sm transition-all hover:bg-black hover:text-white max-mobile:px-6 max-mobile:py-3 max-mobile:text-xs">
               View tracking
             </button>
           </div>

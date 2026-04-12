@@ -182,7 +182,7 @@ export default function EmailVerificationForm({ email }: Props) {
           {/* Continue */}
           <button
             type="submit"
-            className="w-full bg-black text-white py-4 text-sm hover:opacity-90 transition max-mobile:text-xs"
+            className="w-full bg-black text-white leading-none py-4 cursor-pointer text-sm hover:opacity-90 transition max-mobile:text-xs"
           >
             Continue
           </button>
@@ -192,7 +192,7 @@ export default function EmailVerificationForm({ email }: Props) {
             <button
               type="button"
               onClick={handleResendCode}
-              className="text-sm text-black hover:opacity-70 transition font-regular max-mobile:text-xs"
+              className="text-sm text-black hover:opacity-70 transition cursor-pointer font-regular max-mobile:text-xs"
             >
               Request new code
             </button>

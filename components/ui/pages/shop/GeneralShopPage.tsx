@@ -36,7 +36,7 @@ export default function GeneralShopPage() {
   if (isLoading || isFetching)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24" data-header-theme="dark">
+        <section className="min-h-svh text-sm w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-xs max-mobile:pt-24" data-header-theme="dark">
           <div>Loading ...</div>
         </section>
       </div>
@@ -45,13 +45,13 @@ export default function GeneralShopPage() {
   if (isError)
     return (
       <div className="relative w-full h-full bg-[#fffefa]">
-        <section className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24" data-header-theme="dark">
+        <section className="min-h-svh text-sm w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-xs max-mobile:pt-24" data-header-theme="dark">
           <div>Failed to load products...</div>
         </section>
       </div>
     );
   return (
-    <div className="relative w-full h-full bg-[#fffefa]">
+    <div className="relative w-full h-full bg-[#fffefa] text-sm max-mobile:text-xs">
       <div className={`h-svh overflow-hidden`}>
         <div className="h-svh" data-header-theme="dark">
           <div className="relative h-full w-full">
@@ -70,7 +70,7 @@ export default function GeneralShopPage() {
                       key={category.id}
                     >
                       <span
-                        className={`text-[16px] capitalize ${underlineLink}`}
+                        className={`capitalize ${underlineLink}`}
                       >
                         {category.name}
                       </span>
@@ -78,7 +78,7 @@ export default function GeneralShopPage() {
                   ))}
               </div>
               <Link href={`/shop/all-products`} className="flex cursor-pointer">
-                <span className={`text-[16px] ${underlineLink}`}>
+                <span className={` ${underlineLink}`}>
                   All products
                 </span>
               </Link>

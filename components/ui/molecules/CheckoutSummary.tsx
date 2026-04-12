@@ -9,7 +9,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 // --- Sub-components ---
 
 export const SummaryHeader = () => (
-    <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
+    <h2 className="text-xl font-regular uppercase max-mobile:text-lg">
         Your Cart
     </h2>
 );
@@ -65,7 +65,7 @@ export const SummaryPromo = ({
                 type="button"
                 onClick={onApply}
                 disabled={isValidating || !promoCode}
-                className="border border-black/20 px-18 py-4 text-sm hover:border-black/40 transition-colors disabled:opacity-50 max-mobile:text-xs max-mobile:py-3 max-mobile:px-14"
+                className="border border-black/20 px-18 py-4 text-sm cursor-pointer leading-none hover:border-black/40 transition-colors disabled:opacity-50 max-mobile:text-xs max-mobile:py-3 max-mobile:px-14"
             >
                 {isValidating ? "Checking..." : "Apply"}
             </button>
@@ -115,7 +115,7 @@ export const SummaryTotals = ({
 );
 
 export const SummaryTotalAmount = ({ total, currency }: { total: number, currency: string }) => (
-    <div className="flex justify-between items-baseline pt-8 border-t border-black/10 text-2xl max-mobile:text-lg">
+    <div className="flex justify-between items-baseline pt-8 border-t border-black/10 text-xl max-mobile:text-lg">
         <div className="flex items-baseline gap-2">
             <span className=" font-regular">Total</span>
             <span className="text-black/50">(TAX INCLUDED)</span>
@@ -146,7 +146,7 @@ export const SummaryActions = ({
             type="button"
             onClick={onPlaceOrder}
             disabled={isProcessing}
-            className="w-full bg-black text-white py-4 text-sm cursor-pointer hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
+            className="w-full bg-black text-white py-4 text-sm leading-none cursor-pointer hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
         >
             {isProcessing ? "Processing..." : "Pre-order"}
         </button>

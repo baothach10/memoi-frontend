@@ -307,7 +307,7 @@ export default function RegisterForm() {
 
         <div className="flex flex-col gap-6 max-mobile:gap-4">
           {/* Submit */}
-          <button className="bg-black text-white py-4 text-sm">
+          <button className="bg-black text-white py-4 cursor-pointer leading-none text-sm">
             {isPending ? "Creating..." : "Create account"}
           </button>
 

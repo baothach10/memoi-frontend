@@ -461,7 +461,7 @@ function CollectionDetailPage() {
 
           <section
             ref={gridSectionRef}
-            className="min-h-svh w-full text-black gap-16 py-20 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
+            className="min-h-svh w-full text-black gap-16 py-22 relative flex flex-col items-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:pt-24"
             data-header-theme="light"
           >
             <div className="gap-16 relative flex flex-col items-center text-center ">

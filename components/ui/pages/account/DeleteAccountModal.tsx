@@ -66,7 +66,7 @@ export default function DeleteAccountModal({
       {/* Modal */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[900px] bg-[#fffefa] p-8 flex flex-col items-center text-center gap-10 shadow-2xl max-mobile:p-4 max-mobile:gap-8 max-tablet:max-w-[494px]"
+        className="relative z-10 w-full max-w-[450px] bg-[#fffefa] p-8 flex flex-col items-center text-center gap-10 shadow-2xl max-mobile:p-4 max-mobile:gap-8 max-tablet:max-w-[494px]"
       >
         <div className="flex flex-col gap-4">
           <h3 className="text-[16px] font-regular text-black max-mobile:text-sm">
@@ -81,13 +81,13 @@ export default function DeleteAccountModal({
         <div className="flex gap-4 w-full">
           <button
             onClick={onConfirm}
-            className="flex-1 border border-black/10 py-5 text-sm font-regular transition-all hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs"
+            className="flex-1 border border-black/10 py-4 leading-none cursor-pointer text-sm font-regular transition-all hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs"
           >
             Delete
           </button>
           <button
             onClick={handleClose}
-            className="flex-1 bg-black text-white py-5 text-sm font-regular transition-all hover:bg-black/80 max-mobile:text-xs max-mobile:py-3"
+            className="flex-1 bg-black text-white py-4 leading-none cursor-pointer text-sm font-regular transition-all hover:bg-black/80 max-mobile:text-xs max-mobile:py-3"
           >
             Cancel
           </button>

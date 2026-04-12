@@ -10,11 +10,11 @@ function SearchProductSuggestions({ numberOfSuggestions, gridClassName }: { numb
     const { data: productSuggestions, isLoading, isFetching, isError } = useProductSuggestionsQuery();
     const { currency } = useCurrency();
     if (isLoading || isFetching) {
-        return <div>Loading...</div>;
+        return <div className="text-black text-sm max-mobile:text-xs">Loading...</div>;
     }
 
     if (isError) {
-        return <div>Error loading product suggestions.</div>;
+        return <div className="text-black text-sm max-mobile:text-xs">Error loading product suggestions.</div>;
     }
 
     return (

@@ -106,7 +106,7 @@ export default function SignUpModal() {
         {/* Close Button */}
         <button
           onClick={() => handleClose(true)}
-          className="absolute top-6 right-6 max-tablet:top-4 max-tablet:right-4 z-20 text-black/50 hover:text-black transition-colors"
+          className="absolute top-6 right-6 max-tablet:top-4 max-tablet:right-4 cursor-pointer z-20 text-black/50 hover:text-black transition-colors"
           aria-label="Close modal"
         >
           <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={'black'} />
@@ -142,15 +142,15 @@ export default function SignUpModal() {
             <Link
               href="/sign-in"
               onClick={() => handleClose(true)}
-              className="w-full laptop:w-auto border cursor-pointer border-black/20 py-4 laptop:py-3 px-12 laptop:px-8 text-xs bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out max-tablet:text-xs max-mobile:py-3"
+              className="w-full laptop:w-auto border cursor-pointer leading-none border-black/20 py-4 px-12 laptop:px-8 text-sm bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out max-tablet:text-xs max-mobile:py-3"
             >
               Sign up
             </Link>
           </div>
 
           <div className="hidden laptop:block">
-            <p className="text-xs tracking-widest text-black/60 leading-normal uppercase">
-              Copyright © 2025 MEMOÍ, LLC
+            <p className="text-xs text-black/60 leading-normal">
+              Copyright &copy; 2025 MEMOÍ ™
             </p>
           </div>
         </div>

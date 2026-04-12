@@ -371,7 +371,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
     ],
     heroDetail: {
       id: "SS26",
-      title: "Becoming",
+      title: "The Becoming",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
@@ -423,7 +423,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
             className="min-h-svh w-full text-black gap-16 pb-20 pt-36 relative flex flex-col items-center justify-center text-center max-mobile:gap-10 max-mobile:pb-10 max-mobile:text-sm max-mobile:pt-24"
           >
             {isLoading || isFetching ? (
-              <div>Loading...</div>
+              <div className="text-sm max-mobile:text-xs">Loading...</div>
             ) : (
               <>
                 <div className="mx-auto text-center space-y-2">

@@ -63,7 +63,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                             {/* Remove Button */}
                             <button
                                 onClick={onRemove}
-                                className="text-xs text-black/60 hover:text-black tracking-wide transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
+                                className="text-xs text-black/60 hover:text-black cursor-pointer transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
                             >
                                 Remove
                             </button>
@@ -87,7 +87,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                             {/* Remove Button */}
                             <button
                                 onClick={onRemove}
-                                className="text-xs text-black/60 hover:text-black tracking-wide transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
+                                className="text-xs text-black/60 hover:text-black cursor-pointer transition-colors uppercase underline underline-offset-2 decoration-black/40 max-mobile:text-[10px]"
                             >
                                 Remove
                             </button>

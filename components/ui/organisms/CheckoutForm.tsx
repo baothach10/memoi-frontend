@@ -250,7 +250,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         items={itemsToDisplay}
                     />
                 )}
-                <MobileSummaryTotalAmount total={total} currency={currency || "SGD"} />
+                <MobileSummaryTotalAmount total={total} currency={currency || "SGD"} />x
             </div>
 
 
@@ -258,7 +258,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
             <div className="col-span-6 max-tablet:col-span-1 flex flex-col gap-10 max-tablet:gap-12 max-tablet:pt-8 max-tablet:border-t max-tablet:border-black/10 max-mobile:gap-16 max-tablet:pb-16 max-mobile:pb-11">
                 {/* Personal Information */}
                 <div className="flex flex-col gap-10 max-tablet:gap-12 max-mobile:gap-9">
-                    <h1 className="text-2xl font-regular uppercase max-mobile:text-lg">
+                    <h1 className="text-xl font-regular uppercase max-mobile:text-lg">
                         Personal Information
                     </h1>
 
@@ -324,7 +324,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
 
                 {/* Billing Address */}
                 <div className="flex flex-col gap-10 max-mobile:gap-9 max-tablet:gap-12">
-                    <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
+                    <h2 className="text-xl font-regular uppercase max-mobile:text-lg">
                         Billing Address
                     </h2>
 
@@ -392,7 +392,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
 
                 {/* Shipping Method */}
                 <div className="flex flex-col gap-10 max-mobile:gap-8 max-tablet:gap-12">
-                    <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
+                    <h2 className="text-xl font-regular uppercase max-mobile:text-lg">
                         Shipping Method
                     </h2>
                     <div className="flex flex-col gap-4">
@@ -423,7 +423,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
 
                 {/* Payment Method */}
                 <div className="flex flex-col gap-12 max-mobile:gap-8">
-                    <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">
+                    <h2 className="text-xl font-regular uppercase max-mobile:text-lg">
                         Payment Method
                     </h2>
                     <StripePayment

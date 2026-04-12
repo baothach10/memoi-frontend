@@ -21,8 +21,8 @@ export default function ContactUsPage() {
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">MAIL US</h3>
                                 <div className="leading-normal gap-2 flex flex-col">
-                                    <p className="text-sm text-black max-mobile:text-xs" >Send your inquiries to <span>memoi@memoiofficial.com</span>. We will respond within 48 business hours.</p>
-                                    <p className="text-black/60 text-xs">Service available from Monday to Sunday from 10am to 9pm (ICT).</p>
+                                    <p className="text-sm text-black max-mobile:text-xs" >Send your inquiries to <span>memoi@memoiofficial.com</span>. We will respond within 48 business hours</p>
+                                    <p className="text-black/60 text-xs">Available from Monday to Sunday from 10am - 9pm (ICT)</p>
                                 </div>
                             </div>
                             <Link href={mailTo} className="relative cursor-pointer w-full" target="_blank" rel="noreferrer">
@@ -38,12 +38,12 @@ export default function ContactUsPage() {
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">CALL US</h3>
                                 <div className="leading-normal gap-2 flex flex-col">
                                     <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">Our Client Advisors would be delighted to assist you. You may contact us at <span>(+65) 85939373</span></p>
-                                    <p className="text-black/60 text-xs">Calls may be recorded for quality assurance.</p>
+                                    <p className="text-black/60 text-xs">Calls may be recorded for quality assurance</p>
                                 </div>
                             </div>
                             <Link href={whatsapp} target="_blank" rel="noreferrer" className="relative cursor-pointer w-full">
                                 <span className="block w-full bg-transparent text-black border border-black/20 py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
-                                    Whatsapp us
+                                    <span>(+65) 85939373</span>
                                 </span>
                             </Link>
                         </div>
@@ -52,7 +52,7 @@ export default function ContactUsPage() {
                         <div className="flex flex-col items-center gap-8 max-mobile:gap-5">
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">SOCIAL MEDIA</h3>
-                                <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">For quick support, message us directly on Facebook (@memoi) or Instagram (@memoi.official). We aim to reply to DMs within 12 hours during service hours.</p>
+                                <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">For quick support, message us directly on Facebook (@memoi) or Instagram (@memoi.official). We aim to reply to DMs within 12 hours during service hours</p>
                             </div>
                             <div className="flex w-full relative gap-4 items-center justify-center">
                                 <Link href="#" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">

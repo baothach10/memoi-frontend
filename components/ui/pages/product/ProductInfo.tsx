@@ -157,10 +157,10 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
             ref={overlayRef}
             className="
               absolute mx-auto z-10
-              w-1/3 
+              w-1/2
               bg-[#FFFEFA] border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
-              gap-3 py-6 text-sm
+              gap-4 py-8 text-sm
               opacity-0 pointer-events-none
               max-mobile:w-full
               max-mobile:text-xs
@@ -179,7 +179,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                     transition
                     ${disabled
                       ? "opacity-40 line-through cursor-not-allowed"
-                      : "hover:underline decoration-black/40 underline-offset-4"
+                    : "hover:underline decoration-black/40 underline-offset-4 cursor-pointer" 
                     }
                   `}
                 >
@@ -188,7 +188,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               );
             })}
 
-            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="underline decoration-black/40 underline-offset-4">
+            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="underline cursor-pointer decoration-black/40 underline-offset-4">
               Size Suggestion
             </button>
           </div>
@@ -196,7 +196,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           {/* ADD TO CART BUTTON */}
           <button
             onClick={handleAddToCartClick}
-            className="w-1/3 bg-black text-white py-3 max-mobile:py-3.5 text-sm max-mobile:w-full max-mobile:text-xs"
+            className="w-1/2 bg-black text-white py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
           >
             Add to cart
           </button>

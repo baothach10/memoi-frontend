@@ -56,7 +56,7 @@ export default function ContactUsPage() {
                       key={`${item.title}-${idx}`}
                       url={item.href}
                       title={item.title}
-                      style="relative inline-flex text-[16px] leading-[18px] cursor-pointer relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-0 after:transition-transform after:duration-200 hover:after:scale-x-100 after:bg-white/40"
+                      style="relative inline-flex text-sm max-mobile:text-xs leading-[18px] cursor-pointer relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-0 after:transition-transform after:duration-200 hover:after:scale-x-100 after:bg-white/40"
                     />
                   ))}
                 </div>

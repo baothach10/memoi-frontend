@@ -80,7 +80,7 @@ export default function AccountTier() {
     return (
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-6 max-mobile:gap-4">
-          <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
+          <h2 className="text-xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
           <div className="animate-pulse space-y-4">
             <div className="h-4 bg-black/5 rounded w-3/4"></div>
             <div className="h-8 bg-black/5 rounded w-1/2"></div>
@@ -94,7 +94,7 @@ export default function AccountTier() {
   return (
     <div className="flex flex-col gap-12 max-mobile:gap-9">
       <div className="flex flex-col gap-6 max-mobile:gap-4">
-        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
+        <h2 className="text-xl font-regular uppercase max-mobile:text-lg">ACCOUNT TIER</h2>
         <p className="text-sm text-black/80 max-mobile:text-xs">
           Elevate your status to unlock new levels of privilege and reward. View full details at{" "}
           <Link href="/the-memoi-house" className="inline cursor-pointer underline underline-offset-4 decoration-black/40 hover:decoration-black transition-colors">The MEMOÍ House</Link>

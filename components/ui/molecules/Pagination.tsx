@@ -19,7 +19,7 @@ export default function PaginationComponent({
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            className=" w-full px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-5"
+            className=" w-full px-[100px] cursor-pointer smaller-tablet:max-tablet:px-10 max-mobile:px-5"
         >
             {/* ⬅️ PREVIOUS */}
             <IconButton

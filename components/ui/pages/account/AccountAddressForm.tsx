@@ -27,7 +27,7 @@ function inputClass() {
 }
 
 const buttonClass = `
-  w-full border border-black/20 py-4 text-sm font-regular
+  w-full border border-black/20 py-4 leading-none cursor-pointer text-sm font-regular
   transition-all duration-300 ease-in-out
   bg-[#fffefa] text-black
   hover:bg-black hover:text-[#fffefa]
@@ -102,7 +102,7 @@ export default function AccountAddressForm({ userProfile }: AccountAddressFormPr
   return (
     <div className="flex flex-col gap-12 max-mobile:gap-9">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-regular uppercase max-mobile:text-lg">ADDRESS INFORMATION</h2>
+        <h2 className="text-xl font-regular uppercase max-mobile:text-lg">ADDRESS INFORMATION</h2>
         <p className="text-sm text-black/60 max-mobile:text-xs">
           Make changes to your address here. Click save when you are done.
         </p>

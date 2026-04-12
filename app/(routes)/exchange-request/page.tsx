@@ -183,7 +183,7 @@ export default function ExchangeRequestPage() {
                     <div className="flex flex-col gap-6 max-mobile:gap-4">
                         {/* Submit */}
                         <button
-                            className="bg-black text-white py-4 text-sm max-mobile:py-3.5 max-mobile:text-xs"
+                            className="bg-black text-white py-4 text-sm leading-none cursor-pointer max-mobile:py-3.5 max-mobile:text-xs"
                             disabled={isPending}
                         >
                             {isPending ? "Submitting..." : "Register an Exchange"}
