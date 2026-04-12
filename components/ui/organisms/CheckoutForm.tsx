@@ -24,7 +24,7 @@ import { useAddressInfoQuery } from "@/queries/useAddressInfoQuery";
 import { useDiscountMutation } from "@/queries/useDiscountMutation";
 import { useCartQuery } from "@/queries/useCartQuery";
 import { useCurrency } from "@/context/CurrencyContext";
-import { useTierDiscountQuery } from "@/queries/useTierDiscountQuery";
+import { useMembershipDiscountQuery } from "@/queries/useMembershipDiscountQuery";
 
 countries.registerLocale(en);
 
@@ -109,17 +109,17 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     useEffect(() => {
         if (backendItems) {
             if (backendItems.length > 0) {
-            const mappedItems = backendItems.map(item => ({
-                product_id: item.product_variant_id,
-                size: item.size,
-                quantity: item.quantity,
-                productName: item.product_name,
-                productImage: item.image_url,
-                stock: item.stock,
-                color_name: item.color_name,
-                price: item.unit_price,
-            }));
-            setLocalItems(mappedItems);
+                const mappedItems = backendItems.map(item => ({
+                    product_id: item.product_variant_id,
+                    size: item.size,
+                    quantity: item.quantity,
+                    productName: item.product_name,
+                    productImage: item.image_url,
+                    stock: item.stock,
+                    color_name: item.color_name,
+                    price: item.unit_price,
+                }));
+                setLocalItems(mappedItems);
             } else {
                 clearCart();
                 setLocalItems([])
@@ -140,14 +140,15 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
         SHIPPING_METHODS.find((m) => m.id === selectedShippingId) ||
         SHIPPING_METHODS[0];
 
+    const { data: tierDiscountData } = useMembershipDiscountQuery(subtotal);
+    const tierDiscountAmount = tierDiscountData?.tier_discount_amount || 0;
+    const birthMonthDiscountAmount = tierDiscountData?.birth_month_discount || 0;
     const discountAmount = discountInfo
         ? (discountInfo.unit === "percent" ? (subtotal * discountInfo.amount) / 100 : discountInfo.amount)
         : 0;
 
-    const { data: tierDiscountData } = useTierDiscountQuery(subtotal);
-    const tierDiscountAmount = tierDiscountData?.tier_discount_amount || 0;
 
-    const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount;
+    const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount - birthMonthDiscountAmount;
 
     const {
         register,
@@ -250,7 +251,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         items={itemsToDisplay}
                     />
                 )}
-                <MobileSummaryTotalAmount total={total} currency={currency || "SGD"} />x
+                <MobileSummaryTotalAmount total={total} currency={currency || "SGD"} />
             </div>
 
 
@@ -450,6 +451,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     items={itemsToDisplay}
                     subtotal={subtotal}
                     promoDiscountAmount={discountAmount}
+                    birthMonthDiscountAmount={birthMonthDiscountAmount}
                     tierDiscountAmount={tierDiscountAmount}
                     total={total}
                     promoCode={promoCode}
@@ -474,6 +476,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         subtotal={subtotal}
                         shippingCost={selectedShipping.priceValue}
                         shippingLabel={selectedShipping.price}
+                        birthMonthDiscount={birthMonthDiscountAmount}
                         tierDiscount={tierDiscountAmount}
                         promoDiscount={discountAmount}
                         currency={currency ?? "SGD"}

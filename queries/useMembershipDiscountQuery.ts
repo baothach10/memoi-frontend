@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
-export interface TierDiscountResponse {
+export interface MemberDiscountResponse {
   tier_discount_amount: number;
+  birth_month_discount: number;
+  amount: number;
 }
 
-export function useTierDiscountQuery(amount: number) {
+export function useMembershipDiscountQuery(amount: number) {
   const supabase = createBrowserSupabaseClient();
 
-  return useQuery<TierDiscountResponse>({
-    queryKey: ["tier-discount", amount],
+  return useQuery<MemberDiscountResponse>({
+    queryKey: ["membership-discount", amount],
     queryFn: async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
       if (!session) {
         throw new Error("Unauthorized");
@@ -25,7 +29,7 @@ export function useTierDiscountQuery(amount: number) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to fetch tier discount information");
+        throw new Error("Failed to fetch membership discount information");
       }
 
       return res.json();
