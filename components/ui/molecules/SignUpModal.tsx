@@ -30,7 +30,7 @@ export default function SignUpModal() {
     if (isExcludedPage) return;
 
     if (!isLoading && userProfile && !userProfile.authenticated) {
-      const isDismissed = localStorage.getItem("hideSignUpModal");
+      const isDismissed = sessionStorage.getItem("hideSignUpModal");
       // Only trigger an update if it's not already open.
       if (!isDismissed && !isOpen) {
         // Use a timeout to move the state update out of the synchronous execution of the effect.
@@ -66,7 +66,7 @@ export default function SignUpModal() {
       onComplete: () => {
         setIsOpen(false);
         if (persist) {
-          localStorage.setItem("hideSignUpModal", "true");
+          sessionStorage.setItem("hideSignUpModal", "true");
         }
       },
     });
