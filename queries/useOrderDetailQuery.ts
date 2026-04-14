@@ -12,7 +12,7 @@ function transformRawOrderDetails(raw: RawOrderDetails): OrderDetails {
       month: "long",
       year: "numeric",
     }),
-    shipTo: raw.destination || `${bi.address}, ${bi.city}, ${bi.country}`,
+    shipTo: `${bi.address}, ${bi.city}, ${bi.country}`,
     status: raw.status,
     deliveryDetail:
       raw.status === "IN_PROGRESS" ? "Estimated arrival: Pending" : "Delivered",
