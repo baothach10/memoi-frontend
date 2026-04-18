@@ -198,7 +198,8 @@ export default function AccountProfileForm({ userProfile }: AccountProfileFormPr
             <input
               type="text"
               placeholder="dd / mm / yyyy"
-              className={inputClass()}
+              className={`${inputClass()} text-black/40 cursor-not-allowed`}
+              disabled
               {...register("dob", {
                 required: "Date of birth is required",
                 pattern: {
