@@ -17,6 +17,7 @@ type Props = {
 export default function ExpandableSection({ title, children, className = "", defaultOpen = false, titleClassName = "" }: Props) {
     const [open, setOpen] = useState<boolean>(defaultOpen)
     const contentRef = useRef<HTMLDivElement | null>(null)
+    const isFirstRender = useRef(true)
     const isMobile = useIsMobile(768);
     const chevronSize = isMobile ? 14 : 20;
 
@@ -24,38 +25,37 @@ export default function ExpandableSection({ title, children, className = "", def
         const el = contentRef.current
         if (!el) return
 
-        // The inner wrapper holds the children and defines the measured height
-        const inner = el.firstElementChild as HTMLElement | null
-        if (!inner) return
+        if (isFirstRender.current) {
+            isFirstRender.current = false
+            // On first render, set initial height/opacity without animation
+            if (open) {
+                gsap.set(el, { height: "auto", opacity: 1 })
+            } else {
+                gsap.set(el, { height: 0, opacity: 0 })
+            }
+            return
+        }
 
         // Kill any in-flight tweens
         gsap.killTweensOf(el)
 
         if (open) {
-            // Expand: animate from 0 -> measured height, then set height to auto
-            const height = inner.scrollHeight
-            // start from 0 in case previous state left explicit height
-            el.style.height = "0px"
-            el.style.opacity = "0"
+            // Expand: animate to "auto" and let GSAP handle measurements
             gsap.to(el, {
-                height,
+                height: "auto",
                 opacity: 1,
                 duration: 0.35,
                 ease: "power3.inOut",
-                onComplete: () => {
-                    // remove fixed height so content can grow/shrink naturally
-                    el.style.height = "auto"
-                },
+                overwrite: true,
             })
         } else {
-            // Collapse: ensure height is explicit then animate to 0
-            const height = inner.scrollHeight
-            el.style.height = `${height}px`
+            // Collapse: animate to 0
             gsap.to(el, {
                 height: 0,
                 opacity: 0,
                 duration: 0.28,
                 ease: "power3.inOut",
+                overwrite: true,
             })
         }
     }, [open])

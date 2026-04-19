@@ -94,7 +94,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
       <div
         className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-100 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen
           ? "translate-x-0 pointer-events-auto shadow-2xl"
-          : "translate-x-full pointer-events-none"
+          : "translate-x-[105%] pointer-events-none"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -103,7 +103,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
             <h2 className="text-base font-regular leading-tight tracking-wide max-mobile:text-sm">Cart</h2>
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-500 cursor-pointer transition-colors"
+              className="text-black hover:text-gray-500 cursor-pointer transition-all duration-300 active:duration-0 p-2 active:bg-black/20"
               aria-label="Close cart"
             >
               <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />

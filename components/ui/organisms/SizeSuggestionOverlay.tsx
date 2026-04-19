@@ -236,7 +236,7 @@ export default function SizeSuggestionOverlay({
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
+        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-[105%] pointer-events-none"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -245,17 +245,19 @@ export default function SizeSuggestionOverlay({
             {step > 1 && step < 3 ? (
               <button
                 onClick={() => setStep(step - 1)}
-                className="cursor-pointer w-4.5 h-auto max-mobile:w-4 max-mobile:h-auto"
+                className="cursor-pointer w-10 h-10 flex items-center justify-center transition-all duration-300 active:duration-0 active:bg-black/20"
                 aria-label="Go back"
               >
-                <ArrowLeft width="100%" height="100%" color="rgba(0, 0, 0, 0.6)" />
+                <div className="w-4.5 h-auto max-mobile:w-4">
+                  <ArrowLeft width="100%" height="100%" color="rgba(0, 0, 0, 0.6)" />
+                </div>
               </button>
             ) : (
               <div />
             )}
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 cursor-pointer transition-colors"
+              className="text-black hover:text-gray-600 cursor-pointer transition-all duration-300 active:duration-0 w-10 h-10 flex items-center justify-center active:bg-black/20"
               aria-label="Close size suggestion"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
