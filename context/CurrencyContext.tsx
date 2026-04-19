@@ -26,15 +26,12 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setCurrencyState((prev) => {
       // If the current global currency is nothing, store from the currency field
       if (prev === null) {
-        console.log("newCurrency1", newCurrency);
         return newCurrency.toUpperCase();
       }
       // Or else check if the local currency is not similar to the global one, override with the local currency
       if (prev !== newCurrency.toUpperCase()) {
-        console.log("newCurrency2", newCurrency);
         return newCurrency.toUpperCase();
       }
-      console.log("newCurrency3", newCurrency);
       return prev.toUpperCase();
     });
   }, []);

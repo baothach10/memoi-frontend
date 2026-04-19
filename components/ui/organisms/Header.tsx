@@ -24,7 +24,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed w-screen top-0 left-0 right-0 z-50 transition-colors duration-500 ${headerBgClass} pt-10 pb-6 max-mobile:py-8`}
+      className={`fixed w-screen top-0 left-0 right-0 z-50 ${headerBgClass} pt-10 pb-6 max-mobile:py-8`}
     >
       <div className="relative w-full px-[100px] smaller-tablet:max-tablet:px-10 max-mobile:px-4 flex items-center justify-between transition-all ease-in">
         <MobileMenu

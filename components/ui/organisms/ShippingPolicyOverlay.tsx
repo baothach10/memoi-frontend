@@ -44,7 +44,7 @@ export default function ShippingPolicyOverlay({
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"
+        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-101 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-[105%] pointer-events-none"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -52,7 +52,7 @@ export default function ShippingPolicyOverlay({
             <div />
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 cursor-pointer transition-colors"
+              className="text-black hover:text-gray-600 cursor-pointer transition-all duration-300 active:duration-0 p-2 active:bg-black/20"
               aria-label="Close shipping policy"
             >
               <svg

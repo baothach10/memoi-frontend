@@ -71,7 +71,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
       {/* Overlay Panel */}
       <div
-        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-100 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-full pointer-events-none"}`}
+        className={`fixed top-0 right-0 h-dvh w-4/10 bg-[#fffefa] z-100 transform transition-transform duration-300 ease-in-out max-tablet:w-full max-tablet:shadow-transparent ${isOpen ? "translate-x-0 pointer-events-auto shadow-2xl" : "translate-x-[105%] pointer-events-none"}`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -79,7 +79,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             <h2 className="text-base font-regular max-mobile:text-sm">Search</h2>
             <button
               onClick={onClose}
-              className="text-black hover:text-gray-600 transition-colors w-5 h-5 cursor-pointer max-mobile:w-4.5 max-mobile:h-4.5"
+              className="text-black hover:text-gray-600 transition-all duration-300 active:duration-0 w-10 h-10 flex items-center justify-center cursor-pointer active:bg-black/20"
               aria-label="Close search"
             >
               <ExitIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={"black"} />
@@ -101,11 +101,13 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 className="w-full text-sm font-regular text-black mx-3 bg-transparent py-3 outline-none focus:border-black placeholder:text-sm placeholder:text-black/60 max-mobile:text-xs max-mobile:py-2 max-mobile:placeholder:text-xs"
               />
               <div
-                className="cursor-pointer w-4.5 h-auto max-mobile:w-4 max-mobile:h-auto"
+                className="cursor-pointer w-10 h-10 flex items-center justify-center transition-all duration-300 active:duration-0 active:bg-black/20"
                 onClick={handleSearchRedirect}
                 onTouchEnd={handleSearchRedirect}
               >
-                <ArrowRight width="100%" height="100%" color="rgba(0, 0, 0, 0.6)" />
+                <div className="w-4.5 h-auto max-mobile:w-4">
+                  <ArrowRight width="100%" height="100%" color="rgba(0, 0, 0, 0.6)" />
+                </div>
               </div>
             </div>
           </div>
