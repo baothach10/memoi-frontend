@@ -1,6 +1,6 @@
 import { createServerSupabaseClient } from "@/utils/supabase/server";
 
-export async function getMembershipDiscount(amount: number) {
+export async function getMembershipDiscount() {
   const supabase = await createServerSupabaseClient();
   const {
     data: { session },
@@ -11,7 +11,7 @@ export async function getMembershipDiscount(amount: number) {
   }
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL!}/api/discount/membership?amount=${amount}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL!}/api/discount/membership`,
     {
       method: "GET",
       headers: {

@@ -140,7 +140,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
         SHIPPING_METHODS.find((m) => m.id === selectedShippingId) ||
         SHIPPING_METHODS[0];
 
-    const { data: tierDiscountData } = useMembershipDiscountQuery(subtotal);
+    const { data: tierDiscountData } = useMembershipDiscountQuery();
     const tierDiscountAmount = tierDiscountData?.tier_discount_amount || 0;
     const birthMonthDiscountAmount = tierDiscountData?.birth_month_discount || 0;
     const welcomeDiscountAmount = tierDiscountData?.welcome_discount_amount || 0;
