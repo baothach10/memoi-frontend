@@ -8,11 +8,11 @@ export interface MemberDiscountResponse {
   amount: number;
 }
 
-export function useMembershipDiscountQuery(amount: number) {
+export function useMembershipDiscountQuery() {
   const supabase = createBrowserSupabaseClient();
 
   return useQuery<MemberDiscountResponse>({
-    queryKey: ["membership-discount", amount],
+    queryKey: ["membership-discount"],
     queryFn: async () => {
       const {
         data: { session },
@@ -22,7 +22,7 @@ export function useMembershipDiscountQuery(amount: number) {
         throw new Error("Unauthorized");
       }
 
-      const res = await fetch(`/api/discount/tier?amount=${amount}`, {
+      const res = await fetch(`/api/discount/membership`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +35,5 @@ export function useMembershipDiscountQuery(amount: number) {
 
       return res.json();
     },
-    enabled: !!amount && amount > 0,
   });
 }
