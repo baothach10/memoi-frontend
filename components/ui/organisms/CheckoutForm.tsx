@@ -143,12 +143,13 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const { data: tierDiscountData } = useMembershipDiscountQuery(subtotal);
     const tierDiscountAmount = tierDiscountData?.tier_discount_amount || 0;
     const birthMonthDiscountAmount = tierDiscountData?.birth_month_discount || 0;
+    const welcomeDiscountAmount = tierDiscountData?.welcome_discount_amount || 0;
     const discountAmount = discountInfo
         ? (discountInfo.unit === "percent" ? (subtotal * discountInfo.amount) / 100 : discountInfo.amount)
         : 0;
+``
 
-
-    const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount - birthMonthDiscountAmount;
+    const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount - birthMonthDiscountAmount - welcomeDiscountAmount;
 
     const {
         register,
@@ -451,6 +452,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     items={itemsToDisplay}
                     subtotal={subtotal}
                     promoDiscountAmount={discountAmount}
+                    welcomeDiscountAmount={welcomeDiscountAmount}
                     birthMonthDiscountAmount={birthMonthDiscountAmount}
                     tierDiscountAmount={tierDiscountAmount}
                     total={total}
@@ -476,6 +478,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                         subtotal={subtotal}
                         shippingCost={selectedShipping.priceValue}
                         shippingLabel={selectedShipping.price}
+                        welcomeDiscountAmount={welcomeDiscountAmount}
                         birthMonthDiscount={birthMonthDiscountAmount}
                         tierDiscount={tierDiscountAmount}
                         promoDiscount={discountAmount}

@@ -36,6 +36,7 @@ function transformRawOrderDetails(raw: RawOrderDetails): OrderDetails {
       phone_number: bi.phone_number,
     },
     birth_month_discount: raw.birth_month_discount_amount,
+    welcome_discount_amount: raw.welcome_discount_amount,
     tier_discount_amount: raw.tier_discount_amount ?? 0,
     promo_discount_amount: raw.promo_discount_amount,
     shipping_fee: raw.shipping_fee,

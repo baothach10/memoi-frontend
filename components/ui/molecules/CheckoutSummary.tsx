@@ -83,7 +83,7 @@ export const SummaryTotals = ({
     subtotal,
     shippingLabel,
     shippingCost,
-    
+    welcomeDiscountAmount,
     tierDiscount,
     birthMonthDiscount,
     promoDiscount,
@@ -92,6 +92,7 @@ export const SummaryTotals = ({
     subtotal: number;
     shippingLabel: string;
     shippingCost: number;
+    welcomeDiscountAmount: number;
     birthMonthDiscount: number;
     tierDiscount: number;
     promoDiscount: number;
@@ -117,6 +118,10 @@ export const SummaryTotals = ({
         <div className="flex justify-between">
             <span>Promo Discount</span>
             <span>{currency} {promoDiscount > 0 ? `${promoDiscount.toFixed(2)}` : "0.00"}</span>
+        </div>
+        <div className="flex justify-between">
+            <span>Welcome Discount</span>
+            <span>{currency} {welcomeDiscountAmount > 0 ? `${welcomeDiscountAmount.toFixed(2)}` : "0.00"}</span>
         </div>
     </div>
 );
@@ -186,6 +191,7 @@ interface CheckoutSummaryProps {
     items: CartItem[];
     subtotal: number;
     promoDiscountAmount: number;
+    welcomeDiscountAmount: number;
     tierDiscountAmount: number;
     birthMonthDiscountAmount: number;
     total: number;
@@ -206,6 +212,7 @@ export default function CheckoutSummary({
     items,
     subtotal,
     promoDiscountAmount,
+    welcomeDiscountAmount,
     birthMonthDiscountAmount,
     tierDiscountAmount,
     total,
@@ -239,6 +246,7 @@ export default function CheckoutSummary({
                     subtotal={subtotal}
                     shippingLabel={shippingLabel}
                     shippingCost={shippingCost}
+                    welcomeDiscountAmount={welcomeDiscountAmount}
                     tierDiscount={tierDiscountAmount}
                     promoDiscount={promoDiscountAmount}
                     birthMonthDiscount={birthMonthDiscountAmount}

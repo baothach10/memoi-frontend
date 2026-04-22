@@ -4,6 +4,7 @@ import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 export interface MemberDiscountResponse {
   tier_discount_amount: number;
   birth_month_discount: number;
+  welcome_discount_amount:number;
   amount: number;
 }
 
