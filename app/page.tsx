@@ -1,5 +1,6 @@
 "use client";
 
+import { LERP_FACTOR } from "@/constants";
 import GridSectionWithFooter from "../components/ui/pages/home/GridSectionWithFooter";
 import HeroSection from "../components/ui/pages/home/HeroSection";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -24,7 +25,6 @@ export default function HomePage() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
-  const LERP_FACTOR = 0.05;
 
   /** --------------------------------------------------------
    *  Section Offsets Helper

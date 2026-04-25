@@ -5,6 +5,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useRef, useState, useCallback, useEffect } from "react";
 import BenefitTable from "@/components/ui/pages/help/BenefitTable";
 import Link from "next/link";
+import { LERP_FACTOR } from "@/constants";
 
 function TheMemoiHousePage() {
     const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -22,10 +23,6 @@ function TheMemoiHousePage() {
 
     const [isAtBottom, setIsAtBottom] = useState(false);
     const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-    const isMobile = useIsMobile(1024);
-    const isLargeTablet = useIsMobile(1200);
-    
-    const LERP_FACTOR = 0.05;
 
     const getSections = useCallback(() => {
         return [
