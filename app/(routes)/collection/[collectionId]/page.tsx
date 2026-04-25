@@ -10,6 +10,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import GridImageItem from "@/components/ui/pages/collection/GridImageItem";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
 import CollectionImageShowSlide from "@/components/ui/pages/collection/CollectionImageShowSlide";
+import { LERP_FACTOR } from "@/constants";
 
 function CollectionDetailPage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -29,8 +30,6 @@ function CollectionDetailPage() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const isMobile = useIsMobile(1024);
   const isLargeTablet = useIsMobile(1200);
-  
-  const LERP_FACTOR = 0.05;
 
   const getSections = useCallback(() => {
     return [

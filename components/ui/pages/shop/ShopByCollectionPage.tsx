@@ -10,6 +10,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useProductPaginatedByCollectionQuery } from "@/queries/useProductPaginatedByCollectionQuery";
 import PaginationComponent from "../../molecules/Pagination";
 import ShopInteractiveItem from "./ShopInteractiveItem";
+import { LERP_FACTOR } from "@/constants";
 
 type ShopByCollectionPageType = {
   collection: string
@@ -35,10 +36,6 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
 
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const isMobile = useIsMobile(1024);
-  const isLargeTablet = useIsMobile(1200);
-  
-  const LERP_FACTOR = 0.05;
 
   const PAGE_SIZE = 12;
   const [currentPage, setCurrentPage] = useState(1)
