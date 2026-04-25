@@ -3,7 +3,6 @@
 import GridSectionWithFooter from "../components/ui/pages/home/GridSectionWithFooter";
 import HeroSection from "../components/ui/pages/home/HeroSection";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 
 export default function HomePage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -16,90 +15,98 @@ export default function HomePage() {
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
-  const isAnimatingRef = useRef(false);
+  const targetYRef = useRef(0);
+  const currentYRef = useRef(0);
+  const isSettlingRef = useRef(false);
+  const lastWheelTimeRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
-  const SCROLL_DEBOUNCE = 1500; // ms
-  const lastScrollTimeRef = useRef(0);
+  const LERP_FACTOR = 0.05;
 
   /** --------------------------------------------------------
-   *  Smooth GSAP transition to section index
+   *  Section Offsets Helper
    * -------------------------------------------------------- */
-  const scrollToSection = (index: number) => {
-    const content = smoothContentRef.current;
-    const wrapper = smoothWrapperRef.current;
-
-    if (!content || !wrapper) return;
-
-    const sections = [
+  const getSections = useCallback(() => {
+    return [
       heroSection1Ref.current,
       heroSection2Ref.current,
       heroSection3Ref.current,
       heroSection4Ref.current,
       gridSectionRef.current,
-      // footerSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
+  }, []);
 
-    if (index < 0 || index >= sections.length) return;
+  /** --------------------------------------------------------
+   *  Animation Loop (RAF)
+   * -------------------------------------------------------- */
+  useEffect(() => {
+    const animate = () => {
+      const sections = getSections();
+      if (sections.length === 0) return;
 
-    const targetEl = sections[index];
-    const targetTop = targetEl.offsetTop;
+      const now = Date.now();
+      const dist = Math.abs(targetYRef.current - currentYRef.current);
 
-    isAnimatingRef.current = true;
+      // Only release the lock if we are close to target
+      if (dist < 1) {
+        isSettlingRef.current = false;
 
-    const lastIndex = sections.length - 1;
-
-    // Normal snap behavior for non-last sections: translate the content container
-    gsap.to(content, {
-      y: -targetTop,
-      duration: 1,
-      ease: "power3.inOut",
-      onComplete: () => {
-        if (currentIndexRef.current === lastIndex) {
+        // If we settled on the last section, enable native scroll MODE
+        if (currentIndexRef.current === sections.length - 1) {
           setIsAtBottom(true);
-        } else {
-          setIsAtBottom(false);
         }
-        isAnimatingRef.current = false;
-      },
-    });
-  };
+      }
+
+      // LERP calculation
+      currentYRef.current += (targetYRef.current - currentYRef.current) * LERP_FACTOR;
+
+      // Apply transform
+      if (smoothContentRef.current) {
+        smoothContentRef.current.style.transform = `translate3d(0, ${-currentYRef.current}px, 0)`;
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [getSections, LERP_FACTOR]);
 
   /** --------------------------------------------------------
-   *  Wheel handler with debounce
+   *  Input Handlers
    * -------------------------------------------------------- */
-  const handleScrollGesture = useCallback((direction: "up" | "down") => {
-    const now = Date.now();
-    if (isAnimatingRef.current) return;
-    if (now - lastScrollTimeRef.current < SCROLL_DEBOUNCE) return;
+  const onScrollInput = useCallback((deltaY: number) => {
+    if (isSettlingRef.current) return;
 
-    lastScrollTimeRef.current = now;
+    // Require a minimum threshold to trigger a snap
+    if (Math.abs(deltaY) < 20) return;
 
-    const sections = [
-      heroSection1Ref.current,
-      heroSection2Ref.current,
-      heroSection3Ref.current,
-      heroSection4Ref.current,
-      gridSectionRef.current,
-    ].filter(Boolean) as HTMLElement[];
-
+    const sections = getSections();
+    const lastIndex = sections.length - 1;
     let newIndex = currentIndexRef.current;
 
-    if (direction === "down") {
-      newIndex = Math.min(newIndex + 1, sections.length - 1);
+    if (deltaY > 0) {
+      newIndex = Math.min(newIndex + 1, lastIndex);
     } else {
       newIndex = Math.max(newIndex - 1, 0);
     }
 
     if (newIndex !== currentIndexRef.current) {
+      isSettlingRef.current = true;
       currentIndexRef.current = newIndex;
       setCurrentSectionIndex(newIndex);
+      targetYRef.current = sections[newIndex].offsetTop;
 
-      scrollToSection(newIndex);
+      if (newIndex !== lastIndex) {
+        setIsAtBottom(false);
+      }
     }
-  }, []);
+  }, [getSections]);
 
   /** --------------------------------------------------------
    *  Wheel Event Listener
@@ -129,24 +136,24 @@ export default function HomePage() {
         }
       }
 
+      lastWheelTimeRef.current = Date.now();
+
       // Prevent snap if native scroll still active
       if (isAtBottom) {
-        // allow wheel event to bubble so wrapper scroll listener can detect "back up"
         if (
           e.deltaY < 0 &&
           gridSectionRef.current &&
-          gridSectionRef.current.getBoundingClientRect().top >= 0 &&
-          Math.abs(e.deltaY) > 30
+          gridSectionRef.current.getBoundingClientRect().top >= 0
+          && Math.abs(e.deltaY) > 50
         ) {
           e.preventDefault();
-          setIsAtBottom(false);
-          handleScrollGesture(e.deltaY > 0 ? "down" : "up");
+          onScrollInput(e.deltaY);
         }
         return;
       }
 
       e.preventDefault();
-      handleScrollGesture(e.deltaY > 0 ? "down" : "up");
+      onScrollInput(e.deltaY);
     };
 
     window.addEventListener("wheel", wheelHandler, { passive: false });
@@ -154,7 +161,7 @@ export default function HomePage() {
     return () => {
       window.removeEventListener("wheel", wheelHandler);
     };
-  }, [handleScrollGesture, isAtBottom]);
+  }, [isAtBottom]);
 
   /** --------------------------------------------------------
    *  Touch Events (Mobile)
@@ -189,13 +196,10 @@ export default function HomePage() {
         if (isScrollingUp && pageScrollTop <= 1) {
           e.preventDefault();
 
-          if (!isAnimatingRef.current) {
-            window.scrollTo(0, 0);
-            setIsAtBottom(false);
-            // Reset debounce so handleScrollGesture responds immediately
-            lastScrollTimeRef.current = 0;
-            handleScrollGesture("up");
-          }
+          window.scrollTo(0, 0);
+          setIsAtBottom(false);
+          // Set target to previous section immediately
+          // handleScrollGesture("up");
         }
         return;
       }
@@ -225,18 +229,16 @@ export default function HomePage() {
       }
 
       const isScrollingUp = deltaY < 0;
-      const isAtFirstSection = currentIndexRef.current === 0;
+      const isAtFirstSection = targetYRef.current <= 0;
 
       // At the first section, scrolling up → allow native browser behavior
-      // (e.g. pull-to-refresh). Don't prevent default.
       if (isAtFirstSection && isScrollingUp) {
         return;
       }
 
-      // Intercept and snap when not handled by native scroll
+      // Intercept and snap
       e.preventDefault();
-      if (deltaY > 0) handleScrollGesture("down");
-      else handleScrollGesture("up");
+      onScrollInput(deltaY);
       startY = currentY;
     };
 
@@ -247,7 +249,7 @@ export default function HomePage() {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
     };
-  }, [handleScrollGesture, isAtBottom]);
+  }, [isAtBottom]);
 
   /** --------------------------------------------------------
    *  When the page is in native-scroll mode for the last section
@@ -275,36 +277,22 @@ export default function HomePage() {
     const gridTop = sections[lastIndex]?.offsetTop ?? 0;
 
     const onWrapperScroll = () => {
-      // If wrapper.scrollTop has moved above the grid's top, user intends to
-      // go back to the previous section — restore snap behavior.
       if (wrapper.scrollTop <= gridTop - 1) {
-        // detach listener to avoid reentrancy
-        wrapper.removeEventListener("scroll", onWrapperScroll);
-
-        // Reset wrapper scroll to avoid a visual jump while we animate
-        // the content transform back into snap mode.
         try {
           wrapper.scrollTop = 0;
         } catch (err) {
           void err;
         }
 
+        // Immediately switch back to virtual scroll mode to avoid rubber-banding
         setIsAtBottom(false);
 
+        // Pull the targetY back up one section
         const prevIndex = Math.max(0, lastIndex - 1);
+        isSettlingRef.current = true;
         currentIndexRef.current = prevIndex;
-
-        // Animate the content container to the previous section position
-        const targetTop = sections[prevIndex].offsetTop;
-        isAnimatingRef.current = true;
-        gsap.to(content, {
-          y: -targetTop,
-          duration: 1,
-          ease: "power3.inOut",
-          onComplete: () => {
-            isAnimatingRef.current = false;
-          },
-        });
+        setCurrentSectionIndex(prevIndex);
+        targetYRef.current = sections[prevIndex].offsetTop;
       }
     };
 

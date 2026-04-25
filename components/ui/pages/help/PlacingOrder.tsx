@@ -10,7 +10,7 @@ export default function PlacingOrder() {
                     you will receive an order confirmation email detailing your order summary and payment information.
                 </p>
                 <p className="mt-4">
-                    MEMOÍoffers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
+                    MEMOÍ offers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
                     be indicated on the product page.
                 </p>
                 <p className="mt-4">

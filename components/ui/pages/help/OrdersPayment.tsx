@@ -13,7 +13,7 @@ export default function OrdersPayment() {
                         you will receive an order confirmation email detailing your order summary and payment information.
                     </p>
                     <p className="mt-4">
-                        MEMOÍoffers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
+                        MEMOÍ offers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
                         be indicated on the product page.
                     </p>
                     <p className="mt-4">
@@ -28,11 +28,11 @@ export default function OrdersPayment() {
                     <p>
                         MEMOÍ accepts the following secure payment options:
                     </p>
-                    <ul className="mt-3 list-disc list-inside text-sm space-y-2">
+                    <ul className="mt-3 list-disc list-inside text-sm space-y-2 max-mobile:text-xs">
                         <li>Visa, MasterCard, American Express</li>
                         <li>PayNow</li>
                     </ul>
-                    <p className="mt-4 text-sm">All prices displayed on our website are in Singapore Dollars (SGD) and inclusive of GST.</p>
+                    <p className="mt-4 text-sm max-mobile:text-xs">All prices displayed on our website are in Singapore Dollars (SGD) and inclusive of GST.</p>
                 </div>
             </ExpandableSection>
             <div className="border-t pt-8 space-y-8 border-t-black/10 max-mobile:pt-5 max-mobile:space-y-5">
