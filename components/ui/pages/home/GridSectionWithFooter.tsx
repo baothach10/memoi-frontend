@@ -12,12 +12,12 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
   return (
     <section
       ref={ref}
-      className="min-h-dvh w-full snap-start relative flex flex-col bg-[#fffefa] overflow-y-auto"
+      className="min-h-svh w-full relative flex flex-col bg-[#fffefa]"
       data-header-theme="light"
     >
       <div className="relative h-full w-full flex flex-col justify-around">
 
-        <div className="flex flex-col items-center text-center text-black gap-3 pt-22 pb-8 max-mobile:text-sm max-mobile:gap-2 max-mobile:pt-24 max-mobile:pb-6">
+        <div className="flex flex-col items-center text-center text-black gap-3 pt-24 pb-8 max-mobile:text-sm max-mobile:gap-2 max-mobile:pt-24 max-mobile:pb-6">
           <span className="uppercase text-2xl leading-none font-regular max-mobile:text-sm">Follow us on Instagram</span>
           <span>
             <Link
