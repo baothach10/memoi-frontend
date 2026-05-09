@@ -9,16 +9,13 @@ export default function OrdersPayment() {
             <ExpandableSection title={"PLACING AN ORDER"} titleClassName="text-[16px] py-5 border-t border-t-black/10 max-mobile:text-sm" defaultOpen={true}>
                 <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs">
                     <p>
-                        All orders can be placed directly through the official MEMOÍ website. Upon completing your purchase,
-                        you will receive an order confirmation email detailing your order summary and payment information.
+                        All orders are placed through the official MEMOÍ website. Upon completion, you will receive a confirmation email with your order details and payment summary.
                     </p>
                     <p className="mt-4">
-                        MEMOÍ offers both in-stock and pre-order pieces. For pre-order items, the estimated delivery timeframe will
-                        be indicated on the product page.
+                        MEMOÍ offers both in-stock and pre-order pieces. For pre-order pieces, the estimated delivery timeframe will be indicated on the product page.
                     </p>
                     <p className="mt-4">
-                        Should you wish to update your delivery information or request a size change after placing an order,
-                        please contact us promptly via email or WhatsApp, or direct message on our official page.
+                        If you wish to update your delivery details or request a size adjustment after placing an order, please contact us promptly via email, WhatsApp, or direct message on our official channels.
                     </p>
                 </div>
             </ExpandableSection>

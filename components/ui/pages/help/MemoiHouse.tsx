@@ -11,7 +11,8 @@ export default function MemoiHouse() {
                 <h2 className="uppercase text-[16px] leading-[120%] mb-4 max-mobile:text-sm">The MEMOÍ House</h2>
                 <div className="text-black space-y-2 leading-normal max-mobile:text-xs">
                     <p>
-                        Welcome to The MEMOÍ House, our exclusive client collective where sophisticated belonging meets conscious elegance. More than a membership, the House is where we recognize and reward your commitment, granting you access to special discounts, personalized services, and priority access to new collections and events.
+                        Welcome to The MEMOÍ House, an intimate collective shaped by a shared sense of refinement and intention.
+                        More than membership, it is a space of quiet belonging. Here, your presence is acknowledged through considered privileges, including private access to collections, thoughtful offerings, and priority experiences.
                     </p>
                 </div>
             </div>

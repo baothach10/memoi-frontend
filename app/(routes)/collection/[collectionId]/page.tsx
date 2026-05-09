@@ -451,13 +451,15 @@ function CollectionDetailPage() {
                   SS26 THE BECOMING
                 </div>
                 <div className="text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:p-2.5 max-mobile:text-xs">
-                  <div>“THE BECOMING” is a woman’s journey of finding herself.</div>
+                  {/* <div>“THE BECOMING” is a woman’s journey of finding herself.</div>
                   <div>
                     The collection is the perspective reflected through the
                     mirror in which she sees her own image. This becoming is not
                     about turning into someone else, but about discovering who
                     she truly is.
-                  </div>
+                  </div> */}
+
+                  <div>“The Becoming” is not simply a collection, but a reflection of a journey, where identity unfolds quietly through uncertainty, growth, and the courage to begin before feeling fully ready. This first collection of MEMOÍ was never about perfection, but about becoming slowly, intentionally, and truthfully, shaped by discipline, persistence, and the unseen moments in between.</div>
                 </div>
               </div>
             </div>
@@ -504,9 +506,7 @@ function CollectionDetailPage() {
               ))}
             </div>
             <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0  max-mobile:w-full max-mobile:px-5 max-mobile:text-xs ">
-              When she loves herself — embracing even the cracks in the mirror —
-              she touches the beginning of something New. More than a feeling,
-              that understanding becomes her compass.
+              Each piece embodies this transformation in motion. A balance of softness and structure, with fluid silhouettes that are delicate yet certain, minimal yet deeply considered. Designed not to change who you are, but to bring you closer to yourself to who you are becoming.
             </div>
             <div className="relative w-full">
               {[
@@ -534,13 +534,7 @@ function CollectionDetailPage() {
               ))}
             </div>
             <div className="text-center max-w-[500px] p-2.5 mx-auto text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:max-w-[590px] max-mobile:w-full max-mobile:px-5 max-mobile:text-xs">
-              The collection speaks to individuals with a modern lifestyle -
-              those who seek versatile, real-life-ready designs that balance
-              practicality with subtle sophistication. Each piece is refined yet
-              effortless, never overly ornate yet never plain, thanks to its
-              thoughtful details. Rather than targeting a specific demographic,
-              BECOMING is created for anyone in the midst of transformation -
-              those who are ready for change, ready to embrace something new.
+              More than reinvention, “The Becoming” is a return to clarity, to presence, to a deeper sense of self. Created for the modern woman who moves with quiet confidence, this collection invites you to embrace your own rhythm and step into each moment with ease because not everything needs to be loud to be seen. Some things arrive softly.
             </div>
             <div className="w-full flex flex-col gap-10 max-mobile:gap-6">
               <div className="w-full">

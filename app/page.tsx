@@ -322,7 +322,7 @@ export default function HomePage() {
       { type: "image" as const, src: "/images/mobile-third-collection.webp" },
     ],
     firstParameter: [
-      "MEMOÍ - for the woman becoming herself",
+      "MEMOÍ - for the women becoming themselves",
       [
         { url: "/collection/ss26-the-becoming", title: "SS26" },
         { url: "/collection/ss26-the-becoming", title: "THE BECOMING" },
