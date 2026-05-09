@@ -1,12 +1,13 @@
 "use client";
 
+import { ProductDescription } from "@/app/api/getProductDetails";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface DetailsOverlayProps {
   isOpen: boolean;
   onClose: () => void;
-  description: string;
+  description: ProductDescription;
 }
 
 export default function DetailsOverlay({
@@ -75,9 +76,9 @@ export default function DetailsOverlay({
             <div className="flex flex-col gap-8">
               <div className="space-y-5">
                 <h3 className="text-xs font-regular uppercase tracking-widest text-black/40 max-mobile:text-[10px]">Description</h3>
-                <p className="text-sm leading-relaxed font-light text-black/80 max-mobile:text-xs">
-                  {description}
-                </p>
+                <ul className="text-sm leading-relaxed font-light text-black/80 max-mobile:text-xs">
+                  {description.details.map((item, index) => <li key={index}>- {item}</li>)}
+                </ul>
               </div>
 
               <div className="space-y-5">

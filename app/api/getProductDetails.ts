@@ -21,12 +21,16 @@ export type ProductColor = {
   product_id: string;
 };
 
+export type ProductDescription = {
+  details: string[]
+}
+
 export type ProductDetailsResponse = {
   product_id: number;
   sku: string;
   name: string;
   currency: string;
-  description: string;
+  description: ProductDescription;
   color: string;
   color_name: string;
   colors: ProductColor[];
