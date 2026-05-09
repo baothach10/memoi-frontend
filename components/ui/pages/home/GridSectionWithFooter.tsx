@@ -55,8 +55,8 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Shipping Icon"
 
-                title="Free Delivery & Exchanges"
-                description="Complimentary standard shipping and returns & exchanges within 30 days"
+                title="Free Delivery & Exchange"
+                description="Carefully prepared and delivered worldwide from Singapore, with seamless exchanges"
               />
             </Link>
 
@@ -67,7 +67,7 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Payment Icon"
                 title="Secure Payment & Information"
-                description="Your payment and information details are encrypted and securely processed"
+                description="Your payment and information details are thoroughly encrypted and securely processed"
               />
             </Link>
 
@@ -77,8 +77,8 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
               <BenefitItem
                 className="smaller-tablet:max-tablet:w-full smaller-tablet:max-tablet:py-4 smaller-tablet:max-tablet:justify-between max-mobile:py-3"
                 image="Check Icon"
-                title="The MEMOÍ Membership"
-                description="Your MEMOÍ membership elevates your experience with tier rewards"
+                title="The MEMOÍ House"
+                description="A more considered experience, with early access, private releases, and exclusive privileges"
               />
             </Link>
           </div>

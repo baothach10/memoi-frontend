@@ -9,9 +9,9 @@ interface SizingOverlayProps {
 }
 
 const SIZING_DATA = [
-  { size: "SERENE", chest: "82 – 86", waist: "64 – 68", hip: "90 – 94", shoulder: "36", height: "155 – 162" },
-  { size: "MUSE", chest: "86 – 90", waist: "68 – 72", hip: "94 – 98", shoulder: "37 – 38", height: "160 – 167" },
-  { size: "LUMINOUS", chest: "90 – 96", waist: "72 – 78", hip: "98 – 104", shoulder: "39 – 40", height: "165 – 172" },
+  { size: "SERENE", chest: "82 – 86", waist: "64 – 68", hip: "90 – 94", shoulder: "36", height: "155 – 160" },
+  { size: "MUSE", chest: "86 – 90", waist: "68 – 72", hip: "94 – 98", shoulder: "37 – 38", height: "160 – 165" },
+  { size: "LUMINOUS", chest: "90 – 96", waist: "72 – 78", hip: "98 – 104", shoulder: "39 – 40", height: "165 - Above" },
 ];
 
 export default function SizingOverlay({

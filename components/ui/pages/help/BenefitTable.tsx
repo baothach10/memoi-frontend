@@ -18,7 +18,7 @@ const BENEFITS: Array<{
 }> = [
         {
             title: "Welcome Discount",
-            subtitle: "S$10 discount for first purchase",
+            subtitle: "10% discount off for first purchase",
             included: { "MEMOÍ": true, "MEMOÍ +": true, "MEMOÍ ELITE": true },
         },
         {
@@ -27,8 +27,8 @@ const BENEFITS: Array<{
             included: { "MEMOÍ": true, "MEMOÍ +": true, "MEMOÍ ELITE": true },
         },
         {
-            title: "Birth Month Discount",
-            subtitle: "10% discount during your birth month",
+            title: "Birth Month Offer",
+            subtitle: "One-time 10% off during your birth month",
             included: { "MEMOÍ": true, "MEMOÍ +": true, "MEMOÍ ELITE": true },
         },
         {

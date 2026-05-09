@@ -329,7 +329,8 @@ function TheMemoiHousePage() {
                                     </div>
                                     <div className="text-sm leading-normal space-y-2 max-mobile:text-xs">
                                         <div>
-                                            Welcome to The MEMOÍ House, our exclusive client collective where sophisticated belonging meets conscious elegance. More than a membership, the House is where we recognize and reward your commitment, granting you access to special discounts, personalized services, and priority access to new collections and events.
+                                            Welcome to The MEMOÍ House—an intimate collective shaped by a shared sense of refinement and intention.
+                                            More than membership, it is a space of quiet belonging. Here, your presence is acknowledged through considered privileges, including private access to collections, thoughtful offerings, and priority experiences.
                                         </div>
                                         <div className="font-regular">
                                             Your place in our exclusive community awaits. Welcome home!
