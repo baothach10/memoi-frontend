@@ -6,6 +6,7 @@ import gsap from "gsap";
 import Field from "../molecules/Field";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useSizeSuggestionMutation } from "@/queries/useSizeSuggestionMutation";
 
 function inputClass() {
   return `
@@ -157,6 +158,10 @@ export default function SizeSuggestionOverlay({
 
   // Result
   const [suggestedSize, setSuggestedSize] = useState("");
+  const [reasoning, setReasoning] = useState("");
+
+  const sizeSuggestionMutation = useSizeSuggestionMutation();
+  const isLoading = sizeSuggestionMutation.isPending;
 
   useEffect(() => {
     setMounted(true);
@@ -188,7 +193,7 @@ export default function SizeSuggestionOverlay({
     }
   };
 
-  const handleStep2Continue = () => {
+  const handleStep2Continue = async () => {
     const newErrors: typeof errors = {};
     if (chest === 0) newErrors.chest = true;
     if (waist === 0) newErrors.waist = true;
@@ -196,9 +201,29 @@ export default function SizeSuggestionOverlay({
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      const result = suggestSize(height, weight, chest, waist, hip, preference);
-      setSuggestedSize(result);
       setStep(3);
+      
+      sizeSuggestionMutation.mutate({
+        height,
+        weight,
+        age,
+        chest,
+        waist,
+        hip,
+        preference,
+        sizingRanges: SIZING_RANGES,
+      }, {
+        onSuccess: (data) => {
+          setSuggestedSize(data.suggestedSize);
+          setReasoning(data.reasoning);
+        },
+        onError: (error) => {
+          console.error("Error fetching size suggestion:", error);
+          // Fallback to local logic if AI fails
+          const result = suggestSize(height, weight, chest, waist, hip, preference);
+          setSuggestedSize(result);
+        }
+      });
     }
   };
 
@@ -215,6 +240,7 @@ export default function SizeSuggestionOverlay({
     setHip(0);
     setPreference(2);
     setSuggestedSize("");
+    setReasoning("");
     setStep(1);
   };
 
@@ -528,49 +554,60 @@ export default function SizeSuggestionOverlay({
 
             {/* ========== STEP 3: Result ========== */}
             {step === 3 && (
-              <div className="flex flex-col gap-4 items-center text-center">
-                <div className="flex flex-col gap-8 items-center text-center">
-                  <div className="flex flex-col gap-9 items-center text-center">
-                    <h2 className="text-xl uppercase font-regular max-mobile:text-[16px]">
-                      We Suggest Size {suggestedSize}
-                    </h2>
+              <div className="relative flex flex-col gap-4 items-center text-center min-h-[400px] justify-center">
+                {isLoading ? (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#fffefa]">
+                    <div className="w-12 h-12 border-2 border-black/10 border-t-black rounded-full animate-spin mb-4" />
+                    <p className="text-sm uppercase text-black/60 animate-pulse font-regular max-mobile:text-xs">
+                      Calculating your ideal fit
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex flex-col gap-8 items-center text-center">
+                      <div className="flex flex-col gap-9 items-center text-center">
+                        <h2 className="text-xl uppercase font-regular max-mobile:text-[16px]">
+                          We Suggest Size {suggestedSize}
+                        </h2>
 
-                    <div className="flex flex-col gap-2">
-                      <p className="text-sm text-black/60 leading-normal max-mobile:text-xs">
-                        To be certain this is your ideal fit, you can always contact our team for personal guidance.
-                      </p>
-                      <button className="text-sm underline cursor-pointer decoration-black/40 underline-offset-4 max-mobile:text-xs">Contact us</button>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-sm text-black/60 leading-normal max-mobile:text-xs">
+                            {reasoning || "To be certain this is your ideal fit, you can always contact our team for personal guidance."}
+                          </p>
+                          <button className="text-sm underline cursor-pointer decoration-black/40 underline-offset-4 max-mobile:text-xs">Contact us</button>
+                        </div>
+
+                      </div>
+                      <div className="flex flex-col text-xs text-black/60 font-regular uppercase max-mobile:text-[10px] gap-1">
+                        <p>{height} CM / {weight} KG</p>
+                        <p>{chest > 0 ? `${chest} CM` : "–"} / {waist > 0 ? `${waist} CM` : "–"} / {hip > 0 ? `${hip} CM` : "–"}</p>
+                      </div>
                     </div>
 
-                  </div>
-                  <div className="flex flex-col text-xs text-black/60 font-regular uppercase max-mobile:text-[10px] gap-1">
-                    <p>{height} CM / {weight} KG</p>
-                    <p>{chest > 0 ? `${chest} CM` : "–"} / {waist > 0 ? `${waist} CM` : "–"} / {hip > 0 ? `${hip} CM` : "–"}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-6 w-full">
-                  <div className="flex flex-col gap-3 w-full">
-                    <button
-                      onClick={handleEdit}
-                      className="w-full border border-black/20 py-4 cursor-pointer leading-none text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={handleAddSize}
-                      className="w-full bg-black text-white py-4 cursor-pointer leading-none text-sm font-regular max-mobile:text-xs max-mobile:py-3"
-                    >
-                      Add size {suggestedSize}
-                    </button>
-                  </div>
-                  <button
-                    onClick={handleDelete}
-                    className="text-sm underline decoration-black/40 cursor-pointer underline-offset-4 max-mobile:text-xs"
-                  >
-                    Delete details
-                  </button>
-                </div>
+                    <div className="flex flex-col gap-6 w-full">
+                      <div className="flex flex-col gap-3 w-full">
+                        <button
+                          onClick={handleEdit}
+                          className="w-full border border-black/20 py-4 cursor-pointer leading-none text-sm font-regular hover:bg-black hover:text-white transition-all duration-200 max-mobile:text-xs max-mobile:py-3"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={handleAddSize}
+                          className="w-full bg-black text-white py-4 cursor-pointer leading-none text-sm font-regular max-mobile:text-xs max-mobile:py-3"
+                        >
+                          Add size {suggestedSize}
+                        </button>
+                      </div>
+                      <button
+                        onClick={handleDelete}
+                        className="text-sm underline decoration-black/40 cursor-pointer underline-offset-4 max-mobile:text-xs"
+                      >
+                        Delete details
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             )}
           </div>
