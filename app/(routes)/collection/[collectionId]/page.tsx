@@ -363,7 +363,7 @@ function CollectionDetailPage() {
       ],
       [
         { url: "/collection", title: "SS26" },
-        { url: "/collection", title: "THE BECOMINGe" },
+        { url: "/collection", title: "THE BECOMING" },
       ],
     ],
     secondParameter: [
@@ -377,7 +377,7 @@ function CollectionDetailPage() {
       title: "THE BECOMING",
       numberOfItems: 10,
       urlTitle: "Shop the collection",
-      url: "/shop/collection/Becoming",
+      url: "/shop/collection/The-Becoming",
     },
     slider: [
       {
