@@ -420,7 +420,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                       <div
                         className={`uppercase transition-colors decoration-white/40`}
                       >
-                        {collection}
+                        {collection.replace(/-/g, " ")}
                       </div>
                     </div>
                   </div>
