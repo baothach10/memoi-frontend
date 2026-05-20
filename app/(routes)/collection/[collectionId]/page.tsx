@@ -306,8 +306,8 @@ function CollectionDetailPage() {
   const exampleWithLinks = {
     media: [
       {
-        type: "image" as const,
-        src: "/images/desktop-collection-becoming-hero.webp",
+        type: "video" as const,
+        src: "/videos/collection-the-becoming-video.mp4",
       },
       {
         type: "image" as const,

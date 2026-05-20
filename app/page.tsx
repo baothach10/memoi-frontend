@@ -306,7 +306,7 @@ export default function HomePage() {
   // Example content
   const exampleWithLinks = {
     media: [
-      { type: "image" as const, src: "/images/desktop-hero.webp" },
+      { type: "video" as const, src: "/videos/homepage-video.mp4" },
       { type: "image" as const, src: "/images/tablet-hero.webp" },
       { type: "image" as const, src: "/images/mobile-hero.webp" },
       { type: "image" as const, src: "/images/desktop-first-collection.webp" },
