@@ -115,7 +115,7 @@ export default function SignUpModal() {
         {/* Left Side: Image */}
         <div className="relative hidden laptop:block w-1/2 h-full overflow-hidden">
           <Image
-            src="/images/collection-becoming-gallery-look-1.webp"
+            src="/images/pop-up.webp"
             alt="MEMOÍ High Fashion"
             fill
             className="object-cover relative w-full h-full"

@@ -38,15 +38,20 @@
   font-style: normal;
 }
 
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: HelveticaNeueLight, sans-serif;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   overscroll-behavior: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .font-regular {

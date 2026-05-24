@@ -10,7 +10,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import GridImageItem from "@/components/ui/pages/collection/GridImageItem";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
 import CollectionImageShowSlide from "@/components/ui/pages/collection/CollectionImageShowSlide";
-import { LERP_FACTOR } from "@/constants";
+import { LERP_FACTOR, NORMALIZED_DELTA } from "@/constants";
 
 function CollectionDetailPage() {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -42,27 +42,33 @@ function CollectionDetailPage() {
    *  Animation Loop (RAF)
    * -------------------------------------------------------- */
   useEffect(() => {
-    const animate = () => {
+    let lastTime: number | null = null; // track last frame time
+
+    const animate = (timestamp: number) => {
       const sections = getSections();
       if (sections.length === 0) return;
 
-      const now = Date.now();
+      // Calculate time since last frame in seconds
+      if (lastTime === null) lastTime = timestamp;
+      const deltaTime = (timestamp - lastTime) / 1000; // convert ms → seconds
+      lastTime = timestamp;
+
+      // Clamp deltaTime to avoid huge jumps (e.g. tab was inactive)
+      const clampedDelta = Math.min(deltaTime, 0.1);
+
       const dist = Math.abs(targetYRef.current - currentYRef.current);
 
-      // Only release the lock if we are close to target AND user has stopped scrolling (silence period)
-      if (dist < 1 && now) {
+      if (dist < 1) {
         isSettlingRef.current = false;
-
-        // If we settled on the last section, enable native scroll MODE
         if (currentIndexRef.current === sections.length - 1) {
           setIsAtBottom(true);
         }
       }
 
-      // LERP calculation
-      currentYRef.current += (targetYRef.current - currentYRef.current) * LERP_FACTOR;
+      // Time-normalized LERP — same speed on all refresh rates
+      const lerpFactor = 1 - Math.pow(1 - LERP_FACTOR, clampedDelta * NORMALIZED_DELTA);
+      currentYRef.current += (targetYRef.current - currentYRef.current) * lerpFactor;
 
-      // Apply transform
       if (smoothContentRef.current) {
         smoothContentRef.current.style.transform = `translate3d(0, ${-currentYRef.current}px, 0)`;
       }
@@ -70,18 +76,19 @@ function CollectionDetailPage() {
       rafRef.current = requestAnimationFrame(animate);
     };
 
+    // Pass timestamp to rAF
     rafRef.current = requestAnimationFrame(animate);
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [getSections, LERP_FACTOR]);
+  }, [getSections]);
 
   /** --------------------------------------------------------
    *  Input Handlers
    * -------------------------------------------------------- */
   const onScrollInput = useCallback((deltaY: number) => {
     if (isSettlingRef.current) return;
-    
+
     // Require a minimum threshold to trigger a snap
     if (Math.abs(deltaY) < 20) return;
 
@@ -403,8 +410,6 @@ function CollectionDetailPage() {
       "/images/collection-becoming-gallery-look-3.webp",
       "/images/collection-becoming-gallery-look-4.webp",
       "/images/collection-becoming-gallery-look-5.webp",
-      "/images/collection-becoming-gallery-look-6.webp",
-      "/images/collection-becoming-gallery-look-7.webp",
     ],
   };
 
@@ -427,6 +432,7 @@ function CollectionDetailPage() {
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
+              videoPoster="/images/collection-the-becoming-video-frame.jpg"
               tabletMedia={exampleWithLinks.media[1]}
               mobileMedia={exampleWithLinks.media[2]}
             >
@@ -499,6 +505,7 @@ function CollectionDetailPage() {
                           sizes={sizes}
                           alt={`Collection image ${slice[0] + index}`}
                           className="object-cover object-center"
+
                         />
                       </div>
                     ))}

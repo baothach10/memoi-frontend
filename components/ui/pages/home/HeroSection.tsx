@@ -32,6 +32,7 @@ type HeroSectionProps = {
   desktopImageClassName?: string;
   tabletImageClassName?: string;
   mobileImageClassName?: string;
+  videoPoster?: string;
 };
 
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
@@ -46,6 +47,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
       desktopImageClassName,
       tabletImageClassName,
       mobileImageClassName,
+      videoPoster,
     },
     ref
   ) => {
@@ -85,6 +87,8 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
               ref={videoRef}
               src={media.src}
               autoPlay
+              preload="none"
+              poster={videoPoster}
               muted
               loop
               playsInline
@@ -112,6 +116,8 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                 ref={videoRef}
                 src={tabletMedia.src}
                 autoPlay
+                preload="none"
+                poster={videoPoster}
                 muted
                 loop
                 playsInline
@@ -139,6 +145,8 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                 ref={videoRef}
                 src={mobileMedia.src}
                 autoPlay
+                preload="none"
+                poster={videoPoster}
                 muted
                 loop
                 playsInline

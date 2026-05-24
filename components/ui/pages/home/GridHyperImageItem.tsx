@@ -57,6 +57,7 @@ export default function GridHyperImageItem({
                     fill
                     sizes='100%'
                     className="object-cover"
+
                 />
                 {!isMobile && (
 

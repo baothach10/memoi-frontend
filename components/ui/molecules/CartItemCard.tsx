@@ -24,7 +24,7 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                         width={100}
                         height={140}
                         className="object-cover w-full h-full"
-                        unoptimized
+
                     />
                 </div>
 

@@ -10,7 +10,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useProductPaginatedByCollectionQuery } from "@/queries/useProductPaginatedByCollectionQuery";
 import PaginationComponent from "../../molecules/Pagination";
 import ShopInteractiveItem from "./ShopInteractiveItem";
-import { LERP_FACTOR } from "@/constants";
+import { LERP_FACTOR, NORMALIZED_DELTA } from "@/constants";
 
 type ShopByCollectionPageType = {
   collection: string
@@ -80,27 +80,33 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
    *  Animation Loop (RAF)
    * -------------------------------------------------------- */
   useEffect(() => {
-    const animate = () => {
+    let lastTime: number | null = null; // track last frame time
+
+    const animate = (timestamp: number) => {
       const sections = getSections();
       if (sections.length === 0) return;
 
-      const now = Date.now();
+      // Calculate time since last frame in seconds
+      if (lastTime === null) lastTime = timestamp;
+      const deltaTime = (timestamp - lastTime) / 1000; // convert ms → seconds
+      lastTime = timestamp;
+
+      // Clamp deltaTime to avoid huge jumps (e.g. tab was inactive)
+      const clampedDelta = Math.min(deltaTime, 0.1);
+
       const dist = Math.abs(targetYRef.current - currentYRef.current);
 
-      // Only release the lock if we are close to target AND user has stopped scrolling (silence period)
-      if (dist < 1 && now - lastWheelTimeRef.current > 150) {
+      if (dist < 1) {
         isSettlingRef.current = false;
-
-        // If we settled on the last section, enable native scroll MODE
         if (currentIndexRef.current === sections.length - 1) {
           setIsAtBottom(true);
         }
       }
 
-      // LERP calculation
-      currentYRef.current += (targetYRef.current - currentYRef.current) * LERP_FACTOR;
+      // Time-normalized LERP — same speed on all refresh rates
+      const lerpFactor = 1 - Math.pow(1 - LERP_FACTOR, clampedDelta * NORMALIZED_DELTA);
+      currentYRef.current += (targetYRef.current - currentYRef.current) * lerpFactor;
 
-      // Apply transform
       if (smoothContentRef.current) {
         smoothContentRef.current.style.transform = `translate3d(0, ${-currentYRef.current}px, 0)`;
       }
@@ -108,18 +114,19 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
       rafRef.current = requestAnimationFrame(animate);
     };
 
+    // Pass timestamp to rAF
     rafRef.current = requestAnimationFrame(animate);
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [getSections, LERP_FACTOR]);
+  }, [getSections]);
 
   /** --------------------------------------------------------
    *  Input Handlers
    * -------------------------------------------------------- */
   const onScrollInput = useCallback((deltaY: number) => {
     if (isSettlingRef.current) return;
-    
+
     // Require a minimum threshold to trigger a snap
     if (Math.abs(deltaY) < 20) return;
 

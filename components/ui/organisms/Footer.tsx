@@ -238,18 +238,24 @@ export function Footer() {
           <div className="flex justify-between px-25 smaller-tablet:max-tablet:px-10 max-mobile:flex-col max-mobile:gap-4 max-mobile:px-5 max-mobile:items-center max-mobile:text-center max-mobile:text-xs max-mobile:leading-normal">
             <p>&copy; 2025 MEMOÍ ™. A brand by NPS Apparel & Trading (UEN 53508613W). All rights reserved.</p>
             <div className="flex gap-5 max-mobile:gap-[18px]">
+              <Link href={"https://www.facebook.com/memoiofficial/"} target="_blank" rel="noopener noreferrer">
               <FacebookIcon
                 width={16}
                 height={16}
               />
+              </Link>
+              <Link href={"https://www.instagram.com/memoi.official/"} target="_blank" rel="noopener noreferrer">
               <InstagramIcon
                 width={16}
                 height={16}
               />
+            </Link>
+              <Link href={"https://www.tiktok.com/@memoiofficial"} target="_blank" rel="noopener noreferrer">
               <TiktokIcon
                 width={16}
                 height={16}
               />
+          </Link>
             </div>
           </div>
         </div>

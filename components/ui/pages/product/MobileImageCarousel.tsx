@@ -14,6 +14,10 @@ export default function MobileImageCarousel({
   images,
 }: MobileImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
+
+  const handleLoaded = (index: number) =>
+    setLoadedMap((prev) => ({ ...prev, [index]: true }));
 
   const handleSlideChange = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
@@ -33,14 +37,21 @@ export default function MobileImageCarousel({
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full aspect-4/5 max-mobile:aspect-3/4">
+            <div
+              className={`relative w-full aspect-4/5 max-mobile:aspect-3/4 ${
+                !loadedMap[index] ? "animate-pulse bg-neutral-100" : ""
+              }`}
+            >
               <Image
                 src={src}
                 alt={`Product image ${index + 1}`}
                 fill
                 priority={index === 0}
-                className="object-cover"
+                className={`object-cover transition-opacity duration-300 ${
+                  loadedMap[index] ? "opacity-100" : "opacity-0"
+                }`}
                 sizes="100%"
+                onLoad={() => handleLoaded(index)}
               />
             </div>
           </SwiperSlide>

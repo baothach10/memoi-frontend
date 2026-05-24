@@ -15,16 +15,19 @@ function CollectionImageShowSlide({
   sizes,
 }: CollectionImageShowSlideProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goToPrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const goToNext = () => {
     if (currentIndex < images.length - 1) {
       setCurrentIndex(currentIndex + 1);
+      setIsLoaded(false);
+    }
+  };
+
+  const goToPrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setIsLoaded(false);
     }
   };
 
@@ -35,17 +38,24 @@ function CollectionImageShowSlide({
     <div className="relative w-full h-full flex flex-col gap-8 max-mobile:gap-4">
       {/* Image Container */}
       {/* <div className="relative h-full"> */}
+      <div
+        className={`relative w-full transition-colors ${
+          !isLoaded ? "animate-pulse bg-neutral-100" : ""
+        }`}
+      >
         <Image
           src={images[currentIndex]}
           alt={`Image ${currentIndex + 1} of ${images.length}`}
-          // fill
-          width={800}          // or actual image width
-          height={1000}        // or actual image height
+          width={800}
+          height={1000}
           sizes={sizes ?? "100vw"}
-          // className="object-contain object-center"
-          className="relative h-auto w-full object-contain"
+          className={`relative h-auto w-full object-contain transition-opacity duration-300 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
           priority={currentIndex === 0}
+          onLoad={() => setIsLoaded(true)}
         />
+      </div>
       {/* </div> */}
 
       {/* Controls */}

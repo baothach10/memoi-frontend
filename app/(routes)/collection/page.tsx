@@ -6,7 +6,7 @@ export default function CollectionPage() {
   const exampleWithLinks = {
     media: {
       type: "image" as const,
-      src: "/images/test1.jpg",
+      src: "/images/collection-menu.webp",
     },
     tabletMedia: {
       type: "image" as const,

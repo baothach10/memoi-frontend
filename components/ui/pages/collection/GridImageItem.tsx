@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import InstagramIcon from "../../atoms/InstagramIcon";
 import useIsMobile from "@/hooks/useIsMobile";
 
 type Props = {
@@ -18,6 +17,7 @@ export default function GridImageItem({
   fillHeight = false,
 }: Props) {
   const [ratios, setRatios] = useState<string>("5/6");
+  const [isLoaded, setIsLoaded] = useState(false);
   const isMobile = useIsMobile(1024);
 
   useEffect(() => {
@@ -44,12 +44,19 @@ export default function GridImageItem({
 
   return (
     <div
-      className={`relative w-full group ${
-        fillHeight ? "h-full" : ""
-      } ${className}`}
+      className={`relative w-full group ${fillHeight ? "h-full" : ""} ${className} ${
+        !isLoaded ? "animate-pulse bg-neutral-100" : ""
+      }`}
       style={!fillHeight ? { aspectRatio: ratios } : undefined}
     >
-      <Image src={src} alt={alt} fill sizes="100%" className="object-cover" />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="100%"
+        className={`object-cover transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+        onLoad={() => setIsLoaded(true)}
+      />
     </div>
   );
 }

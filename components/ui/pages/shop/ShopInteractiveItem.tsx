@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LoaderCircle } from "lucide-react";
 
 interface ShopInteractiveItemProps {
   image: string;
@@ -22,6 +23,10 @@ export default function ShopInteractiveItem({
   price,
 }: ShopInteractiveItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
+
+  const handleLoaded = (index: number) =>
+    setLoadedMap((prev) => ({ ...prev, [index]: true }));
 
   return (
     <Link
@@ -45,27 +50,37 @@ export default function ShopInteractiveItem({
         ].map(({ breakpoint, sizes }, gridIndex) => (
           <div
             key={gridIndex}
-            className={`relative w-full aspect-3/4 overflow-hidden cursor-pointer ${breakpoint}`}
+            className={`relative w-full aspect-3/4 overflow-hidden cursor-pointer ${breakpoint} ${!loadedMap[gridIndex] ? "animate-pulse bg-neutral-100" : ""
+              }`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
+            {!loadedMap[gridIndex] && (
+              <div className="relative w-full h-full flex items-center justify-center">
+                <LoaderCircle className="animate-spin" size={16} />
+              </div>
+            )}
             <Image
               src={image}
               alt={name}
               fill
-              loading="eager"
+              loading="lazy"
               sizes={sizes}
-              className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"
+              className={`object-cover transition-opacity duration-300 ${loadedMap[gridIndex]
+                  ? isHovered
+                    ? "opacity-0"
+                    : "opacity-100"
+                  : "opacity-0"
                 }`}
+              onLoad={() => handleLoaded(gridIndex)}
             />
             <Image
               src={hoveredImage}
               alt={`${name} - hovered`}
               fill
-              loading="eager"
+              loading="lazy"
               sizes={sizes}
-              className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"
-                }`}
+              className={`object-cover transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}
             />
           </div>
         ))}
