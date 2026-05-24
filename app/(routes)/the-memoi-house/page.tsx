@@ -267,23 +267,24 @@ function TheMemoiHousePage() {
 
         const sections = [
             heroSection1Ref.current,
-            //   heroSection2Ref.current,
-            //   heroSection3Ref.current,
             gridSectionRef.current,
         ].filter(Boolean) as HTMLElement[];
 
         const lastIndex = sections.length - 1;
-        const gridTop = sections[lastIndex]?.offsetTop ?? 0;
 
         const onWrapperScroll = () => {
-            if (wrapper.scrollTop <= gridTop - 1) {
+            // Only snap back when the user has scrolled all the way back to the
+            // top of the native-scroll wrapper (i.e. past the beginning of the
+            // last section). Using scrollTop <= 0 is correct here because the
+            // wrapper itself starts at scrollTop=0 when isAtBottom becomes true.
+            if (wrapper.scrollTop <= 0) {
                 try {
                     wrapper.scrollTop = 0;
                 } catch (err) {
                     void err;
                 }
 
-                // Immediately switch back to virtual scroll mode to avoid rubber-banding
+                // Switch back to virtual scroll mode
                 setIsAtBottom(false);
 
                 // Pull the targetY back up one section
@@ -306,16 +307,16 @@ function TheMemoiHousePage() {
         <div className="relative w-full h-full bg-[#fffefa]">
             <div
                 ref={smoothWrapperRef}
-                className={`h-svh ${isAtBottom ? "" : "overflow-hidden"} `}
+                className={`h-svh  ${isAtBottom ? "" : "overflow-hidden"} `}
                 style={{
                     overscrollBehaviorY:
                         currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
                 }}
             >
-                <div ref={smoothContentRef} className="bg-[#fffefa]">
+                <div ref={smoothContentRef} className=" bg-[#fffefa] ">
                     <div
                         ref={heroSection1Ref}
-                        className="h-svh"
+                        className=" h-svh "
                         data-header-theme="dark"
                     >
                         <HeroSection

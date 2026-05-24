@@ -274,23 +274,24 @@ function CollectionDetailPage() {
 
     const sections = [
       heroSection1Ref.current,
-      //   heroSection2Ref.current,
-      //   heroSection3Ref.current,
       gridSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
 
     const lastIndex = sections.length - 1;
-    const gridTop = sections[lastIndex]?.offsetTop ?? 0;
 
     const onWrapperScroll = () => {
-      if (wrapper.scrollTop <= gridTop - 1) {
+      // Only snap back when the user has scrolled all the way back to the
+      // top of the native-scroll wrapper. scrollTop <= 0 is the correct
+      // boundary — not gridTop, which is a large number that makes this
+      // condition fire immediately on every upward scroll.
+      if (wrapper.scrollTop <= 0) {
         try {
           wrapper.scrollTop = 0;
         } catch (err) {
           void err;
         }
 
-        // Immediately switch back to virtual scroll mode to avoid rubber-banding
+        // Switch back to virtual scroll mode
         setIsAtBottom(false);
 
         // Pull the targetY back up one section
