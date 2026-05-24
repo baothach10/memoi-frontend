@@ -35,6 +35,7 @@ export type ProductDetailsResponse = {
   color_name: string;
   colors: ProductColor[];
   seo_meta_description: string;
+  seo_title: string;
   status: string;
   collection: string;
   category: ProductCategory;

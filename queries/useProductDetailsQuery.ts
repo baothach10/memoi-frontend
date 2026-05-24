@@ -16,7 +16,7 @@ export function useProductDetailsQuery(productId: number) {
     if (query.data?.currency && query.data.currency.toUpperCase() !== globalCurrency) {
       updateCurrency(query.data.currency);
     }
-  }, [query.data, updateCurrency]);
+  }, [globalCurrency, query.data, updateCurrency]);
 
   return query;
 }

@@ -160,7 +160,7 @@ function TheMemoiHousePage() {
         return () => {
             window.removeEventListener("wheel", wheelHandler);
         };
-    }, [isAtBottom]);
+    }, [isAtBottom, onScrollInput]);
 
     /** --------------------------------------------------------
      *  Touch Events (Mobile)
@@ -248,7 +248,7 @@ function TheMemoiHousePage() {
             window.removeEventListener("touchstart", onTouchStart);
             window.removeEventListener("touchmove", onTouchMove);
         };
-    }, [isAtBottom]);
+    }, [isAtBottom, onScrollInput]);
 
     /** --------------------------------------------------------
      *  When the page is in native-scroll mode for the last section
@@ -320,9 +320,9 @@ function TheMemoiHousePage() {
                     >
                         <HeroSection
                             ref={heroSection1Ref}
-                            media={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
-                            tabletMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
-                            mobileMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
+                            media={{ type: "image" as const, src: '/images/desktop-the-memoi-house.webp' }}
+                            tabletMedia={{ type: "image" as const, src: '/images/tablet-the-memoi-house.webp' }}
+                            mobileMedia={{ type: "image" as const, src: '/images/mobile-the-memoi-house.webp' }}
                             desktopImageClassName={"object-[0_80%]"}
                         >
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto max-w-[720px] text-center flex flex-col gap-12 justify-center items-center max-mobile:w-full max-mobile:px-5">

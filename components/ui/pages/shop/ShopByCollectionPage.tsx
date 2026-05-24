@@ -205,7 +205,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
     return () => {
       window.removeEventListener("wheel", wheelHandler);
     };
-  }, [isAtBottom]);
+  }, [isAtBottom, onScrollInput]);
 
   /** --------------------------------------------------------
    *  Touch Events (Mobile)
@@ -294,7 +294,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
     };
-  }, [isAtBottom]);
+  }, [isAtBottom, onScrollInput]);
 
   /** --------------------------------------------------------
    *  When the page is in native-scroll mode for the last section
