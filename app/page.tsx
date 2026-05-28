@@ -313,9 +313,9 @@ export default function HomePage() {
   // Example content
   const exampleWithLinks = {
     media: [
-      { type: "video" as const, src: "/videos/homepage-video.mp4" },
-      { type: "video" as const, src: "/videos/homepage-video.mp4" },
-      { type: "video" as const, src: "/videos/homepage-video.mp4" },
+      { type: "video" as const, src: "/videos/homepage-video-horizontal.mp4" },
+      { type: "video" as const, src: "/videos/homepage-video-horizontal.mp4" },
+      { type: "video" as const, src: "/videos/homepage-video-horizontal.mp4" },
       { type: "image" as const, src: "/images/desktop-first-collection.webp" },
       { type: "image" as const, src: "/images/tablet-first-collection.webp" },
       { type: "image" as const, src: "/images/mobile-first-collection.webp" },
@@ -370,7 +370,10 @@ export default function HomePage() {
               media={exampleWithLinks.media[0]}
               tabletMedia={exampleWithLinks.media[1]}
               mobileMedia={exampleWithLinks.media[2]}
-              videoPoster="/images/homepage-video-frame.jpg"
+              videoPosterHorizontal="/images/homepage-video-frame-horizontal.jpg"
+              videoPosterVertical="/images/homepage-video-frame-vertical.jpg"
+              videoHorizontalSrc="/videos/homepage-video-horizontal.mp4"
+              videoVerticalSrc="/videos/homepage-video-vertical.mp4"
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
             />

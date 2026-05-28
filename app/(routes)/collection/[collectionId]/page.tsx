@@ -315,15 +315,15 @@ function CollectionDetailPage() {
     media: [
       {
         type: "video" as const,
-        src: "/videos/collection-the-becoming-video.mp4",
+        src: "/videos/collection-the-becoming-video-horizontal.mp4",
       },
       {
-        type: "image" as const,
-        src: "/images/tablet-collection-becoming-hero.webp",
+        type: "video" as const,
+        src: "/videos/collection-the-becoming-video-vertical.mp4",
       },
       {
-        type: "image" as const,
-        src: "/images/mobile-collection-becoming-hero.webp",
+        type: "video" as const,
+        src: "/videos/collection-the-becoming-video-vertical.mp4",
       },
       {
         type: "image" as const,
@@ -433,7 +433,10 @@ function CollectionDetailPage() {
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
-              videoPoster="/images/collection-the-becoming-video-frame.jpg"
+              videoPosterHorizontal="/images/collection-the-becoming-video-frame-horizontal.jpg"
+              videoPosterVertical="/images/collection-the-becoming-video-frame-vertical.jpg"
+              videoHorizontalSrc="/videos/collection-the-becoming-video-horizontal.mp4"
+              videoVerticalSrc="/videos/collection-the-becoming-video-vertical.mp4"
               tabletMedia={exampleWithLinks.media[1]}
               mobileMedia={exampleWithLinks.media[2]}
             >
