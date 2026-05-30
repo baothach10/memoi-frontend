@@ -37,11 +37,11 @@ export default function ShopInteractiveItem({
         {[
           {
             breakpoint: "laptop:grid hidden",
-            sizes: "(min-width: 1025px) 50vw, 0px",
+            sizes: "(min-width: 1024px) 50vw, 0px",
           },
           {
             breakpoint: "smaller-tablet:max-tablet:grid hidden",
-            sizes: "(min-width: 768px) and (max-width: 1024px) 50vw, 0px",
+            sizes: "(min-width: 768px) and (max-width: 1023px) 50vw, 0px",
           },
           {
             breakpoint: "max-mobile:grid hidden",
