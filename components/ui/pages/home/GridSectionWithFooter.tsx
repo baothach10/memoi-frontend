@@ -34,13 +34,15 @@ const GridSectionWithFooter = forwardRef<HTMLElement>((props, ref) => {
           <Carousel
             items={[
               <GridHyperImageItem key={1} src="/images/instagram-post-1.webp" href="https://www.instagram.com/p/DYe1u8ik56L" />,
-              <GridHyperImageItem key={2} src="/images/instagram-post-2.webp" href="https://www.instagram.com/p/DYKKbSAE8QC" />,
+              <GridHyperImageItem key={2} src="/images/instagram-post-2.webp" href="https://www.instagram.com/p/DYrsPzpkzf5" />,
               <GridHyperImageItem key={3} src="/images/instagram-post-3.webp" href="https://www.instagram.com/p/DYmZTnCk7p7" />,
-              <GridHyperImageItem key={4} src="/images/instagram-post-4.webp" href="https://www.instagram.com/reel/DYFB397S378" />,
-              <GridHyperImageItem key={5} src="/images/instagram-post-1.webp" href="https://www.instagram.com/p/DYe1u8ik56L" />,
-              <GridHyperImageItem key={6} src="/images/instagram-post-2.webp" href="https://www.instagram.com/p/DYKKbSAE8QC" />,
-              <GridHyperImageItem key={7} src="/images/instagram-post-3.webp" href="https://www.instagram.com/p/DYmZTnCk7p7" />,
-              <GridHyperImageItem key={8} src="/images/instagram-post-4.webp" href="https://www.instagram.com/reel/DYFB397S378" />
+              <GridHyperImageItem key={4} src="/images/instagram-post-4.webp" href="https://www.instagram.com/p/DYW8jR2EzPR" />,
+              <GridHyperImageItem key={5} src="/images/instagram-post-5.webp" href="https://www.instagram.com/p/DYzQDxFkwnh" />,
+              <GridHyperImageItem key={6} src="/images/instagram-post-1.webp" href="https://www.instagram.com/p/DYe1u8ik56L" />,
+              <GridHyperImageItem key={7} src="/images/instagram-post-2.webp" href="https://www.instagram.com/p/DYrsPzpkzf5" />,
+              <GridHyperImageItem key={8} src="/images/instagram-post-3.webp" href="https://www.instagram.com/p/DYmZTnCk7p7" />,
+              <GridHyperImageItem key={9} src="/images/instagram-post-4.webp" href="https://www.instagram.com/p/DYW8jR2EzPR" />,
+              <GridHyperImageItem key={10} src="/images/instagram-post-5.webp" href="https://www.instagram.com/p/DYzQDxFkwnh" />
             ]}
             slidesPerView={isMobile ? 2 : (isLargeTablet ? 3 : 4)}
             spaceBetween={10}

@@ -61,43 +61,44 @@ export default function AboutUsPage() {
               <GridHyperImageItem
                 key={1}
                 src="/images/about-us-production-1.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/reel/DYFB397S378"
               />,
               <GridHyperImageItem
                 key={2}
                 src="/images/about-us-production-2.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYM8hpfE6QV"
               />,
               <GridHyperImageItem
                 key={3}
                 src="/images/about-us-production-3.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYKKbSAE8QC"
               />,
               <GridHyperImageItem
                 key={4}
                 src="/images/about-us-production-4.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYhYR1RE9hP"
               />,
               <GridHyperImageItem
                 key={5}
                 src="/images/about-us-production-1.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/reel/DYFB397S378"
               />,
               <GridHyperImageItem
                 key={6}
                 src="/images/about-us-production-2.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYM8hpfE6QV"
               />,
               <GridHyperImageItem
                 key={7}
                 src="/images/about-us-production-3.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYKKbSAE8QC"
               />,
               <GridHyperImageItem
                 key={8}
                 src="/images/about-us-production-4.webp"
-                href="https://www.instagram.com/memoi.official/"
-              />,
+                href="https://www.instagram.com/p/DYhYR1RE9hP"
+              />
+
             ]}
             slidesPerView={isMobile ? 2 : isLargeTablet ? 3 : 4}
             spaceBetween={10}

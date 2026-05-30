@@ -17,14 +17,16 @@ interface SizeSuggestionParams {
   hip: number;
   preference: number;
   sizingRanges: SizingRange[];
+  ai_notes?: string;
 }
 
 interface SizeSuggestionResponse {
   suggestedSize: string;
-  reasoning: string;
 }
 
-async function getSizeSuggestion(params: SizeSuggestionParams): Promise<SizeSuggestionResponse> {
+async function getSizeSuggestion(
+  params: SizeSuggestionParams,
+): Promise<SizeSuggestionResponse> {
   const res = await fetch("/api/size-suggestion", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

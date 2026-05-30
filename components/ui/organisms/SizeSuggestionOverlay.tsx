@@ -18,6 +18,7 @@ interface SizeSuggestionOverlayProps {
   isOpen: boolean;
   onClose: () => void;
   onAddSize: (size: string) => void;
+  aiNotes?: string;
 }
 
 // Sizing data matching SizingOverlay
@@ -135,6 +136,7 @@ export default function SizeSuggestionOverlay({
   isOpen,
   onClose,
   onAddSize,
+  aiNotes,
 }: SizeSuggestionOverlayProps) {
   const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState(1);
@@ -158,7 +160,6 @@ export default function SizeSuggestionOverlay({
 
   // Result
   const [suggestedSize, setSuggestedSize] = useState("");
-  const [reasoning, setReasoning] = useState("");
 
   const sizeSuggestionMutation = useSizeSuggestionMutation();
   const isLoading = sizeSuggestionMutation.isPending;
@@ -202,7 +203,7 @@ export default function SizeSuggestionOverlay({
 
     if (Object.keys(newErrors).length === 0) {
       setStep(3);
-      
+
       sizeSuggestionMutation.mutate({
         height,
         weight,
@@ -212,10 +213,10 @@ export default function SizeSuggestionOverlay({
         hip,
         preference,
         sizingRanges: SIZING_RANGES,
+        ai_notes: aiNotes,
       }, {
         onSuccess: (data) => {
           setSuggestedSize(data.suggestedSize);
-          setReasoning(data.reasoning);
         },
         onError: (error) => {
           console.error("Error fetching size suggestion:", error);
@@ -240,7 +241,6 @@ export default function SizeSuggestionOverlay({
     setHip(0);
     setPreference(2);
     setSuggestedSize("");
-    setReasoning("");
     setStep(1);
   };
 
@@ -572,7 +572,7 @@ export default function SizeSuggestionOverlay({
 
                         <div className="flex flex-col gap-2">
                           <p className="text-sm text-black/60 leading-normal max-mobile:text-xs">
-                            {reasoning || "To be certain this is your ideal fit, you can always contact our team for personal guidance."}
+                            To be certain this is your ideal fit, you can always contact our team for personal guidance.
                           </p>
                           <button className="text-sm underline cursor-pointer decoration-black/40 underline-offset-4 max-mobile:text-xs">Contact us</button>
                         </div>
