@@ -148,7 +148,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
             fill
             loading="eager"
             // Fixed: correct sizes syntax — no `and` operator in sizes
-            sizes="(min-width: 1025px) 100vw, 0px"
+            sizes="(min-width: 1024px) 100vw, 0px"
             className={`object-cover ${desktopImageClassName ?? "object-center"
               } laptop:block hidden`}
             priority
