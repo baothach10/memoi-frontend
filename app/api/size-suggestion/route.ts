@@ -7,7 +7,7 @@ export const runtime = "edge";
 // Instantiate the provider with the API key using createGoogleGenerativeAI
 // (preferred over the default singleton `google` when passing custom config)
 const googleAI = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API,
+  apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
 });
 
 const sizeSuggestionSchema = jsonSchema<{
