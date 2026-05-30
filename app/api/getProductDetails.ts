@@ -31,6 +31,7 @@ export type ProductDetailsResponse = {
   name: string;
   currency: string;
   description: ProductDescription;
+  ai_notes: string;
   color: string;
   color_name: string;
   colors: ProductColor[];
