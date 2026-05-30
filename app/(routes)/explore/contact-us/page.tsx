@@ -43,7 +43,7 @@ export default function ContactUsPage() {
                             </div>
                             <Link href={whatsapp} target="_blank" rel="noreferrer" className="relative cursor-pointer w-full">
                                 <span className="block w-full bg-transparent text-black border border-black/20 py-4 px-8 text-sm transition-colors duration-200 hover:bg-black hover:text-white max-mobile:py-3 max-mobile:text-xs">
-                                    <span>(+65) 85939373</span>
+                                    <span>Whatsapp us</span>
                                 </span>
                             </Link>
                         </div>
@@ -52,13 +52,13 @@ export default function ContactUsPage() {
                         <div className="flex flex-col items-center gap-8 max-mobile:gap-5">
                             <div className="flex flex-col gap-5 max-mobile:gap-3.5">
                                 <h3 className="text-[16px] font-regular uppercase max-mobile:text-sm">SOCIAL MEDIA</h3>
-                                <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">For quick support, message us directly on Facebook (@memoi) or Instagram (@memoi.official). We aim to reply to DMs within 12 hours during service hours</p>
+                                <p className="text-sm text-black tracking-[4%] max-mobile:text-xs">For quick support, message us directly on Facebook or Instagram. We aim to reply to DMs within 12 hours during service hours</p>
                             </div>
                             <div className="flex w-full relative gap-4 items-center justify-center">
-                                <Link href="#" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
+                                <Link href={"https://www.facebook.com/memoi.official"} target="_blank" rel="noopener noreferrer" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
                                     <FacebookIcon width={20} height={20} />
                                 </Link>
-                                <Link href="#" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
+                                <Link href={"https://www.instagram.com/memoi.official/"} target="_blank" rel="noopener noreferrer" className="p-4 border border-black/20 rounded-full cursor-pointer inline-flex items-center justify-center max-mobile:p-3">
                                     <InstagramIcon width={20} height={20} />
                                 </Link>
                             </div>

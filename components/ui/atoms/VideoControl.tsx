@@ -7,7 +7,7 @@ export const VideoControls = ({
 }) => (
   <button
     onClick={onToggle}
-    className="absolute bottom-10 left-20 text-white cursor-pointer w-[50px] h-[50px] flex items-center justify-center transition-all z-20"
+    className="absolute bottom-10 left-20 text-white cursor-pointer w-[50px] h-[50px] max-mobile:left-6 flex items-center justify-center transition-all z-20"
     style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
     aria-label={isPlaying ? "Pause video" : "Play video"}
   >

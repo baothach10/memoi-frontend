@@ -31,10 +31,12 @@ export type ProductDetailsResponse = {
   name: string;
   currency: string;
   description: ProductDescription;
+  ai_notes: string;
   color: string;
   color_name: string;
   colors: ProductColor[];
   seo_meta_description: string;
+  seo_title: string;
   status: string;
   collection: string;
   category: ProductCategory;

@@ -20,7 +20,7 @@ export default function AboutUsPage() {
       >
         <div className="relative w-2/3 flex flex-col items-center text-center max-mobile:w-full max-mobile:px-4">
           <div className="relative uppercase leading-[140%] text-2xl laptop:max-desktop:w-2/5 desktop:w-1/4 font-regular max-tablet:w-3/5 max-mobile:text-[18px] max-mobile:leading-[120%] max-mobile:w-4/5">
-            MEMOÍ - for the woman becoming herself
+            MEMOÍ - for the woman you are becoming
           </div>
 
           <div className="relative w-[680px] h-[470px] laptop:max-desktop:w-[780px] laptop:max-desktop:h-[470px] smaller-tablet:max-tablet:w-[488px] smaller-tablet:max-tablet:h-[348px] max-mobile:w-[355px] max-mobile:h-[255px]">
@@ -61,43 +61,44 @@ export default function AboutUsPage() {
               <GridHyperImageItem
                 key={1}
                 src="/images/about-us-production-1.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/reel/DYFB397S378"
               />,
               <GridHyperImageItem
                 key={2}
                 src="/images/about-us-production-2.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYM8hpfE6QV"
               />,
               <GridHyperImageItem
                 key={3}
                 src="/images/about-us-production-3.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYKKbSAE8QC"
               />,
               <GridHyperImageItem
                 key={4}
                 src="/images/about-us-production-4.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYhYR1RE9hP"
               />,
               <GridHyperImageItem
                 key={5}
                 src="/images/about-us-production-1.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/reel/DYFB397S378"
               />,
               <GridHyperImageItem
                 key={6}
                 src="/images/about-us-production-2.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYM8hpfE6QV"
               />,
               <GridHyperImageItem
                 key={7}
                 src="/images/about-us-production-3.webp"
-                href="https://www.instagram.com/memoi.official/"
+                href="https://www.instagram.com/p/DYKKbSAE8QC"
               />,
               <GridHyperImageItem
                 key={8}
                 src="/images/about-us-production-4.webp"
-                href="https://www.instagram.com/memoi.official/"
-              />,
+                href="https://www.instagram.com/p/DYhYR1RE9hP"
+              />
+
             ]}
             slidesPerView={isMobile ? 2 : isLargeTablet ? 3 : 4}
             spaceBetween={10}

@@ -5,7 +5,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useRef, useState, useCallback, useEffect } from "react";
 import BenefitTable from "@/components/ui/pages/help/BenefitTable";
 import Link from "next/link";
-import { LERP_FACTOR } from "@/constants";
+import { LERP_FACTOR, NORMALIZED_DELTA } from "@/constants";
 
 function TheMemoiHousePage() {
     const smoothWrapperRef = useRef<HTMLDivElement>(null);
@@ -35,27 +35,33 @@ function TheMemoiHousePage() {
      *  Animation Loop (RAF)
      * -------------------------------------------------------- */
     useEffect(() => {
-        const animate = () => {
+        let lastTime: number | null = null; // track last frame time
+
+        const animate = (timestamp: number) => {
             const sections = getSections();
             if (sections.length === 0) return;
 
-            const now = Date.now();
+            // Calculate time since last frame in seconds
+            if (lastTime === null) lastTime = timestamp;
+            const deltaTime = (timestamp - lastTime) / 1000; // convert ms → seconds
+            lastTime = timestamp;
+
+            // Clamp deltaTime to avoid huge jumps (e.g. tab was inactive)
+            const clampedDelta = Math.min(deltaTime, 0.1);
+
             const dist = Math.abs(targetYRef.current - currentYRef.current);
 
-            // Only release the lock if we are close to target AND user has stopped scrolling (silence period)
-            if (dist < 1 && now - lastWheelTimeRef.current > 150) {
+            if (dist < 1) {
                 isSettlingRef.current = false;
-
-                // If we settled on the last section, enable native scroll MODE
                 if (currentIndexRef.current === sections.length - 1) {
                     setIsAtBottom(true);
                 }
             }
 
-            // LERP calculation
-            currentYRef.current += (targetYRef.current - currentYRef.current) * LERP_FACTOR;
+            // Time-normalized LERP — same speed on all refresh rates
+            const lerpFactor = 1 - Math.pow(1 - LERP_FACTOR, clampedDelta * NORMALIZED_DELTA);
+            currentYRef.current += (targetYRef.current - currentYRef.current) * lerpFactor;
 
-            // Apply transform
             if (smoothContentRef.current) {
                 smoothContentRef.current.style.transform = `translate3d(0, ${-currentYRef.current}px, 0)`;
             }
@@ -63,18 +69,19 @@ function TheMemoiHousePage() {
             rafRef.current = requestAnimationFrame(animate);
         };
 
+        // Pass timestamp to rAF
         rafRef.current = requestAnimationFrame(animate);
         return () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-    }, [getSections, LERP_FACTOR]);
+    }, [getSections]);
 
     /** --------------------------------------------------------
      *  Input Handlers
      * -------------------------------------------------------- */
     const onScrollInput = useCallback((deltaY: number) => {
         if (isSettlingRef.current) return;
-        
+
         // Require a minimum threshold to trigger a snap
         if (Math.abs(deltaY) < 20) return;
 
@@ -153,7 +160,7 @@ function TheMemoiHousePage() {
         return () => {
             window.removeEventListener("wheel", wheelHandler);
         };
-    }, [isAtBottom]);
+    }, [isAtBottom, onScrollInput]);
 
     /** --------------------------------------------------------
      *  Touch Events (Mobile)
@@ -241,7 +248,7 @@ function TheMemoiHousePage() {
             window.removeEventListener("touchstart", onTouchStart);
             window.removeEventListener("touchmove", onTouchMove);
         };
-    }, [isAtBottom]);
+    }, [isAtBottom, onScrollInput]);
 
     /** --------------------------------------------------------
      *  When the page is in native-scroll mode for the last section
@@ -260,23 +267,24 @@ function TheMemoiHousePage() {
 
         const sections = [
             heroSection1Ref.current,
-            //   heroSection2Ref.current,
-            //   heroSection3Ref.current,
             gridSectionRef.current,
         ].filter(Boolean) as HTMLElement[];
 
         const lastIndex = sections.length - 1;
-        const gridTop = sections[lastIndex]?.offsetTop ?? 0;
 
         const onWrapperScroll = () => {
-            if (wrapper.scrollTop <= gridTop - 1) {
+            // Only snap back when the user has scrolled all the way back to the
+            // top of the native-scroll wrapper (i.e. past the beginning of the
+            // last section). Using scrollTop <= 0 is correct here because the
+            // wrapper itself starts at scrollTop=0 when isAtBottom becomes true.
+            if (wrapper.scrollTop <= 0) {
                 try {
                     wrapper.scrollTop = 0;
                 } catch (err) {
                     void err;
                 }
 
-                // Immediately switch back to virtual scroll mode to avoid rubber-banding
+                // Switch back to virtual scroll mode
                 setIsAtBottom(false);
 
                 // Pull the targetY back up one section
@@ -299,23 +307,23 @@ function TheMemoiHousePage() {
         <div className="relative w-full h-full bg-[#fffefa]">
             <div
                 ref={smoothWrapperRef}
-                className={`h-svh ${isAtBottom ? "" : "overflow-hidden"} `}
+                className={`h-svh  ${isAtBottom ? "" : "overflow-hidden"} `}
                 style={{
                     overscrollBehaviorY:
                         currentSectionIndex === 0 && !isAtBottom ? "auto" : "contain",
                 }}
             >
-                <div ref={smoothContentRef} className="bg-[#fffefa]">
+                <div ref={smoothContentRef} className=" bg-[#fffefa] ">
                     <div
                         ref={heroSection1Ref}
-                        className="h-svh"
+                        className=" h-svh "
                         data-header-theme="dark"
                     >
                         <HeroSection
                             ref={heroSection1Ref}
-                            media={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
-                            tabletMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
-                            mobileMedia={{ type: "image" as const, src: '/images/the-memoi-house.webp' }}
+                            media={{ type: "image" as const, src: '/images/desktop-the-memoi-house.webp' }}
+                            tabletMedia={{ type: "image" as const, src: '/images/tablet-the-memoi-house.webp' }}
+                            mobileMedia={{ type: "image" as const, src: '/images/mobile-the-memoi-house.webp' }}
                             desktopImageClassName={"object-[0_80%]"}
                         >
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto max-w-[720px] text-center flex flex-col gap-12 justify-center items-center max-mobile:w-full max-mobile:px-5">

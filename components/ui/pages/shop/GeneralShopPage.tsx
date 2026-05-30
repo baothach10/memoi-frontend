@@ -17,7 +17,7 @@ export default function GeneralShopPage() {
     media: [
       {
         type: "image" as const,
-        src: "/images/test2.jpg",
+        src: "/images/shop-menu.webp",
       },
       {
         type: "image" as const,

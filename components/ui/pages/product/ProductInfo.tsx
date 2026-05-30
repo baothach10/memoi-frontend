@@ -179,7 +179,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                     transition
                     ${disabled
                       ? "opacity-40 line-through cursor-not-allowed"
-                    : "hover:underline decoration-black/40 underline-offset-4 cursor-pointer" 
+                      : "hover:underline decoration-black/40 underline-offset-4 cursor-pointer"
                     }
                   `}
                 >
@@ -228,6 +228,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         <SizeSuggestionOverlay
           isOpen={showSizeSuggestion}
           onClose={() => setShowSizeSuggestion(false)}
+          aiNotes={product.ai_notes}
           onAddSize={(size) => {
             const variant = product.variants.find((v) => v.size.toLowerCase() === size.toLowerCase());
             if (variant) {

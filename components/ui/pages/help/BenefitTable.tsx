@@ -28,7 +28,7 @@ const BENEFITS: Array<{
         },
         {
             title: "Birth Month Offer",
-            subtitle: "One-time 10% off during your birth month",
+            subtitle: "One-time 5% off during your birth month",
             included: { "MEMOÍ": true, "MEMOÍ +": true, "MEMOÍ ELITE": true },
         },
         {

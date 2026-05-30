@@ -105,12 +105,12 @@ export default function SizingOverlay({
                   <tbody>
                     {SIZING_DATA.map((row) => (
                       <tr key={row.size} className="text-sm text-black font-light max-mobile:text-xs">
-                        <td className="py-2 font-regular text-left text-black/40 max-mobile:text-[10px]">{row.size}</td>
-                        <td className="py-2">{row.chest}</td>
-                        <td className="py-2">{row.waist}</td>
-                        <td className="py-2">{row.hip}</td>
-                        <td className="py-2">{row.shoulder}</td>
-                        <td className="py-2">{row.height}</td>
+                        <td className="py-2 whitespace-nowrap font-regular text-left text-black/40 max-mobile:text-[10px]">{row.size}</td>
+                        <td className="py-2 whitespace-nowrap">{row.chest}</td>
+                        <td className="py-2 whitespace-nowrap">{row.waist}</td>
+                        <td className="py-2 whitespace-nowrap">{row.hip}</td>
+                        <td className="py-2 whitespace-nowrap">{row.shoulder}</td>
+                        <td className="py-2 whitespace-nowrap">{row.height}</td>
                       </tr>
                     ))}
                   </tbody>

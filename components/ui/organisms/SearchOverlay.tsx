@@ -93,6 +93,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 <SearchIcon width="100%" height="100%" color="rgba(0,0,0,0.6)" />
               </div>
               <input
+                suppressHydrationWarning
                 ref={inputRef}
                 type="text"
                 placeholder="What are you looking for?"
@@ -142,7 +143,10 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               </>
             ) : (
               <>
-                <div className={`grid grid-cols-${isMobile ? 2 : 3} gap-2.5`}>
+                <div
+                  className={`grid gap-2.5 ${isMobile ? "grid-cols-2" : "grid-cols-3"
+                    }`}
+                >
                   {products.map((product) => (
                     <SearchInteractiveItem
                       key={product.product_id}

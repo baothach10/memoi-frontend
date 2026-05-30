@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 // export default function useIsMobile(breakpoint = 1024) {
 //   const [isMobile, setIsMobile] = useState<boolean | null>(null);

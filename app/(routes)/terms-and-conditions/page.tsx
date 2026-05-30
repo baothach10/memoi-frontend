@@ -28,10 +28,7 @@ export default function TermsAndConditionsPage() {
                             AGREEMENT TO OUR LEGAL TERMS
                         </h2>
                         <p className={textClass}>
-                            We are MEMOÍ (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our&rdquo;), a company registered in Singapore at 10 Marina Boulevard, Singapore, Singapore 018983. Our VAT number is M90360025X.
-                        </p>
-                        <p className={textClass}>
-                            We operate the website memoiofficial.com (the &ldquo;Site&rdquo;), as well as any other related products and services that refer or link to these legal terms (the &ldquo;Legal Terms&rdquo;) (collectively, the &ldquo;Services&rdquo;).
+                            We are MEMOÍ (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our&rdquo;). We operate the website memoiofficial.com (the &ldquo;Site&rdquo;), as well as any other related products and services that refer or link to these legal terms (the &ldquo;Legal Terms&rdquo;) (collectively, the &ldquo;Services&rdquo;).
                         </p>
                         <p className={textClass}>
                             The purpose of the MEMOÍ website is to provide a seamless, end-to-end e-commerce experience for high-quality apparel. Beyond standard retail, the platform integrates a comprehensive membership system that allows users to manage their personal profiles, receive intelligent size recommendations, and access a dedicated dashboard for order tracking and exclusive house benefits.
@@ -41,7 +38,6 @@ export default function TermsAndConditionsPage() {
                             <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                 memoi@memoiofficial.com
                             </Link>{" "}
-                            or by mail to 10 Marina Boulevard, Singapore, Singapore 018983, Singapore.
                         </p>
                         <p className={textClass}>
                             These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&ldquo;you&rdquo;), and Memoi, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
@@ -190,7 +186,6 @@ export default function TermsAndConditionsPage() {
                             <li>Mastercard</li>
                             <li>American Express</li>
                             <li>Discover</li>
-                            <li>PayPal</li>
                         </ul>
                         <p className={textClass}>
                             You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Services. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time. All payments shall be in Singaporean Dollar (SGD).
@@ -423,10 +418,6 @@ export default function TermsAndConditionsPage() {
                             In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:
                         </p>
                         <div className="flex flex-col gap-1">
-                            <p className={textClass}>Memoi</p>
-                            <p className={textClass}>10 Marina Boulevard</p>
-                            <p className={textClass}>Singapore, Singapore 018983</p>
-                            <p className={textClass}>Singapore</p>
                             <p className={textClass}>
                                 <Link href="mailto:memoi@memoiofficial.com" className="cursor-pointer">
                                     memoi@memoiofficial.com
