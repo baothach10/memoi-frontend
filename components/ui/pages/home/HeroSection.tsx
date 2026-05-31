@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, forwardRef, useEffect, useCallback } from "react";
-import Image from "next/image";
 import { VideoControls } from "@/components/ui/atoms/VideoControl";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
+import useViewportInfo from "@/hooks/useViewportInfo";
+import { useAssetPrefetch } from "@/hooks/useAssetPrefetch";
 
 type LinkObject = {
   url: string;
@@ -32,10 +33,8 @@ type HeroSectionProps = {
   desktopImageClassName?: string;
   tabletImageClassName?: string;
   mobileImageClassName?: string;
-  // Optional poster images for vertical/horizontal videos
   videoPosterVertical?: string;
   videoPosterHorizontal?: string;
-  // Optional explicit video sources to choose between vertical/horizontal
   videoVerticalSrc?: string;
   videoHorizontalSrc?: string;
 };
@@ -60,219 +59,208 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
     ref
   ) => {
     const [isPlaying, setIsPlaying] = useState(true);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const { mounted, isPortrait, breakpoint } = useViewportInfo();
 
-    // Keep SSR and first hydration render stable by deferring orientation detection to mount.
-    const [isPortrait, setIsPortrait] = useState<boolean | null>(null);
-
-    // Track playback position so we can restore it after a src/key change
+    const horizontalVideoRef = useRef<HTMLVideoElement>(null);
+    const verticalVideoRef = useRef<HTMLVideoElement>(null);
     const savedPositionRef = useRef<number>(0);
 
-    // Derived video source and poster based on orientation
-    const isPortraitValue = isPortrait ?? false;
-    const hasVideo = media.type === "video";
-    const videoSrc = isPortraitValue
-      ? (videoVerticalSrc ?? media.src)
-      : (videoHorizontalSrc ?? media.src);
-    const posterSrc = isPortraitValue ? videoPosterVertical : videoPosterHorizontal;
+    // Collect ALL asset srcs upfront — videos + images
+    const horizontalSrc = videoHorizontalSrc ?? media.src;
+    const verticalSrc = videoVerticalSrc ?? media.src;
 
-    // Key changes only when the orientation flips after mount, forcing a single clean remount
-    const videoKey = isPortrait === null ? "initial" : isPortrait ? "portrait" : "landscape";
+    const allSrcs = [
+      ...new Set([
+        horizontalSrc,
+        verticalSrc,
+        // Only include image srcs
+        media.type === "image" ? media.src : null,
+        tabletMedia?.type === "image" ? tabletMedia.src : null,
+        mobileMedia?.type === "image" ? mobileMedia.src : null,
+      ].filter(Boolean) as string[]),
+    ];
 
-    // --- Orientation detection via matchMedia on mount
+    // ✅ Single prefetch for ALL assets — videos and images alike
+    const { urls, ready } = useAssetPrefetch(allSrcs);
+
+    const horizontalVideoSrcValue = urls[horizontalSrc] ?? "";
+    const verticalVideoSrcValue = urls[verticalSrc] ?? "";
+
+    const activeMediaType = (() => {
+      if (breakpoint === "mobile") return (mobileMedia ?? tabletMedia ?? media).type;
+      if (breakpoint === "tablet") return (tabletMedia ?? media).type;
+      return media.type;
+    })();
+
+    const showVideo = activeMediaType === "video";
+
+    const saveCurrentPosition = useCallback(() => {
+      const activeVideo = isPortrait ? verticalVideoRef.current : horizontalVideoRef.current;
+      if (activeVideo) {
+        savedPositionRef.current = activeVideo.currentTime;
+      }
+    }, [isPortrait]);
+
     useEffect(() => {
-      const mql = window.matchMedia("(orientation: portrait)");
-      const initialPortrait = mql.matches;
+      if (!mounted || !ready) return;
 
-      if (videoRef.current) {
-        savedPositionRef.current = videoRef.current.currentTime;
+      const horizontalVideo = horizontalVideoRef.current;
+      const verticalVideo = verticalVideoRef.current;
+      if (!horizontalVideo || !verticalVideo) return;
+
+      const activeVideo = isPortrait ? verticalVideo : horizontalVideo;
+      const inactiveVideo = isPortrait ? horizontalVideo : verticalVideo;
+
+      if (!showVideo) {
+        horizontalVideo.pause();
+        verticalVideo.pause();
+        return;
       }
 
-      setIsPortrait(initialPortrait);
-
-      const onChange = (e: MediaQueryListEvent) => {
-        if (videoRef.current) {
-          savedPositionRef.current = videoRef.current.currentTime;
+      const restorePosition = (video: HTMLVideoElement) => {
+        if (savedPositionRef.current <= 0) return;
+        const setTime = () => {
+          video.currentTime = Math.min(savedPositionRef.current, video.duration || Infinity);
+        };
+        if (video.readyState >= 1) {
+          setTime();
+        } else {
+          const onLoaded = () => {
+            setTime();
+            video.removeEventListener("loadedmetadata", onLoaded);
+          };
+          video.addEventListener("loadedmetadata", onLoaded);
         }
-        setIsPortrait(e.matches);
       };
 
-      mql.addEventListener("change", onChange);
-      return () => mql.removeEventListener("change", onChange);
-    }, []);
-
-    // --- After the video remounts (key changed): restore position + honour isPlaying
-    useEffect(() => {
-      const video = videoRef.current;
-      if (!video) return;
-
-      // Restore playback position
-      if (savedPositionRef.current > 0) {
-        video.currentTime = savedPositionRef.current;
-      }
-
-      // Sync play/pause state — autoPlay always starts playing, but user may have paused
-      if (!isPlaying) {
-        video.pause();
-      }
-      // videoKey is the dependency: runs once per orientation change after remount
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [videoKey]);
-
-    const togglePlayPause = useCallback(() => {
-      const video = videoRef.current;
-      if (!video) return;
+      restorePosition(activeVideo);
+      inactiveVideo.pause();
 
       if (isPlaying) {
-        video.pause();
+        if (activeVideo.readyState >= 2) {
+          activeVideo.play().catch(() => undefined);
+        } else {
+          const onCanPlay = () => {
+            activeVideo.play().catch(() => undefined);
+            activeVideo.removeEventListener("canplay", onCanPlay);
+          };
+          activeVideo.addEventListener("canplay", onCanPlay);
+          return () => activeVideo.removeEventListener("canplay", onCanPlay);
+        }
       } else {
-        video.play();
+        activeVideo.pause();
+      }
+    }, [mounted, ready, isPortrait, isPlaying, showVideo]);
+
+    useEffect(() => {
+      const portraitMql = window.matchMedia("(orientation: portrait)");
+      const handleChange = () => saveCurrentPosition();
+      portraitMql.addEventListener("change", handleChange);
+      return () => portraitMql.removeEventListener("change", handleChange);
+    }, [saveCurrentPosition]);
+
+    const togglePlayPause = useCallback(() => {
+      const activeVideo = isPortrait ? verticalVideoRef.current : horizontalVideoRef.current;
+      if (!activeVideo) return;
+      if (isPlaying) {
+        activeVideo.pause();
+      } else {
+        activeVideo.play();
       }
       setIsPlaying((prev) => !prev);
-    }, [isPlaying]);
-
-    // Determine which breakpoint media type is video so we know to show VideoControls
-    const anyVideoVisible =
-      hasVideo ||
-      tabletMedia?.type === "video" ||
-      mobileMedia?.type === "video";
+    }, [isPlaying, isPortrait]);
 
     return (
       <section ref={ref} className="h-svh w-full relative overflow-hidden">
 
-        {/* ── Desktop Media ──────────────────────────────────────────── */}
-        {media.type === "image" ? (
-          <Image
-            src={media.src}
-            alt="Hero background"
-            fill
-            loading="eager"
-            // Fixed: correct sizes syntax — no `and` operator in sizes
-            sizes="(min-width: 1024px) 100vw, 0px"
-            className={`object-cover ${desktopImageClassName ?? "object-center"
-              } laptop:block hidden`}
-            priority
-          />
-        ) : (
-          <video
-            key={`desktop-${videoKey}`}
-            ref={videoRef}
-            src={videoSrc}
-            autoPlay
-            preload="none"
-            poster={posterSrc}
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover object-center laptop:block hidden"
-          />
-        )}
-
-        {/* ── Tablet Media ───────────────────────────────────────────── */}
-        {tabletMedia &&
-          (tabletMedia.type === "image" ? (
-            <Image
-              src={tabletMedia.src}
-              alt="Hero background"
-              fill
-              loading="eager"
-              // Fixed: split into two conditions — `and` is invalid in sizes
-              sizes="(min-width: 768px) and (max-width: 1024px) 100vw, 0px"
-              className={`object-cover ${tabletImageClassName ?? "object-center"
-                } smaller-tablet:max-tablet:block hidden`}
-              priority
-            />
-          ) : (
-            // Tablet video: same ref is safe here because only ONE breakpoint's
-            // video is visible at a time (CSS hides the others). The ref will
-            // point to whichever element is currently in the DOM after React's
-            // reconciliation, but since we use a shared key they all remount
-            // together. If you need independent refs per breakpoint, split into
-            // three separate ref + useEffect pairs.
+        {ready && (
+          <>
+            {/* Videos — blob URLs, never re-fetched */}
             <video
-              key={`tablet-${videoKey}`}
-              ref={media.type === "video" ? undefined : videoRef}
-              src={videoSrc}
-              autoPlay
-              preload="none"
-              poster={posterSrc}
+              ref={horizontalVideoRef}
+              src={horizontalVideoSrcValue}
+              preload="auto"
+              poster={videoPosterHorizontal}
               muted
               loop
               playsInline
-              className="absolute inset-0 w-full h-full object-cover object-center smaller-tablet:max-tablet:block hidden"
+              className="absolute inset-0 w-full h-full object-cover portrait:hidden"
             />
-          ))}
-
-        {/* ── Mobile Media ───────────────────────────────────────────── */}
-        {mobileMedia &&
-          (mobileMedia.type === "image" ? (
-            <Image
-              src={mobileMedia.src}
-              alt="Hero background"
-              fill
-              loading="eager"
-              sizes="(max-width: 767px) 100vw, 0px"
-              className={`object-cover ${mobileImageClassName ?? "object-center"
-                } max-mobile:block hidden`}
-              priority
-            />
-          ) : (
             <video
-              key={`mobile-${videoKey}`}
-              ref={
-                media.type === "video" || tabletMedia?.type === "video"
-                  ? undefined
-                  : videoRef
-              }
-              src={videoSrc}
-              autoPlay
-              preload="none"
-              poster={posterSrc}
+              ref={verticalVideoRef}
+              src={verticalVideoSrcValue}
+              preload="auto"
+              poster={videoPosterVertical}
               muted
               loop
               playsInline
-              className="absolute inset-0 w-full h-full object-cover object-center max-mobile:block hidden"
+              className="absolute inset-0 w-full h-full object-cover hidden portrait:block"
             />
-          ))}
 
-        {/* ── Single VideoControls, rendered once regardless of breakpoint ── */}
-        {anyVideoVisible && (
-          <VideoControls isPlaying={isPlaying} onToggle={togglePlayPause} />
+            {/* ✅ Native <img> with blob URLs — no Next.js Image pipeline,
+                no re-requests on re-render, CSS handles responsive visibility */}
+            {media.type === "image" && urls[media.src] && (
+              <img
+                src={urls[media.src]}
+                alt="Hero background"
+                className={`absolute inset-0 w-full h-full object-cover ${desktopImageClassName ?? "object-center"} laptop:block hidden`}
+              />
+            )}
+            {tabletMedia?.type === "image" && urls[tabletMedia.src] && (
+              <img
+                src={urls[tabletMedia.src]}
+                alt="Hero background"
+                className={`absolute inset-0 w-full h-full object-cover ${tabletImageClassName ?? "object-center"} smaller-tablet:max-tablet:block hidden`}
+              />
+            )}
+            {mobileMedia?.type === "image" && urls[mobileMedia.src] && (
+              <img
+                src={urls[mobileMedia.src]}
+                alt="Hero background"
+                className={`absolute inset-0 w-full h-full object-cover ${mobileImageClassName ?? "object-center"} max-mobile:block hidden`}
+              />
+            )}
+          </>
         )}
 
-        {children}
+        {mounted && (
+          <>
+            {showVideo && (
+              <VideoControls isPlaying={isPlaying} onToggle={togglePlayPause} />
+            )}
 
-        {firstParameter && secondParameter && (
-          <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-8">
-            <div className="mx-auto text-center space-y-3">
-              {/* First Parameter - Links or Text */}
-              <div className="text-white text-[1rem] leading-[1.2] max-mobile:text-sm">
-                {Array.isArray(firstParameter) ? (
-                  <div className="flex flex-wrap justify-center gap-4 leading-[1.2]">
-                    {firstParameter.map((link, index) => (
-                      <LinkItem
-                        key={index}
-                        url={link.url}
-                        title={link.title}
-                        style="uppercase relative inline-flex cursor-pointer leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
-                      />
-                    ))}
+            {children}
+
+            {firstParameter && secondParameter && (
+              <div className="absolute bottom-10 left-0 right-0 z-10 px-8 max-mobile:bottom-8">
+                <div className="mx-auto text-center space-y-3">
+                  <div className="text-white text-[1rem] leading-[1.2] max-mobile:text-sm">
+                    {Array.isArray(firstParameter) ? (
+                      <div className="flex flex-wrap justify-center gap-4 leading-[1.2]">
+                        {firstParameter.map((link, index) => (
+                          <LinkItem
+                            key={index}
+                            url={link.url}
+                            title={link.title}
+                            style="uppercase relative inline-flex cursor-pointer leading-[18px] text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-white">{firstParameter}</p>
+                    )}
                   </div>
-                ) : (
-                  <p className="text-white">{firstParameter}</p>
-                )}
+                  <div className="text-white text-[1rem] max-mobile:text-sm">
+                    <LinkItem
+                      url={secondParameter.url}
+                      title={secondParameter.title}
+                      style="capitalize relative inline-flex leading-[18px] cursor-pointer text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
+                    />
+                  </div>
+                </div>
               </div>
-
-              {/* Second Parameter - Link */}
-              <div className="text-white text-[1rem] max-mobile:text-sm">
-                <LinkItem
-                  url={secondParameter.url}
-                  title={secondParameter.title}
-                  style="capitalize relative inline-flex leading-[18px] cursor-pointer text-white after:absolute after:left-0 after:-bottom-px after:h-px after:w-full after:origin-left after:scale-x-100 after:bg-white/40"
-                />
-              </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </section>
     );
@@ -280,5 +268,4 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
 );
 
 HeroSection.displayName = "HeroSection";
-
 export default HeroSection;

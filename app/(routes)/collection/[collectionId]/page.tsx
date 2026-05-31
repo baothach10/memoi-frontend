@@ -505,7 +505,7 @@ function CollectionDetailPage() {
                         <Image
                           src={media.src}
                           fill
-                          loading="eager"
+                          loading="lazy"
                           sizes={sizes}
                           alt={`Collection image ${slice[0] + index}`}
                           className="object-cover object-center"
