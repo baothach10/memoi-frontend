@@ -7,7 +7,7 @@ import InstagramIcon from "@/components/ui/atoms/InstagramIcon";
 
 export default function ContactUsPage() {
     const mailTo = "mailto:memoi@memoiofficial.com";
-    const whatsapp = "https://wa.me/6591234567?text=Hi%20MEMO%C3%8D%20team,%20I%20have%20a%20question";
+    const whatsapp = "https://wa.me/6585939373?text=Hi%20MEMO%C3%8D%20team,%20I%20have%20a%20question";
 
     return (
         <div className="min-h-dvh h-full w-full relative" data-header-theme="light">

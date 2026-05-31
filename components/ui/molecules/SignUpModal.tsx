@@ -135,7 +135,7 @@ export default function SignUpModal() {
                 Get 10% off today!
               </h2>
               <p className="text-sm leading-relaxed text-black/80 w-full max-tablet:text-xs">
-                Join The MEMOÍ House and enjoy 10% off your first purchase!
+                Join The MEMOÍ House and enjoy 10% off your for first purchase!
               </p>
             </div>
 
