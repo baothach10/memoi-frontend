@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     } = await req.json();
 
     const { output: object } = await generateText({
-      model: googleAI("gemini-2.5-flash-lite"),
+      model: googleAI("gemini-2.5-flash"),
       output: Output.object({ schema: sizeSuggestionSchema }),
       prompt: `You are a professional fashion sizing assistant for MEMOÍ, a luxury clothing brand.
       Your task is to recommend the best clothing size for a customer based on their measurements, preferences, and product-specific notes.
