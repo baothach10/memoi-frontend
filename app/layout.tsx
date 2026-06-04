@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "MEMOÍ | Affordable Luxury for the Modern Woman",
@@ -32,6 +33,7 @@ export default function RootLayout({
             </ThreeModelProvider>
           </CurrencyProvider>
         </ReactQueryProvider>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </body>
     </html>
   );
