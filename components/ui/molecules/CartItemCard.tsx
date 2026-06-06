@@ -15,16 +15,15 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
     const { currency } = useCurrency();
     return (
         <div className="bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]">
-            <div className="flex gap-8  max-mobile:gap-4">
+            <div className="flex gap-8 max-mobile:gap-4">
                 {/* Product Image */}
-                <div className="w-[25%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
+                <div className="relative w-[25%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
                     <Image
                         src={item.productImage}
                         alt={item.productName}
-                        width={100}
-                        height={140}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, (min-width: 768px) and (max-width: 1023px) 50vw, (max-width: 767px) 50vw"
                         className="object-cover w-full h-full"
-
                     />
                 </div>
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef, forwardRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { VideoControls } from "@/components/ui/atoms/VideoControl";
 import { LinkItem } from "@/components/ui/atoms/LinkItem";
 import useViewportInfo from "@/hooks/useViewportInfo";
-import { useAssetPrefetch } from "@/hooks/useAssetPrefetch";
 
 type LinkObject = {
   url: string;
@@ -65,26 +65,30 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
     const verticalVideoRef = useRef<HTMLVideoElement>(null);
     const savedPositionRef = useRef<number>(0);
 
-    // Collect ALL asset srcs upfront — videos + images
+    // Collect asset srcs for the current active video and images
     const horizontalSrc = videoHorizontalSrc ?? media.src;
     const verticalSrc = videoVerticalSrc ?? media.src;
 
-    const allSrcs = [
-      ...new Set([
-        horizontalSrc,
-        verticalSrc,
-        // Only include image srcs
-        media.type === "image" ? media.src : null,
-        tabletMedia?.type === "image" ? tabletMedia.src : null,
-        mobileMedia?.type === "image" ? mobileMedia.src : null,
-      ].filter(Boolean) as string[]),
-    ];
+    const activeVideoSrc = isPortrait ? verticalSrc : horizontalSrc;
+    const activePoster = isPortrait ? videoPosterVertical : videoPosterHorizontal;
+    const activeVideoSrcValue = activeVideoSrc;
 
-    // ✅ Single prefetch for ALL assets — videos and images alike
-    const { urls, ready } = useAssetPrefetch(allSrcs);
+    const desktopImageSrc = media.type === "image" ? media.src : undefined;
+    const tabletImageSrc = tabletMedia?.type === "image" ? tabletMedia.src : desktopImageSrc;
+    const mobileImageSrc = mobileMedia?.type === "image" ? mobileMedia.src : tabletImageSrc;
+    const activeImageSrc =
+      breakpoint === "mobile"
+        ? mobileImageSrc
+        : breakpoint === "tablet"
+          ? tabletImageSrc
+          : desktopImageSrc;
 
-    const horizontalVideoSrcValue = urls[horizontalSrc] ?? "";
-    const verticalVideoSrcValue = urls[verticalSrc] ?? "";
+    const activeImageClassName =
+      breakpoint === "mobile"
+        ? mobileImageClassName ?? "object-center"
+        : breakpoint === "tablet"
+          ? tabletImageClassName ?? "object-center"
+          : desktopImageClassName ?? "object-center";
 
     const activeMediaType = (() => {
       if (breakpoint === "mobile") return (mobileMedia ?? tabletMedia ?? media).type;
@@ -102,18 +106,15 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
     }, [isPortrait]);
 
     useEffect(() => {
-      if (!mounted || !ready) return;
+      if (!mounted) return;
 
-      const horizontalVideo = horizontalVideoRef.current;
-      const verticalVideo = verticalVideoRef.current;
-      if (!horizontalVideo || !verticalVideo) return;
-
-      const activeVideo = isPortrait ? verticalVideo : horizontalVideo;
-      const inactiveVideo = isPortrait ? horizontalVideo : verticalVideo;
+      const activeVideo = isPortrait ? verticalVideoRef.current : horizontalVideoRef.current;
+      const inactiveVideo = isPortrait ? horizontalVideoRef.current : verticalVideoRef.current;
+      if (!activeVideo) return;
 
       if (!showVideo) {
-        horizontalVideo.pause();
-        verticalVideo.pause();
+        activeVideo.pause();
+        inactiveVideo?.pause();
         return;
       }
 
@@ -134,7 +135,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
       };
 
       restorePosition(activeVideo);
-      inactiveVideo.pause();
+      inactiveVideo?.pause();
 
       if (isPlaying) {
         if (activeVideo.readyState >= 2) {
@@ -150,7 +151,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
       } else {
         activeVideo.pause();
       }
-    }, [mounted, ready, isPortrait, isPlaying, showVideo]);
+    }, [mounted, isPortrait, isPlaying, showVideo]);
 
     useEffect(() => {
       const portraitMql = window.matchMedia("(orientation: portrait)");
@@ -172,55 +173,28 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
 
     return (
       <section ref={ref} className="h-svh w-full relative overflow-hidden">
+        {/* Videos — render only the active orientation video to avoid duplicate hidden loads */}
+        {showVideo && (
+          <video
+            ref={isPortrait ? verticalVideoRef : horizontalVideoRef}
+            src={activeVideoSrcValue}
+            poster={activePoster}
 
-        {ready && (
-          <>
-            {/* Videos — blob URLs, never re-fetched */}
-            <video
-              ref={horizontalVideoRef}
-              src={horizontalVideoSrcValue}
-              preload="auto"
-              poster={videoPosterHorizontal}
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover portrait:hidden"
-            />
-            <video
-              ref={verticalVideoRef}
-              src={verticalVideoSrcValue}
-              preload="auto"
-              poster={videoPosterVertical}
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover hidden portrait:block"
-            />
+            muted
+            loop
+            playsInline
+            autoPlay
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
 
-            {/* ✅ Native <img> with blob URLs — no Next.js Image pipeline,
-                no re-requests on re-render, CSS handles responsive visibility */}
-            {media.type === "image" && urls[media.src] && (
-              <img
-                src={urls[media.src]}
-                alt="Hero background"
-                className={`absolute inset-0 w-full h-full object-cover ${desktopImageClassName ?? "object-center"} laptop:block hidden`}
-              />
-            )}
-            {tabletMedia?.type === "image" && urls[tabletMedia.src] && (
-              <img
-                src={urls[tabletMedia.src]}
-                alt="Hero background"
-                className={`absolute inset-0 w-full h-full object-cover ${tabletImageClassName ?? "object-center"} smaller-tablet:max-tablet:block hidden`}
-              />
-            )}
-            {mobileMedia?.type === "image" && urls[mobileMedia.src] && (
-              <img
-                src={urls[mobileMedia.src]}
-                alt="Hero background"
-                className={`absolute inset-0 w-full h-full object-cover ${mobileImageClassName ?? "object-center"} max-mobile:block hidden`}
-              />
-            )}
-          </>
+        {activeImageSrc && !showVideo && (
+          <Image
+            src={activeImageSrc}
+            fill
+            alt="Hero background"
+            className={`absolute inset-0 w-full h-full object-cover ${activeImageClassName}`}
+          />
         )}
 
         {mounted && (

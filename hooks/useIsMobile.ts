@@ -2,35 +2,21 @@
 
 import { useLayoutEffect, useState } from "react";
 
-// export default function useIsMobile(breakpoint = 1024) {
-//   const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
-//   useLayoutEffect(() => {
-//     const check = () => {
-//       setIsMobile(window.innerWidth < breakpoint);
-//     };
-
-//     check(); // ✅ Run once on mount
-//     window.addEventListener("resize", check, { passive: true });
-
-//     return () => window.removeEventListener("resize", check);
-//   }, [breakpoint]);
-
-//   return isMobile;
-// }
-
 export default function useIsMobile(breakpoint = 1024) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useLayoutEffect(() => {
-    const media = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const check = () => {
+      const media = window.matchMedia(`(max-width: ${breakpoint}px)`);
+      const isTouchDevice =
+        navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+      setIsMobile(media.matches && isTouchDevice);
+    };
 
-    const update = () => setIsMobile(media.matches);
+    check(); // ✅ Run once on mount
+    window.addEventListener("resize", check, { passive: true });
 
-    update(); // ✅ set before paint
-    media.addEventListener("change", update);
-
-    return () => media.removeEventListener("change", update);
+    return () => window.removeEventListener("resize", check);
   }, [breakpoint]);
 
   return isMobile;
