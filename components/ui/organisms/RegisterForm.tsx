@@ -3,12 +3,12 @@
 import { useForm } from "react-hook-form";
 import Field from "../molecules/Field";
 import Link from "next/link";
-import { getCountries, getCountryCallingCode } from "libphonenumber-js";
+import { getCountries, getCountryCallingCode, type CountryCode } from "libphonenumber-js";
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 import { useCreateUser } from "@/queries/useCreateUser";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 import ChevronDownIcon from "../atoms/ChevronDownIcon";
 import { toast } from "react-toastify";
@@ -34,6 +34,8 @@ function inputClass() {
 }
 
 export default function RegisterForm() {
+  const phoneZoneSelectRef = useRef<HTMLSelectElement | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -45,6 +47,15 @@ export default function RegisterForm() {
       phoneZone: "+1",
     },
   });
+  const {
+    ref: countryRef,
+    ...countryRegisterProps
+  } = register("country", {
+    required: true,
+  });
+  const { ref: phoneZoneRef, ...phoneZoneRegisterProps } = register("phoneZone", {
+    required: true,
+  });
   const { mutate, isPending, error } = useCreateUser();
   const router = useRouter();
 
@@ -54,7 +65,7 @@ export default function RegisterForm() {
       const supabase = createBrowserSupabaseClient();
       const {
         data: { user },
-      } = await supabase.auth.getUser(); 
+      } = await supabase.auth.getUser();
       if (user?.email) {
         setValue("email", user.email);
       }
@@ -202,11 +213,45 @@ export default function RegisterForm() {
               <div className="relative flex">
                 <select
                   className={`pb-0.5 appearance-none w-full ${inputClass()}`}
-                  {...register("country", { required: true })}
+                  {...countryRegisterProps}
+                  ref={(el) => {
+                    if (typeof countryRef === "function") {
+                      countryRef(el);
+                    }
+                  }}
+                  onChange={(e) => {
+                    countryRegisterProps.onChange(e);
+
+                    const selectedCountry =
+                      e.target.value as CountryCode;
+
+                    if (!selectedCountry) return;
+
+
+                    const phoneCode =
+                      `+${getCountryCallingCode(selectedCountry)}`;
+
+
+                    setValue("phoneZone", phoneCode, {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    });
+
+
+                    requestAnimationFrame(() => {
+                      phoneZoneSelectRef.current?.focus();
+                    });
+                  }}
                 >
-                  <option value="">Choose your country</option>
+                  <option value="">
+                    Choose your country
+                  </option>
+
                   {COUNTRIES.map((z) => (
-                    <option key={z.iso + z.label} value={z.iso}>
+                    <option
+                      key={z.iso + z.label}
+                      value={z.iso}
+                    >
                       {z.label}
                     </option>
                   ))}
@@ -223,12 +268,25 @@ export default function RegisterForm() {
                 {/* Zone selector */}
                 <div className="relative flex flex-1 max-mobile:flex-2">
                   <select
-                    className={` appearance-none ${inputClass()}`}
-                    {...register("phoneZone", { required: true })}
+                    ref={(el) => {
+                      phoneZoneSelectRef.current = el;
+
+                      if (typeof phoneZoneRef === "function") {
+                        phoneZoneRef(el);
+                      }
+                    }}
+                    className={`appearance-none ${inputClass()}`}
+                    {...phoneZoneRegisterProps}
                   >
-                    <option value="">+Code</option>
+                    <option value="">
+                      +Code
+                    </option>
+
                     {PHONE_ZONES.map((z) => (
-                      <option key={z.code + z.label} value={z.code}>
+                      <option
+                        key={z.code + z.label}
+                        value={z.code}
+                      >
                         {z.code}
                       </option>
                     ))}
