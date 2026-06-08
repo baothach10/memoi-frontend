@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import InstagramIcon from '../../atoms/InstagramIcon'
-import { useAssetPrefetch } from '@/hooks/useAssetPrefetch'
 
 type Props = {
     src: string
@@ -16,9 +15,6 @@ export default function GridHyperImageItem({
     alt = 'Instagram image',
     className = '',
 }: Props) {
-    const { urls, ready } = useAssetPrefetch([src])
-    const blobSrc = urls[src] ?? ''
-
     return (
         <Link
             href={href}
@@ -35,16 +31,14 @@ export default function GridHyperImageItem({
           - ≥1440px (desktop): 3/4  → 2xl:aspect-[3/4]
           Adjust breakpoint tokens to match your tailwind.config exactly.    */}
             <div className="relative w-full group aspect-5/7 smaller-tablet:aspect-5/6 min-[1000px]:aspect-5/7 min-[1440px]:aspect-3/4">
-                {ready && (
-                    <Image
-                        src={blobSrc}
-                        alt={alt}
-                        fill
-                        unoptimized
-                        sizes="(min-width: 1440px) 25vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                        className="object-cover"
-                    />
-                )}
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    unoptimized
+                    sizes="(min-width: 1440px) 25vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                    className="object-cover"
+                />
 
                 {/* Hover overlay — CSS-only, no isMobile hook needed.
             laptop: prefix shows it only on non-touch/desktop viewports. */}

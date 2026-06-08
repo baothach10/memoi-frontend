@@ -313,18 +313,9 @@ function CollectionDetailPage() {
   // Example content
   const exampleWithLinks = {
     media: [
-      {
-        type: "video" as const,
-        src: "/videos/collection-the-becoming-video-horizontal.mp4",
-      },
-      {
-        type: "video" as const,
-        src: "/videos/collection-the-becoming-video-vertical.mp4",
-      },
-      {
-        type: "video" as const,
-        src: "/videos/collection-the-becoming-video-vertical.mp4",
-      },
+      { type: "image" as const, src: "/images/desktop-first-collection.webp" },
+      { type: "image" as const, src: "/images/tablet-first-collection.webp" },
+      { type: "image" as const, src: "/images/mobile-first-collection.webp" },
       {
         type: "image" as const,
         src: "/images/desktop-collection-becoming-campaign-1.webp",
@@ -433,10 +424,6 @@ function CollectionDetailPage() {
             <HeroSection
               ref={heroSection1Ref}
               media={exampleWithLinks.media[0]}
-              videoPosterHorizontal="/images/collection-the-becoming-video-frame-horizontal.jpg"
-              videoPosterVertical="/images/collection-the-becoming-video-frame-vertical.jpg"
-              videoHorizontalSrc="/videos/collection-the-becoming-video-horizontal.mp4"
-              videoVerticalSrc="/videos/collection-the-becoming-video-vertical.mp4"
               tabletMedia={exampleWithLinks.media[1]}
               mobileMedia={exampleWithLinks.media[2]}
             >
@@ -461,13 +448,6 @@ function CollectionDetailPage() {
                   SS26 THE BECOMING
                 </div>
                 <div className="text-[14px] leading-normal tracking-0 smaller-tablet:max-tablet:p-2.5 max-mobile:text-xs">
-                  {/* <div>“THE BECOMING” is a woman’s journey of finding herself.</div>
-                  <div>
-                    The collection is the perspective reflected through the
-                    mirror in which she sees her own image. This becoming is not
-                    about turning into someone else, but about discovering who
-                    she truly is.
-                  </div> */}
 
                   <div>“The Becoming” is not simply a collection, but a reflection of a journey, where identity unfolds quietly through uncertainty, growth, and the courage to begin before feeling fully ready. This first collection of MEMOÍ was never about perfection, but about becoming slowly, intentionally, and truthfully, shaped by discipline, persistence, and the unseen moments in between.</div>
                 </div>
