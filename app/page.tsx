@@ -12,7 +12,6 @@ export default function HomePage() {
   const heroSection1Ref = useRef<HTMLDivElement>(null);
   const heroSection2Ref = useRef<HTMLDivElement>(null);
   const heroSection3Ref = useRef<HTMLDivElement>(null);
-  const heroSection4Ref = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -34,7 +33,6 @@ export default function HomePage() {
       heroSection1Ref.current,
       heroSection2Ref.current,
       heroSection3Ref.current,
-      heroSection4Ref.current,
       gridSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
   }, []);
@@ -367,13 +365,9 @@ export default function HomePage() {
           >
             <HeroSection
               ref={heroSection1Ref}
-              media={exampleWithLinks.media[0]}
-              tabletMedia={exampleWithLinks.media[1]}
-              mobileMedia={exampleWithLinks.media[2]}
-              videoPosterHorizontal="/images/homepage-video-frame-horizontal.jpg"
-              videoPosterVertical="/images/homepage-video-frame-vertical.jpg"
-              videoHorizontalSrc="/videos/homepage-video-horizontal.mp4"
-              videoVerticalSrc="/videos/homepage-video-vertical.mp4"
+              media={exampleWithLinks.media[9]}
+              tabletMedia={exampleWithLinks.media[10]}
+              mobileMedia={exampleWithLinks.media[11]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
             />
@@ -406,20 +400,6 @@ export default function HomePage() {
               mobileMedia={exampleWithLinks.media[8]}
               firstParameter={exampleWithLinks.firstParameter[2]}
               secondParameter={exampleWithLinks.secondParameter[2]}
-            />
-          </div>
-          <div
-            ref={heroSection4Ref}
-            className="h-svh relative"
-            data-header-theme="dark"
-          >
-            <HeroSection
-              ref={heroSection4Ref}
-              media={exampleWithLinks.media[9]}
-              tabletMedia={exampleWithLinks.media[10]}
-              mobileMedia={exampleWithLinks.media[11]}
-              firstParameter={exampleWithLinks.firstParameter[3]}
-              secondParameter={exampleWithLinks.secondParameter[3]}
             />
           </div>
 
