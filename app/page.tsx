@@ -273,8 +273,6 @@ export default function HomePage() {
 
     const sections = [
       heroSection1Ref.current,
-      heroSection2Ref.current,
-      heroSection3Ref.current,
       gridSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
 
@@ -370,36 +368,6 @@ export default function HomePage() {
               mobileMedia={exampleWithLinks.media[11]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
-            />
-          </div>
-
-          <div
-            ref={heroSection2Ref}
-            className="h-svh relative"
-            data-header-theme="dark"
-          >
-            <HeroSection
-              ref={heroSection2Ref}
-              media={exampleWithLinks.media[3]}
-              tabletMedia={exampleWithLinks.media[4]}
-              mobileMedia={exampleWithLinks.media[5]}
-              firstParameter={exampleWithLinks.firstParameter[1]}
-              secondParameter={exampleWithLinks.secondParameter[1]}
-            />
-          </div>
-
-          <div
-            ref={heroSection3Ref}
-            className="h-svh relative"
-            data-header-theme="dark"
-          >
-            <HeroSection
-              ref={heroSection3Ref}
-              media={exampleWithLinks.media[6]}
-              tabletMedia={exampleWithLinks.media[7]}
-              mobileMedia={exampleWithLinks.media[8]}
-              firstParameter={exampleWithLinks.firstParameter[2]}
-              secondParameter={exampleWithLinks.secondParameter[2]}
             />
           </div>
 

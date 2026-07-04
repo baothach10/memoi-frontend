@@ -10,6 +10,7 @@ import SizingOverlay from "../../organisms/SizingOverlay";
 import SizeSuggestionOverlay from "../../organisms/SizeSuggestionOverlay";
 import { addItemToCart } from "@/utils/cartUtils";
 import { useUpdateCart } from "@/queries/useUpdateCart";
+import { useRouter } from "next/navigation";
 
 interface ProductInfoProps {
   product: ProductDetailsResponse;
@@ -25,12 +26,17 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
   //   [product.variants]
   // );
   const [showSizeOverlay, setShowSizeOverlay] = useState(false);
+  const [showSizeBuyNowOverlay, setShowSizeBuyNowOverlay] = useState(false);
   const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
   const [showShippingOverlay, setShowShippingOverlay] = useState(false);
   const [showSizingOverlay, setShowSizingOverlay] = useState(false);
   const [showSizeSuggestion, setShowSizeSuggestion] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  const overlayBuyNowRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
 
   /* ---------------------------------------------
    * SIZES (stock-aware, per color)
@@ -61,11 +67,38 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
     });
   }, [showSizeOverlay]);
 
+  useEffect(() => {
+    if (!overlayBuyNowRef.current) return;
+
+    gsap.to(overlayBuyNowRef.current, {
+      autoAlpha: showSizeBuyNowOverlay ? 1 : 0,
+      scale: showSizeBuyNowOverlay ? 1 : 0.96,
+      duration: 0.25,
+      ease: "power2.out",
+      pointerEvents: showSizeBuyNowOverlay ? "auto" : "none",
+    });
+  }, [showSizeBuyNowOverlay]);
+
   /* ---------------------------------------------
    * ACTIONS
    --------------------------------------------- */
+  const closeAllOverlays = () => {
+    setShowSizeOverlay(false);
+    setShowSizeBuyNowOverlay(false);
+    setShowDetailsOverlay(false);
+    setShowShippingOverlay(false);
+    setShowSizingOverlay(false);
+    setShowSizeSuggestion(false);
+  };
+
   const handleAddToCartClick = () => {
+    closeAllOverlays();
     setShowSizeOverlay(true);
+  };
+
+  const handleBuyNowClick = () => {
+    closeAllOverlays();
+    setShowSizeBuyNowOverlay(true);
   };
 
   const updateCartMutation = useUpdateCart();
@@ -89,7 +122,13 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
     });
 
     await updateCartMutation.mutateAsync({ products: updatedItems });
-    setShowSizeOverlay(false);
+    closeAllOverlays();
+  };
+
+  const handleBuyNowSizeSelect = async (size: string, price: number) => {
+    await handleSizeSelect(size, price);
+    // Redirect to checkout page after adding to cart
+    router.push("/checkout");
   };
 
   /* ---------------------------------------------
@@ -98,9 +137,9 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
   return (
     <div className={isMobileLayout ? "flex items-center justify-center py-8" : "sticky top-0 h-dvh flex items-center justify-center"}>
       {/* BACKDROP */}
-      {showSizeOverlay && (
+      {(showSizeOverlay || showSizeBuyNowOverlay) && (
         <div
-          onClick={() => setShowSizeOverlay(false)}
+          onClick={closeAllOverlays}
           className="fixed inset-0 z-5 bg-transparent"
         />
       )}
@@ -151,18 +190,17 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </div>
 
         {/* ADD TO CART + SIZE OVERLAY */}
-        <div className="relative w-full mb-6 flex flex-col items-center max-mobile:mb-6">
+        <div className="relative w-1/2 mb-6 flex flex-col items-center max-tablet:w-2/3 max-mobile:w-full max-mobile:mb-6">
           {/* SIZE OVERLAY */}
           <div
             ref={overlayRef}
             className="
-              absolute mx-auto z-10
+              absolute left-0 z-10
               w-1/2
               bg-[#FFFEFA] border border-neutral-300 shadow-lg
               flex flex-col items-center justify-center
               gap-4 py-8 text-sm
               opacity-0 pointer-events-none
-              max-mobile:w-full
               max-mobile:text-xs
               max-mobile:gap-5
             "
@@ -188,25 +226,72 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               );
             })}
 
-            <button onClick={() => { setShowSizeOverlay(false); setShowSizeSuggestion(true); }} className="underline cursor-pointer decoration-black/40 underline-offset-4">
+            <button onClick={() => { closeAllOverlays(); setShowSizeSuggestion(true); }} className="underline cursor-pointer decoration-black/40 underline-offset-4">
               Size Suggestion
             </button>
           </div>
 
-          {/* ADD TO CART BUTTON */}
-          <button
-            onClick={handleAddToCartClick}
-            className="w-1/2 bg-black text-white py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
+          <div
+            ref={overlayBuyNowRef}
+            className="
+              absolute right-0 z-10
+              w-1/2
+              bg-[#FFFEFA] border border-neutral-300 shadow-lg
+              flex flex-col items-center justify-center
+              gap-4 py-8 text-sm
+              opacity-0 pointer-events-none
+              max-mobile:text-xs
+              max-mobile:gap-5
+            "
           >
-            Add to cart
-          </button>
+            {sizes.map(({ size, stock, price }) => {
+              const disabled = stock === 0;
+
+              return (
+                <button
+                  key={size}
+                  disabled={disabled}
+                  onClick={() => !disabled && handleBuyNowSizeSelect(size, price)}
+                  className={`x
+                    transition
+                    ${disabled
+                      ? "opacity-40 line-through cursor-not-allowed"
+                      : "hover:underline decoration-black/40 underline-offset-4 cursor-pointer"
+                    }
+                  `}
+                >
+                  {size}
+                </button>
+              );
+            })}
+
+            <button onClick={() => { closeAllOverlays(); setShowSizeSuggestion(true); }} className="underline cursor-pointer decoration-black/40 underline-offset-4">
+              Size Suggestion
+            </button>
+          </div>
+
+          {/* ADD TO CART + BUY NOW BUTTONS */}
+          <div className="flex w-full gap-4 max-mobile:gap-3">
+            <button
+              onClick={handleAddToCartClick}
+              className="w-1/2 bg-[#FFFEFA] border border-neutral-300 text-black hover:bg-black hover:border-black hover:text-white transition py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
+            >
+              Add to cart
+            </button>
+            <button
+              onClick={handleBuyNowClick}
+              className="w-1/2 bg-black text-white py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
+            >
+              Buy now
+            </button>
+          </div>
         </div>
 
         {/* FOOTER LINKS */}
         <div className="flex gap-6 text-sm underline underline-offset-4 decoration-black/40 mt-4 max-mobile:text-xs max-mobile:mt-0">
-          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowDetailsOverlay(true)}>Details</button>
-          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowSizingOverlay(true)}>Sizing</button>
-          <button className="cursor-pointer whitespace-nowrap" onClick={() => setShowShippingOverlay(true)}>Shipping & Exchanges</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => { closeAllOverlays(); setShowDetailsOverlay(true); }}>Details</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => { closeAllOverlays(); setShowSizingOverlay(true); }}>Sizing</button>
+          <button className="cursor-pointer whitespace-nowrap" onClick={() => { closeAllOverlays(); setShowShippingOverlay(true); }}>Shipping & Exchanges</button>
         </div>
 
         <DetailsOverlay
