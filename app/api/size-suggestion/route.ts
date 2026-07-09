@@ -7,7 +7,7 @@ export const runtime = "edge";
 // Instantiate the provider with the API key using createGoogleGenerativeAI
 // (preferred over the default singleton `google` when passing custom config)
 const googleAI = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API || process.env.NEXT_PUBLIC_GEMINI_API,
+  apiKey: process.env.NEXT_PUBLIC_GEMINI_API || "",
 });
 
 const sizeSuggestionSchema = jsonSchema<{
@@ -42,6 +42,13 @@ export async function POST(req: Request) {
     const { output: object } = await generateText({
       model: googleAI("gemini-2.5-flash"),
       output: Output.object({ schema: sizeSuggestionSchema }),
+      providerOptions: {
+        google: {
+          thinkingConfig: {
+            thinkingBudget: 0,
+          },
+        },
+      },
       prompt: `You are a professional fashion sizing assistant for MEMOÍ, a luxury clothing brand.
       Your task is to recommend the best clothing size for a customer based on their measurements, preferences, and product-specific notes.
 

@@ -160,7 +160,7 @@ export const SummaryActions = ({
             disabled={isProcessing}
             className="w-full bg-black text-white py-4 text-sm leading-none cursor-pointer hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed max-mobile:py-3.5 max-mobile:text-xs"
         >
-            {isProcessing ? "Processing..." : "Pre-order"}
+            {isProcessing ? "Processing..." : "Place an order"}
         </button>
 
         <p className="text-sm text-black max-mobile:text-xs">

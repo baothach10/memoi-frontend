@@ -144,7 +144,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         />
       )}
 
-      <div className="px-16 flex flex-col items-center justify-center w-full">
+      <div className="px-12 flex flex-col items-center justify-center w-full">
         {/* CATEGORY */}
         <p className="text-xs font-regular text-black/40 mb-2">
           {product.category.name.toUpperCase()}
@@ -271,7 +271,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           </div>
 
           {/* ADD TO CART + BUY NOW BUTTONS */}
-          <div className="flex w-full gap-4 max-mobile:gap-3">
+          <div className="flex w-full gap-2.5">
             <button
               onClick={handleAddToCartClick}
               className="w-1/2 bg-[#FFFEFA] border border-neutral-300 text-black hover:bg-black hover:border-black hover:text-white transition py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"

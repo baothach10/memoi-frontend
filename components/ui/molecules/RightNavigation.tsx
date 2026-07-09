@@ -114,7 +114,7 @@ function RightNavigation({
           <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (
             <span
-              className="h-4 flex items-center text-[14px] font-medium"
+              className="h-4 flex items-center text-[15px] font-medium"
               style={{ color }}
             >
               ({cartCount})
@@ -132,7 +132,7 @@ function RightNavigation({
           <CartIcon width={MOBILE_LOGO_SIZE} height={MOBILE_LOGO_SIZE} color={color} />
           {cartCount > 0 && (
             <span
-              className="h-4 flex items-center text-[14px] font-medium"
+              className="h-4 flex items-center max-mobile:text-[15px] font-medium"
               style={{ color }}
             >
               ({cartCount})

@@ -10,8 +10,7 @@ export default function HomePage() {
   const smoothContentRef = useRef<HTMLDivElement>(null);
 
   const heroSection1Ref = useRef<HTMLDivElement>(null);
-  const heroSection2Ref = useRef<HTMLDivElement>(null);
-  const heroSection3Ref = useRef<HTMLDivElement>(null);
+  const shopAllSectionRef = useRef<HTMLElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   const currentIndexRef = useRef(0);
@@ -31,8 +30,7 @@ export default function HomePage() {
   const getSections = useCallback(() => {
     return [
       heroSection1Ref.current,
-      heroSection2Ref.current,
-      heroSection3Ref.current,
+      shopAllSectionRef.current,
       gridSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
   }, []);
@@ -273,6 +271,7 @@ export default function HomePage() {
 
     const sections = [
       heroSection1Ref.current,
+      shopAllSectionRef.current,
       gridSectionRef.current,
     ].filter(Boolean) as HTMLElement[];
 
