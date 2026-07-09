@@ -67,10 +67,10 @@ export default function ShopInteractiveItem({
               loading="lazy"
               sizes={sizes}
               className={`object-cover transition-opacity duration-300 ${loadedMap[gridIndex]
-                  ? isHovered
-                    ? "opacity-0"
-                    : "opacity-100"
-                  : "opacity-0"
+                ? isHovered
+                  ? "opacity-0"
+                  : "opacity-100"
+                : "opacity-0"
                 }`}
               onLoad={() => handleLoaded(gridIndex)}
             />
