@@ -71,7 +71,7 @@ export default function CartPage() {
     };
 
     const subtotal = itemsToDisplay.reduce(
-        (sum, item) => sum + item.price * item.quantity,
+        (sum, item) => sum + (item.sale_price ? item.sale_price : item.price) * item.quantity,
         0
     );
 

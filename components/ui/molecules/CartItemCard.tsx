@@ -47,9 +47,16 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
                     </div>
 
                     <div className="flex items-center justify-between max-mobile:hidden">
-                        <p className="text-base font-regular max-mobile:text-xs ">
-                            {currency} {item.price}
-                        </p>
+                        <div className="flex items-center justify-center text-center gap-2.5 max-mobile:gap-3 max-tablet:gap-4">
+                            <p className={`text-base font-regular ${item.sale_price ? 'line-through text-black/40' : ''} max-mobile:text-xs `}>
+                                {currency} {item.price}
+                            </p>
+                            {item.sale_price && (
+                                <p className="text-base font-regular max-mobile:text-xs ">
+                                    {currency} {item.sale_price}
+                                </p>
+                            )}
+                        </div>
 
                         <div className="flex items-center gap-3">
                             <QuantitySelector

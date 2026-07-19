@@ -31,6 +31,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
           productImage: item.image_url,
           color_name: item.color_name,
           price: item.unit_price,
+          sale_price: item.sale_price,
           stock: item.stock,
         }));
         setLocalItems(mappedItems);
@@ -73,7 +74,7 @@ export default function CartOverlay({ isOpen, onClose }: CartOverlayProps) {
   };
 
   const subtotal = itemsToDisplay.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + (item.sale_price ? item.sale_price : item.price) * item.quantity,
     0
   );
 

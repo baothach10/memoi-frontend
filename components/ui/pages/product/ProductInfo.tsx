@@ -47,10 +47,13 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         size: v.size,
         stock: v.stock,
         price: v.price,
+        sale_price: v.sale_price || null,
       }));
   }, [product.variants]);
 
   const displayPrice = product.variants[0].price;
+
+  const displaySalePrice = product.variants[0].sale_price || null;
 
   /* ---------------------------------------------
    * GSAP overlay animation
@@ -156,7 +159,16 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
         </h1>
 
         {/* PRICE */}
-        <p className="text-[16px] mb-8 text-center font-regular max-mobile:text-sm max-mobile:mb-6">{product.currency} {displayPrice.toFixed(2)}</p>
+        <div className="flex items-center justify-center text-center gap-2.5 max-mobile:gap-3 max-tablet:gap-4">
+          <p className={`text-[16px] mb-8 text-center font-regular ${displaySalePrice ? 'line-through text-black/40' : ''} max-mobile:text-sm max-mobile:mb-6`}>
+            {product.currency} {displayPrice.toFixed(2)}
+          </p>
+          {displaySalePrice && (
+            <p className="text-[16px] mb-8 text-center font-regular max-mobile:text-sm max-mobile:mb-6">
+              {product.currency} {displaySalePrice.toFixed(2)}
+            </p>
+          )}
+        </div>
 
         {/* COLOR SELECTOR */}
         <div className="mb-10 flex flex-col items-center justify-center text-center max-mobile:mb-6">
@@ -205,14 +217,14 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               max-mobile:gap-5
             "
           >
-            {sizes.map(({ size, stock, price }) => {
+            {sizes.map(({ size, stock, price, sale_price }) => {
               const disabled = stock === 0;
 
               return (
                 <button
                   key={size}
                   disabled={disabled}
-                  onClick={() => !disabled && handleSizeSelect(size, price)}
+                  onClick={() => !disabled && handleSizeSelect(size, sale_price ? sale_price : price)}
                   className={`x
                     transition
                     ${disabled
@@ -317,7 +329,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           onAddSize={(size) => {
             const variant = product.variants.find((v) => v.size.toLowerCase() === size.toLowerCase());
             if (variant) {
-              handleSizeSelect(variant.size, variant.price);
+              handleSizeSelect(variant.size, variant.sale_price ? variant.sale_price : variant.price);
             }
             setShowSizeSuggestion(false);
           }}

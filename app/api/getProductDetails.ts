@@ -7,6 +7,7 @@ export type ProductVariant = {
   id: string;
   size: string;
   price: number;
+  sale_price?: number;
   stock: number;
   currency: string;
 };

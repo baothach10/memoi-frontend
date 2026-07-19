@@ -10,6 +10,7 @@ export interface BackendCartItem {
   product_name: string;
   product_sku: string;
   unit_price: number;
+  sale_price?: number;
   total_price: number;
   currency: string;
   stock: number;
@@ -76,6 +77,7 @@ export function useCartQuery() {
           quantity: item.quantity,
           productName: item.product_name,
           productImage: item.image_url,
+          sale_price: item.sale_price,
           stock: item.stock,
           color_name: item.color_name,
           price: item.unit_price,
@@ -88,7 +90,7 @@ export function useCartQuery() {
     };
 
     syncBackendToLocal();
-  }, [query.data, query.isSuccess, query.isFetched, supabase.auth, updateCurrency]);
+  }, [query.data, query.isSuccess, query.isFetched, supabase.auth, updateCurrency, currency]);
 
   return query;
 }

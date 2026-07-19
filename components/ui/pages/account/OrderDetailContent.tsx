@@ -80,7 +80,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
           <BillingPaymentInfo
             customer={order.customer}
             address={order.shipTo}
-            subtotal={order.items.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+            subtotal={order.items.reduce((sum, i) => sum + (i.sale_price ? i.sale_price : i.price) * i.quantity, 0)}
             tierDiscount={order.tier_discount_amount}
             welcomeDiscount={order.welcome_discount_amount}
             promoDiscount={order.promo_discount_amount}
