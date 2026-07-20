@@ -120,6 +120,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
       stock: variant.stock,
       color_name: product.color_name,
       quantity: 1,
+      sale_price: variant.sale_price ? variant.sale_price : undefined,
       size,
       price,
     });

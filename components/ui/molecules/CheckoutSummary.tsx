@@ -30,6 +30,7 @@ export const SummaryItems = ({
                         color_name: item.color_name,
                         size: item.size,
                         price: item.price,
+                        sale_price: item.sale_price,
                         quantity: item.quantity,
                         image: item.productImage,
                     }
