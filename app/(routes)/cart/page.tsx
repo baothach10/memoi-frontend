@@ -127,7 +127,7 @@ export default function CartPage() {
                             <div className="flex flex-col gap-5 text-[16px] max-mobile:text-sm max-mobile:gap-3">
                                 <div className="flex justify-between items-center font-regular">
                                     <span >Subtotal</span>
-                                    <span>{currency} {subtotal}</span>
+                                    <span>{currency} {subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between items-center font-regular">
                                     <span >Shipping</span>
@@ -138,7 +138,7 @@ export default function CartPage() {
                                         <span className="font-regular">Total</span>
                                         <span className="text-sm text-black/60 uppercase">(TAX INCLUDED)</span>
                                     </div>
-                                    <span className="text-2xl font-regular max-mobile:text-lg">{currency} {subtotal}</span>
+                                    <span className="text-2xl font-regular max-mobile:text-lg">{currency} {subtotal.toFixed(2)}</span>
                                 </div>
                             </div>
 
