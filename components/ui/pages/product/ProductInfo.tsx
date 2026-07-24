@@ -106,9 +106,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
 
   const updateCartMutation = useUpdateCart();
 
-  const handleSizeSelect = async (size: string, price: number) => {
-
-
+  const handleSizeSelect = async (size: string, basePrice: number, salePrice?: number) => {
     // Find the variant for the selected size to get its ID
     const variant = product.variants.find(v => v.size === size);
     if (!variant) return;
@@ -120,17 +118,17 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
       stock: variant.stock,
       color_name: product.color_name,
       quantity: 1,
-      sale_price: variant.sale_price ? variant.sale_price : undefined,
+      sale_price: salePrice ?? variant.sale_price ?? undefined,
       size,
-      price,
+      price: basePrice,
     });
 
     await updateCartMutation.mutateAsync({ products: updatedItems });
     closeAllOverlays();
   };
 
-  const handleBuyNowSizeSelect = async (size: string, price: number) => {
-    await handleSizeSelect(size, price);
+  const handleBuyNowSizeSelect = async (size: string, basePrice: number, salePrice?: number) => {
+    await handleSizeSelect(size, basePrice, salePrice);
     // Redirect to checkout page after adding to cart
     router.push("/checkout");
   };
@@ -225,7 +223,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
                 <button
                   key={size}
                   disabled={disabled}
-                  onClick={() => !disabled && handleSizeSelect(size, sale_price ? sale_price : price)}
+                  onClick={() => !disabled && handleSizeSelect(size, price, sale_price ?? undefined)}
                   className={`x
                     transition
                     ${disabled
@@ -257,14 +255,14 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               max-mobile:gap-5
             "
           >
-            {sizes.map(({ size, stock, price }) => {
+            {sizes.map(({ size, stock, price, sale_price }) => {
               const disabled = stock === 0;
 
               return (
                 <button
                   key={size}
                   disabled={disabled}
-                  onClick={() => !disabled && handleBuyNowSizeSelect(size, price)}
+                  onClick={() => !disabled && handleBuyNowSizeSelect(size, price, sale_price ?? undefined)}
                   className={`x
                     transition
                     ${disabled
@@ -330,7 +328,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
           onAddSize={(size) => {
             const variant = product.variants.find((v) => v.size.toLowerCase() === size.toLowerCase());
             if (variant) {
-              handleSizeSelect(variant.size, variant.sale_price ? variant.sale_price : variant.price);
+              handleSizeSelect(variant.size, variant.price, variant.sale_price ?? undefined);
             }
             setShowSizeSuggestion(false);
           }}
