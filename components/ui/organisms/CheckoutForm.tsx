@@ -133,7 +133,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const itemsToDisplay = localItems;
 
     const subtotal = itemsToDisplay.reduce(
-        (sum, item) => sum + item.price * item.quantity,
+        (sum, item) => sum + (item.sale_price ? item.sale_price : item.price) * item.quantity,
         0
     );
     const selectedShipping =
@@ -147,7 +147,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
     const discountAmount = discountInfo
         ? (discountInfo.unit === "percent" ? (subtotal * discountInfo.amount) / 100 : discountInfo.amount)
         : 0;
-``
+    ``
 
     const total = subtotal + selectedShipping.priceValue - discountAmount - tierDiscountAmount - birthMonthDiscountAmount - welcomeDiscountAmount;
 

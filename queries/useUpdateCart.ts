@@ -65,6 +65,7 @@ export function useUpdateCart() {
           product_name: item.productName || "Updating...",
           image_url: item.productImage || "",
           unit_price: item.price || 0,
+          sale_price: item.sale_price,
           color_name: item.color_name || "",
         } as unknown as BackendCartItem;
       });

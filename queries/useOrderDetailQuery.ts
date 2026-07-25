@@ -25,6 +25,7 @@ function transformRawOrderDetails(raw: RawOrderDetails): OrderDetails {
         color_name: item.product.color_name,
         size: item.product.size,
         price: item.product.price,
+        sale_price: item.product.sale_price,
         quantity: item.quantity,
         image: item.product.image_url,
       }),

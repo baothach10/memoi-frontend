@@ -52,7 +52,7 @@ const ShopAllSection = forwardRef<HTMLElement>((_, ref) => {
           href="/shop/all-products"
           className="shrink-0 hover:bg-black bg-transparent hover:text-white text-black border border-black/10 px-22 py-5 text-sm leading-none cursor-pointer hover:opacity-90 transition max-mobile:px-16 max-mobile:py-3.5 max-mobile:text-xs"
         >
-          Shop all
+          View more
         </Link>
       </div>
     </section>

@@ -4,6 +4,7 @@ export interface OrderItem {
   color_name: string;
   size?: string;
   price: number;
+  sale_price?: number;
   quantity: number;
   image: string;
 }
@@ -26,6 +27,7 @@ export interface RawOrderItem {
     image_url: string;
     name: string;
     price: number;
+    sale_price?: number;
     currency: string;
     color_name: string;
     size: string;
