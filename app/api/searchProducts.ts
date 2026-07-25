@@ -7,6 +7,7 @@ export type SearchProduct = {
   product_id: string;
   name: string;
   price: number;
+  sale_price?: number | null;
   currency: string;
   images: ProductImage[];
 };
@@ -22,7 +23,7 @@ export type SearchProductsResponse = {
 export async function searchProducts(
   searchQuery: string,
   pageNumber: number = 1,
-  pageLimit: number = 9
+  pageLimit: number = 9,
 ): Promise<SearchProductsResponse> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL!}/rest/v1/rpc/search_products`,
@@ -39,7 +40,7 @@ export async function searchProducts(
         page_number: pageNumber,
         page_limit: pageLimit,
       }),
-    }
+    },
   );
 
   if (!res.ok) {
