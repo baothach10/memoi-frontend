@@ -117,6 +117,7 @@ export default function SearchPage({ searchQuery }: SearchPageProps) {
                   name={item.name}
                   currency={item.currency}
                   price={item.price}
+                  salePrice={item.sale_price}
                 />
               ))}
             </div>

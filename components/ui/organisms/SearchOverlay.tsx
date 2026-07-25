@@ -158,6 +158,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                       name={product.name}
                       currency={product.currency}
                       price={product.price}
+                      salePrice={product.sale_price}
                     />
                   ))}
                 </div>

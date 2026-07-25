@@ -2,6 +2,7 @@ export type ProductSuggestion = {
   id: string;
   name: string;
   price: number;
+  sale_price?: number | null;
   images: string[];
   currency: string;
 };
@@ -21,7 +22,7 @@ export async function getProductSuggestions(): Promise<ProductDetailsResponse> {
         apiKey: process.env.NEXT_PUBLIC_API_KEY!,
       },
       body: JSON.stringify({}),
-    }
+    },
   );
 
   if (!res.ok) {

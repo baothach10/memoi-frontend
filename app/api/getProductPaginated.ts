@@ -7,7 +7,8 @@ export type Product = {
   product_id: string;
   name: string;
   price: number;
-  currency: string
+  sale_price?: number | null;
+  currency: string;
   images: Array<ProductImage>;
 };
 
@@ -25,7 +26,7 @@ export type ProductsPaginatedResponse = {
 };
 
 export async function getProductsPaginated(
-  params: GetProductsParams
+  params: GetProductsParams,
 ): Promise<ProductsPaginatedResponse> {
   const res = await fetch(
     `${process.env
@@ -42,7 +43,7 @@ export async function getProductsPaginated(
         page_number: params.page_number,
         page_limit: params.page_limit,
       }),
-    }
+    },
   );
 
   if (!res.ok) {

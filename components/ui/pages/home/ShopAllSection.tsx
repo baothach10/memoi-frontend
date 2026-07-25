@@ -42,6 +42,7 @@ const ShopAllSection = forwardRef<HTMLElement>((_, ref) => {
                   name={product.name}
                   currency={currency ?? product.currency}
                   price={product.price}
+                  salePrice={product.sale_price}
                 />
               ))}
             </div>

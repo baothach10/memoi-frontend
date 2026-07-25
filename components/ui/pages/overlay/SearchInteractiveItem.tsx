@@ -12,6 +12,7 @@ interface ShopInteractiveItemProps {
   name: string;
   currency: string;
   price: number;
+  salePrice?: number | null;
 }
 
 export default function SearchInteractiveItem({
@@ -21,9 +22,11 @@ export default function SearchInteractiveItem({
   name,
   currency,
   price,
+  salePrice,
 }: ShopInteractiveItemProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [loadedMap, setLoadedMap] = useState<Record<number, boolean>>({});
+  const hasSalePrice = typeof salePrice === "number" && salePrice > 0 && salePrice !== price;
 
   const handleLoaded = (index: number) =>
     setLoadedMap((prev) => ({ ...prev, [index]: true }));
@@ -67,10 +70,10 @@ export default function SearchInteractiveItem({
               loading="lazy"
               sizes={sizes}
               className={`object-cover transition-opacity duration-300 ${loadedMap[gridIndex]
-                  ? isHovered
-                    ? "opacity-0"
-                    : "opacity-100"
-                  : "opacity-0"
+                ? isHovered
+                  ? "opacity-0"
+                  : "opacity-100"
+                : "opacity-0"
                 }`}
               onLoad={() => handleLoaded(gridIndex)}
             />
@@ -87,9 +90,15 @@ export default function SearchInteractiveItem({
 
         <div className="flex flex-col items-center mt-4 w-full gap-2">
           <h3 className="text-center font-regular text-[14px] max-mobile:text-xs">{name}</h3>
-          <div className="flex flex-row items-center text-xs">
-            <span className="mr-1">{currency}</span>
-            <span>{price.toFixed(2)}</span>
+          <div className="flex flex-row items-center text-xs gap-1">
+            <div className={`text-xs ${hasSalePrice ? "line-through  text-black/40" : ""}`}>
+              <span>{currency} {price.toFixed(2)}</span>
+            </div>
+            {hasSalePrice && (
+              <div className="text-xs">
+                <span>{currency} {salePrice!.toFixed(2)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div >

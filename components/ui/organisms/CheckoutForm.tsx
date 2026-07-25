@@ -115,6 +115,7 @@ export default function CheckoutForm({ userProfile }: CheckoutFormProps) {
                     quantity: item.quantity,
                     productName: item.product_name,
                     productImage: item.image_url,
+                    sale_price: item.sale_price,
                     stock: item.stock,
                     color_name: item.color_name,
                     price: item.unit_price,

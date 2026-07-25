@@ -32,6 +32,7 @@ function SearchProductSuggestions({ numberOfSuggestions, gridClassName }: { numb
                             name={product.name}
                             currency={currency ?? "SGD"}
                             price={product.price}
+                            salePrice={product.sale_price}
                         />
                     )) : <div>No suggestions available.</div>}
             </div>

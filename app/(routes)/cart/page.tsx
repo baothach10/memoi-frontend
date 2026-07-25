@@ -27,6 +27,7 @@ export default function CartPage() {
                     quantity: item.quantity,
                     productName: item.product_name,
                     productImage: item.image_url,
+                    sale_price: item.sale_price,
                     color_name: item.color_name,
                     price: item.unit_price,
                     stock: item.stock,
@@ -51,6 +52,7 @@ export default function CartPage() {
     const updateLocalStorage = async (newItems: CartItem[]) => {
         setLocalItems(newItems);
         setCartItems(newItems);
+
         await updateCartMutation.mutateAsync({ products: newItems });
     };
 
@@ -96,6 +98,8 @@ export default function CartPage() {
             </div>
         );
     }
+
+    console.log(itemsToDisplay)
 
     return (
         <div className="relative w-full bg-[#fffefa]" data-header-theme="light">

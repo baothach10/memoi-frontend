@@ -447,6 +447,7 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
                       name={item.name}
                       currency={item.currency}
                       price={item.price}
+                      salePrice={item.sale_price}
                     />
                   ))}
                 </div>
