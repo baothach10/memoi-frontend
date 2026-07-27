@@ -13,9 +13,11 @@ interface CartItemCardProps {
 
 export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }: CartItemCardProps) {
     const { currency } = useCurrency();
+    const hasSalePrice = typeof item.sale_price === "number" && item.sale_price > 0 && item.sale_price !== item.price;
+
     return (
         <div className="bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]">
-            
+
             <div className="flex gap-8 max-mobile:gap-4">
                 {/* Product Image */}
                 <div className="relative w-[25%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
@@ -49,12 +51,12 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
 
                     <div className="flex items-center justify-between max-mobile:hidden">
                         <div className="flex items-center justify-center text-center gap-2.5 max-mobile:gap-3 max-tablet:gap-4">
-                            <p className={`text-base font-regular ${item.sale_price ? 'line-through text-black/40' : ''} max-mobile:text-xs `}>
+                            <p className={`text-base font-regular ${hasSalePrice ? 'line-through text-black/40' : ''} max-mobile:text-xs `}>
                                 {currency} {item.price.toFixed(2)}
                             </p>
-                            {item.sale_price && (
+                            {hasSalePrice && (
                                 <p className="text-base font-regular max-mobile:text-xs ">
-                                    {currency} {item.sale_price.toFixed(2)}
+                                    {currency} {item.sale_price!.toFixed(2)}
                                 </p>
                             )}
                         </div>
@@ -79,9 +81,16 @@ export default function CartItemCard({ item, onRemove, onIncrease, onDecrease }:
 
 
                     <div className="hidden max-mobile:flex max-mobile:flex-col max-mobile:justify-between max-mobile:gap-2 max-mobile:pt-4">
-                        <p className="text-base font-regular max-mobile:text-xs ">
-                            {currency} {item.price}
-                        </p>
+                        <div className="flex gap-1">
+                            <p className={`text-base font-regular max-mobile:text-xs ${hasSalePrice ? 'line-through text-black/40' : ''}`}>
+                                {currency} {item.price.toFixed(2)}
+                            </p>
+                            {hasSalePrice && (
+                                <p className="text-base font-regular max-mobile:text-xs">
+                                    {currency} {item.sale_price!.toFixed(2)}
+                                </p>
+                            )}
+                        </div>
 
                         <div className="flex items-center gap-3 justify-between">
                             <QuantitySelector

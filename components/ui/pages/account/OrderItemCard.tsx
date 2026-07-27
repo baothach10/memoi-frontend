@@ -12,6 +12,8 @@ interface OrderItemCardProps {
 
 export default function OrderItemCard({ item }: OrderItemCardProps) {
   const { currency } = useCurrency();
+  const hasSalePrice = typeof item.sale_price === "number" && item.sale_price > 0 && item.sale_price !== item.price;
+
   return (
     <div className={` bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]`}>
       <div className="flex gap-8 max-mobile:gap-4">
@@ -42,12 +44,12 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
 
           <div className="flex items-center justify-between font-regular max-mobile:mt-10">
             <div className="flex items-center justify-center text-center gap-2.5 max-mobile:gap-3 max-tablet:gap-4">
-              <p className={`text-base font-regular ${item.sale_price ? 'line-through text-black/40' : ''} max-mobile:text-xs `}>
+              <p className={`text-base font-regular ${hasSalePrice ? 'line-through text-black/40' : ''} max-mobile:text-xs `}>
                 {currency} {item.price.toFixed(2)}
               </p>
-              {item.sale_price && (
+              {hasSalePrice && (
                 <p className="text-base font-regular max-mobile:text-xs ">
-                  {currency} {item.sale_price.toFixed(2)}
+                  {currency} {item.sale_price!.toFixed(2)}
                 </p>
               )}
             </div>
