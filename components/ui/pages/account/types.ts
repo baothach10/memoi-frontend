@@ -52,26 +52,42 @@ export interface RawBillingInfo {
   address: string;
   optional_address?: string;
   city: string;
-  state: string;
+  state?: string;
   country: string;
-  zip_code: string;
+  zip_code?: string;
+}
+
+export interface RawOrderCustomer {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+}
+
+export interface RawProgressStep {
+  label: string;
+  date?: string;
+  completed: boolean;
+  active: boolean;
 }
 
 export interface RawOrderDetails extends RawOrder {
   tier_discount_amount: number;
-  birth_month_discount_amount: number;
+  birth_month_discount: number;
   welcome_discount_amount: number;
   promo_discount_amount: number;
   shipping_fee: number;
   total_taxed: number;
-  billing_info: RawBillingInfo;
+  progress: RawProgressStep[];
+  billing_info?: RawBillingInfo;
+  customer: RawOrderCustomer;
 }
 
 export interface ProgressStep {
   label: string;
   date: string;
   completed: boolean;
-  active?: boolean;
+  active: boolean;
 }
 
 export interface BillingInfo {
