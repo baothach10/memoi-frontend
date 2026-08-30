@@ -18,12 +18,11 @@ export default function OrderItemCard({ item }: OrderItemCardProps) {
     <div className={` bg-linear-to-r from-[#fffefa] via-black/2 to-[#fffefa]`}>
       <div className="flex gap-8 max-mobile:gap-4">
         {/* Product Image */}
-        <div className="w-[20%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
+        <div className="relative w-[20%] aspect-5/6 shrink-0 flex items-center justify-center overflow-hidden">
           <Image
             src={item.image}
             alt={item.name}
-            width={100}
-            height={140}
+            fill
             className="object-cover w-full h-full"
 
           />
