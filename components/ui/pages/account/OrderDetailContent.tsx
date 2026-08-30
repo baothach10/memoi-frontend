@@ -24,7 +24,7 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
         <p className="text-sm text-black">
           Failed to load order details
         </p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="text-xs underline underline-offset-4 cursor-pointer decoration-black/40"
         >
@@ -48,14 +48,9 @@ export default function OrderDetailContent({ orderId }: { orderId: string }) {
                   {order.status === 'COMPLETED' ? 'Completed' : 'In progress'}
                 </span>
               </div>
-          
+
               <h1 className="text-xl font-regular uppercase max-mobile:text-lg leading-none">ORDER ID #{order.order_number}</h1>
             </div>
-
-            {/* View Tracking Button (Desktop) */}
-            <button className="self-end h-fit px-12 py-4 leading-none border cursor-pointer border-black/10 text-sm transition-all hover:bg-black hover:text-white max-mobile:px-6 max-mobile:py-3 max-mobile:text-xs">
-              View tracking
-            </button>
           </div>
         </div>
 
