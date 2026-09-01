@@ -324,23 +324,23 @@ export default function HomePage() {
     firstParameter: [
       "MEMOÍ - for the woman you are becoming",
       [
-        { url: "/collection/ss26-the-becoming", title: "SS26" },
-        { url: "/collection/ss26-the-becoming", title: "THE BECOMING" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "THE BECOMING" },
       ],
       [
-        { url: "/collection/ss26-the-becoming", title: "SS26" },
-        { url: "/collection/ss26-the-becoming", title: "THE BECOMING" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "THE BECOMING" },
       ],
       [
-        { url: "/collection/ss26-the-becoming", title: "SS26" },
-        { url: "/collection/ss26-the-becoming", title: "THE BECOMING" },
+        { url: "/collection/SS26", title: "SS26" },
+        { url: "/collection/SS26", title: "THE BECOMING" },
       ],
     ],
     secondParameter: [
       { url: "/shop/all-products", title: "Shop" },
-      { url: "/collection/ss26-the-becoming", title: "Discover" },
-      { url: "/collection/ss26-the-becoming", title: "Discover" },
-      { url: "/collection/ss26-the-becoming", title: "Discover" },
+      { url: "/collection/SS26", title: "Discover" },
+      { url: "/collection/SS26", title: "Discover" },
+      { url: "/collection/SS26", title: "Discover" },
     ],
   };
 
