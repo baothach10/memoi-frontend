@@ -31,7 +31,7 @@ countries.registerLocale(en);
 const SHIPPING_METHODS = [
     {
         id: "express",
-        title: "2 TO 3 BUSINESS DAYS",
+        title: "7 TO 14 BUSINESS DAYS",
         description: "Express Courier (Air)",
         price: "FREE",
         priceValue: 0,
