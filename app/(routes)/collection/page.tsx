@@ -25,7 +25,7 @@ export default function CollectionPage() {
         <div className="text-white gap-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
           <div className="gap-3 flex flex-col items-center justify-center">
             {COLLECTION_LIST.map((collection) => (
-              <div key={collection.season}>
+              <div key={collection.season + '-' + collection.slug}>
                 <CollectionLink
                   id={collection.season}
                   name={collection.name}
