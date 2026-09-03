@@ -281,7 +281,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
             </button>
           </div>
 
-          {/* ADD TO CART + BUY NOW BUTTONS */}
+          {/* ADD TO CART + Preorder BUTTONS */}
           <div className="flex w-full gap-2.5">
             <button
               onClick={handleAddToCartClick}
@@ -293,7 +293,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               onClick={handleBuyNowClick}
               className="w-1/2 bg-black text-white py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
             >
-              Buy now
+              Preorder
             </button>
           </div>
         </div>

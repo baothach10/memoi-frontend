@@ -115,7 +115,7 @@ export default function MobileMenu({
               <ul className="text-sm space-y-3 max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
                 <li>
                   <Link
-                    href="/collection/ss26-the-becoming"
+                    href="/collection/SS26"
                     onClick={closeMenu}
                     className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
                   >

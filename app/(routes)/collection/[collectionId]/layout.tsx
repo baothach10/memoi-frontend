@@ -1,10 +1,32 @@
-import { Metadata } from 'next';
+import { getCollectionBySlug } from "@/constants/collections";
+import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: 'The Becoming | Our First Collection | MEMOÍ',
-  description: 'Discover "The Becoming," the debut collection from MEMOÍ. A journey of quiet confidence, fluid silhouettes, and intentional design for the modern woman.',
+type LayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ collectionId: string }>;
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ collectionId: string }>;
+}): Promise<Metadata> {
+  const { collectionId } = await params;
+  const collection = getCollectionBySlug(collectionId);
+
+  if (!collection) {
+    return {
+      title: "Collection | MEMOÍ",
+      description: "Explore our curated collections at MEMOÍ.",
+    };
+  }
+
+  return {
+    title: collection.metadata.title,
+    description: collection.metadata.description,
+  };
+}
+
+export default function Layout({ children }: LayoutProps) {
   return <>{children}</>;
 }

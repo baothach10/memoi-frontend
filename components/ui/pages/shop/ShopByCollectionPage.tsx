@@ -11,6 +11,7 @@ import { useProductPaginatedByCollectionQuery } from "@/queries/useProductPagina
 import PaginationComponent from "../../molecules/Pagination";
 import ShopInteractiveItem from "./ShopInteractiveItem";
 import { LERP_FACTOR, NORMALIZED_DELTA } from "@/constants";
+import { getCollectionByShopName } from "@/constants/collections";
 
 type ShopByCollectionPageType = {
   collection: string
@@ -348,29 +349,30 @@ export default function ShopByCollectionPage({ collection }: ShopByCollectionPag
     };
   }, [isAtBottom]);
 
-  // Example content
+  const collectionDetail = getCollectionByShopName(collection);
+
   const exampleWithLinks = {
     media: [
-      {
+      collectionDetail?.hero.desktop ?? {
         type: "image" as const,
         src: "/images/desktop-first-collection.webp",
       },
-      {
+      collectionDetail?.hero.tablet ?? {
         type: "image" as const,
         src: "/images/tablet-first-collection.webp",
       },
-      {
+      collectionDetail?.hero.mobile ?? {
         type: "image" as const,
         src: "/images/mobile-first-collection.webp",
       },
     ],
     heroDetail: {
-      id: "SS26",
-      title: "The Becoming",
+      id: collectionDetail?.season ?? "SS26",
+      title: collectionDetail?.name ?? collection.replace(/-/g, " "),
       numberOfItems: 10,
       urlTitle: "Shop the collection",
       url: "/shop",
-    }
+    },
   };
 
   if (isError) return (
