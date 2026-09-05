@@ -9,6 +9,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useHeaderTheme } from "@/hooks/useHeaderTheme";
 import { useCategoriesQuery } from "@/queries/useCategoriesQuery";
 import { DESKTOP_LOGO_SIZE, MOBILE_LOGO_SIZE } from "@/constants";
+import { COLLECTION_LIST } from "@/constants/collections";
 
 type Props = {
   className?: string;
@@ -113,24 +114,30 @@ export default function MobileMenu({
               }
             >
               <ul className="text-sm space-y-3 max-mobile:text-xs max-mobile:mt-4 max-tablet:mt-3">
-                <li>
-                  <Link
-                    href="/collection/SS26"
-                    onClick={closeMenu}
-                    className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
-                  >
-                    SS26 THE BECOMING
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    onClick={closeMenu}
-                    className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
-                  >
-                    FW26 COMING SOON
-                  </Link>
-                </li>
+                {COLLECTION_LIST.map((collection) => {
+                  const label = `${collection.season} ${collection.name}`;
+                  const href = collection.slug
+                    ? `/collection/${collection.slug}`
+                    : undefined;
+
+                  return (
+                    <li key={collection.season + "-" + (collection.slug ?? collection.name)}>
+                      {href ? (
+                        <Link
+                          href={href}
+                          onClick={closeMenu}
+                          className=" text-[14px] uppercase max-mobile:text-xs cursor-pointer"
+                        >
+                          {label}
+                        </Link>
+                      ) : (
+                        <span className=" text-[14px] uppercase max-mobile:text-xs cursor-not-allowed">
+                          {label}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </ExpandableSection>
 
