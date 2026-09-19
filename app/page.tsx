@@ -317,9 +317,6 @@ export default function HomePage() {
       { type: "image" as const, src: "/images/desktop-second-collection.webp" },
       { type: "image" as const, src: "/images/tablet-second-collection.webp" },
       { type: "image" as const, src: "/images/mobile-second-collection.webp" },
-      { type: "image" as const, src: "/images/desktop-third-collection.webp" },
-      { type: "image" as const, src: "/images/tablet-third-collection.webp" },
-      { type: "image" as const, src: "/images/mobile-third-collection.webp" },
     ],
     firstParameter: [
       "MEMOÍ - for the woman you are becoming",
@@ -362,9 +359,9 @@ export default function HomePage() {
           >
             <HeroSection
               ref={heroSection1Ref}
-              media={exampleWithLinks.media[9]}
-              tabletMedia={exampleWithLinks.media[10]}
-              mobileMedia={exampleWithLinks.media[11]}
+              media={exampleWithLinks.media[6]}
+              tabletMedia={exampleWithLinks.media[7]}
+              mobileMedia={exampleWithLinks.media[8]}
               firstParameter={exampleWithLinks.firstParameter[0]}
               secondParameter={exampleWithLinks.secondParameter[0]}
             />
