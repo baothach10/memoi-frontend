@@ -19,7 +19,7 @@ const ShopAllSection = forwardRef<HTMLElement>((_, ref) => {
       className="h-full relative w-full flex flex-col bg-[#fffefa]"
       data-header-theme="light"
     >
-      <div className="flex relative h-full flex-col items-center justify-between px-2.5 pt-30 smaller-tablet:max-tablet:px-10 max-tablet:gap-8 max-mobile:px-5 max-mobile:pt-24 max-mobile:gap-4">
+      <div className="flex relative h-full flex-col gap-8 items-center justify-between px-2.5 pt-30 smaller-tablet:max-tablet:px-10 max-tablet:gap-8 max-mobile:px-5 max-mobile:pt-24 max-mobile:gap-4">
         <h2 className="shrink-0 uppercase text-2xl font-regular text-black leading-none max-mobile:text-sm">
           Shop all
         </h2>
