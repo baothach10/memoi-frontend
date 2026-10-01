@@ -157,9 +157,9 @@ function CollectionDetailView({ collection }: CollectionDetailViewProps) {
     const wheelHandler = (e: WheelEvent) => {
       if (
         typeof document !== "undefined" &&
-        document.body.classList.contains("menu-open")
+        (document.body.classList.contains("menu-open") ||
+          document.body.style.overflow === "hidden")
       ) {
-        e.preventDefault();
         return;
       }
 
@@ -213,9 +213,9 @@ function CollectionDetailView({ collection }: CollectionDetailViewProps) {
     const onTouchMove = (e: TouchEvent) => {
       if (
         typeof document !== "undefined" &&
-        document.body.classList.contains("menu-open")
+        (document.body.classList.contains("menu-open") ||
+          document.body.style.overflow === "hidden")
       ) {
-        e.preventDefault();
         return;
       }
 
