@@ -314,6 +314,41 @@ function CollectionDetailView({ collection }: CollectionDetailViewProps) {
     };
   }, [isAtBottom]);
 
+  /** --------------------------------------------------------
+   *  Resize Handling
+   *  Safari's dynamic toolbar (address/search bar) changes the
+   *  visual viewport height as it collapses/expands, which shifts
+   *  where each `h-svh` section's offsetTop lands. Re-snap to the
+   *  current section's offset whenever the viewport (or
+   *  visualViewport, which iOS Safari reports more accurately)
+   *  resizes.
+   * -------------------------------------------------------- */
+  useEffect(() => {
+    const handleResize = () => {
+      if (isAtBottom) return;
+
+      const sections = getSections();
+      const section = sections[currentIndexRef.current];
+      if (!section) return;
+
+      const newOffset = section.offsetTop;
+      targetYRef.current = newOffset;
+      currentYRef.current = newOffset;
+
+      if (smoothContentRef.current) {
+        smoothContentRef.current.style.transform = `translate3d(0, ${-newOffset}px, 0)`;
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    window.visualViewport?.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.visualViewport?.removeEventListener("resize", handleResize);
+    };
+  }, [isAtBottom, getSections]);
+
   const carouselItems = [...collection.slider, ...collection.slider].map(
     (src, index) => (
       <GridImageItem key={`${src}-${index}`} src={src} alt="Slider image" />
