@@ -35,22 +35,17 @@ export default function AboutUsPage() {
             </div>
             <div className="text-center space-y-2 leading-[150%] text-sm mx-auto max-w-[778px] smaller-tablet:max-tablet:max-w-[522px] max-mobile:text-xs">
               <div>
-                Empowering Quiet Elegance, Timeless Transformation - To inspire
-                customers to embrace a confidently chic and elegant lifestyle -
-                expressing individuality, independence, and femininity with
-                quiet power.
+                Empowering Quiet Elegance, Timeless Transformation - To inspire customers to embrace a confidently chic and elegant lifestyle - expressing individuality, independence,
+                and femininity with quiet power.
               </div>
               <div>
-                Founded in 2025. MEMOÍ was born from a
-                simple yet powerful belief: every woman deserves to feel
-                beautiful, confident, and true to herself—every single day.
+                Founded in Singapore in 2025, MEMOÍ is an affordable luxury fashion house built on a simple belief: every woman deserves to feel beautiful, confident and true to herself.
+                Our collections come to life in the heart of Ho Chi Minh City, where experienced seamstresses at our manufacturing partners bring skill and care to each piece. Their craftsmanship translates our vision into refined silhouettes and thoughtful details, balancing timeless sophistication with effortless comfort.
+                To us, fashion is a quiet language of self-expression. Through accessible luxury, we inspire women to embrace an elegant lifestyle that feels distinctly their own—expressing individuality, independence and
+                femininity with quiet power.
               </div>
               <div>
-                MEMOÍ - An affordable luxury fashion house dedicated to the
-                modern, independent woman - one who embraces her femininity with
-                confidence and grace. Rooted in the art of self-expression, our
-                creations marry timeless sophistication with effortless comfort,
-                redefining contemporary elegance.
+                From everyday moments to meaningful occasions, MEMOÍ accompanies the woman you are becoming.
               </div>
             </div>
           </div>
