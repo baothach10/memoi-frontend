@@ -54,9 +54,9 @@ export default function AccountTier() {
   const getNextTierMessage = () => {
     switch (tier) {
       case "MEMOÍ":
-        return `Reach S$3,000 to unlock MEMOÍ +`;
+        return `Reach S$1,000 to unlock MEMOÍ +`;
       case "MEMOÍ +":
-        return `Reach S$8,000 to unlock MEMOÍ ELITE`;
+        return `Reach S$3,000 to unlock MEMOÍ ELITE`;
       case "MEMOÍ ELITE":
         return `You have reached the highest tier`;
       default:
