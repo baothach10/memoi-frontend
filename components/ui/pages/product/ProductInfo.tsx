@@ -293,7 +293,7 @@ export default function ProductInfo({ product, isMobileLayout = false }: Product
               onClick={handleBuyNowClick}
               className="w-1/2 bg-black text-white py-4 cursor-pointer leading-none text-sm max-mobile:py-3 max-mobile:w-full max-mobile:text-xs"
             >
-              Preorder
+              Buy Now
             </button>
           </div>
         </div>
