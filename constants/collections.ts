@@ -149,12 +149,65 @@ export const COLLECTIONS: Record<string, CollectionDetail> = {
       "/images/collection-silk-slider-look-4.webp",
     ],
   },
+  "the-celebration": {
+    slug: "the-celebration",
+    season: "FW26",
+    name: "THE CELEBRATION",
+    shopCollectionName: "The-Celebration",
+    shopUrl: "/shop/collection/The-Celebration",
+    shopLinkTitle: "Shop the collection",
+    metadata: {
+      title: "The Celebration | Our Third Collection | MEMOÍ",
+      description:
+        "Discover THE CELEBRATION by MEMOÍ - a collection defined by fluid silhouettes, serene pastels, and effortless luxury. Shop timeless pieces designed to move with you.",
+    },
+    hero: {
+      desktop: image("/images/desktop-third-collection.webp"),
+      tablet: image("/images/tablet-third-collection.webp"),
+      mobile: image("/images/mobile-third-collection.webp"),
+    },
+    campaignGrid: {
+      desktop: [
+        image("/images/desktop-collection-celebration-campaign-1.webp"),
+        image("/images/desktop-collection-celebration-campaign-2.webp"),
+      ],
+      tablet: [
+        image("/images/tablet-collection-celebration-campaign-1.webp"),
+        image("/images/tablet-collection-celebration-campaign-2.webp"),
+      ],
+      mobile: [
+        image("/images/mobile-collection-celebration-campaign-1.webp"),
+        image("/images/mobile-collection-celebration-campaign-2.webp"),
+      ],
+    },
+    intro: {
+      heading: "FW26 THE CELEBRATION",
+      body: "Some moments call for dressing up. Others become special simply because you do. “The Celebration” carries MEMOÍ’s journey of becoming into a season of being present—to the people we love, the milestones we reach, and the pleasure of feeling beautiful in our own skin.",
+    },
+    midSection:
+      "Fluid silk, delicate lace and light-catching sequins meet sculpted waists, romantic bows and playful volume. Each piece balances softness with a sense of occasion, leaving room for the woman wearing it to make it her own. From intimate dinners to evenings that linger past midnight, these are pieces to accompany you through a season of gathering, connection and possibility.",
+    slideShow: [
+      "/images/collection-celebration-gallery-look-1.webp",
+      "/images/collection-celebration-gallery-look-2.webp",
+      "/images/collection-celebration-gallery-look-3.webp",
+      "/images/collection-celebration-gallery-look-4.webp",
+      "/images/collection-celebration-gallery-look-5.webp",
+    ],
+    closingSection:
+      "An invitation to dress with intention, move with confidence, and enjoy the moment as it unfolds.\n You are invited.",
+    slider: [
+      "/images/collection-celebration-slider-look-1.webp",
+      "/images/collection-celebration-slider-look-2.webp",
+      "/images/collection-celebration-slider-look-3.webp",
+      "/images/collection-celebration-slider-look-4.webp",
+    ],
+  },
 };
 
 export const COLLECTION_LIST: CollectionListItem[] = [
   { season: "SS26", name: "The Becoming", slug: "the-becoming" },
   { season: "SS26", name: "The Silk Edition", slug: "the-silk-edition" },
-  { season: "FW26", name: "Coming soon" },
+  { season: "FW26", name: "The Celebration", slug: "the-celebration" },
 ];
 
 export function getCollectionBySlug(
