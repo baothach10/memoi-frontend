@@ -7,8 +7,8 @@ type Tier = "MEMOÍ" | "MEMOÍ +" | "MEMOÍ ELITE";
 const TIERS: Tier[] = ["MEMOÍ", "MEMOÍ +", "MEMOÍ ELITE"];
 const TIERS_PRICE: Record<Tier, string> = {
     "MEMOÍ": "",
-    "MEMOÍ +": "S$3,000",
-    "MEMOÍ ELITE": "S$8,000",
+    "MEMOÍ +": "S$1,000",
+    "MEMOÍ ELITE": "S$3,000",
 };
 
 const BENEFITS: Array<{

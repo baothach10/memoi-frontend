@@ -25,8 +25,8 @@ export default function MemoiHouse() {
                         <div className="leading-normal space-y-2 text-sm pb-8 max-mobile:text-xs max-mobile:pb-6">
                             <p >Exclusive membership tiers are achieved when your cumulative spending reaches the required threshold:</p>
                             <ul className="list-['-_'] list-inside space-y-2">
-                                <li><span className="font-regular">MEMOÍ +:</span> Achieve S$3,000 in accumulated spending.</li>
-                                <li><span className="font-regular">MEMOÍ ELITE:</span> Achieve S$8,000 in accumulated spending.</li>
+                                <li><span className="font-regular">MEMOÍ +:</span> Achieve S$1,000 in accumulated spending.</li>
+                                <li><span className="font-regular">MEMOÍ ELITE:</span> Achieve S$3,000 in accumulated spending.</li>
                             </ul>
                         </div>
                     </ExpandableSection>
